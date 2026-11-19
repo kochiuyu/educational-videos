@@ -1,0 +1,207 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import {
+  collections,
+  languages,
+  statModuleIds,
+  videoCount,
+  videos,
+} from '../data/catalog';
+import { href, trackSlug } from '../lib/urls';
+import { haystack, titleLang } from '../lib/text';
+
+const statTopics: string[] = [];
+const laeTopics: string[] = [];
+for (const video of videos) {
+  if (video.collection_slug === 'stat-lessons' && !statTopics.includes(video.topic)) {
+    statTopics.push(video.topic);
+  }
+  if (video.collection_slug === 'lae-101' && !laeTopics.includes(video.topic)) {
+    laeTopics.push(video.topic);
+  }
+}
+const modules = statModuleIds();
+---
+
+<Base
+  title="Search · Educational Videos"
+  description={`Search and filter ${videoCount} videos by collection, module, topic, and language track.`}
+  current="search"
+>
+  <Breadcrumb
+    items={[
+      { href: href(), label: 'Home' },
+      { label: 'Search' },
+    ]}
+  />
+  <header class="page-intro">
+    <p class="eyebrow">Catalog</p>
+    <h1>Search</h1>
+    <p class="lede">
+      Filter by words in a title or description, and by collection, module, topic, or language track.
+      The full list is in the page, so browsing still works if scripts do not run.
+    </p>
+  </header>
+
+  <form id="filters" class="filters" method="get" action={href('search')} role="search" aria-controls="results">
+    <div class="search-field">
+      <label for="q">Search titles and descriptions</label>
+      <input
+        id="q"
+        name="q"
+        type="search"
+        autocomplete="off"
+        placeholder="A title, a phrase, or a catalog ID"
+      />
+    </div>
+    <div>
+      <label for="collection">Collection</label>
+      <select id="collection" name="collection">
+        <option value="">All collections</option>
+        {collections.map((collection) => <option value={collection.slug}>{collection.name}</option>)}
+      </select>
+    </div>
+    <div>
+      <label for="module">Module</label>
+      <select id="module" name="module">
+        <option value="">All modules</option>
+        {modules.map((moduleId) => <option value={moduleId}>{moduleId}</option>)}
+      </select>
+    </div>
+    <div>
+      <label for="topic">Topic</label>
+      <select id="topic" name="topic">
+        <option value="">All topics</option>
+        <optgroup label="STAT lessons">
+          {statTopics.map((topic) => <option value={topic}>{topic}</option>)}
+        </optgroup>
+        <optgroup label="LAE 101">
+          {laeTopics.map((topic) => <option value={topic}>{topic}</option>)}
+        </optgroup>
+      </select>
+    </div>
+    <div>
+      <label for="language">Language track</label>
+      <select id="language" name="language">
+        <option value="">All language tracks</option>
+        {
+          languages.map((language) => (
+            <option value={trackSlug(language.id)}>{language.label}</option>
+          ))
+        }
+      </select>
+    </div>
+    <div class="filter-actions">
+      <button type="submit">Apply filters</button>
+      <a class="button secondary" href={href('search')}>Clear filters</a>
+    </div>
+  </form>
+
+  <p id="result-count" class="result-count" aria-live="polite">Showing all {videoCount} videos.</p>
+  <p id="empty" hidden>No videos match these filters.</p>
+
+  <ul id="results" class="result-list">
+    {
+      videos.map((video) => (
+        <li
+          data-collection={video.collection_slug}
+          data-module={video.module ?? ''}
+          data-topic={video.topic}
+          data-language={video.language ? trackSlug(video.language) : ''}
+          data-haystack={haystack(video)}
+        >
+          <a class="row" href={href(`videos/${video.youtube_id}`)}>
+            <span class="meta">
+              {video.collection}
+              {video.module ? ` · ${video.module} ${video.topic}` : video.topic ? ` · Topic ${video.topic}` : ''}
+              {video.language_label ? ` · ${video.language_label}` : ''}
+              {video.duration && (
+                <>
+                  {' · '}
+                  <span class="sr-only">Duration </span>
+                  {video.duration}
+                </>
+              )}
+            </span>
+            <span class="title" lang={titleLang(video)}>
+              {video.title}
+            </span>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</Base>
+
+<script>
+  const form = document.querySelector('#filters');
+  const count = document.querySelector('#result-count');
+  const empty = document.querySelector('#empty');
+  const items = Array.from(document.querySelectorAll('#results > li'));
+  const total = items.length;
+
+  function field(id: string): HTMLInputElement | HTMLSelectElement {
+    const element = document.getElementById(id);
+    if (!(element instanceof HTMLInputElement) && !(element instanceof HTMLSelectElement)) {
+      throw new Error(`Missing filter ${id}`);
+    }
+    return element;
+  }
+
+  function apply(updateUrl: boolean) {
+    const rawQuery = field('q').value.trim();
+    const tokens = rawQuery.toLowerCase().split(/\s+/).filter(Boolean);
+    const collection = field('collection').value;
+    const moduleId = field('module').value;
+    const topic = field('topic').value;
+    const language = field('language').value;
+    let shown = 0;
+
+    for (const item of items) {
+      if (!(item instanceof HTMLElement)) continue;
+      const hay = item.dataset.haystack ?? '';
+      const matches =
+        (!collection || item.dataset.collection === collection) &&
+        (!moduleId || item.dataset.module === moduleId) &&
+        (!topic || item.dataset.topic === topic) &&
+        (!language || item.dataset.language === language) &&
+        tokens.every((token) => hay.includes(token));
+      item.hidden = !matches;
+      if (matches) shown += 1;
+    }
+
+    if (count) {
+      count.textContent =
+        shown === total ? `Showing all ${total} videos.` : `Showing ${shown} of ${total} videos.`;
+    }
+    if (empty instanceof HTMLElement) empty.hidden = shown !== 0;
+
+    if (updateUrl) {
+      const params = new URLSearchParams();
+      if (rawQuery) params.set('q', rawQuery);
+      if (collection) params.set('collection', collection);
+      if (moduleId) params.set('module', moduleId);
+      if (topic) params.set('topic', topic);
+      if (language) params.set('language', language);
+      const query = params.toString();
+      const next = `${location.pathname}${query ? `?${query}` : ''}`;
+      history.replaceState(null, '', next);
+    }
+  }
+
+  const params = new URLSearchParams(location.search);
+  for (const name of ['q', 'collection', 'module', 'topic', 'language']) {
+    const value = params.get(name);
+    if (value != null) field(name).value = value;
+  }
+
+  apply(false);
+
+  form?.addEventListener('submit', (event) => {
+    event.preventDefault();
+    apply(true);
+  });
+  form?.addEventListener('input', () => apply(true));
+  form?.addEventListener('change', () => apply(true));
+</script>

@@ -1,0 +1,17 @@
+---
+import { asOf, channelUrl, owner, timezone, videoCount } from '../data/catalog';
+---
+
+<footer class="site-footer">
+  <div class="site-footer-inner">
+    <p>
+      Allowlist as of {asOf} ({timezone}). {videoCount} public videos. Owner: {owner}.
+    </p>
+    <p>
+      Channel for attribution only:
+      <a href={channelUrl}>youtube.com/@ChiuYuKo</a>.
+      This catalog does not scrape or mirror the channel.
+    </p>
+    <p>Playback uses a YouTube player embedded on the video page. This site does not host video files.</p>
+  </div>
+</footer>

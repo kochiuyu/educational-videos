@@ -1,0 +1,73 @@
+---
+import Base from '../../layouts/Base.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import {
+  languageBySlug,
+  languages,
+  statModuleIds,
+  videosInModule,
+  videosInTrack,
+} from '../../data/catalog';
+import { href, trackSlug } from '../../lib/urls';
+import { titleLang } from '../../lib/text';
+
+export function getStaticPaths() {
+  return languages.map((language) => ({
+    params: { track: trackSlug(language.id) },
+    props: { languageId: language.id },
+  }));
+}
+
+const { languageId } = Astro.props;
+const language = languageBySlug(trackSlug(languageId));
+if (!language) {
+  throw new Error(`Unknown language track ${languageId}`);
+}
+const rows = videosInTrack(language.id);
+const modules = statModuleIds()
+  .map((moduleId) => ({
+    moduleId,
+    videos: videosInModule(moduleId).filter((video) => video.language === language.id),
+  }))
+  .filter((group) => group.videos.length > 0);
+---
+
+<Base
+  title={`${language.label} · Educational Videos`}
+  description={`${language.label}: ${rows.length} STAT lesson videos.`}
+  current="tracks"
+>
+  <Breadcrumb
+    items={[
+      { href: href(), label: 'Home' },
+      { href: href('tracks'), label: 'Language tracks' },
+      { label: language.label },
+    ]}
+  />
+  <header class="page-intro">
+    <p class="eyebrow">Language track</p>
+    <h1>{language.label}</h1>
+    <p class="note">{rows.length} videos in the STAT lessons collection.</p>
+  </header>
+  {
+    modules.map((group) => (
+      <section class="topic-block" id={group.moduleId.toLowerCase()} aria-labelledby={`${group.moduleId}-heading`}>
+        <h2 id={`${group.moduleId}-heading`}>
+          <a href={href(`stat-lessons/${group.moduleId.toLowerCase()}`)}>{group.moduleId}</a>
+        </h2>
+        <ul class="track-list">
+          {group.videos.map((video) => (
+            <li>
+              <a href={href(`videos/${video.youtube_id}`)}>
+                <span class="meta">{video.topic}</span>
+                <span class="title" lang={titleLang(video)}>
+                  {video.title}
+                </span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    ))
+  }
+</Base>

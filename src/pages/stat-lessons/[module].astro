@@ -1,0 +1,89 @@
+---
+import Base from '../../layouts/Base.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import {
+  languages,
+  moduleTitles,
+  statModuleIds,
+  topicsInModule,
+  videosInModule,
+} from '../../data/catalog';
+import { href, trackSlug } from '../../lib/urls';
+import { moduleTitleLang, titleLang } from '../../lib/text';
+
+export function getStaticPaths() {
+  return statModuleIds().map((moduleId) => ({
+    params: { module: moduleId.toLowerCase() },
+    props: { moduleId },
+  }));
+}
+
+const { moduleId } = Astro.props;
+const rows = videosInModule(moduleId);
+const groups = topicsInModule(moduleId);
+const titles = moduleTitles(moduleId);
+---
+
+<Base
+  title={`${moduleId} · STAT lessons · Educational Videos`}
+  description={`STAT lessons ${moduleId}: ${groups.length} topics, ${rows.length} videos.`}
+  current="stat"
+>
+  <Breadcrumb
+    items={[
+      { href: href(), label: 'Home' },
+      { href: href('collections/stat-lessons'), label: 'STAT lessons' },
+      { label: moduleId },
+    ]}
+  />
+  <header class="page-intro">
+    <p class="eyebrow">STAT lessons</p>
+    <h1>{moduleId}</h1>
+    {
+      titles.map((title) => (
+        <p class="lede" lang={moduleTitleLang(title)}>
+          {title}
+        </p>
+      ))
+    }
+    <p class="note">
+      {groups.length} topics · {rows.length} videos. Topic codes are catalog groupings. Titles are shown as published.
+    </p>
+    <p id="track-jump" class="kicker">Language tracks</p>
+    <ul class="inline-links" aria-labelledby="track-jump">
+      {
+        languages.map((language) => (
+          <li>
+            <a href={`${href(`tracks/${trackSlug(language.id)}`)}#${moduleId.toLowerCase()}`}>
+              {language.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </header>
+
+  {
+    groups.map((group) => (
+      <section class="topic-block" id={group.topic.toLowerCase()} aria-labelledby={`${group.topic}-heading`}>
+        <h2 id={`${group.topic}-heading`}>
+          <a href={href(`stat-lessons/${moduleId.toLowerCase()}/${group.topic.toLowerCase()}`)}>
+            Topic {group.topic}
+          </a>
+        </h2>
+        <ul class="track-list">
+          {group.videos.map((video) => (
+            <li>
+              <a href={href(`videos/${video.youtube_id}`)}>
+                <span class="meta">{video.language_label}</span>
+                <span class="title" lang={titleLang(video)}>
+                  {video.title}
+                </span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    ))
+  }
+</Base>

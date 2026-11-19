@@ -1,0 +1,86 @@
+---
+import Base from '../../layouts/Base.astro';
+import VideoRows from '../../components/VideoRows.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import {
+  collections,
+  moduleTitles,
+  statModuleIds,
+  videosInCollection,
+  videosInModule,
+} from '../../data/catalog';
+import { href } from '../../lib/urls';
+import { moduleTitleLang } from '../../lib/text';
+
+export function getStaticPaths() {
+  return collections.map((collection) => ({
+    params: { slug: collection.slug },
+    props: { collection },
+  }));
+}
+
+const { collection } = Astro.props;
+const list = videosInCollection(collection.slug);
+const isStat = collection.slug === 'stat-lessons';
+const current = collection.slug === 'lae-101' ? 'lae' : 'stat';
+---
+
+<Base
+  title={`${collection.name} · Educational Videos`}
+  description={`${collection.description} ${list.length} videos.`}
+  current={current}
+>
+  <Breadcrumb
+    items={[
+      { href: href(), label: 'Home' },
+      { label: collection.name },
+    ]}
+  />
+  <header class="page-intro">
+    <p class="eyebrow">Collection</p>
+    <h1>{collection.name}</h1>
+    <p class="lede">{collection.description}</p>
+    <p class="note">{list.length} videos.</p>
+    {
+      isStat && (
+        <p class="note">
+          Each topic code is the catalog’s grouping, not a translated title. Language tracks can use different wording.
+          Open a video for the title and description verified for that recording.
+        </p>
+      )
+    }
+  </header>
+
+  {
+    isStat ? (
+      <section class="section" aria-labelledby="module-list-heading">
+        <h2 id="module-list-heading">Modules</h2>
+        <ul class="module-grid">
+          {statModuleIds().map((moduleId) => {
+            const titles = moduleTitles(moduleId);
+            const rows = videosInModule(moduleId);
+            const topics = new Set(rows.map((video) => video.topic)).size;
+            return (
+              <li>
+                <a class="sheet-link" href={href(`stat-lessons/${moduleId.toLowerCase()}`)}>
+                  <span class="code">{moduleId}</span>
+                  {titles.map((title) => (
+                    <span lang={moduleTitleLang(title)}>{title}</span>
+                  ))}
+                  <p class="count">
+                    {topics} topics · {rows.length} videos
+                  </p>
+                </a>
+              </li>
+            );
+          })}
+        </ul>
+      </section>
+    ) : (
+      <section class="section" aria-labelledby="video-list-heading">
+        <h2 id="video-list-heading">Videos</h2>
+        <VideoRows videos={list} showTopic />
+      </section>
+    )
+  }
+</Base>

@@ -1,0 +1,102 @@
+---
+import Base from '../layouts/Base.astro';
+import {
+  asOf,
+  collections,
+  languages,
+  owner,
+  siteTitle,
+  statModuleIds,
+  timezone,
+  videoCount,
+  videosInCollection,
+  videosInModule,
+  videosInTrack,
+  moduleTitles,
+} from '../data/catalog';
+import { href, trackSlug } from '../lib/urls';
+import { moduleTitleLang } from '../lib/text';
+
+const description = `Public catalog of ${videoCount} lesson videos by ${owner}. Allowlist as of ${asOf} (${timezone}).`;
+---
+
+<Base title={`${siteTitle} · ${owner}`} description={description} current="home">
+  <header class="page-intro">
+    <p class="eyebrow">Allowlist as of {asOf} · {timezone}</p>
+    <h1>{siteTitle}</h1>
+    <p class="lede">
+      {videoCount} public videos selected for teaching, kept in a static catalog by {owner}.
+      Open a video page to play it in a YouTube embed. Titles and descriptions are the ones recorded in the allowlist.
+    </p>
+    <form class="home-search" role="search" action={href('search')} method="get">
+      <div class="field">
+        <label for="home-q">Search titles and descriptions</label>
+        <input id="home-q" name="q" type="search" autocomplete="off" />
+      </div>
+      <button type="submit">Search</button>
+    </form>
+  </header>
+
+  <section class="section" aria-labelledby="collections-heading">
+    <h2 id="collections-heading">Collections</h2>
+    <ul class="collection-grid">
+      {
+        collections.map((collection) => {
+          const count = videosInCollection(collection.slug).length;
+          return (
+            <li>
+              <a class="sheet-link" href={href(`collections/${collection.slug}`)}>
+                <p class="kicker">Collection</p>
+                <h3>{collection.name}</h3>
+                <p>{collection.description}</p>
+                <p class="count">{count} videos</p>
+              </a>
+            </li>
+          );
+        })
+      }
+    </ul>
+  </section>
+
+  <section class="section" aria-labelledby="modules-heading">
+    <h2 id="modules-heading">STAT modules</h2>
+    <ul class="module-grid">
+      {
+        statModuleIds().map((moduleId) => {
+          const titles = moduleTitles(moduleId);
+          const count = videosInModule(moduleId).length;
+          const topics = new Set(videosInModule(moduleId).map((video) => video.topic)).size;
+          return (
+            <li>
+              <a class="sheet-link" href={href(`stat-lessons/${moduleId.toLowerCase()}`)}>
+                <span class="code">{moduleId}</span>
+                {titles.map((title) => (
+                  <span lang={moduleTitleLang(title)}>{title}</span>
+                ))}
+                <p class="count">
+                  {topics} topics · {count} videos
+                </p>
+              </a>
+            </li>
+          );
+        })
+      }
+    </ul>
+  </section>
+
+  <section class="section" aria-labelledby="tracks-heading">
+    <h2 id="tracks-heading">Language tracks</h2>
+    <ul class="track-grid">
+      {
+        languages.map((language) => (
+          <li>
+            <a class="sheet-link" href={href(`tracks/${trackSlug(language.id)}`)}>
+              <h3>{language.label}</h3>
+              <p class="count">{videosInTrack(language.id).length} videos</p>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+</Base>

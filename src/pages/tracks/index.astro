@@ -1,0 +1,38 @@
+---
+import Base from '../../layouts/Base.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import { languages, videosInTrack } from '../../data/catalog';
+import { href, trackSlug } from '../../lib/urls';
+---
+
+<Base
+  title="Language tracks · Educational Videos"
+  description="STAT lesson videos grouped by language track."
+  current="tracks"
+>
+  <Breadcrumb
+    items={[
+      { href: href(), label: 'Home' },
+      { label: 'Language tracks' },
+    ]}
+  />
+  <header class="page-intro">
+    <p class="eyebrow">STAT lessons</p>
+    <h1>Language tracks</h1>
+    <p class="lede">
+      Four narration and slide pairings from the allowlist. LAE 101 videos are not assigned to a language track.
+    </p>
+  </header>
+  <ul class="track-grid">
+    {
+      languages.map((language) => (
+        <li>
+          <a class="sheet-link" href={href(`tracks/${trackSlug(language.id)}`)}>
+            <h2>{language.label}</h2>
+            <p class="count">{videosInTrack(language.id).length} videos</p>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</Base>

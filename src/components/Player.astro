@@ -1,0 +1,24 @@
+---
+import type { Video } from '../data/catalog';
+
+interface Props {
+  video: Video;
+}
+
+const { video } = Astro.props;
+const src = `https://www.youtube.com/embed/${video.youtube_id}`;
+---
+
+<div class="player">
+  <iframe
+    src={src}
+    title={video.title}
+    width="560"
+    height="315"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    allowfullscreen
+    referrerpolicy="strict-origin-when-cross-origin"></iframe>
+</div>
+<p class="watch-link">
+  <a href={video.youtube_url}>Watch this video on YouTube</a>
+</p>
