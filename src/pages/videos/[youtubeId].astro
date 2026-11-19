@@ -1,0 +1,171 @@
+---
+import Base from '../../layouts/Base.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import Player from '../../components/Player.astro';
+import VideoRows from '../../components/VideoRows.astro';
+import {
+  othersInCollection,
+  sameTopic,
+  videos,
+  type Video,
+} from '../../data/catalog';
+import { href, trackSlug } from '../../lib/urls';
+import { descriptionBlocks, moduleTitleLang, titleLang } from '../../lib/text';
+import type { Crumb } from '../../components/Breadcrumb.astro';
+
+export function getStaticPaths() {
+  return videos.map((video) => ({
+    params: { youtubeId: video.youtube_id },
+    props: { video },
+  }));
+}
+
+const { video } = Astro.props as { video: Video };
+const blocks = descriptionBlocks(video);
+const related =
+  video.collection_slug === 'stat-lessons' ? sameTopic(video) : othersInCollection(video);
+const relatedHeading =
+  video.collection_slug === 'stat-lessons' && video.module
+    ? `Other videos under ${video.module} ${video.topic}`
+    : `More in ${video.collection}`;
+
+const crumbs: Crumb[] = [
+  { href: href(), label: 'Home' },
+  { href: href(`collections/${video.collection_slug}`), label: video.collection },
+];
+if (video.module) {
+  crumbs.push({
+    href: href(`stat-lessons/${video.module.toLowerCase()}`),
+    label: video.module,
+  });
+  crumbs.push({
+    href: href(`stat-lessons/${video.module.toLowerCase()}/${video.topic.toLowerCase()}`),
+    label: `Topic ${video.topic}`,
+  });
+}
+crumbs.push({ label: video.title, lang: titleLang(video) });
+
+const meta = [
+  video.title,
+  video.collection,
+  video.language_label,
+  video.module && video.topic ? `${video.module} ${video.topic}` : null,
+]
+  .filter((part): part is string => Boolean(part))
+  .join(' · ');
+
+const current = video.collection_slug === 'lae-101' ? 'lae' : 'stat';
+---
+
+<Base title={`${video.title} · Educational Videos`} description={meta} current={current}>
+  <Breadcrumb items={crumbs} />
+  <article class="detail">
+    <div>
+      <header class="page-intro">
+        <p class="eyebrow">{video.collection}</p>
+        <h1 lang={titleLang(video)}>{video.title}</h1>
+      </header>
+      <Player video={video} />
+      {
+        blocks.length > 0 && (
+          <section class="description" aria-labelledby="description-heading">
+            <h2 id="description-heading">Description</h2>
+            {blocks.map((block) =>
+              block.kind === 'break' ? (
+                <hr class="lang-break" />
+              ) : (
+                <p lang={block.lang}>
+                  {block.lines.map((line, index) => (
+                    <>
+                      {index > 0 && <br />}
+                      {line}
+                    </>
+                  ))}
+                </p>
+              ),
+            )}
+          </section>
+        )
+      }
+      {
+        related.length > 0 && (
+          <section class="section" aria-labelledby="related-heading">
+            <h2 id="related-heading">{relatedHeading}</h2>
+            {video.collection_slug === 'stat-lessons' && (
+              <p class="note">Same catalog topic code. Titles are not rewritten to match.</p>
+            )}
+            <VideoRows videos={related} showTopic={video.collection_slug !== 'stat-lessons'} />
+          </section>
+        )
+      }
+    </div>
+    <aside aria-label="Catalog facts">
+      <dl class="facts">
+        <div>
+          <dt>Collection</dt>
+          <dd><a href={href(`collections/${video.collection_slug}`)}>{video.collection}</a></dd>
+        </div>
+        {
+          video.module && (
+            <div>
+              <dt>Module</dt>
+              <dd>
+                <a href={href(`stat-lessons/${video.module.toLowerCase()}`)}>{video.module}</a>
+              </dd>
+            </div>
+          )
+        }
+        {
+          video.module_title && (
+            <div>
+              <dt>Module title</dt>
+              <dd lang={moduleTitleLang(video.module_title)}>{video.module_title}</dd>
+            </div>
+          )
+        }
+        {
+          video.topic && (
+            <div>
+              <dt>Topic</dt>
+              <dd>
+                {video.module ? (
+                  <a
+                    href={href(
+                      `stat-lessons/${video.module.toLowerCase()}/${video.topic.toLowerCase()}`,
+                    )}
+                  >
+                    {video.topic}
+                  </a>
+                ) : (
+                  video.topic
+                )}
+              </dd>
+            </div>
+          )
+        }
+        {
+          video.language && video.language_label && (
+            <div>
+              <dt>Language track</dt>
+              <dd>
+                <a href={href(`tracks/${trackSlug(video.language)}`)}>{video.language_label}</a>
+              </dd>
+            </div>
+          )
+        }
+        {
+          video.duration && (
+            <div>
+              <dt>Duration</dt>
+              <dd>{video.duration}</dd>
+            </div>
+          )
+        }
+        <div>
+          <dt>Catalog ID</dt>
+          <dd><code>{video.id}</code></dd>
+        </div>
+      </dl>
+    </aside>
+  </article>
+</Base>

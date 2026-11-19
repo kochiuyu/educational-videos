@@ -1,0 +1,16 @@
+---
+import Base from '../layouts/Base.astro';
+import { href } from '../lib/urls';
+---
+
+<Base title="Page not found · Educational Videos" description="That page is not in this catalog.">
+  <header class="page-intro">
+    <p class="eyebrow">404</p>
+    <h1>Page not found</h1>
+    <p class="lede">That address is not in this catalog.</p>
+    <p>
+      <a class="button" href={href()}>Back to the catalog</a>
+      <a class="button secondary" href={href('search')}>Search videos</a>
+    </p>
+  </header>
+</Base>

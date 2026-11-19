@@ -1,0 +1,37 @@
+---
+export interface Crumb {
+  href?: string;
+  label: string;
+  lang?: string;
+}
+
+interface Props {
+  items: Crumb[];
+}
+
+const { items } = Astro.props;
+---
+
+<nav class="crumbs" aria-label="Breadcrumb">
+  <ol>
+    {
+      items.map((item, index) => {
+        const last = index === items.length - 1;
+        const linked = Boolean(item.href) && !last;
+        return (
+          <li>
+            {linked ? (
+              <a href={item.href} lang={item.lang}>
+                {item.label}
+              </a>
+            ) : (
+              <span lang={item.lang} aria-current={last ? 'page' : undefined}>
+                {item.label}
+              </span>
+            )}
+          </li>
+        );
+      })
+    }
+  </ol>
+</nav>

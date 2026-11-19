@@ -1,0 +1,59 @@
+---
+import Base from '../../../layouts/Base.astro';
+import Breadcrumb from '../../../components/Breadcrumb.astro';
+import { statModuleIds, topicIds, videosInTopic } from '../../../data/catalog';
+import { href } from '../../../lib/urls';
+import { titleLang } from '../../../lib/text';
+
+export function getStaticPaths() {
+  const paths = [];
+  for (const moduleId of statModuleIds()) {
+    for (const topic of topicIds(moduleId)) {
+      paths.push({
+        params: { module: moduleId.toLowerCase(), topic: topic.toLowerCase() },
+        props: { moduleId, topic },
+      });
+    }
+  }
+  return paths;
+}
+
+const { moduleId, topic } = Astro.props;
+const rows = videosInTopic(moduleId, topic);
+---
+
+<Base
+  title={`${moduleId} ${topic} · STAT lessons · Educational Videos`}
+  description={`Videos catalogued under STAT ${moduleId} topic ${topic}. ${rows.length} recordings.`}
+  current="stat"
+>
+  <Breadcrumb
+    items={[
+      { href: href(), label: 'Home' },
+      { href: href('collections/stat-lessons'), label: 'STAT lessons' },
+      { href: href(`stat-lessons/${moduleId.toLowerCase()}`), label: moduleId },
+      { label: `Topic ${topic}` },
+    ]}
+  />
+  <header class="page-intro">
+    <p class="eyebrow">STAT lessons · {moduleId}</p>
+    <h1>Topic {topic}</h1>
+    <p class="note">
+      These recordings share catalog topic code {topic}. Each title is the verified title for that video.
+    </p>
+  </header>
+  <ul class="track-list">
+    {
+      rows.map((video) => (
+        <li>
+          <a href={href(`videos/${video.youtube_id}`)}>
+            <span class="meta">{video.language_label}</span>
+            <span class="title" lang={titleLang(video)}>
+              {video.title}
+            </span>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</Base>

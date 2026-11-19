@@ -1,0 +1,41 @@
+---
+import { href } from '../lib/urls';
+import { owner, siteTitle } from '../data/catalog';
+
+interface Props {
+  current?: 'home' | 'stat' | 'lae' | 'tracks' | 'search';
+}
+
+const { current } = Astro.props;
+
+const items = [
+  { id: 'home', href: href(), label: 'Home' },
+  { id: 'stat', href: href('collections/stat-lessons'), label: 'STAT lessons' },
+  { id: 'lae', href: href('collections/lae-101'), label: 'LAE 101' },
+  { id: 'tracks', href: href('tracks'), label: 'Language tracks' },
+  { id: 'search', href: href('search'), label: 'Search' },
+];
+---
+
+<header class="masthead">
+  <div class="masthead-inner">
+    <div>
+      <p class="kicker">Public lesson catalog</p>
+      <a class="wordmark" href={href()}>{siteTitle}</a>
+      <p class="byline">{owner}</p>
+    </div>
+  </div>
+  <nav class="nav-inner" aria-label="Primary">
+    <ul class="nav-list">
+      {
+        items.map((item) => (
+          <li>
+            <a href={item.href} aria-current={current === item.id ? 'page' : undefined}>
+              {item.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </nav>
+</header>
