@@ -4,6 +4,14 @@ const YOUTUBE_ID = /^[A-Za-z0-9_-]{11}$/;
 const SLUG = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 
 /** Routing slugs for language ids. `+` is not used in paths or query keys. */
+/** Keep in step with topicSlug in src/lib/urls.ts. */
+export function topicSlug(topic) {
+  return String(topic)
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-|-$/g, '');
+}
+
 export function trackSlug(languageId) {
   const fixed = {
     'en+zh': 'en-zh',
@@ -167,6 +175,7 @@ export function validateCatalog(data) {
       usedCollections.add(video.collection_slug);
     }
 
+    // economics-shorts (and LAE 101) are valid without a STAT module or language track.
     if (video.collection_slug === 'stat-lessons') {
       if (!isString(video.module) || !/^M\d{2}$/.test(video.module)) {
         errors.push(`${where} (${label}) STAT lessons need module like M01.`);

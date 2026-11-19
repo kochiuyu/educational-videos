@@ -133,6 +133,30 @@ export function topicsInModule(moduleId: string): TopicGroup[] {
   }));
 }
 
+/** Topics in catalog order, then ordered by where each topic name appears in the collection description. */
+export function topicsInCollection(slug: string): TopicGroup[] {
+  const groups: TopicGroup[] = [];
+  const index = new Map<string, TopicGroup>();
+  for (const video of videosInCollection(slug)) {
+    let group = index.get(video.topic);
+    if (!group) {
+      group = { topic: video.topic, videos: [] };
+      index.set(video.topic, group);
+      groups.push(group);
+    }
+    group.videos.push(video);
+  }
+  const description = collectionBySlug(slug)?.description ?? '';
+  return groups.sort((a, b) => {
+    const ai = description.indexOf(a.topic);
+    const bi = description.indexOf(b.topic);
+    if (ai === -1 && bi === -1) return 0;
+    if (ai === -1) return 1;
+    if (bi === -1) return -1;
+    return ai - bi;
+  });
+}
+
 export function languageBySlug(slug: string): Language | undefined {
   return languages.find((language) => trackSlug(language.id) === slug);
 }

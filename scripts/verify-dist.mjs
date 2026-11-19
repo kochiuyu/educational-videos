@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { loadCatalog, trackSlug } from './catalog-lib.mjs';
+import { loadCatalog, topicSlug, trackSlug } from './catalog-lib.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const dist = path.join(root, 'dist');
@@ -33,19 +33,17 @@ function walk(dir) {
 
 function decode(value) {
   return value
+    .replace(/&#(\d+);/g, (_, digits) => String.fromCodePoint(Number(digits)))
+    .replace(/&#x([0-9a-f]+);/gi, (_, digits) => String.fromCodePoint(parseInt(digits, 16)))
     .replace(/&amp;/g, '&')
     .replace(/&lt;/g, '<')
     .replace(/&gt;/g, '>')
-    .replace(/&quot;/g, '"')
-    .replace(/&#39;/g, "'")
-    .replace(/&#x27;/g, "'");
+    .replace(/&quot;/g, '"');
 }
 
 function appears(html, text) {
   if (!text) return true;
-  if (html.includes(text)) return true;
-  const escaped = text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-  return html.includes(escaped);
+  return html.includes(text) || decode(html).includes(text);
 }
 
 function iframes(html) {
@@ -83,6 +81,10 @@ for (const video of catalog.videos) {
 }
 for (const moduleId of moduleIds) expected.add(`stat-lessons/${moduleId}/index.html`);
 for (const topicKey of topicKeys) expected.add(`stat-lessons/${topicKey}/index.html`);
+const econTopics = new Set(
+  catalog.videos.filter((video) => video.collection_slug === 'economics-shorts').map((video) => video.topic),
+);
+for (const topic of econTopics) expected.add(`economics-shorts/${topicSlug(topic)}/index.html`);
 for (const language of catalog.languages) {
   expected.add(`tracks/${trackSlug(language.id)}/index.html`);
 }

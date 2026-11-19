@@ -1,0 +1,36 @@
+---
+import Base from '../../layouts/Base.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import VideoRows from '../../components/VideoRows.astro';
+import { topicsInCollection } from '../../data/catalog';
+import { href, topicSlug } from '../../lib/urls';
+
+export function getStaticPaths() {
+  return topicsInCollection('economics-shorts').map((group) => ({
+    params: { topic: topicSlug(group.topic) },
+    props: { group },
+  }));
+}
+
+const { group } = Astro.props;
+---
+
+<Base
+  title={`${group.topic} · Economics Shorts · Educational Videos`}
+  description={`${group.topic}: ${group.videos.length} public economics Shorts.`}
+  current="econ"
+>
+  <Breadcrumb
+    items={[
+      { href: href(), label: 'Home' },
+      { href: href('collections/economics-shorts'), label: 'Economics Shorts' },
+      { label: group.topic },
+    ]}
+  />
+  <header class="page-intro">
+    <p class="eyebrow">Economics Shorts</p>
+    <h1>{group.topic}</h1>
+    <p class="note">{group.videos.length} videos. Titles are shown as published.</p>
+  </header>
+  <VideoRows videos={group.videos} />
+</Base>

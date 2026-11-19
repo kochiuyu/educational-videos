@@ -6,12 +6,13 @@ The public channel [https://www.youtube.com/@ChiuYuKo](https://www.youtube.com/@
 
 ## What is listed
 
-`catalog/allowlist.json` is the source of truth. The copy in this repository is the verified public allowlist as of **2026-11-19** (Asia/Hong_Kong): **262** videos.
+`catalog/allowlist.json` is the source of truth. The copy in this repository is the verified public allowlist as of **2026-11-19** (Asia/Hong_Kong): **287** videos.
 
 | Collection | Videos |
 | --- | ---: |
 | STAT lessons | 252 |
 | LAE 101 | 10 |
+| Economics Shorts | 25 |
 
 STAT lessons by module:
 
@@ -25,6 +26,15 @@ STAT lessons by module:
 
 Each STAT topic has four language tracks: English · 简体 slides, 普通话 · English slides, 粵語 · English slides, and 普通话.
 
+Economics Shorts are public cartoon-style YouTube Shorts from the @ChiuYuKo channel. The catalog groups them by the channel’s public playlist names:
+
+| Topic | Videos |
+| --- | ---: |
+| Experimental Economics | 18 |
+| Game Theory in daily life | 7 |
+
+`oVODqhnkkPg` is in the Game Theory in daily life group. It is a public Short on the channel and was not in that playlist when the list was checked. `econ-shorts-11` (`3C_-2iME2vk`) has no verified duration, so `duration` is null. Descriptions are null. Watch URLs are `https://www.youtube.com/watch?v=` plus the id, not Shorts URLs and not playlist URLs.
+
 On that date the allowlist left out:
 
 - Older DSME2021 lecture recordings
@@ -33,6 +43,8 @@ On that date the allowlist left out:
 - All YouTube playlist URLs
 - HeyGen-labeled videos
 - Any unlisted or private video
+- Seven public campus-walking Shorts that are not economics lessons: `JqQtx1NpGFc`, `ONuqnSEsL64`, `MWxWfH8OO9w`, `Jt63krqjqpA`, `m7s78I9eha8`, `MnkiC51dFNk`, `OZWPxCoQFwo`
+- The non-Short Micro Business Case video `Rv665coalu8`
 
 Those limits describe the file as of that date. A later public video, including a topic that was not public yet, can be added by the steps below once its watch URL is verified. Do not invent a YouTube ID, title, description, or duration. If a field is unknown, omit it or set it to `null`.
 
@@ -60,9 +72,10 @@ npm run preview
 
 ## Browse, search, and filter
 
-- Collections: `/collections/stat-lessons/` and `/collections/lae-101/`
+- Collections: `/collections/stat-lessons/`, `/collections/lae-101/`, and `/collections/economics-shorts/`
 - STAT modules: `/stat-lessons/m01/` through `/stat-lessons/m05/`
-- Topics: `/stat-lessons/m03/t01/`
+- STAT topics: `/stat-lessons/m03/t01/`
+- Economics Shorts topics: `/economics-shorts/experimental-economics/` and `/economics-shorts/game-theory-in-daily-life/`
 - Language tracks: `/tracks/en-zh/`, `/tracks/zh-en/`, `/tracks/hk-en/`, `/tracks/zh/`
 - Search: `/search/`
 
@@ -83,10 +96,11 @@ There is no backend. Edit the catalog, open a pull request, and let the Pages wo
    - `youtube_id` (11 characters; unique)
    - `youtube_url` exactly `https://www.youtube.com/watch?v=` plus that id
 5. STAT lessons also need `module` (`M01`), `topic` (`T01`), `language` (an id in `languages`), and `language_label` (that language’s label, copied exactly).
-6. Optional: `description`, `duration` (`2:14`), `module_title`, `source`. Use `null` or omit anything you do not have.
-7. A new collection or language has to be added to `collections` or `languages` in the same edit. Every collection and language in those arrays must have at least one video.
-8. Run `npm run check:catalog` and `npm run build`.
-9. Open a pull request to `main`. The workflow builds the site on the pull request. After merge, GitHub Actions deploys it.
+6. Economics Shorts use `collection_slug` `economics-shorts` and a `topic` of `Experimental Economics` or `Game Theory in daily life`. Leave `module`, `language`, and `language_label` null unless a verified value exists. Use the watch URL, not a Shorts URL and not a playlist URL. Copy `duration` when it was verified, and leave it null when it was not. Do not label these Shorts as HeyGen.
+7. Optional: `description`, `duration` (`2:14`), `module_title`, `source`. Use `null` or omit anything you do not have.
+8. A new collection or language has to be added to `collections` or `languages` in the same edit. Every collection and language in those arrays must have at least one video.
+9. Run `npm run check:catalog` and `npm run build`.
+10. Open a pull request to `main`. The workflow builds the site on the pull request. After merge, GitHub Actions deploys it.
 
 The checker rejects duplicate YouTube IDs, playlist URLs, a `youtube_url` that does not match the id, HeyGen-labeled entries, and DSME2021 entries.
 
@@ -99,13 +113,13 @@ Workflow: [`.github/workflows/pages.yml`](.github/workflows/pages.yml).
 - The Astro `base` is `/educational-videos`, which is the project-site path for this repository name.
 - Built files are the site root. They are not nested in an extra `educational-videos` folder.
 
-**Pages is not fully configured yet.** This repository has no Pages site (`has_pages` is false). A repository admin still has to choose the source once:
+**Pages is not fully configured yet.** The workflow is already on `main`, and this repository still has no Pages site. A repository admin still has to choose the source once:
 
-1. Merge this pull request so `.github/workflows/pages.yml` is on `main`.
-2. Open [Settings → Pages](https://github.com/kochiuyu/educational-videos/settings/pages).
-3. Under **Build and deployment**, set **Source** to **GitHub Actions**.
+1. Open [Settings → Pages](https://github.com/kochiuyu/educational-videos/settings/pages).
+2. Under **Build and deployment**, set **Source** to **GitHub Actions**.
+3. Re-run the failed **Deploy to GitHub Pages** job on `main` (Actions → the workflow run → Re-run failed jobs).
 
-If **GitHub Actions** is not in the source list until the workflow file is on `main`, merge first, then set the source. The first Actions run may fail with a Pages site error until that source is saved. After saving it, re-run the failed **Deploy to GitHub Pages** job (Actions → the workflow run → Re-run failed jobs). Later pushes to `main` deploy without another settings change.
+Later pushes to `main` deploy without another settings change. This catalog change does not enable or edit Pages settings.
 
 The site is then served at [https://kochiuyu.github.io/educational-videos/](https://kochiuyu.github.io/educational-videos/). If the `github-pages` environment asks for approval, approve that deployment in the Actions run.
 
@@ -117,4 +131,4 @@ Built with [Astro](https://astro.build/) 5.18.2, used under the [MIT License](ht
 
 ## Embed restrictions
 
-The allowlist does not say whether YouTube permits embedding. If a player shows that a video cannot be embedded, the page still links to the public watch URL. Embed restrictions were not verified for all 262 videos.
+The allowlist does not say whether YouTube permits embedding. If a player shows that a video cannot be embedded, the page still links to the public watch URL. Embed restrictions were not verified for all 287 videos.
