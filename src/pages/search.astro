@@ -5,6 +5,7 @@ import {
   collections,
   languages,
   statModuleIds,
+  topicsInCollection,
   videoCount,
   videos,
 } from '../data/catalog';
@@ -21,6 +22,7 @@ for (const video of videos) {
     laeTopics.push(video.topic);
   }
 }
+const econTopics = topicsInCollection('economics-shorts').map((group) => group.topic);
 const modules = statModuleIds();
 ---
 
@@ -78,6 +80,9 @@ const modules = statModuleIds();
         </optgroup>
         <optgroup label="LAE 101">
           {laeTopics.map((topic) => <option value={topic}>{topic}</option>)}
+        </optgroup>
+        <optgroup label="Economics Shorts">
+          {econTopics.map((topic) => <option value={topic}>{topic}</option>)}
         </optgroup>
       </select>
     </div>

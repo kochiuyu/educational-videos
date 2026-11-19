@@ -13,11 +13,13 @@ import {
   videosInModule,
   videosInTrack,
   moduleTitles,
+  topicsInCollection,
 } from '../data/catalog';
-import { href, trackSlug } from '../lib/urls';
+import { href, topicSlug, trackSlug } from '../lib/urls';
 import { moduleTitleLang } from '../lib/text';
 
 const description = `Public catalog of ${videoCount} lesson videos by ${owner}. Allowlist as of ${asOf} (${timezone}).`;
+const economicsTopics = topicsInCollection('economics-shorts');
 ---
 
 <Base title={`${siteTitle} · ${owner}`} description={description} current="home">
@@ -54,6 +56,22 @@ const description = `Public catalog of ${videoCount} lesson videos by ${owner}. 
             </li>
           );
         })
+      }
+    </ul>
+  </section>
+
+  <section class="section" aria-labelledby="economics-heading">
+    <h2 id="economics-heading">Economics Shorts</h2>
+    <ul class="module-grid">
+      {
+        economicsTopics.map((group) => (
+          <li>
+            <a class="sheet-link" href={href(`economics-shorts/${topicSlug(group.topic)}`)}>
+              <h3>{group.topic}</h3>
+              <p class="count">{group.videos.length} videos</p>
+            </a>
+          </li>
+        ))
       }
     </ul>
   </section>

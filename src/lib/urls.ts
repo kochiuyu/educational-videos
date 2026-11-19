@@ -6,6 +6,14 @@ export function href(path = ''): string {
   return `${base}${trimmed}/`;
 }
 
+/** URL slug for a catalog topic phrase. Derived from the topic text; not stored metadata. */
+export function topicSlug(topic: string): string {
+  return topic
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-|-$/g, '');
+}
+
 export function trackSlug(languageId: string): string {
   const fixed: Record<string, string> = {
     'en+zh': 'en-zh',

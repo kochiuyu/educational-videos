@@ -6,10 +6,11 @@ import {
   collections,
   moduleTitles,
   statModuleIds,
+  topicsInCollection,
   videosInCollection,
   videosInModule,
 } from '../../data/catalog';
-import { href } from '../../lib/urls';
+import { href, topicSlug } from '../../lib/urls';
 import { moduleTitleLang } from '../../lib/text';
 
 export function getStaticPaths() {
@@ -22,7 +23,10 @@ export function getStaticPaths() {
 const { collection } = Astro.props;
 const list = videosInCollection(collection.slug);
 const isStat = collection.slug === 'stat-lessons';
-const current = collection.slug === 'lae-101' ? 'lae' : 'stat';
+const isEconomics = collection.slug === 'economics-shorts';
+const economicsTopics = isEconomics ? topicsInCollection(collection.slug) : [];
+const current =
+  collection.slug === 'lae-101' ? 'lae' : collection.slug === 'economics-shorts' ? 'econ' : 'stat';
 ---
 
 <Base
@@ -76,6 +80,16 @@ const current = collection.slug === 'lae-101' ? 'lae' : 'stat';
           })}
         </ul>
       </section>
+    ) : isEconomics ? (
+      economicsTopics.map((group) => (
+        <section class="topic-block" id={topicSlug(group.topic)} aria-labelledby={`${topicSlug(group.topic)}-heading`}>
+          <h2 id={`${topicSlug(group.topic)}-heading`}>
+            <a href={href(`economics-shorts/${topicSlug(group.topic)}`)}>{group.topic}</a>
+          </h2>
+          <p class="note">{group.videos.length} videos.</p>
+          <VideoRows videos={group.videos} />
+        </section>
+      ))
     ) : (
       <section class="section" aria-labelledby="video-list-heading">
         <h2 id="video-list-heading">Videos</h2>

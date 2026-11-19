@@ -9,7 +9,7 @@ import {
   videos,
   type Video,
 } from '../../data/catalog';
-import { href, trackSlug } from '../../lib/urls';
+import { href, topicSlug, trackSlug } from '../../lib/urls';
 import { descriptionBlocks, moduleTitleLang, titleLang } from '../../lib/text';
 import type { Crumb } from '../../components/Breadcrumb.astro';
 
@@ -23,11 +23,13 @@ export function getStaticPaths() {
 const { video } = Astro.props as { video: Video };
 const blocks = descriptionBlocks(video);
 const related =
-  video.collection_slug === 'stat-lessons' ? sameTopic(video) : othersInCollection(video);
+  video.collection_slug === 'lae-101' ? othersInCollection(video) : sameTopic(video);
 const relatedHeading =
   video.collection_slug === 'stat-lessons' && video.module
     ? `Other videos under ${video.module} ${video.topic}`
-    : `More in ${video.collection}`;
+    : video.collection_slug === 'economics-shorts'
+      ? `Other videos under ${video.topic}`
+      : `More in ${video.collection}`;
 
 const crumbs: Crumb[] = [
   { href: href(), label: 'Home' },
@@ -42,6 +44,11 @@ if (video.module) {
     href: href(`stat-lessons/${video.module.toLowerCase()}/${video.topic.toLowerCase()}`),
     label: `Topic ${video.topic}`,
   });
+} else if (video.collection_slug === 'economics-shorts') {
+  crumbs.push({
+    href: href(`economics-shorts/${topicSlug(video.topic)}`),
+    label: video.topic,
+  });
 }
 crumbs.push({ label: video.title, lang: titleLang(video) });
 
@@ -49,12 +56,17 @@ const meta = [
   video.title,
   video.collection,
   video.language_label,
-  video.module && video.topic ? `${video.module} ${video.topic}` : null,
+  video.module && video.topic ? `${video.module} ${video.topic}` : video.topic,
 ]
   .filter((part): part is string => Boolean(part))
   .join(' · ');
 
-const current = video.collection_slug === 'lae-101' ? 'lae' : 'stat';
+const current =
+  video.collection_slug === 'lae-101'
+    ? 'lae'
+    : video.collection_slug === 'economics-shorts'
+      ? 'econ'
+      : 'stat';
 ---
 
 <Base title={`${video.title} · Educational Videos`} description={meta} current={current}>
@@ -94,7 +106,7 @@ const current = video.collection_slug === 'lae-101' ? 'lae' : 'stat';
             {video.collection_slug === 'stat-lessons' && (
               <p class="note">Same catalog topic code. Titles are not rewritten to match.</p>
             )}
-            <VideoRows videos={related} showTopic={video.collection_slug !== 'stat-lessons'} />
+            <VideoRows videos={related} showTopic={video.collection_slug === 'lae-101'} />
           </section>
         )
       }
@@ -136,6 +148,8 @@ const current = video.collection_slug === 'lae-101' ? 'lae' : 'stat';
                   >
                     {video.topic}
                   </a>
+                ) : video.collection_slug === 'economics-shorts' ? (
+                  <a href={href(`economics-shorts/${topicSlug(video.topic)}`)}>{video.topic}</a>
                 ) : (
                   video.topic
                 )}
