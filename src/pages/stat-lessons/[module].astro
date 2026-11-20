@@ -1,6 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 import Breadcrumb from '../../components/Breadcrumb.astro';
+import VideoRows from '../../components/VideoRows.astro';
 import {
   languages,
   moduleTitles,
@@ -9,7 +10,7 @@ import {
   videosInModule,
 } from '../../data/catalog';
 import { href, trackSlug } from '../../lib/urls';
-import { moduleTitleLang, titleLang } from '../../lib/text';
+import { moduleTitleLang } from '../../lib/text';
 
 export function getStaticPaths() {
   return statModuleIds().map((moduleId) => ({
@@ -71,18 +72,7 @@ const titles = moduleTitles(moduleId);
             Topic {group.topic}
           </a>
         </h2>
-        <ul class="track-list">
-          {group.videos.map((video) => (
-            <li>
-              <a href={href(`videos/${video.youtube_id}`)}>
-                <span class="meta">{video.language_label}</span>
-                <span class="title" lang={titleLang(video)}>
-                  {video.title}
-                </span>
-              </a>
-            </li>
-          ))}
-        </ul>
+        <VideoRows videos={group.videos} showLanguage />
       </section>
     ))
   }

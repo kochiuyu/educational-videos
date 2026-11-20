@@ -6,15 +6,16 @@ interface Props {
 }
 
 const { video } = Astro.props;
+const portrait = video.collection_slug === 'economics-shorts';
 const src = `https://www.youtube.com/embed/${video.youtube_id}`;
 ---
 
-<div class="player">
+<div class:list={['player', { portrait }]}>
   <iframe
     src={src}
     title={video.title}
-    width="560"
-    height="315"
+    width={portrait ? 315 : 560}
+    height={portrait ? 560 : 315}
     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
     allowfullscreen
     referrerpolicy="strict-origin-when-cross-origin"></iframe>

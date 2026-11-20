@@ -1,44 +1,29 @@
 ---
 import type { Video } from '../data/catalog';
-import { href } from '../lib/urls';
-import { titleLang } from '../lib/text';
+import VideoCard from './VideoCard.astro';
 
 interface Props {
   videos: Video[];
   showTopic?: boolean;
+  showLanguage?: boolean;
 }
 
-const { videos, showTopic = false } = Astro.props;
+const { videos, showTopic = false, showLanguage = false } = Astro.props;
+const shorts = videos.length > 0 && videos.every((video) => video.collection_slug === 'economics-shorts');
 
 function metaLabel(video: Video): string {
   const parts: string[] = [];
-  if (video.language_label) parts.push(video.language_label);
-  if (showTopic) {
-    parts.push(video.module ? `${video.module} ${video.topic}` : `Topic ${video.topic}`);
-  }
+  if (showLanguage && video.language_label) parts.push(video.language_label);
+  if (showTopic) parts.push(video.module ? `${video.module} ${video.topic}` : video.topic);
   return parts.join(' · ');
 }
 ---
 
-<ul class="track-list">
+<ul class:list={['video-grid', { shorts }]}>
   {
     videos.map((video) => (
       <li>
-        <a href={href(`videos/${video.youtube_id}`)}>
-          <span class="meta">
-            {metaLabel(video) && <span>{metaLabel(video)}</span>}
-            {video.duration && (
-              <span>
-                {metaLabel(video) ? ' · ' : ''}
-                <span class="sr-only">Duration </span>
-                {video.duration}
-              </span>
-            )}
-          </span>
-          <span class="title" lang={titleLang(video)}>
-            {video.title}
-          </span>
-        </a>
+        <VideoCard video={video} meta={metaLabel(video)} />
       </li>
     ))
   }

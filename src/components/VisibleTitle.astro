@@ -1,0 +1,39 @@
+---
+import type { Video } from '../data/catalog';
+import { splitPublishedTitle, titleLang } from '../lib/text';
+
+interface Props {
+  video: Video;
+  heading?: boolean;
+}
+
+const { video, heading = false } = Astro.props;
+const parts =
+  video.collection_slug === 'economics-shorts'
+    ? splitPublishedTitle(video.title)
+    : { headline: video.title, tags: [] as string[] };
+const headline = parts.headline || video.title;
+const tags = parts.headline ? parts.tags : [];
+const lang = titleLang(video);
+---
+
+{
+  heading ? (
+    <h1 class="watch-title" lang={lang}>
+      {headline}
+    </h1>
+  ) : (
+    <span class="video-card-title" lang={lang}>
+      {headline}
+    </span>
+  )
+}
+{
+  tags.length > 0 && (
+    <ul class="tag-row">
+      {tags.map((tag) => (
+        <li class="tag">#{tag}</li>
+      ))}
+    </ul>
+  )
+}

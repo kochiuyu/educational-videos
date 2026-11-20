@@ -14,6 +14,20 @@ export function topicSlug(topic: string): string {
     .replace(/^-|-$/g, '');
 }
 
+/**
+ * Public YouTube thumbnail. Shorts use oardefault (1080×1920), which was
+ * present for every economics short. Other videos use hq720 (1280×720),
+ * present for every STAT and LAE video. hqdefault is the fallback.
+ */
+export function thumbnailUrl(youtubeId: string, collectionSlug: string): string {
+  const file = collectionSlug === 'economics-shorts' ? 'oardefault.jpg' : 'hq720.jpg';
+  return `https://i.ytimg.com/vi/${youtubeId}/${file}`;
+}
+
+export function thumbnailFallbackUrl(youtubeId: string): string {
+  return `https://i.ytimg.com/vi/${youtubeId}/hqdefault.jpg`;
+}
+
 export function trackSlug(languageId: string): string {
   const fixed: Record<string, string> = {
     'en+zh': 'en-zh',

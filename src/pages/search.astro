@@ -9,8 +9,9 @@ import {
   videoCount,
   videos,
 } from '../data/catalog';
+import VideoCard from '../components/VideoCard.astro';
 import { href, trackSlug } from '../lib/urls';
-import { haystack, titleLang } from '../lib/text';
+import { haystack } from '../lib/text';
 
 const statTopics: string[] = [];
 const laeTopics: string[] = [];
@@ -106,35 +107,28 @@ const modules = statModuleIds();
   <p id="result-count" class="result-count" aria-live="polite">Showing all {videoCount} videos.</p>
   <p id="empty" hidden>No videos match these filters.</p>
 
-  <ul id="results" class="result-list">
+  <ul id="results" class="video-grid">
     {
-      videos.map((video) => (
-        <li
-          data-collection={video.collection_slug}
-          data-module={video.module ?? ''}
-          data-topic={video.topic}
-          data-language={video.language ? trackSlug(video.language) : ''}
-          data-haystack={haystack(video)}
-        >
-          <a class="row" href={href(`videos/${video.youtube_id}`)}>
-            <span class="meta">
-              {video.collection}
-              {video.module ? ` · ${video.module} ${video.topic}` : video.topic ? ` · Topic ${video.topic}` : ''}
-              {video.language_label ? ` · ${video.language_label}` : ''}
-              {video.duration && (
-                <>
-                  {' · '}
-                  <span class="sr-only">Duration </span>
-                  {video.duration}
-                </>
-              )}
-            </span>
-            <span class="title" lang={titleLang(video)}>
-              {video.title}
-            </span>
-          </a>
-        </li>
-      ))
+      videos.map((video) => {
+        const context = [
+          video.collection,
+          video.module ? `${video.module} ${video.topic}` : video.topic,
+          video.language_label,
+        ]
+          .filter((part): part is string => Boolean(part))
+          .join(' · ');
+        return (
+          <li
+            data-collection={video.collection_slug}
+            data-module={video.module ?? ''}
+            data-topic={video.topic}
+            data-language={video.language ? trackSlug(video.language) : ''}
+            data-haystack={haystack(video)}
+          >
+            <VideoCard video={video} meta={context} />
+          </li>
+        );
+      })
     }
   </ul>
 </Base>

@@ -1,5 +1,56 @@
 import type { Video } from '../data/catalog';
 
+const MONTHS = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December',
+];
+
+/** Plain date line for the public pages. Does not change the catalog value. */
+export function catalogDateLine(asOf: string, timezone: string): string {
+  const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(asOf);
+  let date = asOf;
+  if (match) {
+    const month = MONTHS[Number(match[2]) - 1];
+    if (month) date = `${Number(match[3])} ${month} ${match[1]}`;
+  }
+  const zone = timezone === 'Asia/Hong_Kong' ? 'Hong Kong time' : timezone.replaceAll('_', ' ');
+  return `${date}, ${zone}`;
+}
+
+export interface PublishedTitleParts {
+  headline: string;
+  tags: string[];
+}
+
+/**
+ * Split a published title at its hashtags for display.
+ * The headline is the text before the first #, and each tag is the text
+ * between # marks, trimmed. Nothing is rewritten or dropped except the
+ * separators and surrounding whitespace.
+ */
+export function splitPublishedTitle(title: string): PublishedTitleParts {
+  const hash = title.indexOf('#');
+  if (hash === -1) return { headline: title.trim(), tags: [] };
+  const headline = title.slice(0, hash).trim();
+  const tags = title
+    .slice(hash + 1)
+    .split('#')
+    .map((part) => part.trim())
+    .filter((part) => part.length > 0);
+  if (!headline) return { headline: title.trim(), tags: [] };
+  return { headline, tags };
+}
+
 /** Language of a title, based on its first character and the catalog language id. */
 export function titleLang(video: Pick<Video, 'title' | 'language'>): string {
   const startsHan = /^\s*\p{Script=Han}/u.test(video.title);

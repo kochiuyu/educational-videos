@@ -1,16 +1,19 @@
 ---
 import { asOf, channelUrl, owner, timezone, videoCount } from '../data/catalog';
+import { catalogDateLine } from '../lib/text';
+
+const updated = catalogDateLine(asOf, timezone);
 ---
 
 <footer class="site-footer">
   <div class="site-footer-inner">
     <p>
-      Allowlist as of {asOf} ({timezone}). {videoCount} public videos. Owner: {owner}.
+      Updated {updated}. {videoCount} public videos. {owner}.
     </p>
     <p>
       Channel for attribution only:
       <a href={channelUrl}>youtube.com/@ChiuYuKo</a>.
-      This catalog does not scrape or mirror the channel.
+      This site does not copy videos from the channel.
     </p>
     <p>Playback uses a YouTube player embedded on the video page. This site does not host video files.</p>
   </div>

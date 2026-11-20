@@ -10,7 +10,8 @@ import {
   type Video,
 } from '../../data/catalog';
 import { href, topicSlug, trackSlug } from '../../lib/urls';
-import { descriptionBlocks, moduleTitleLang, titleLang } from '../../lib/text';
+import VisibleTitle from '../../components/VisibleTitle.astro';
+import { descriptionBlocks, moduleTitleLang } from '../../lib/text';
 import type { Crumb } from '../../components/Breadcrumb.astro';
 
 export function getStaticPaths() {
@@ -50,7 +51,6 @@ if (video.module) {
     label: video.topic,
   });
 }
-crumbs.push({ label: video.title, lang: titleLang(video) });
 
 const meta = [
   video.title,
@@ -71,13 +71,13 @@ const current =
 
 <Base title={`${video.title} · Educational Videos`} description={meta} current={current}>
   <Breadcrumb items={crumbs} />
-  <article class="detail">
+  <article class="detail watch">
     <div>
-      <header class="page-intro">
-        <p class="eyebrow">{video.collection}</p>
-        <h1 lang={titleLang(video)}>{video.title}</h1>
-      </header>
       <Player video={video} />
+      <header class="watch-heading">
+        <p class="kicker">{video.collection}</p>
+        <VisibleTitle video={video} heading />
+      </header>
       {
         blocks.length > 0 && (
           <section class="description" aria-labelledby="description-heading">
@@ -106,13 +106,17 @@ const current =
             {video.collection_slug === 'stat-lessons' && (
               <p class="note">Same catalog topic code. Titles are not rewritten to match.</p>
             )}
-            <VideoRows videos={related} showTopic={video.collection_slug === 'lae-101'} />
+            <VideoRows
+              videos={related}
+              showTopic={video.collection_slug === 'lae-101'}
+              showLanguage={video.collection_slug === 'stat-lessons'}
+            />
           </section>
         )
       }
     </div>
-    <aside aria-label="Catalog facts">
-      <dl class="facts">
+    <aside class="facts" aria-label="About this video">
+      <dl>
         <div>
           <dt>Collection</dt>
           <dd><a href={href(`collections/${video.collection_slug}`)}>{video.collection}</a></dd>
@@ -175,11 +179,8 @@ const current =
             </div>
           )
         }
-        <div>
-          <dt>Catalog ID</dt>
-          <dd><code>{video.id}</code></dd>
-        </div>
       </dl>
+      <p class="quiet-id">Catalog ID <code>{video.id}</code></p>
     </aside>
   </article>
 </Base>

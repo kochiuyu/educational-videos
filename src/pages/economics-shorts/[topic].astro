@@ -30,7 +30,9 @@ const { group } = Astro.props;
   <header class="page-intro">
     <p class="eyebrow">Economics Shorts</p>
     <h1>{group.topic}</h1>
-    <p class="note">{group.videos.length} videos. Titles are shown as published.</p>
+    <p class="note">
+      {group.videos.length} videos. The title is the published title. Hashtags from that title are shown as tags.
+    </p>
   </header>
   <VideoRows videos={group.videos} />
 </Base>
