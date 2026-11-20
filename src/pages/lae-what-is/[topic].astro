@@ -1,0 +1,36 @@
+---
+import Base from '../../layouts/Base.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import VideoRows from '../../components/VideoRows.astro';
+import { topicsInCollection } from '../../data/catalog';
+import { href, topicSlug } from '../../lib/urls';
+
+export function getStaticPaths() {
+  return topicsInCollection('lae-what-is').map((group) => ({
+    params: { topic: topicSlug(group.topic) },
+    props: { group },
+  }));
+}
+
+const { group } = Astro.props;
+---
+
+<Base
+  title={`${group.topic} · LAE What-is · Educational Videos`}
+  description={`${group.topic}: ${group.videos.length} LAE What-is videos.`}
+  current="what"
+>
+  <Breadcrumb
+    items={[
+      { href: href(), label: 'Home' },
+      { href: href('collections/lae-what-is'), label: 'LAE What-is' },
+      { label: group.topic },
+    ]}
+  />
+  <header class="page-intro">
+    <p class="eyebrow">LAE What-is</p>
+    <h1>{group.topic}</h1>
+    <p class="note">{group.videos.length} videos. Titles are the published titles.</p>
+  </header>
+  <VideoRows videos={group.videos} showLanguage />
+</Base>

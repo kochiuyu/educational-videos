@@ -85,8 +85,13 @@ const econTopics = new Set(
   catalog.videos.filter((video) => video.collection_slug === 'economics-shorts').map((video) => video.topic),
 );
 for (const topic of econTopics) expected.add(`economics-shorts/${topicSlug(topic)}/index.html`);
+const laeWhatTopics = new Set(
+  catalog.videos.filter((video) => video.collection_slug === 'lae-what-is').map((video) => video.topic),
+);
+for (const topic of laeWhatTopics) expected.add(`lae-what-is/${topicSlug(topic)}/index.html`);
+const statLanguageIds = new Set(['en+zh', 'zh+en', 'hk+en', 'zh']);
 for (const language of catalog.languages) {
-  expected.add(`tracks/${trackSlug(language.id)}/index.html`);
+  if (statLanguageIds.has(language.id)) expected.add(`tracks/${trackSlug(language.id)}/index.html`);
 }
 
 for (const rel of expected) {

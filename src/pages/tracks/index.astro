@@ -1,7 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 import Breadcrumb from '../../components/Breadcrumb.astro';
-import { languages, videosInTrack } from '../../data/catalog';
+import { statLanguages, videosInTrack } from '../../data/catalog';
 import { href, trackSlug } from '../../lib/urls';
 ---
 
@@ -20,12 +20,12 @@ import { href, trackSlug } from '../../lib/urls';
     <p class="eyebrow">STAT lessons</p>
     <h1>Language tracks</h1>
     <p class="lede">
-      Four narration and slide pairings for STAT lessons. LAE 101 and Economics Shorts are not language tracks.
+      Four narration and slide pairings for STAT lessons. LAE 101, LAE What-is, and Economics Shorts are not language tracks.
     </p>
   </header>
   <ul class="track-grid">
     {
-      languages.map((language) => (
+      statLanguages().map((language) => (
         <li>
           <a class="sheet-link" href={href(`tracks/${trackSlug(language.id)}`)}>
             <h2>{language.label}</h2>

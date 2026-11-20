@@ -3,12 +3,13 @@
   "owner": "Prof. Chiu Yu KO",
   "channel_url": "https://www.youtube.com/@ChiuYuKo",
   "repo": "https://github.com/kochiuyu/educational-videos",
-  "as_of": "2026-11-19",
+  "as_of": "2026-11-20",
   "timezone": "Asia/Hong_Kong",
   "inclusions": {
     "stat_lessons": "Public VF-Revise STAT lessons only: M01–M03 all topics; M04 T01–T10; M05 T01–T08. Four language tracks per topic.",
     "lae_101": "Ten public LAE 101 short intros. Individual video URLs only.",
-    "economics_shorts": "Public cartoon-style economics YouTube Shorts from the @ChiuYuKo channel, grouped by the channel's public playlists Experimental Economics and Game Theory in daily life."
+    "economics_shorts": "Public cartoon-style economics YouTube Shorts from the @ChiuYuKo channel, grouped by the channel's public playlists Experimental Economics and Game Theory in daily life.",
+    "lae_what_is": "What is LAE? and What is the 1,000-metre band? for CUHK DOTE5891, Business Analysis of Low-Altitude Economy. Companion site: https://kochiuyu.github.io/lae-companion/."
   },
   "exclusions": [
     "Older DSME2021 lecture recordings in kochiuyu/video-links",
@@ -16,9 +17,10 @@
     "M05 T09–T15 (not yet confirmed public as of 18 Nov 2026, 9:03pm HKT)",
     "All YouTube playlist URLs (M03–M05 playlists remain unlisted; several local playlist IDs appear truncated and are unverified)",
     "HeyGen-labeled videos (no verified URL list supplied)",
-    "Any unlisted or private video",
+    "Any unlisted or private video, except the 10 faculty-approved LAE What-is watch links added on 20 Nov 2026: 8Rzd0SHzQuw, dImZvXJ9ltE, G3mHD9mqMxk, k6fljhys-rc, fTK-AoG7EWk, SsSM23tx3ws, aE_JfWFbHrs, 7JOObh6f5DI, koIr-kV0_JU, wVsofjW1MAo",
     "Seven public campus-walking Shorts that are not economics lessons: JqQtx1NpGFc, ONuqnSEsL64, MWxWfH8OO9w, Jt63krqjqpA, m7s78I9eha8, MnkiC51dFNk, OZWPxCoQFwo",
-    "Non-Short Micro Business Case video Rv665coalu8"
+    "Non-Short Micro Business Case video Rv665coalu8",
+    "Five language-mix playlist IDs that appear truncated and were not added: PLdov2JtNENto, PLRfIHgyMKz8c, PLLdrdvbXQCiI, PLdhLcA4fn-Mc, PLTdQoQ9sXSew"
   ],
   "collections": [
     {
@@ -35,6 +37,11 @@
       "slug": "economics-shorts",
       "name": "Economics Shorts",
       "description": "Public cartoon-style economics YouTube Shorts from the @ChiuYuKo channel, grouped by the channel's public playlists Experimental Economics and Game Theory in daily life."
+    },
+    {
+      "slug": "lae-what-is",
+      "name": "LAE What-is",
+      "description": "What is LAE? and What is the 1,000-metre band? for CUHK DOTE5891, Business Analysis of Low-Altitude Economy. Companion site: https://kochiuyu.github.io/lae-companion/."
     }
   ],
   "languages": [
@@ -53,9 +60,29 @@
     {
       "id": "zh",
       "label": "普通话"
+    },
+    {
+      "id": "en",
+      "label": "English"
+    },
+    {
+      "id": "cmn",
+      "label": "普通话"
+    },
+    {
+      "id": "yue",
+      "label": "粵語"
+    },
+    {
+      "id": "en-bi-hans",
+      "label": "English narration · bilingual slides 中英 · 简体"
+    },
+    {
+      "id": "en-bi-hant",
+      "label": "English narration · bilingual slides 中英 · 繁體"
     }
   ],
-  "video_count": 287,
+  "video_count": 297,
   "videos": [
     {
       "id": "LAE101-01",
@@ -4647,6 +4674,166 @@
       "youtube_id": "M0V0cZRzpJw",
       "youtube_url": "https://www.youtube.com/watch?v=M0V0cZRzpJw",
       "source": "Public Shorts tab of https://www.youtube.com/@ChiuYuKo, verified 2026-11-19 (Asia/Hong_Kong); oEmbed author Chiu Yu Ko. Also listed in the public playlist “Game Theory in daily life”.",
+      "module_title": null
+    },
+    {
+      "id": "LAE-WHAT-T01",
+      "collection": "LAE What-is",
+      "collection_slug": "lae-what-is",
+      "module": null,
+      "topic": "What is LAE?",
+      "language": "en",
+      "language_label": "English",
+      "title": "LAE What-is 01 · What is LAE? (English)",
+      "description": null,
+      "duration": null,
+      "youtube_id": "8Rzd0SHzQuw",
+      "youtube_url": "https://www.youtube.com/watch?v=8Rzd0SHzQuw",
+      "source": "Faculty-approved for the public catalog on 20 Nov 2026 while remaining Unlisted on YouTube.",
+      "module_title": null
+    },
+    {
+      "id": "LAE-WHAT-T01",
+      "collection": "LAE What-is",
+      "collection_slug": "lae-what-is",
+      "module": null,
+      "topic": "What is LAE?",
+      "language": "cmn",
+      "language_label": "普通话",
+      "title": "LAE What-is 01 · 什么是低空经济？（普通话）",
+      "description": null,
+      "duration": null,
+      "youtube_id": "dImZvXJ9ltE",
+      "youtube_url": "https://www.youtube.com/watch?v=dImZvXJ9ltE",
+      "source": "Faculty-approved for the public catalog on 20 Nov 2026 while remaining Unlisted on YouTube.",
+      "module_title": null
+    },
+    {
+      "id": "LAE-WHAT-T01",
+      "collection": "LAE What-is",
+      "collection_slug": "lae-what-is",
+      "module": null,
+      "topic": "What is LAE?",
+      "language": "yue",
+      "language_label": "粵語",
+      "title": "LAE What-is 01 · 咩係低空經濟？（粵語）",
+      "description": null,
+      "duration": null,
+      "youtube_id": "G3mHD9mqMxk",
+      "youtube_url": "https://www.youtube.com/watch?v=G3mHD9mqMxk",
+      "source": "Faculty-approved for the public catalog on 20 Nov 2026 while remaining Unlisted on YouTube.",
+      "module_title": null
+    },
+    {
+      "id": "LAE-WHAT-T01",
+      "collection": "LAE What-is",
+      "collection_slug": "lae-what-is",
+      "module": null,
+      "topic": "What is LAE?",
+      "language": "en-bi-hans",
+      "language_label": "English narration · bilingual slides 中英 · 简体",
+      "title": "LAE What-is 01 · What is LAE? (English narration · bilingual slides 中英 · 简体)",
+      "description": null,
+      "duration": null,
+      "youtube_id": "k6fljhys-rc",
+      "youtube_url": "https://www.youtube.com/watch?v=k6fljhys-rc",
+      "source": "Faculty-approved for the public catalog on 20 Nov 2026 while remaining Unlisted on YouTube.",
+      "module_title": null
+    },
+    {
+      "id": "LAE-WHAT-T01",
+      "collection": "LAE What-is",
+      "collection_slug": "lae-what-is",
+      "module": null,
+      "topic": "What is LAE?",
+      "language": "en-bi-hant",
+      "language_label": "English narration · bilingual slides 中英 · 繁體",
+      "title": "LAE What-is 01 · What is LAE? (English narration · bilingual slides 中英 · 繁體)",
+      "description": null,
+      "duration": null,
+      "youtube_id": "fTK-AoG7EWk",
+      "youtube_url": "https://www.youtube.com/watch?v=fTK-AoG7EWk",
+      "source": "Faculty-approved for the public catalog on 20 Nov 2026 while remaining Unlisted on YouTube.",
+      "module_title": null
+    },
+    {
+      "id": "LAE-WHAT-T02",
+      "collection": "LAE What-is",
+      "collection_slug": "lae-what-is",
+      "module": null,
+      "topic": "What is the 1,000-metre band?",
+      "language": "en",
+      "language_label": "English",
+      "title": "LAE What-is 02 · What is the 1,000-metre band? (English)",
+      "description": null,
+      "duration": null,
+      "youtube_id": "SsSM23tx3ws",
+      "youtube_url": "https://www.youtube.com/watch?v=SsSM23tx3ws",
+      "source": "Faculty-approved for the public catalog on 20 Nov 2026 while remaining Unlisted on YouTube.",
+      "module_title": null
+    },
+    {
+      "id": "LAE-WHAT-T02",
+      "collection": "LAE What-is",
+      "collection_slug": "lae-what-is",
+      "module": null,
+      "topic": "What is the 1,000-metre band?",
+      "language": "cmn",
+      "language_label": "普通话",
+      "title": "LAE What-is 02 · 什么是一千米这一层？（普通话）",
+      "description": null,
+      "duration": null,
+      "youtube_id": "aE_JfWFbHrs",
+      "youtube_url": "https://www.youtube.com/watch?v=aE_JfWFbHrs",
+      "source": "Faculty-approved for the public catalog on 20 Nov 2026 while remaining Unlisted on YouTube.",
+      "module_title": null
+    },
+    {
+      "id": "LAE-WHAT-T02",
+      "collection": "LAE What-is",
+      "collection_slug": "lae-what-is",
+      "module": null,
+      "topic": "What is the 1,000-metre band?",
+      "language": "yue",
+      "language_label": "粵語",
+      "title": "LAE What-is 02 · 咩係一千米呢一層？（粵語）",
+      "description": null,
+      "duration": null,
+      "youtube_id": "7JOObh6f5DI",
+      "youtube_url": "https://www.youtube.com/watch?v=7JOObh6f5DI",
+      "source": "Faculty-approved for the public catalog on 20 Nov 2026 while remaining Unlisted on YouTube.",
+      "module_title": null
+    },
+    {
+      "id": "LAE-WHAT-T02",
+      "collection": "LAE What-is",
+      "collection_slug": "lae-what-is",
+      "module": null,
+      "topic": "What is the 1,000-metre band?",
+      "language": "en-bi-hans",
+      "language_label": "English narration · bilingual slides 中英 · 简体",
+      "title": "LAE What-is 02 · What is the 1,000-metre band? (English narration · bilingual slides 中英 · 简体)",
+      "description": null,
+      "duration": null,
+      "youtube_id": "koIr-kV0_JU",
+      "youtube_url": "https://www.youtube.com/watch?v=koIr-kV0_JU",
+      "source": "Faculty-approved for the public catalog on 20 Nov 2026 while remaining Unlisted on YouTube.",
+      "module_title": null
+    },
+    {
+      "id": "LAE-WHAT-T02",
+      "collection": "LAE What-is",
+      "collection_slug": "lae-what-is",
+      "module": null,
+      "topic": "What is the 1,000-metre band?",
+      "language": "en-bi-hant",
+      "language_label": "English narration · bilingual slides 中英 · 繁體",
+      "title": "LAE What-is 02 · What is the 1,000-metre band? (English narration · bilingual slides 中英 · 繁體)",
+      "description": null,
+      "duration": null,
+      "youtube_id": "wVsofjW1MAo",
+      "youtube_url": "https://www.youtube.com/watch?v=wVsofjW1MAo",
+      "source": "Faculty-approved for the public catalog on 20 Nov 2026 while remaining Unlisted on YouTube.",
       "module_title": null
     }
   ]

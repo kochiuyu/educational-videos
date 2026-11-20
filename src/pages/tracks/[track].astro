@@ -3,7 +3,7 @@ import Base from '../../layouts/Base.astro';
 import Breadcrumb from '../../components/Breadcrumb.astro';
 import {
   languageBySlug,
-  languages,
+  statLanguages,
   statModuleIds,
   videosInModule,
   videosInTrack,
@@ -12,7 +12,7 @@ import VideoRows from '../../components/VideoRows.astro';
 import { href, trackSlug } from '../../lib/urls';
 
 export function getStaticPaths() {
-  return languages.map((language) => ({
+  return statLanguages().map((language) => ({
     params: { track: trackSlug(language.id) },
     props: { languageId: language.id },
   }));

@@ -3,7 +3,7 @@ import Base from '../layouts/Base.astro';
 import {
   asOf,
   collections,
-  languages,
+  statLanguages,
   owner,
   siteTitle,
   statModuleIds,
@@ -21,6 +21,7 @@ import { catalogDateLine, moduleTitleLang } from '../lib/text';
 const updated = catalogDateLine(asOf, timezone);
 const description = `${videoCount} public teaching videos by ${owner}. Updated ${updated}.`;
 const economicsTopics = topicsInCollection('economics-shorts');
+const laeWhatTopics = topicsInCollection('lae-what-is');
 ---
 
 <Base title={`${siteTitle} · ${owner}`} description={description} current="home">
@@ -57,6 +58,22 @@ const economicsTopics = topicsInCollection('economics-shorts');
             </li>
           );
         })
+      }
+    </ul>
+  </section>
+
+  <section class="section" aria-labelledby="lae-what-heading">
+    <h2 id="lae-what-heading">LAE What-is</h2>
+    <ul class="module-grid">
+      {
+        laeWhatTopics.map((group) => (
+          <li>
+            <a class="sheet-link" href={href(`lae-what-is/${topicSlug(group.topic)}`)}>
+              <h3>{group.topic}</h3>
+              <p class="count">{group.videos.length} videos</p>
+            </a>
+          </li>
+        ))
       }
     </ul>
   </section>
@@ -105,10 +122,10 @@ const economicsTopics = topicsInCollection('economics-shorts');
 
   <section class="section" aria-labelledby="tracks-heading">
     <h2 id="tracks-heading">STAT language tracks</h2>
-    <p class="note">These tracks are for STAT lessons only. LAE 101 and Economics Shorts are not listed here.</p>
+    <p class="note">These tracks are for STAT lessons only. LAE 101, LAE What-is, and Economics Shorts are not listed here.</p>
     <ul class="track-grid">
       {
-        languages.map((language) => (
+        statLanguages().map((language) => (
           <li>
             <a class="sheet-link" href={href(`tracks/${trackSlug(language.id)}`)}>
               <h3>{language.label}</h3>

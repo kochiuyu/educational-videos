@@ -55,6 +55,21 @@ export const timezone = catalog.timezone;
 export const exclusions = catalog.exclusions;
 export const collections = catalog.collections;
 export const languages = catalog.languages;
+
+const STAT_LANGUAGE_IDS = ['en+zh', 'zh+en', 'hk+en', 'zh'];
+
+/** The four STAT lesson tracks. Other language labels stay off these filters. */
+export function statLanguages(): Language[] {
+  const byId = new Map(languages.map((language) => [language.id, language]));
+  return STAT_LANGUAGE_IDS.flatMap((id) => {
+    const language = byId.get(id);
+    return language ? [language] : [];
+  });
+}
+
+export function isStatLanguage(languageId: string | null): boolean {
+  return languageId != null && STAT_LANGUAGE_IDS.includes(languageId);
+}
 export const videos = catalog.videos;
 export const videoCount = catalog.videos.length;
 
