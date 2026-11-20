@@ -17,7 +17,7 @@ const { items } = Astro.props;
     {
       items.map((item, index) => {
         const last = index === items.length - 1;
-        const linked = Boolean(item.href) && !last;
+        const linked = Boolean(item.href);
         return (
           <li>
             {linked ? (

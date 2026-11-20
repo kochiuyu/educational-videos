@@ -1,9 +1,9 @@
 ---
 import Base from '../../../layouts/Base.astro';
 import Breadcrumb from '../../../components/Breadcrumb.astro';
+import VideoRows from '../../../components/VideoRows.astro';
 import { statModuleIds, topicIds, videosInTopic } from '../../../data/catalog';
 import { href } from '../../../lib/urls';
-import { titleLang } from '../../../lib/text';
 
 export function getStaticPaths() {
   const paths = [];
@@ -42,18 +42,5 @@ const rows = videosInTopic(moduleId, topic);
       These recordings share catalog topic code {topic}. Each title is the verified title for that video.
     </p>
   </header>
-  <ul class="track-list">
-    {
-      rows.map((video) => (
-        <li>
-          <a href={href(`videos/${video.youtube_id}`)}>
-            <span class="meta">{video.language_label}</span>
-            <span class="title" lang={titleLang(video)}>
-              {video.title}
-            </span>
-          </a>
-        </li>
-      ))
-    }
-  </ul>
+  <VideoRows videos={rows} showLanguage />
 </Base>

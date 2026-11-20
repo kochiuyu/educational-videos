@@ -8,8 +8,8 @@ import {
   videosInModule,
   videosInTrack,
 } from '../../data/catalog';
+import VideoRows from '../../components/VideoRows.astro';
 import { href, trackSlug } from '../../lib/urls';
-import { titleLang } from '../../lib/text';
 
 export function getStaticPaths() {
   return languages.map((language) => ({
@@ -55,18 +55,7 @@ const modules = statModuleIds()
         <h2 id={`${group.moduleId}-heading`}>
           <a href={href(`stat-lessons/${group.moduleId.toLowerCase()}`)}>{group.moduleId}</a>
         </h2>
-        <ul class="track-list">
-          {group.videos.map((video) => (
-            <li>
-              <a href={href(`videos/${video.youtube_id}`)}>
-                <span class="meta">{video.topic}</span>
-                <span class="title" lang={titleLang(video)}>
-                  {video.title}
-                </span>
-              </a>
-            </li>
-          ))}
-        </ul>
+        <VideoRows videos={group.videos} showTopic />
       </section>
     ))
   }

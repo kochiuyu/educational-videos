@@ -1,0 +1,45 @@
+---
+import type { Video } from '../data/catalog';
+import VisibleTitle from './VisibleTitle.astro';
+import { href, thumbnailFallbackUrl, thumbnailUrl } from '../lib/urls';
+import { splitPublishedTitle } from '../lib/text';
+
+interface Props {
+  video: Video;
+  meta?: string;
+}
+
+const { video, meta = '' } = Astro.props;
+const portrait = video.collection_slug === 'economics-shorts';
+const primary = thumbnailUrl(video.youtube_id, video.collection_slug);
+const fallback = thumbnailFallbackUrl(video.youtube_id);
+const altSource =
+  portrait ? splitPublishedTitle(video.title).headline || video.title : video.title;
+---
+
+<a class:list={['video-card', { portrait }]} href={href(`videos/${video.youtube_id}`)}>
+  <span class="thumb">
+    <img
+      src={primary}
+      data-fallback={fallback}
+      alt={altSource}
+      width={portrait ? 1080 : 1280}
+      height={portrait ? 1920 : 720}
+      loading="lazy"
+      decoding="async"
+      onerror="this.onerror=null;var next=this.dataset.fallback;if(next){this.removeAttribute('data-fallback');this.src=next;}"
+    />
+    {
+      video.duration && (
+        <span class="duration-badge">
+          <span class="sr-only">Duration </span>
+          {video.duration}
+        </span>
+      )
+    }
+  </span>
+  <div class="video-card-body">
+    {meta && <span class="meta">{meta}</span>}
+    <VisibleTitle video={video} />
+  </div>
+</a>
