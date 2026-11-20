@@ -2,6 +2,7 @@
 import Base from '../../layouts/Base.astro';
 import VideoRows from '../../components/VideoRows.astro';
 import Breadcrumb from '../../components/Breadcrumb.astro';
+import CollectionDescription from '../../components/CollectionDescription.astro';
 import {
   collections,
   moduleTitles,
@@ -23,10 +24,19 @@ export function getStaticPaths() {
 const { collection } = Astro.props;
 const list = videosInCollection(collection.slug);
 const isStat = collection.slug === 'stat-lessons';
-const isEconomics = collection.slug === 'economics-shorts';
-const economicsTopics = isEconomics ? topicsInCollection(collection.slug) : [];
+const topicBase =
+  collection.slug === 'economics-shorts' || collection.slug === 'lae-what-is'
+    ? collection.slug
+    : null;
+const topicGroups = topicBase ? topicsInCollection(collection.slug) : [];
 const current =
-  collection.slug === 'lae-101' ? 'lae' : collection.slug === 'economics-shorts' ? 'econ' : 'stat';
+  collection.slug === 'lae-101'
+    ? 'lae'
+    : collection.slug === 'lae-what-is'
+      ? 'what'
+      : collection.slug === 'economics-shorts'
+        ? 'econ'
+        : 'stat';
 ---
 
 <Base
@@ -43,7 +53,7 @@ const current =
   <header class="page-intro">
     <p class="eyebrow">Collection</p>
     <h1>{collection.name}</h1>
-    <p class="lede">{collection.description}</p>
+    <CollectionDescription class="lede" description={collection.description} />
     <p class="note">{list.length} videos.</p>
     {
       isStat && (
@@ -80,14 +90,14 @@ const current =
           })}
         </ul>
       </section>
-    ) : isEconomics ? (
-      economicsTopics.map((group) => (
+    ) : topicBase ? (
+      topicGroups.map((group) => (
         <section class="topic-block" id={topicSlug(group.topic)} aria-labelledby={`${topicSlug(group.topic)}-heading`}>
           <h2 id={`${topicSlug(group.topic)}-heading`}>
-            <a href={href(`economics-shorts/${topicSlug(group.topic)}`)}>{group.topic}</a>
+            <a href={href(`${topicBase}/${topicSlug(group.topic)}`)}>{group.topic}</a>
           </h2>
           <p class="note">{group.videos.length} videos.</p>
-          <VideoRows videos={group.videos} />
+          <VideoRows videos={group.videos} showLanguage={collection.slug === 'lae-what-is'} />
         </section>
       ))
     ) : (

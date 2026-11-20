@@ -4,6 +4,7 @@ import Breadcrumb from '../../components/Breadcrumb.astro';
 import Player from '../../components/Player.astro';
 import VideoRows from '../../components/VideoRows.astro';
 import {
+  isStatLanguage,
   othersInCollection,
   sameTopic,
   videos,
@@ -28,7 +29,7 @@ const related =
 const relatedHeading =
   video.collection_slug === 'stat-lessons' && video.module
     ? `Other videos under ${video.module} ${video.topic}`
-    : video.collection_slug === 'economics-shorts'
+    : video.collection_slug === 'economics-shorts' || video.collection_slug === 'lae-what-is'
       ? `Other videos under ${video.topic}`
       : `More in ${video.collection}`;
 
@@ -45,9 +46,9 @@ if (video.module) {
     href: href(`stat-lessons/${video.module.toLowerCase()}/${video.topic.toLowerCase()}`),
     label: `Topic ${video.topic}`,
   });
-} else if (video.collection_slug === 'economics-shorts') {
+} else if (video.collection_slug === 'economics-shorts' || video.collection_slug === 'lae-what-is') {
   crumbs.push({
-    href: href(`economics-shorts/${topicSlug(video.topic)}`),
+    href: href(`${video.collection_slug}/${topicSlug(video.topic)}`),
     label: video.topic,
   });
 }
@@ -64,9 +65,11 @@ const meta = [
 const current =
   video.collection_slug === 'lae-101'
     ? 'lae'
-    : video.collection_slug === 'economics-shorts'
-      ? 'econ'
-      : 'stat';
+    : video.collection_slug === 'lae-what-is'
+      ? 'what'
+      : video.collection_slug === 'economics-shorts'
+        ? 'econ'
+        : 'stat';
 ---
 
 <Base title={`${video.title} · Educational Videos`} description={meta} current={current}>
@@ -109,7 +112,9 @@ const current =
             <VideoRows
               videos={related}
               showTopic={video.collection_slug === 'lae-101'}
-              showLanguage={video.collection_slug === 'stat-lessons'}
+              showLanguage={
+                video.collection_slug === 'stat-lessons' || video.collection_slug === 'lae-what-is'
+              }
             />
           </section>
         )
@@ -152,8 +157,9 @@ const current =
                   >
                     {video.topic}
                   </a>
-                ) : video.collection_slug === 'economics-shorts' ? (
-                  <a href={href(`economics-shorts/${topicSlug(video.topic)}`)}>{video.topic}</a>
+                ) : video.collection_slug === 'economics-shorts' ||
+                  video.collection_slug === 'lae-what-is' ? (
+                  <a href={href(`${video.collection_slug}/${topicSlug(video.topic)}`)}>{video.topic}</a>
                 ) : (
                   video.topic
                 )}
@@ -164,9 +170,15 @@ const current =
         {
           video.language && video.language_label && (
             <div>
-              <dt>Language track</dt>
+              <dt>{isStatLanguage(video.language) ? 'Language track' : 'Language'}</dt>
               <dd>
-                <a href={href(`tracks/${trackSlug(video.language)}`)}>{video.language_label}</a>
+                {
+                  isStatLanguage(video.language) ? (
+                    <a href={href(`tracks/${trackSlug(video.language)}`)}>{video.language_label}</a>
+                  ) : (
+                    video.language_label
+                  )
+                }
               </dd>
             </div>
           )

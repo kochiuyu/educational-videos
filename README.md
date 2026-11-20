@@ -6,13 +6,14 @@ The public channel [https://www.youtube.com/@ChiuYuKo](https://www.youtube.com/@
 
 ## What is listed
 
-`catalog/allowlist.json` is the source of truth. The copy in this repository is the verified public allowlist as of **2026-11-19** (Asia/Hong_Kong): **287** videos.
+`catalog/allowlist.json` is the source of truth. The copy in this repository is the verified catalog as of **2026-11-20** (Asia/Hong_Kong): **297** videos.
 
 | Collection | Videos |
 | --- | ---: |
 | STAT lessons | 252 |
 | LAE 101 | 10 |
 | Economics Shorts | 25 |
+| LAE What-is | 10 |
 
 STAT lessons by module:
 
@@ -35,16 +36,19 @@ Economics Shorts are public cartoon-style YouTube Shorts from the @ChiuYuKo chan
 
 `oVODqhnkkPg` is in the Game Theory in daily life group. It is a public Short on the channel and was not in that playlist when the list was checked. `econ-shorts-11` (`3C_-2iME2vk`) has no verified duration, so `duration` is null. Descriptions are null. Watch URLs are `https://www.youtube.com/watch?v=` plus the id, not Shorts URLs and not playlist URLs.
 
-On that date the allowlist left out:
+LAE What-is is a separate collection from LAE 101. It has two topics, What is LAE? and What is the 1,000-metre band?, with five language mixes that are not the four STAT tracks: English, 普通话, 粵語, English narration with bilingual 简体 slides, and English narration with bilingual 繁體 slides. These 10 watch links were faculty-approved for this public catalog on 20 Nov 2026 and remain Unlisted on YouTube. Descriptions and durations are null. The collection description names CUHK DOTE5891, Business Analysis of Low-Altitude Economy, and links to https://kochiuyu.github.io/lae-companion/ for context.
+
+On that date the catalog left out:
 
 - Older DSME2021 lecture recordings
 - M04 T11–T15 (not yet public as of 19 Nov 2026, 3:16pm HKT)
 - M05 T09–T15 (not yet confirmed public as of 18 Nov 2026, 9:03pm HKT)
 - All YouTube playlist URLs
 - HeyGen-labeled videos
-- Any unlisted or private video
+- Any unlisted or private video, except the 10 faculty-approved LAE What-is watch links added on 20 Nov 2026: `8Rzd0SHzQuw`, `dImZvXJ9ltE`, `G3mHD9mqMxk`, `k6fljhys-rc`, `fTK-AoG7EWk`, `SsSM23tx3ws`, `aE_JfWFbHrs`, `7JOObh6f5DI`, `koIr-kV0_JU`, `wVsofjW1MAo`
 - Seven public campus-walking Shorts that are not economics lessons: `JqQtx1NpGFc`, `ONuqnSEsL64`, `MWxWfH8OO9w`, `Jt63krqjqpA`, `m7s78I9eha8`, `MnkiC51dFNk`, `OZWPxCoQFwo`
 - The non-Short Micro Business Case video `Rv665coalu8`
+- Five language-mix playlist IDs that appear truncated and were not added: `PLdov2JtNENto`, `PLRfIHgyMKz8c`, `PLLdrdvbXQCiI`, `PLdhLcA4fn-Mc`, `PLTdQoQ9sXSew`
 
 Those limits describe the file as of that date. A later public video, including a topic that was not public yet, can be added by the steps below once its watch URL is verified. Do not invent a YouTube ID, title, description, or duration. If a field is unknown, omit it or set it to `null`.
 
@@ -72,11 +76,12 @@ npm run preview
 
 ## Browse, search, and filter
 
-- Collections: `/collections/stat-lessons/`, `/collections/lae-101/`, and `/collections/economics-shorts/`
+- Collections: `/collections/stat-lessons/`, `/collections/lae-101/`, `/collections/economics-shorts/`, and `/collections/lae-what-is/`
 - STAT modules: `/stat-lessons/m01/` through `/stat-lessons/m05/`
 - STAT topics: `/stat-lessons/m03/t01/`
 - Economics Shorts topics: `/economics-shorts/experimental-economics/` and `/economics-shorts/game-theory-in-daily-life/`
-- Language tracks: `/tracks/en-zh/`, `/tracks/zh-en/`, `/tracks/hk-en/`, `/tracks/zh/`
+- LAE What-is topics: `/lae-what-is/what-is-lae/` and `/lae-what-is/what-is-the-1-000-metre-band/`
+- STAT language tracks: `/tracks/en-zh/`, `/tracks/zh-en/`, `/tracks/hk-en/`, `/tracks/zh/`
 - Search: `/search/`
 
 Search filters titles, descriptions, catalog IDs, modules, topics, and language labels in the browser. Collection, module, topic, and language pages are ordinary links and work without scripts. Topic codes are catalog groupings. Titles are shown as published and are not rewritten to look like translations of each other.
@@ -85,7 +90,7 @@ Search filters titles, descriptions, catalog IDs, modules, topics, and language 
 
 There is no backend. Edit the catalog, open a pull request, and let the Pages workflow rebuild.
 
-1. Confirm the video is public (not unlisted or private) and copy its watch URL. Do not add playlist URLs.
+1. Confirm the video is public (not unlisted or private) and copy its watch URL. Do not add playlist URLs. The only unlisted exception is the 10 faculty-approved LAE What-is watch links already listed. Do not add other unlisted or private videos.
 2. Edit `catalog/allowlist.json`.
 3. Append one object to `videos` and set `video_count` to the new length of `videos`.
 4. Required fields:
@@ -97,10 +102,11 @@ There is no backend. Edit the catalog, open a pull request, and let the Pages wo
    - `youtube_url` exactly `https://www.youtube.com/watch?v=` plus that id
 5. STAT lessons also need `module` (`M01`), `topic` (`T01`), `language` (an id in `languages`), and `language_label` (that language’s label, copied exactly).
 6. Economics Shorts use `collection_slug` `economics-shorts` and a `topic` of `Experimental Economics` or `Game Theory in daily life`. Leave `module`, `language`, and `language_label` null unless a verified value exists. Use the watch URL, not a Shorts URL and not a playlist URL. Copy `duration` when it was verified, and leave it null when it was not. Do not label these Shorts as HeyGen.
-7. Optional: `description`, `duration` (`2:14`), `module_title`, `source`. Use `null` or omit anything you do not have.
-8. A new collection or language has to be added to `collections` or `languages` in the same edit. Every collection and language in those arrays must have at least one video.
-9. Run `npm run check:catalog` and `npm run build`.
-10. Open a pull request to `main`. The workflow builds the site on the pull request. After merge, GitHub Actions deploys it.
+7. LAE What-is uses `collection_slug` `lae-what-is`, a topic of `What is LAE?` or `What is the 1,000-metre band?`, and one of its five language ids (`en`, `cmn`, `yue`, `en-bi-hans`, `en-bi-hant`) with that language’s label copied exactly. Do not file these under LAE 101 or under the four STAT language tracks. Leave `duration` null unless a duration was verified. Use the watch URL, not a playlist URL.
+8. Optional: `description`, `duration` (`2:14`), `module_title`, `source`. Use `null` or omit anything you do not have.
+9. A new collection or language has to be added to `collections` or `languages` in the same edit. Every collection and language in those arrays must have at least one video.
+10. Run `npm run check:catalog` and `npm run build`.
+11. Open a pull request to `main`. The workflow builds the site on the pull request. After merge, GitHub Actions deploys it.
 
 The checker rejects duplicate YouTube IDs, playlist URLs, a `youtube_url` that does not match the id, HeyGen-labeled entries, and DSME2021 entries.
 
@@ -131,4 +137,4 @@ Built with [Astro](https://astro.build/) 5.18.2, used under the [MIT License](ht
 
 ## Embed restrictions
 
-The allowlist does not say whether YouTube permits embedding. If a player shows that a video cannot be embedded, the page still links to the public watch URL. Embed restrictions were not verified for all 287 videos.
+The catalog does not say whether YouTube permits embedding. If a player shows that a video cannot be embedded, the page still links to the watch URL. Embed restrictions were not verified for all 297 videos.
