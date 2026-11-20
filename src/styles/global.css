@@ -646,6 +646,17 @@ code {
   margin: 0 0 0.55rem;
 }
 
+.credit-links {
+  max-width: var(--measure);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.credit-links li {
+  margin: 0.2rem 0 0;
+}
+
 .sr-only {
   position: absolute;
   width: 1px;
