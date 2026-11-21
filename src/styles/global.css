@@ -607,8 +607,55 @@ button:hover,
   margin: 0.1rem 0 0;
 }
 
-.description p {
+.description,
+.quiz {
+  margin-top: 1.6rem;
+}
+
+.description p,
+.quiz {
   max-width: var(--measure);
+}
+
+.quiz-list {
+  margin: 0;
+  padding-left: 1.25rem;
+}
+
+.quiz-list > li {
+  margin: 0 0 1.35rem;
+}
+
+.quiz-list > li:last-child {
+  margin-bottom: 0;
+}
+
+.quiz h3 {
+  margin: 0 0 0.45rem;
+  font-size: 1.15rem;
+}
+
+.quiz-options {
+  margin: 0.35rem 0 0.6rem;
+  padding-left: 1.15rem;
+}
+
+.quiz-options li + li {
+  margin-top: 0.25rem;
+}
+
+.quiz details {
+  margin-top: 0.35rem;
+}
+
+.quiz summary {
+  cursor: pointer;
+  font-weight: 650;
+}
+
+.quiz-answer {
+  margin-bottom: 0.35rem;
+  font-weight: 650;
 }
 
 .watch-link {

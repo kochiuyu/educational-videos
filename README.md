@@ -54,6 +54,25 @@ Those limits describe the file as of that date. A later public video, including 
 
 Catalog `id` values repeat across language tracks for M03–M05. Pages are addressed by `youtube_id`, which is unique. The `source` field is editor provenance and is not shown on the site.
 
+## Descriptions and questions
+
+A video page shows Description when that recording has a catalog description, and Questions when `catalog/stat-lessons.json` has an official quiz. Empty sections are omitted. LAE 101, Economics Shorts, and LAE What-is have no official quiz here.
+
+A description is the description on that YouTube video, copied verbatim and matched by `youtube_id`. The 25 Economics Shorts were read from the public Shorts page. The other previously empty descriptions were copied from the official Google Takeout videos CSV, archive `takeout-20261121T101859Z-1-001.zip`. Descriptions already in the catalog, including STAT Modules 3–5, stay as written. A lesson objective is not a substitute. `catalog/youtube-descriptions.json` records the retrieval and is not rendered.
+
+STAT questions come from the public repository [kochiuyu/video-factory](https://github.com/kochiuyu/video-factory), default branch, `lessons/STAT/*.yaml`. This repository does not vendor that source. The quiz file records the commit that was read.
+
+The lesson for a question is the number in the official YouTube title. `STAT 1.11`, `统计 1.11`, and `統計 1.13` select `STAT-M01-T11-*.yaml` and `STAT-M01-T13-*.yaml`. The catalog topic code and the catalog id are not that number. A title without exactly one lesson number, or a number that is not exactly one factory file, gets no quiz.
+
+The narration track selects the quiz language. `en+zh` uses the English quiz. `zh+en` and `zh` use the 简体 quiz. `hk+en` uses the 粵語 quiz. Questions and options are visible. The answer and the explanation stay inside a closed disclosure until the learner opens it.
+
+Regenerate the quiz file with network access to video-factory and YouTube oEmbed, plus PyYAML. Retrieve descriptions from the public YouTube pages:
+
+```bash
+python3 scripts/build-stat-lessons.py
+python3 scripts/fetch-youtube-descriptions.py
+```
+
 ## Run and build
 
 Requires Node.js 22 or newer.
@@ -72,7 +91,7 @@ npm run check:dist
 npm run preview
 ```
 
-`npm run build` checks the allowlist before generating the site. `npm run check:dist` checks that the built pages match the allowlist: one page and one standard embed per video, descriptions and durations only where the file has them, and links under `/educational-videos/`.
+`npm run build` checks the allowlist before generating the site. `npm run check:dist` checks that the built pages match the allowlist: one page and one standard embed per video, descriptions and durations only where the file has them, STAT questions only where the derived lesson file has them, and links under `/educational-videos/`.
 
 ## Browse, search, and filter
 
