@@ -6,10 +6,10 @@ import {
   statLanguages,
   moduleTitles,
   statModuleIds,
-  topicsInModule,
   videosInModule,
 } from '../../data/catalog';
 import { href, trackSlug } from '../../lib/urls';
+import { lessonsInModule, ungroupedInModule } from '../../lib/stat-lesson';
 import { moduleTitleLang } from '../../lib/text';
 
 export function getStaticPaths() {
@@ -21,13 +21,14 @@ export function getStaticPaths() {
 
 const { moduleId } = Astro.props;
 const rows = videosInModule(moduleId);
-const groups = topicsInModule(moduleId);
+const groups = lessonsInModule(moduleId);
+const ungrouped = ungroupedInModule(moduleId);
 const titles = moduleTitles(moduleId);
 ---
 
 <Base
   title={`${moduleId} · STAT lessons · Educational Videos`}
-  description={`STAT lessons ${moduleId}: ${groups.length} topics, ${rows.length} videos.`}
+  description={`STAT ${moduleId}: ${groups.length} lessons, ${rows.length} recordings.`}
   current="stat"
 >
   <Breadcrumb
@@ -48,7 +49,7 @@ const titles = moduleTitles(moduleId);
       ))
     }
     <p class="note">
-      {groups.length} topics · {rows.length} videos. Topic codes are catalog groupings. Titles are shown as published.
+      {groups.length} lessons · {rows.length} recordings. Each lesson is the number in the official title, with one recording for each language.
     </p>
     <p id="track-jump" class="kicker">Language tracks</p>
     <ul class="inline-links" aria-labelledby="track-jump">
@@ -66,14 +67,26 @@ const titles = moduleTitles(moduleId);
 
   {
     groups.map((group) => (
-      <section class="topic-block" id={group.topic.toLowerCase()} aria-labelledby={`${group.topic}-heading`}>
-        <h2 id={`${group.topic}-heading`}>
-          <a href={href(`stat-lessons/${moduleId.toLowerCase()}/${group.topic.toLowerCase()}`)}>
-            Topic {group.topic}
-          </a>
+      <section
+        class="topic-block"
+        id={group.slug}
+        data-lesson={group.label}
+        aria-labelledby={`${group.slug}-heading`}
+      >
+        <h2 id={`${group.slug}-heading`}>
+          <a href={href(`stat-lessons/${moduleId.toLowerCase()}/${group.slug}`)}>STAT {group.label}</a>
         </h2>
         <VideoRows videos={group.videos} showLanguage />
       </section>
     ))
+  }
+  {
+    ungrouped.length > 0 && (
+      <section class="topic-block" aria-labelledby="ungrouped-heading">
+        <h2 id="ungrouped-heading">Titles without one lesson number</h2>
+        <p class="note">These recordings are not placed in a lesson, because the official title does not contain exactly one lesson number.</p>
+        <VideoRows videos={ungrouped} showLanguage />
+      </section>
+    )
   }
 </Base>

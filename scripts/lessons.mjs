@@ -2,12 +2,12 @@
  * Distinct lessons versus language versions.
  *
  * A lesson is counted inside one collection. Catalog ids are not collapsed
- * across collections, and titles are never used as a key.
+ * across collections, and translated titles are never used as a key.
  *
- * stat-lessons: one lesson is one module plus topic code (the existing topic
- * page). Each of those has the four STAT language tracks. The catalog id is
- * not the lesson: some topics reuse one id across languages and others give
- * each language its own id.
+ * stat-lessons: one lesson is the number in the official YouTube title
+ * (STAT 1.11, 统计 1.11, or 統計 1.11). The catalog topic code is not that
+ * number. A title that does not contain exactly one lesson number is not
+ * merged with any other recording.
  *
  * lae-what-is: one lesson is one catalog id. That id is shared by the language
  * versions of a single topic and does not span topics.
@@ -21,10 +21,25 @@
  * Any other collection is one lesson per recording.
  */
 
+import statLessons from '../catalog/stat-lessons.json' with { type: 'json' };
+import { parseLessonNumber } from './stat-map.mjs';
+
+const officialTitles = statLessons.videos;
+
+/** Official lesson number, or null when the verified title cannot be mapped. */
+export function canonicalStatLabel(video) {
+  const stored = officialTitles[video.youtube_id]?.youtube_title;
+  const title = typeof stored === 'string' && stored.trim() ? stored : video.youtube_title;
+  const parsed = parseLessonNumber(typeof title === 'string' ? title : '');
+  return parsed ? parsed.label : null;
+}
+
 export function lessonKey(video) {
   const slug = video.collection_slug;
   if (slug === 'stat-lessons') {
-    return `stat-lessons\n${video.module}\n${video.topic}`;
+    const label = canonicalStatLabel(video);
+    if (!label) return `stat-lessons\nunmapped\n${video.youtube_id}`;
+    return `stat-lessons\n${label}`;
   }
   if (slug === 'lae-what-is' || slug === 'lae-101') {
     return `${slug}\n${video.id}`;

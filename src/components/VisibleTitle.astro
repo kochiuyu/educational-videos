@@ -1,5 +1,6 @@
 ---
 import type { Video } from '../data/catalog';
+import { officialYoutubeTitle } from '../lib/stat-lesson';
 import { splitPublishedTitle, titleLang } from '../lib/text';
 
 interface Props {
@@ -8,13 +9,15 @@ interface Props {
 }
 
 const { video, heading = false } = Astro.props;
+const source =
+  video.collection_slug === 'stat-lessons' ? officialYoutubeTitle(video) : video.title;
 const parts =
   video.collection_slug === 'economics-shorts'
-    ? splitPublishedTitle(video.title)
-    : { headline: video.title, tags: [] as string[] };
-const headline = parts.headline || video.title;
+    ? splitPublishedTitle(source)
+    : { headline: source, tags: [] as string[] };
+const headline = parts.headline || source;
 const tags = parts.headline ? parts.tags : [];
-const lang = titleLang(video);
+const lang = titleLang({ title: headline, language: video.language });
 ---
 
 {

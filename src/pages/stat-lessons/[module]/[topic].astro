@@ -2,29 +2,29 @@
 import Base from '../../../layouts/Base.astro';
 import Breadcrumb from '../../../components/Breadcrumb.astro';
 import VideoRows from '../../../components/VideoRows.astro';
-import { statModuleIds, topicIds, videosInTopic } from '../../../data/catalog';
+import { statModuleIds } from '../../../data/catalog';
 import { href } from '../../../lib/urls';
+import { lessonsInModule } from '../../../lib/stat-lesson';
 
 export function getStaticPaths() {
   const paths = [];
   for (const moduleId of statModuleIds()) {
-    for (const topic of topicIds(moduleId)) {
+    for (const group of lessonsInModule(moduleId)) {
       paths.push({
-        params: { module: moduleId.toLowerCase(), topic: topic.toLowerCase() },
-        props: { moduleId, topic },
+        params: { module: moduleId.toLowerCase(), topic: group.slug },
+        props: { moduleId, group },
       });
     }
   }
   return paths;
 }
 
-const { moduleId, topic } = Astro.props;
-const rows = videosInTopic(moduleId, topic);
+const { moduleId, group } = Astro.props;
 ---
 
 <Base
-  title={`${moduleId} ${topic} · STAT lessons · Educational Videos`}
-  description={`Videos catalogued under STAT ${moduleId} topic ${topic}. ${rows.length} recordings.`}
+  title={`STAT ${group.label} · Educational Videos`}
+  description={`STAT ${group.label}: ${group.videos.length} language versions.`}
   current="stat"
 >
   <Breadcrumb
@@ -32,15 +32,17 @@ const rows = videosInTopic(moduleId, topic);
       { href: href(), label: 'Home' },
       { href: href('collections/stat-lessons'), label: 'STAT lessons' },
       { href: href(`stat-lessons/${moduleId.toLowerCase()}`), label: moduleId },
-      { label: `Topic ${topic}` },
+      { label: `STAT ${group.label}` },
     ]}
   />
   <header class="page-intro">
     <p class="eyebrow">STAT lessons · {moduleId}</p>
-    <h1>Topic {topic}</h1>
+    <h1>STAT {group.label}</h1>
     <p class="note">
-      These recordings share catalog topic code {topic}. Each title is the verified title for that video.
+      {group.videos.length} language versions of lesson {group.label}. Each title is the official title of that recording.
     </p>
   </header>
-  <VideoRows videos={rows} showLanguage />
+  <div data-lesson={group.label}>
+    <VideoRows videos={group.videos} showLanguage />
+  </div>
 </Base>

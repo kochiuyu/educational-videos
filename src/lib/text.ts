@@ -1,4 +1,5 @@
 import type { Video } from '../data/catalog';
+import { officialYoutubeTitle } from './stat-lesson';
 import { href } from './urls';
 
 const MONTHS = [
@@ -237,6 +238,7 @@ export function presentDescription(
 export function haystack(video: Video): string {
   return [
     video.title,
+    video.collection_slug === 'stat-lessons' ? officialYoutubeTitle(video) : '',
     video.description,
     video.id,
     video.collection,

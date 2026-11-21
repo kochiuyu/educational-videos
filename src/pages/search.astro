@@ -11,17 +11,25 @@ import {
 } from '../data/catalog';
 import VideoCard from '../components/VideoCard.astro';
 import { href, trackSlug } from '../lib/urls';
+import { canonicalLesson } from '../lib/stat-lesson';
 import { haystack } from '../lib/text';
 
-const statTopics: string[] = [];
+const statLessonOptions = new Map<string, string[]>();
 const laeTopics: string[] = [];
 for (const video of videos) {
-  if (video.collection_slug === 'stat-lessons' && !statTopics.includes(video.topic)) {
-    statTopics.push(video.topic);
+  if (video.collection_slug === 'stat-lessons' && video.module) {
+    const lesson = canonicalLesson(video);
+    if (!lesson) continue;
+    const list = statLessonOptions.get(video.module) ?? [];
+    if (!list.includes(lesson.label)) list.push(lesson.label);
+    statLessonOptions.set(video.module, list);
   }
   if (video.collection_slug === 'lae-101' && !laeTopics.includes(video.topic)) {
     laeTopics.push(video.topic);
   }
+}
+for (const list of statLessonOptions.values()) {
+  list.sort((a, b) => a.localeCompare(b, undefined, { numeric: true }));
 }
 const econTopics = topicsInCollection('economics-shorts').map((group) => group.topic);
 const laeWhatTopics = topicsInCollection('lae-what-is').map((group) => group.topic);
@@ -77,9 +85,15 @@ const modules = statModuleIds();
       <label for="topic">Topic</label>
       <select id="topic" name="topic">
         <option value="">All topics</option>
-        <optgroup label="STAT lessons">
-          {statTopics.map((topic) => <option value={topic}>{topic}</option>)}
-        </optgroup>
+        {
+          [...statLessonOptions.entries()].map(([moduleId, labels]) => (
+            <optgroup label={`STAT ${moduleId}`}>
+              {labels.map((label) => (
+                <option value={label}>STAT {label}</option>
+              ))}
+            </optgroup>
+          ))
+        }
         <optgroup label="LAE 101">
           {laeTopics.map((topic) => <option value={topic}>{topic}</option>)}
         </optgroup>
@@ -114,9 +128,10 @@ const modules = statModuleIds();
   <ul id="results" class="video-grid">
     {
       videos.map((video) => {
+        const lesson = video.collection_slug === 'stat-lessons' ? canonicalLesson(video) : null;
         const context = [
           video.collection,
-          video.module ? `${video.module} ${video.topic}` : video.topic,
+          lesson ? `STAT ${lesson.label}` : video.module ? `${video.module} ${video.topic}` : video.topic,
           video.language_label,
         ]
           .filter((part): part is string => Boolean(part))
@@ -125,7 +140,7 @@ const modules = statModuleIds();
           <li
             data-collection={video.collection_slug}
             data-module={video.module ?? ''}
-            data-topic={video.topic}
+            data-topic={lesson ? lesson.label : video.topic}
             data-language={video.language ? trackSlug(video.language) : ''}
             data-haystack={haystack(video)}
           >

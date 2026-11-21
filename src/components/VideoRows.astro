@@ -1,20 +1,27 @@
 ---
 import type { Video } from '../data/catalog';
+import { canonicalLesson } from '../lib/stat-lesson';
 import VideoCard from './VideoCard.astro';
 
 interface Props {
   videos: Video[];
   showTopic?: boolean;
   showLanguage?: boolean;
+  showLesson?: boolean;
 }
 
-const { videos, showTopic = false, showLanguage = false } = Astro.props;
+const { videos, showTopic = false, showLanguage = false, showLesson = false } = Astro.props;
 const shorts = videos.length > 0 && videos.every((video) => video.collection_slug === 'economics-shorts');
 
 function metaLabel(video: Video): string {
   const parts: string[] = [];
   if (showLanguage && video.language_label) parts.push(video.language_label);
-  if (showTopic) parts.push(video.module ? `${video.module} ${video.topic}` : video.topic);
+  if (showLesson) {
+    const lesson = canonicalLesson(video);
+    if (lesson) parts.push(`STAT ${lesson.label}`);
+  } else if (showTopic) {
+    parts.push(video.module ? `${video.module} ${video.topic}` : video.topic);
+  }
   return parts.join(' · ');
 }
 ---

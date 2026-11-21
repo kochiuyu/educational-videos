@@ -1,4 +1,4 @@
-import { lessonKey, summarizeLessons, tally } from './lessons.mjs';
+import { canonicalStatLabel, lessonKey, summarizeLessons, tally } from './lessons.mjs';
 import { loadCatalog } from './catalog-lib.mjs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -22,21 +22,21 @@ function video(partial) {
 }
 
 const statSameLesson = [
-  video({ language: 'en+zh', id: 'A', youtube_id: 'aaaaaaaaaaa' }),
-  video({ language: 'zh+en', id: 'B', youtube_id: 'bbbbbbbbbbb' }),
-  video({ language: 'hk+en', id: 'C', youtube_id: 'ccccccccccc' }),
-  video({ language: 'zh', id: 'D', youtube_id: 'ddddddddddd' }),
+  video({ topic: 'T01', language: 'en+zh', id: 'A', youtube_id: 'aaaaaaaaaaa', youtube_title: 'STAT 1.11 · skewness' }),
+  video({ topic: 'T08', language: 'zh+en', id: 'B', youtube_id: 'bbbbbbbbbbb', youtube_title: '统计 1.11 · 偏度' }),
+  video({ topic: 'T03', language: 'hk+en', id: 'C', youtube_id: 'ccccccccccc', youtube_title: '統計 1.11 · 偏度' }),
+  video({ topic: 'T11', language: 'zh', id: 'D', youtube_id: 'ddddddddddd', youtube_title: '统计 1.11 · 偏度' }),
 ];
 if (tally(statSameLesson).lessons !== 1 || tally(statSameLesson).versions !== 4) {
-  fail('STAT module+topic with different catalog ids must be one lesson.');
+  fail('The same official STAT lesson number must be one lesson across catalog topic codes.');
 }
 
-const statDifferentTopics = [
-  video({ topic: 'T01', id: 'shared', youtube_id: 'aaaaaaaaaaa' }),
-  video({ topic: 'T02', id: 'shared', youtube_id: 'bbbbbbbbbbb' }),
+const statSameCatalogCode = [
+  video({ topic: 'T01', id: 'shared', youtube_id: 'aaaaaaaaaaa', youtube_title: 'STAT 1.01 · intro' }),
+  video({ topic: 'T01', id: 'shared', youtube_id: 'bbbbbbbbbbb', youtube_title: '統計 1.13 · covariance' }),
 ];
-if (tally(statDifferentTopics).lessons !== 2) {
-  fail('A repeated STAT catalog id must not merge different topic codes.');
+if (tally(statSameCatalogCode).lessons !== 2) {
+  fail('A shared catalog topic code must not merge different official lesson numbers.');
 }
 
 const shorts = [
@@ -107,22 +107,48 @@ if (lessonSum !== summary.lessons) fail('Per-collection lesson counts do not add
 if (versionSum !== summary.versions) fail('Per-collection version counts do not add up.');
 
 const stat = catalog.videos.filter((video) => video.collection_slug === 'stat-lessons');
-const statTopics = new Set(stat.map((video) => `${video.module}\n${video.topic}`));
-if (summary.byCollection['stat-lessons'].lessons !== statTopics.size) {
-  fail('STAT lessons must equal module plus topic pairs.');
-}
-const statByTopic = new Map();
+const statByLesson = new Map();
 for (const video of stat) {
-  const key = `${video.module}\n${video.topic}`;
-  const languages = statByTopic.get(key) ?? new Set();
-  languages.add(video.language);
-  statByTopic.set(key, languages);
-}
-for (const [key, languages] of statByTopic) {
-  const expected = ['en+zh', 'zh+en', 'hk+en', 'zh'];
-  if (expected.some((id) => !languages.has(id)) || languages.size !== 4) {
-    fail(`STAT lesson ${key} is not the four STAT language tracks.`);
+  const label = canonicalStatLabel(video);
+  if (!label) {
+    fail(`${video.youtube_id} has no single official lesson number.`);
+    continue;
   }
+  if (lessonKey(video) !== `stat-lessons\n${label}`) {
+    fail(`${video.youtube_id} was grouped by its catalog topic instead of ${label}.`);
+  }
+  const group = statByLesson.get(label) ?? [];
+  group.push(video);
+  statByLesson.set(label, group);
+}
+if (summary.byCollection['stat-lessons'].lessons !== statByLesson.size) {
+  fail('STAT lesson count must equal official YouTube lesson numbers, not catalog topic codes.');
+}
+const expectedLanguages = ['en+zh', 'zh+en', 'hk+en', 'zh'];
+for (const [label, group] of statByLesson) {
+  const labels = new Set(group.map((video) => canonicalStatLabel(video)));
+  const languages = new Set(group.map((video) => video.language));
+  if (labels.size !== 1) fail(`STAT ${label} mixes official lesson numbers.`);
+  if (group.length !== 4 || languages.size !== 4 || expectedLanguages.some((id) => !languages.has(id))) {
+    fail(`STAT ${label} is not one recording for each language track.`);
+  }
+}
+const mixedCatalogCode = stat.filter((video) => video.module === 'M01' && video.topic === 'T01');
+const mixedLabels = new Set(mixedCatalogCode.map((video) => canonicalStatLabel(video)));
+if (mixedLabels.size < 2) {
+  fail('M01 catalog T01 must not be treated as one lesson; its recordings have different official numbers.');
+}
+const known = {
+  dgh99RbB43s: '1.11',
+  VS7Qbq07ATM: '1.01',
+  IfZSkxjGnIo: '1.11',
+  Yb4eqJPlp5g: '1.02',
+  t42YutwalcM: '1.13',
+  f8_qd5CERLA: '1.01',
+};
+for (const [id, label] of Object.entries(known)) {
+  const video = stat.find((item) => item.youtube_id === id);
+  if (!video || canonicalStatLabel(video) !== label) fail(`${id} must be official lesson ${label}.`);
 }
 const shortsLive = catalog.videos.filter((video) => video.collection_slug === 'economics-shorts');
 const shortTopics = new Set(shortsLive.map((video) => video.topic));

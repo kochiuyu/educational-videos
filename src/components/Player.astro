@@ -1,11 +1,13 @@
 ---
 import type { Video } from '../data/catalog';
+import { officialYoutubeTitle } from '../lib/stat-lesson';
 
 interface Props {
   video: Video;
 }
 
 const { video } = Astro.props;
+const title = video.collection_slug === 'stat-lessons' ? officialYoutubeTitle(video) : video.title;
 const portrait = video.collection_slug === 'economics-shorts';
 const src = `https://www.youtube.com/embed/${video.youtube_id}`;
 ---
@@ -13,7 +15,7 @@ const src = `https://www.youtube.com/embed/${video.youtube_id}`;
 <div class:list={['player', { portrait }]}>
   <iframe
     src={src}
-    title={video.title}
+    title={title}
     width={portrait ? 315 : 560}
     height={portrait ? 560 : 315}
     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
