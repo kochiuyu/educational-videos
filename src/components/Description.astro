@@ -1,0 +1,59 @@
+---
+import type { TextRun, DescriptionView } from '../lib/text';
+
+interface Props {
+  view: DescriptionView;
+}
+
+const { view } = Astro.props;
+---
+
+{
+  (view.body.length > 0 || view.series) && (
+    <section class="description" aria-labelledby="description-heading">
+      <h2 id="description-heading">Description</h2>
+      <div class="description-body">
+        {view.body.map((block) => {
+          if (block.kind === 'rule') return <hr class="lang-break" />;
+          if (block.kind === 'divider') {
+            return (
+              <p class="lang-divider" lang={block.lang}>
+                {block.text}
+              </p>
+            );
+          }
+          if (block.kind === 'list' || block.kind === 'timestamps') {
+            return (
+              <ul class:list={['description-list', { timestamps: block.kind === 'timestamps' }]} lang={block.lang}>
+                {block.items.map((item) => (
+                  <li>
+                    {item.map((run) => (run.href ? <a href={run.href}>{run.text}</a> : run.text))}
+                  </li>
+                ))}
+              </ul>
+            );
+          }
+          return (
+            <p lang={block.lang}>
+              {block.lines.map((line, index) => (
+                <>
+                  {index > 0 && <br />}
+                  {line.map((run: TextRun) => (run.href ? <a href={run.href}>{run.text}</a> : run.text))}
+                </>
+              ))}
+            </p>
+          );
+        })}
+      </div>
+      {view.series && (
+        <div class="description-series" lang={view.series.lang}>
+          {view.series.lines.map((line) => (
+            <p>
+              {line.map((run) => (run.href ? <a href={run.href}>{run.text}</a> : run.text))}
+            </p>
+          ))}
+        </div>
+      )}
+    </section>
+  )
+}

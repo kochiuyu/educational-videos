@@ -3,6 +3,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { loadCatalog, topicSlug, trackSlug } from './catalog-lib.mjs';
 import { lessonCountText, summarizeLessons } from './lessons.mjs';
+import { parseLessonNumber } from './stat-map.mjs';
 import './check-lessons.mjs';
 import './check-stat-lessons.mjs';
 import './check-youtube-descriptions.mjs';
@@ -115,10 +116,17 @@ for (const [rel, html] of byRel) {
   if (/public_progress|videos\.qmd|series-retitle|HeyGen|DSME2021/i.test(html)) {
     fail(`${rel} leaks excluded or internal source text`);
   }
-  // Description text may quote a playlist line from YouTube. A link or embed may not.
-  const links = html.match(/(?:href|src)="[^"]*"/g) ?? [];
-  if (links.some((link) => /playlist\?|[?&]list=/.test(link))) {
-    fail(`${rel} links to a playlist URL`);
+  // A description may link the playlist URL it already quotes. Playback links may not.
+  const playlistAttrs = html.match(/(?:href|src)="[^"]*(?:playlist\?|[?&]list=)[^"]*"/g) ?? [];
+  for (const attr of playlistAttrs) {
+    const value = decode(attr.slice(attr.indexOf('"') + 1, -1));
+    const ownerId = rel.startsWith('videos/') ? rel.split('/')[1] : '';
+    const owner = allowlisted.get(ownerId);
+    if (value.startsWith('https://www.youtube.com/embed/') || value === owner?.youtube_url) {
+      fail(`${rel} uses a playlist URL for playback`);
+    } else if (!owner?.description?.includes(value)) {
+      fail(`${rel} links to a playlist URL that is not in that video's description`);
+    }
   }
   if (/href="\/(?!educational-videos\/)/.test(html)) {
     fail(`${rel} has a root link that skips the /educational-videos/ base path`);
@@ -153,6 +161,13 @@ for (const video of catalog.videos) {
   const expectedSrc = `https://www.youtube.com/embed/${video.youtube_id}`;
   if (!html.includes(`src="${expectedSrc}"`)) fail(`${rel} is missing ${expectedSrc}`);
   if (!html.includes(`href="${video.youtube_url}"`)) fail(`${rel} is missing the watch URL`);
+  const h1At = html.indexOf('<h1');
+  const iframeAt = html.indexOf('<iframe');
+  const asideAt = html.indexOf('<aside');
+  const watchAt = html.indexOf('Watch this video on YouTube');
+  if (h1At < 0 || iframeAt < 0 || h1At > iframeAt) fail(`${rel} does not place the title above the player`);
+  if (asideAt < 0 || watchAt < asideAt) fail(`${rel} does not keep the watch link in the sidebar`);
+  if (html.includes('Same catalog topic code')) fail(`${rel} still groups STAT videos by catalog topic code`);
   const hasDescription = Boolean(video.description);
   const showsDescription = html.includes('id="description-heading"');
   if (hasDescription !== showsDescription) {
@@ -200,6 +215,71 @@ for (const video of catalog.videos) {
       }
     }
   }
+}
+
+function relatedIds(html) {
+  const at = html.indexOf('id="related-heading"');
+  if (at < 0) return [];
+  const end = html.indexOf('</section>', at);
+  const slice = html.slice(at, end === -1 ? html.length : end);
+  return [...slice.matchAll(/\/videos\/([\w-]{11})\//g)].map((match) => match[1]);
+}
+
+function sameIds(actual, expected) {
+  const left = [...actual].sort();
+  const right = [...expected].sort();
+  return left.length === right.length && left.every((id, index) => id === right[index]);
+}
+
+for (const video of catalog.videos) {
+  const rel = `videos/${video.youtube_id}/index.html`;
+  const html = byRel.get(rel) ?? '';
+  if (!html) continue;
+  const ids = relatedIds(html);
+  if (video.collection_slug === 'stat-lessons') {
+    const parsed = parseLessonNumber(statLessons.videos?.[video.youtube_id]?.youtube_title ?? '');
+    if (!parsed) {
+      if (html.includes('Same lesson in other languages.') || ids.length > 0) {
+        fail(`${rel} groups related videos without a parsed lesson number`);
+      }
+      continue;
+    }
+    const expected = catalog.videos
+      .filter((other) => {
+        if (other.collection_slug !== 'stat-lessons' || other.youtube_id === video.youtube_id) return false;
+        const otherNumber = parseLessonNumber(statLessons.videos?.[other.youtube_id]?.youtube_title ?? '');
+        return otherNumber?.label === parsed.label;
+      })
+      .map((other) => other.youtube_id);
+    if (!html.includes('Same lesson in other languages.')) {
+      fail(`${rel} is missing the same-lesson heading`);
+    }
+    if (!sameIds(ids, expected)) {
+      fail(`${rel} related videos are not the other ${parsed.label} language versions`);
+    }
+  } else if (video.collection_slug === 'lae-what-is' || video.collection_slug === 'economics-shorts') {
+    const expected = catalog.videos
+      .filter(
+        (other) =>
+          other.youtube_id !== video.youtube_id &&
+          other.collection_slug === video.collection_slug &&
+          other.topic === video.topic,
+      )
+      .map((other) => other.youtube_id);
+    if (html.includes('Same lesson in other languages.')) {
+      fail(`${rel} uses a STAT lesson group`);
+    }
+    if (!sameIds(ids, expected)) fail(`${rel} related videos are not the other recordings of this topic`);
+  }
+}
+
+const skew = byRel.get('videos/dgh99RbB43s/index.html') ?? '';
+const skewRelated = relatedIds(skew);
+for (const id of ['IfZSkxjGnIo', 'ktDsOsvrqgA', 'd6uiWh4pnyc']) {
+  if (!skewRelated.includes(id)) fail(`skewness page is missing the other 1.11 recording ${id}`);
+}
+for (const id of ['t42YutwalcM', 'f8_qd5CERLA']) {
+  if (skewRelated.includes(id)) fail(`skewness page still lists ${id}, which is not STAT 1.11`);
 }
 
 const search = byRel.get('search/index.html') ?? '';

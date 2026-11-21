@@ -7,14 +7,14 @@ import LessonQuiz from '../../components/LessonQuiz.astro';
 import type { QuizItem } from '../../components/LessonQuiz.astro';
 import {
   isStatLanguage,
-  othersInCollection,
-  sameTopic,
   videos,
   type Video,
 } from '../../data/catalog';
 import { href, topicSlug, trackSlug } from '../../lib/urls';
 import VisibleTitle from '../../components/VisibleTitle.astro';
-import { descriptionBlocks, moduleTitleLang } from '../../lib/text';
+import Description from '../../components/Description.astro';
+import { moduleTitleLang, presentDescription } from '../../lib/text';
+import { relatedVideos, statLessonLabel } from '../../lib/related';
 import type { Crumb } from '../../components/Breadcrumb.astro';
 import statLessons from '../../../catalog/stat-lessons.json';
 
@@ -34,15 +34,10 @@ export function getStaticPaths() {
 }
 
 const { video, quiz } = Astro.props as { video: Video; quiz: QuizItem[] | null };
-const blocks = descriptionBlocks(video);
-const related =
-  video.collection_slug === 'lae-101' ? othersInCollection(video) : sameTopic(video);
-const relatedHeading =
-  video.collection_slug === 'stat-lessons' && video.module
-    ? `Other videos under ${video.module} ${video.topic}`
-    : video.collection_slug === 'economics-shorts' || video.collection_slug === 'lae-what-is'
-      ? `Other videos under ${video.topic}`
-      : `More in ${video.collection}`;
+const catalogIds = new Set(videos.map((item) => item.youtube_id));
+const description = presentDescription(video, catalogIds);
+const related = relatedVideos(video);
+const lessonLabel = video.collection_slug === 'stat-lessons' ? statLessonLabel(video.youtube_id) : null;
 
 const crumbs: Crumb[] = [
   { href: href(), label: 'Home' },
@@ -55,7 +50,7 @@ if (video.module) {
   });
   crumbs.push({
     href: href(`stat-lessons/${video.module.toLowerCase()}/${video.topic.toLowerCase()}`),
-    label: `Topic ${video.topic}`,
+    label: `Catalog topic ${video.topic}`,
   });
 } else if (video.collection_slug === 'economics-shorts' || video.collection_slug === 'lae-what-is') {
   crumbs.push({
@@ -87,42 +82,26 @@ const current =
   <Breadcrumb items={crumbs} />
   <article class="detail watch">
     <div>
-      <Player video={video} />
       <header class="watch-heading">
-        <p class="kicker">{video.collection}</p>
+        {
+          video.language_label ? (
+            <p class="language-kicker">{video.language_label}</p>
+          ) : (
+            <p class="kicker">{video.collection}</p>
+          )
+        }
+        {video.language_label && <p class="collection-line">{video.collection}</p>}
         <VisibleTitle video={video} heading />
       </header>
-      {
-        blocks.length > 0 && (
-          <section class="description" aria-labelledby="description-heading">
-            <h2 id="description-heading">Description</h2>
-            {blocks.map((block) =>
-              block.kind === 'break' ? (
-                <hr class="lang-break" />
-              ) : (
-                <p lang={block.lang}>
-                  {block.lines.map((line, index) => (
-                    <>
-                      {index > 0 && <br />}
-                      {line}
-                    </>
-                  ))}
-                </p>
-              ),
-            )}
-          </section>
-        )
-      }
+      <Player video={video} />
+      <Description view={description} />
       {quiz && quiz.length > 0 && <LessonQuiz items={quiz} />}
       {
-        related.length > 0 && (
+        related && (
           <section class="section" aria-labelledby="related-heading">
-            <h2 id="related-heading">{relatedHeading}</h2>
-            {video.collection_slug === 'stat-lessons' && (
-              <p class="note">Same catalog topic code. Titles are not rewritten to match.</p>
-            )}
+            <h2 id="related-heading">{related.heading}</h2>
             <VideoRows
-              videos={related}
+              videos={related.videos}
               showTopic={video.collection_slug === 'lae-101'}
               showLanguage={
                 video.collection_slug === 'stat-lessons' || video.collection_slug === 'lae-what-is'
@@ -138,6 +117,14 @@ const current =
           <dt>Collection</dt>
           <dd><a href={href(`collections/${video.collection_slug}`)}>{video.collection}</a></dd>
         </div>
+        {
+          lessonLabel && (
+            <div class="lesson-fact">
+              <dt>Lesson</dt>
+              <dd>STAT {lessonLabel}</dd>
+            </div>
+          )
+        }
         {
           video.module && (
             <div>
@@ -158,8 +145,8 @@ const current =
         }
         {
           video.topic && (
-            <div>
-              <dt>Topic</dt>
+            <div class:list={[{ 'quiet-fact': Boolean(video.module) }]}>
+              <dt>{video.module ? 'Catalog topic' : 'Topic'}</dt>
               <dd>
                 {video.module ? (
                   <a
@@ -204,6 +191,9 @@ const current =
           )
         }
       </dl>
+      <p class="watch-link">
+        <a href={video.youtube_url}>Watch this video on YouTube</a>
+      </p>
       <p class="quiet-id">Catalog ID <code>{video.id}</code></p>
     </aside>
   </article>
