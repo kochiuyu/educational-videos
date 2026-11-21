@@ -34,6 +34,32 @@ export function canonicalStatLabel(video) {
   return parsed ? parsed.label : null;
 }
 
+const COVER_LANGUAGE = 'en+zh';
+
+/**
+ * YouTube id for a module cover: the first official lesson number in that
+ * module, preferring the English narration track when it exists.
+ * Catalog order is not used.
+ */
+export function statModuleCoverId(videos, moduleId) {
+  const moduleNumber = Number(String(moduleId).replace(/^M/i, ''));
+  const groups = new Map();
+  for (const video of videos) {
+    if (video.collection_slug !== 'stat-lessons' || video.module !== moduleId) continue;
+    const label = canonicalStatLabel(video);
+    const moduleFromLabel = label ? Number(label.split('.')[0]) : NaN;
+    if (!label || moduleFromLabel !== moduleNumber) continue;
+    const list = groups.get(label) ?? [];
+    list.push(video);
+    groups.set(label, list);
+  }
+  const first = [...groups.keys()].sort((a, b) => a.localeCompare(b, undefined, { numeric: true }))[0];
+  if (!first) return null;
+  const group = groups.get(first) ?? [];
+  const english = group.find((video) => video.language === COVER_LANGUAGE);
+  return (english ?? group[0])?.youtube_id ?? null;
+}
+
 export function lessonKey(video) {
   const slug = video.collection_slug;
   if (slug === 'stat-lessons') {

@@ -1,4 +1,5 @@
 import statLessons from '../../catalog/stat-lessons.json';
+import { statModuleCoverId } from '../../scripts/lessons.mjs';
 import { parseLessonNumber } from '../../scripts/stat-map.mjs';
 import { sortByLanguage, videos, type Video } from '../data/catalog';
 
@@ -31,6 +32,13 @@ export function officialYoutubeTitle(video: Pick<Video, 'youtube_id' | 'title'>)
 
 export function lessonSlug(label: string): string {
   return `t${label.split('.')[1]}`;
+}
+
+/** First official lesson in the module, English narration when that track exists. */
+export function moduleCover(moduleId: string): Video | undefined {
+  const youtubeId = statModuleCoverId(videos, moduleId) as string | null;
+  if (!youtubeId) return undefined;
+  return videos.find((video) => video.youtube_id === youtubeId);
 }
 
 export interface LessonGroup {

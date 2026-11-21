@@ -2,7 +2,8 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { loadCatalog, topicSlug, trackSlug } from './catalog-lib.mjs';
-import { canonicalStatLabel, lessonCountText, summarizeLessons } from './lessons.mjs';
+import { canonicalStatLabel, lessonCountText, statModuleCoverId, summarizeLessons } from './lessons.mjs';
+import { collectionCardCopy, readerIntro } from './reader-copy.mjs';
 import { parseLessonNumber } from './stat-map.mjs';
 import './check-lessons.mjs';
 import './check-stat-lessons.mjs';
@@ -376,19 +377,61 @@ if (!search.includes('aria-live="polite"')) fail('search page is missing a live 
 
 const lessonSummary = summarizeLessons(catalog.videos);
 const home = byRel.get('index.html') ?? '';
-if (!home.includes(`${lessonSummary.lessons} lessons`)) {
+const homeHeading = /<h1>([^<]*)<\/h1>/.exec(home)?.[1] ?? '';
+if (homeHeading !== 'Lesson catalog') fail(`home heading is "${homeHeading}"`);
+if (!home.includes(`${lessonSummary.lessons} distinct lessons`)) {
   fail('home page is missing the distinct lesson count');
 }
-if (!home.includes(String(catalog.videos.length))) fail('home page is missing the recording count');
-if (!home.includes('recordings, including language versions')) {
+if (!home.includes(`${catalog.videos.length} recordings, including language versions`)) {
   fail('home page does not explain that recordings include language versions');
 }
 if (home.includes('public videos') || home.includes('public teaching videos')) {
   fail('home page calls the catalog public videos');
 }
+if (home.includes('video-factory') || home.includes('VF-Revise')) {
+  fail('home page still shows production jargon');
+}
+if (home.includes('kochiuyu.github.io/lae-companion')) {
+  fail('home page still shows the raw companion URL');
+}
+if (home.includes('dgh99RbB43s')) {
+  fail('home page still uses the skewness recording as a cover');
+}
+if (!home.includes('Teaching Development and Language Enhancement Grant')) {
+  fail('home page is missing the TDLEG credit');
+}
+const coverModules = [...new Set(catalog.videos.filter((video) => video.module).map((video) => video.module))].sort();
+for (const moduleId of coverModules) {
+  const coverId = statModuleCoverId(catalog.videos, moduleId);
+  if (!coverId || !home.includes(`/vi/${coverId}/`)) {
+    fail(`home page is missing the first-lesson cover for ${moduleId}`);
+  }
+  const cover = catalog.videos.find((video) => video.youtube_id === coverId);
+  const label = cover ? canonicalStatLabel(cover) : null;
+  if (!label || !label.endsWith('.01')) fail(`${moduleId} cover ${coverId} is not lesson .01`);
+  if (cover?.language !== 'en+zh') fail(`${moduleId} cover is not the English narration`);
+}
+for (const title of ['STAT M04 · 咖啡连锁的抽样与区间估计', 'STAT M05 · 咖啡连锁的假设检验']) {
+  if (!appears(home, title)) fail(`home page is missing the verified module title ${title}`);
+}
 for (const collection of catalog.collections) {
-  if (!appears(home, collection.name) || !appears(home, collection.description)) {
+  const card = collectionCardCopy(collection);
+  if (!appears(home, collection.name) || !appears(home, card)) {
     fail(`home page is missing collection copy for ${collection.slug}`);
+  }
+  if (collection.slug === 'lae-what-is') {
+    for (const phrase of ['DOTE5891', 'Business Analysis of Low-Altitude Economy']) {
+      if (!collection.description.includes(phrase) || !card.includes(phrase)) {
+        fail(`LAE What-is card dropped the verified phrase ${phrase}`);
+      }
+    }
+  }
+  if (collection.slug === 'economics-shorts') {
+    for (const phrase of ['Experimental Economics', 'Game Theory in daily life']) {
+      if (!collection.description.includes(phrase) || !card.includes(phrase)) {
+        fail(`Economics Shorts card dropped the verified phrase ${phrase}`);
+      }
+    }
   }
   const row = lessonSummary.byCollection[collection.slug];
   const label = lessonCountText(row.lessons, row.versions);
@@ -397,6 +440,26 @@ for (const collection of catalog.collections) {
 if (!home.includes('id="home-q"') || !home.includes('for="home-q"')) {
   fail('home page is missing a labeled search field');
 }
+if (!home.includes('STAT language tracks') || !home.includes('not listed here')) {
+  fail('home page no longer limits language tracks to STAT');
+}
+const searchPage = byRel.get('search/index.html') ?? '';
+if (!searchPage.includes('STAT language track')) {
+  fail('search page does not label the language filter as STAT only');
+}
+for (const collection of catalog.collections) {
+  const page = byRel.get(`collections/${collection.slug}/index.html`) ?? '';
+  const intro = readerIntro(collection.description);
+  if (!appears(page, intro)) fail(`${collection.slug} page is missing its reader intro`);
+  if (page.includes('video-factory') || page.includes('VF-Revise')) {
+    fail(`${collection.slug} page still shows production jargon`);
+  }
+  if (page.includes('Companion site: https://')) {
+    fail(`${collection.slug} page still prints the raw companion URL`);
+  }
+}
+const laePage = byRel.get('collections/lae-what-is/index.html') ?? '';
+if (!laePage.includes('>Companion site<')) fail('LAE collection page dropped the companion link');
 
 const uniqueEmbeds = new Set(embedSrcs);
 if (uniqueEmbeds.size !== catalog.videos.length) {

@@ -51,8 +51,7 @@ const modules = statModuleIds();
     <p class="eyebrow">Catalog</p>
     <h1>Search</h1>
     <p class="lede">
-      Filter by words in a title or description, and by collection, module, topic, or language track.
-      The full list is in the page, so browsing still works if scripts do not run.
+      Search titles and descriptions. The language-track filter lists STAT lessons only.
     </p>
   </header>
 
@@ -106,9 +105,9 @@ const modules = statModuleIds();
       </select>
     </div>
     <div>
-      <label for="language">Language track</label>
+      <label for="language">STAT language track</label>
       <select id="language" name="language">
-        <option value="">All language tracks</option>
+        <option value="">All</option>
         {
           statLanguages().map((language) => (
             <option value={trackSlug(language.id)}>{language.label}</option>
