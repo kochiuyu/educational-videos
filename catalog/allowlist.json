@@ -3,7 +3,7 @@
   "owner": "Prof. Chiu Yu KO",
   "channel_url": "https://www.youtube.com/@ChiuYuKo",
   "repo": "https://github.com/kochiuyu/educational-videos",
-  "as_of": "2026-11-20",
+  "as_of": "2026-11-21",
   "timezone": "Asia/Hong_Kong",
   "inclusions": {
     "stat_lessons": "Public VF-Revise STAT lessons only: M01–M03 all topics; M04 T01–T10; M05 T01–T08. Four language tracks per topic.",
@@ -17,7 +17,7 @@
     "M05 T09–T15 (not yet confirmed public as of 18 Nov 2026, 9:03pm HKT)",
     "All YouTube playlist URLs (M03–M05 playlists remain unlisted; several local playlist IDs appear truncated and are unverified)",
     "HeyGen-labeled videos (no verified URL list supplied)",
-    "Any unlisted or private video, except these LAE What-is watch links that remain Unlisted on YouTube: the 10 faculty-approved links added on 20 Nov 2026 (8Rzd0SHzQuw, dImZvXJ9ltE, G3mHD9mqMxk, k6fljhys-rc, fTK-AoG7EWk, SsSM23tx3ws, aE_JfWFbHrs, 7JOObh6f5DI, koIr-kV0_JU, wVsofjW1MAo) and the 15 T03–T05 links approved for this public catalog on 20 Nov 2026 (NrxDw-5BJQM, CyCK71Weipg, w3TSjyx4m44, yzU1T_FtXGc, ziaNFUJEgXw, 27Rg3B3_2QE, t_-vEnjJgCc, CzUMY-dtRO8, MBXJwBl3FTs, WYmiEXeOvpg, 25yQjVJoTjc, jQZ7PqnW-rU, -COmumpSlz4, hlfZpcq1oEE, ITrs7sD_a_g). This is not permission to add other unlisted or private videos.",
+    "Any unlisted or private video, except these LAE What-is watch links that remain Unlisted on YouTube: the 10 faculty-approved T01–T02 links, with the five T02 links replaced on 21 Nov 2026 and still Unlisted (8Rzd0SHzQuw, dImZvXJ9ltE, G3mHD9mqMxk, k6fljhys-rc, fTK-AoG7EWk, Ij7FeqTjN1E, vtBGxjIddpM, bvpwxNdzbgE, kpVK0zK8I8M, rJThHVak5Zc) and the 15 T03–T05 links approved for this public catalog on 20 Nov 2026 (NrxDw-5BJQM, CyCK71Weipg, w3TSjyx4m44, yzU1T_FtXGc, ziaNFUJEgXw, 27Rg3B3_2QE, t_-vEnjJgCc, CzUMY-dtRO8, MBXJwBl3FTs, WYmiEXeOvpg, 25yQjVJoTjc, jQZ7PqnW-rU, -COmumpSlz4, hlfZpcq1oEE, ITrs7sD_a_g). This is not permission to add other unlisted or private videos.",
     "Seven public campus-walking Shorts that are not economics lessons: JqQtx1NpGFc, ONuqnSEsL64, MWxWfH8OO9w, Jt63krqjqpA, m7s78I9eha8, MnkiC51dFNk, OZWPxCoQFwo",
     "Non-Short Micro Business Case video Rv665coalu8",
     "Five language-mix playlist IDs that appear truncated and were not added: PLdov2JtNENto, PLRfIHgyMKz8c, PLLdrdvbXQCiI, PLdhLcA4fn-Mc, PLTdQoQ9sXSew"
@@ -4767,9 +4767,9 @@
       "title": "LAE What-is 02 · What is the 1,000-metre band? (English)",
       "description": null,
       "duration": null,
-      "youtube_id": "SsSM23tx3ws",
-      "youtube_url": "https://www.youtube.com/watch?v=SsSM23tx3ws",
-      "source": "Faculty-approved for the public catalog on 20 Nov 2026 while remaining Unlisted on YouTube.",
+      "youtube_id": "Ij7FeqTjN1E",
+      "youtube_url": "https://www.youtube.com/watch?v=Ij7FeqTjN1E",
+      "source": "Faculty-requested replacement on 21 Nov 2026 of the T02 watch link approved on 20 Nov 2026, while remaining Unlisted on YouTube.",
       "module_title": null
     },
     {
@@ -4783,9 +4783,9 @@
       "title": "LAE What-is 02 · 什么是一千米这一层？（普通话）",
       "description": null,
       "duration": null,
-      "youtube_id": "aE_JfWFbHrs",
-      "youtube_url": "https://www.youtube.com/watch?v=aE_JfWFbHrs",
-      "source": "Faculty-approved for the public catalog on 20 Nov 2026 while remaining Unlisted on YouTube.",
+      "youtube_id": "vtBGxjIddpM",
+      "youtube_url": "https://www.youtube.com/watch?v=vtBGxjIddpM",
+      "source": "Faculty-requested replacement on 21 Nov 2026 of the T02 watch link approved on 20 Nov 2026, while remaining Unlisted on YouTube.",
       "module_title": null
     },
     {
@@ -4799,9 +4799,9 @@
       "title": "LAE What-is 02 · 咩係一千米呢一層？（粵語）",
       "description": null,
       "duration": null,
-      "youtube_id": "7JOObh6f5DI",
-      "youtube_url": "https://www.youtube.com/watch?v=7JOObh6f5DI",
-      "source": "Faculty-approved for the public catalog on 20 Nov 2026 while remaining Unlisted on YouTube.",
+      "youtube_id": "bvpwxNdzbgE",
+      "youtube_url": "https://www.youtube.com/watch?v=bvpwxNdzbgE",
+      "source": "Faculty-requested replacement on 21 Nov 2026 of the T02 watch link approved on 20 Nov 2026, while remaining Unlisted on YouTube.",
       "module_title": null
     },
     {
@@ -4815,9 +4815,9 @@
       "title": "LAE What-is 02 · What is the 1,000-metre band? (English narration · bilingual slides 中英 · 简体)",
       "description": null,
       "duration": null,
-      "youtube_id": "koIr-kV0_JU",
-      "youtube_url": "https://www.youtube.com/watch?v=koIr-kV0_JU",
-      "source": "Faculty-approved for the public catalog on 20 Nov 2026 while remaining Unlisted on YouTube.",
+      "youtube_id": "kpVK0zK8I8M",
+      "youtube_url": "https://www.youtube.com/watch?v=kpVK0zK8I8M",
+      "source": "Faculty-requested replacement on 21 Nov 2026 of the T02 watch link approved on 20 Nov 2026, while remaining Unlisted on YouTube.",
       "module_title": null
     },
     {
@@ -4831,9 +4831,9 @@
       "title": "LAE What-is 02 · What is the 1,000-metre band? (English narration · bilingual slides 中英 · 繁體)",
       "description": null,
       "duration": null,
-      "youtube_id": "wVsofjW1MAo",
-      "youtube_url": "https://www.youtube.com/watch?v=wVsofjW1MAo",
-      "source": "Faculty-approved for the public catalog on 20 Nov 2026 while remaining Unlisted on YouTube.",
+      "youtube_id": "rJThHVak5Zc",
+      "youtube_url": "https://www.youtube.com/watch?v=rJThHVak5Zc",
+      "source": "Faculty-requested replacement on 21 Nov 2026 of the T02 watch link approved on 20 Nov 2026, while remaining Unlisted on YouTube.",
       "module_title": null
     },
     {
