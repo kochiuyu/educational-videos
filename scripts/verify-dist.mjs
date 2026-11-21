@@ -2,6 +2,8 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { loadCatalog, topicSlug, trackSlug } from './catalog-lib.mjs';
+import { lessonCountText, summarizeLessons } from './lessons.mjs';
+import './check-lessons.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const dist = path.join(root, 'dist');
@@ -175,12 +177,28 @@ for (const id of ['q', 'collection', 'module', 'topic', 'language']) {
 }
 if (!search.includes('aria-live="polite"')) fail('search page is missing a live result count');
 
+const lessonSummary = summarizeLessons(catalog.videos);
 const home = byRel.get('index.html') ?? '';
-if (!home.includes(String(catalog.videos.length))) fail('home page is missing the video count');
+if (!home.includes(`${lessonSummary.lessons} lessons`)) {
+  fail('home page is missing the distinct lesson count');
+}
+if (!home.includes(String(catalog.videos.length))) fail('home page is missing the recording count');
+if (!home.includes('recordings, including language versions')) {
+  fail('home page does not explain that recordings include language versions');
+}
+if (home.includes('public videos') || home.includes('public teaching videos')) {
+  fail('home page calls the catalog public videos');
+}
 for (const collection of catalog.collections) {
   if (!appears(home, collection.name) || !appears(home, collection.description)) {
     fail(`home page is missing collection copy for ${collection.slug}`);
   }
+  const row = lessonSummary.byCollection[collection.slug];
+  const label = lessonCountText(row.lessons, row.versions);
+  if (!appears(home, label)) fail(`home page is missing ${label} for ${collection.slug}`);
+}
+if (!home.includes('id="home-q"') || !home.includes('for="home-q"')) {
+  fail('home page is missing a labeled search field');
 }
 
 const uniqueEmbeds = new Set(embedSrcs);
