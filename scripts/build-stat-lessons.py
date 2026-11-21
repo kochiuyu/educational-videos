@@ -10,12 +10,12 @@ lessons/STAT/STAT-M01-T11-*.yaml and STAT-M01-T13-*.yaml. Catalog topic codes
 and catalog ids are not used. A title with no single lesson number, or a
 number that is not exactly one factory file, stays unmapped.
 
-A null catalog description is filled only from objective_en, objective_zh, or
-objective_zh_hk on that file. Existing descriptions are not replaced. YouTube
-upload blurbs are not copied. A mixed-language track may append the official
-second-language objective after a ——— break. The quiz is the narration-track
-text from the same file. The answer stays in the generated data so the page
-can reveal it; the page keeps it inside a closed disclosure.
+This script does not write descriptions. A catalog description comes from the
+YouTube video itself (scripts/fetch-youtube-descriptions.py), matched by
+youtube_id. An objective in the lesson file is not a substitute. The quiz is
+the narration-track text from the matched lesson. The answer stays in the
+generated data so the page can reveal it; the page keeps it inside a closed
+disclosure.
 """
 
 from __future__ import annotations
@@ -41,7 +41,6 @@ USER_AGENT = "educational-videos-stat-lessons"
 
 LESSON_NUMBER = re.compile(r"(?:STAT|统计|統計)\s+(\d{1,2})\.(\d{2})(?!\d)")
 PRIMARY = {"en+zh": "en", "zh+en": "zh", "hk+en": "zh_hk", "zh": "zh"}
-SECONDARY = {"en+zh": "zh", "zh+en": "en", "hk+en": "en"}
 NARRATION_LANG = {"en": "en", "zh": "zh-Hans", "zh_hk": "zh-Hant"}
 MAPPING = (
     "The lesson number in the official YouTube title "
@@ -163,26 +162,6 @@ def quiz_for(document: dict, language: str) -> list[dict] | None:
     return items
 
 
-def objective_for(document: dict, suffix: str) -> str | None:
-    return official_text(document.get(f"objective_{suffix}"))
-
-
-def official_description(document: dict, language: str) -> str | None:
-    suffix = PRIMARY.get(language)
-    if suffix is None:
-        return None
-    primary = objective_for(document, suffix)
-    if not primary:
-        return None
-    secondary_suffix = SECONDARY.get(language)
-    if not secondary_suffix:
-        return primary
-    secondary = objective_for(document, secondary_suffix)
-    if not secondary:
-        return primary
-    return f"{primary}\n\n———\n\n{secondary}"
-
-
 def factory_commit() -> str:
     payload = json.loads(fetch(f"{FACTORY_API}/commits/main", "application/vnd.github+json").decode())
     sha = payload.get("sha")
@@ -232,7 +211,6 @@ def main() -> int:
             documents[futures[future]] = future.result()
 
     records: dict[str, dict] = {}
-    filled = 0
     for video in stat_videos:
         youtube_id = video["youtube_id"]
         title = titles.get(youtube_id)
@@ -276,16 +254,9 @@ def main() -> int:
             continue
 
         lesson = filename[: -len(".yaml")]
-        official = official_description(document, video["language"])
         existing = video["description"]
-        if isinstance(existing, str) and existing != "":
-            status = "kept"
-        elif official:
-            video["description"] = official
-            status = "filled"
-            filled += 1
-        else:
-            status = "missing_objective"
+        # Objectives are not copied. A null description stays null here.
+        status = "kept" if isinstance(existing, str) and existing != "" else "missing_objective"
         records[youtube_id] = {
             "lesson": lesson,
             "lesson_number": number[2],
@@ -294,14 +265,11 @@ def main() -> int:
             "quiz": quiz_for(document, video["language"]),
         }
 
-    if filled:
-        CATALOG_PATH.write_text(json.dumps(catalog, ensure_ascii=False, indent=2) + "\n")
-
     counts = {
         "stat": len(stat_videos),
         "mapped": sum(1 for record in records.values() if record["lesson"]),
         "quizzes": sum(1 for record in records.values() if record["quiz"]),
-        "descriptions_filled": filled,
+        "descriptions_filled": 0,
         "missing_objective": sum(1 for record in records.values() if record["description_status"] == "missing_objective"),
         "unmapped": sum(1 for record in records.values() if record["description_status"] == "unmapped"),
     }
@@ -313,10 +281,10 @@ def main() -> int:
             "titles": "YouTube oEmbed title for each catalog watch URL",
             "mapping": MAPPING,
             "descriptions": (
-                "A null catalog description is filled from objective_en, objective_zh, "
-                "or objective_zh_hk for the narration track. Mixed tracks also include "
-                "the official second-language objective after ———. Existing descriptions "
-                "stay as written. youtube.description_* is not copied."
+                "This file does not supply descriptions. Catalog descriptions are the "
+                "YouTube description of that youtube_id, retrieved by "
+                "scripts/fetch-youtube-descriptions.py. Existing descriptions stay as "
+                "written. Lesson objectives are not substitutes."
             ),
             "files": filenames,
         },

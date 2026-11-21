@@ -177,14 +177,7 @@ for (const video of statVideos) {
   }
   if (record.description_status === 'kept') {
     if (!video.description) fail(`${video.youtube_id} is marked kept but has no catalog description.`);
-  } else if (record.description_status === 'missing_objective') {
-    if (video.description) fail(`${video.youtube_id} gained a description without an official objective.`);
-  } else if (record.description_status === 'filled') {
-    if (!video.description) fail(`${video.youtube_id} is marked filled but the catalog description is empty.`);
-    if (/subscribe|訂閱/.test(video.description)) {
-      fail(`${video.youtube_id} filled description contains a subscribe line.`);
-    }
-  } else {
+  } else if (record.description_status !== 'missing_objective') {
     fail(`${video.youtube_id} has an unknown description status ${record.description_status}.`);
   }
 }

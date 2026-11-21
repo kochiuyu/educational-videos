@@ -5,7 +5,7 @@
     "path": "lessons/STAT",
     "titles": "YouTube oEmbed title for each catalog watch URL",
     "mapping": "The lesson number in the official YouTube title (STAT X.YY, 统计 X.YY, or 統計 X.YY) selects lessons/STAT/STAT-M{XX}-T{YY}-*.yaml. Catalog topic codes and catalog ids are not used. A title without exactly one lesson number, or a number that does not match exactly one factory file, is left unmapped.",
-    "descriptions": "A null catalog description is filled from objective_en, objective_zh, or objective_zh_hk for the narration track. Mixed tracks also include the official second-language objective after ———. Existing descriptions stay as written. youtube.description_* is not copied.",
+    "descriptions": "This file does not supply descriptions. Catalog descriptions are the YouTube description of that youtube_id, retrieved by scripts/fetch-youtube-descriptions.py. Existing descriptions stay as written. Lesson objectives are not substitutes.",
     "files": [
       "STAT-M01-T01-INTRO.yaml",
       "STAT-M01-T02-MEAN.yaml",

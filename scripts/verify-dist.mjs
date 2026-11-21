@@ -5,6 +5,7 @@ import { loadCatalog, topicSlug, trackSlug } from './catalog-lib.mjs';
 import { lessonCountText, summarizeLessons } from './lessons.mjs';
 import './check-lessons.mjs';
 import './check-stat-lessons.mjs';
+import './check-youtube-descriptions.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const dist = path.join(root, 'dist');

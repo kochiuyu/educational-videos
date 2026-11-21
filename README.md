@@ -56,20 +56,21 @@ Catalog `id` values repeat across language tracks for M03–M05. Pages are addre
 
 ## Descriptions and questions
 
-A video page shows Description when that recording has a catalog description, and Questions when `catalog/stat-lessons.json` has an official quiz. Empty sections are omitted. LAE 101, Economics Shorts, and LAE What-is have no official quiz here, and their descriptions stay null.
+A video page shows Description when that recording has a catalog description, and Questions when `catalog/stat-lessons.json` has an official quiz. Empty sections are omitted. LAE 101, Economics Shorts, and LAE What-is have no official quiz here.
 
-STAT questions, and any description filled for a recording that had none, come from the public repository [kochiuyu/video-factory](https://github.com/kochiuyu/video-factory), default branch, `lessons/STAT/*.yaml`. This repository does not vendor that source. The file records the commit that was read.
+A description is the description on that YouTube video, copied verbatim and matched by `youtube_id`. Descriptions already in the catalog, including STAT Modules 3–5, stay as written. A lesson objective is not a substitute. `catalog/youtube-descriptions.json` records the retrieval date and the result for each previously empty description. Pages do not read that file.
 
-The lesson is the number in the official YouTube title. `STAT 1.11`, `统计 1.11`, and `統計 1.13` select `STAT-M01-T11-*.yaml` and `STAT-M01-T13-*.yaml`. The catalog topic code and the catalog id are not that number. A title without exactly one lesson number, or a number that is not exactly one factory file, gets no new description and no quiz.
+STAT questions come from the public repository [kochiuyu/video-factory](https://github.com/kochiuyu/video-factory), default branch, `lessons/STAT/*.yaml`. This repository does not vendor that source. The quiz file records the commit that was read.
 
-The narration track selects the text. `en+zh` uses the English objective and quiz. `zh+en` and `zh` use the 简体 fields. `hk+en` uses the 粵語 fields. A mixed track may also include the official second-language objective after a `———` break. Descriptions already in the catalog, including Modules 3–5, stay as written. The generator does not add subscribe lines and does not copy YouTube upload blurbs. If `objective_*` is absent, the description stays empty.
+The lesson for a question is the number in the official YouTube title. `STAT 1.11`, `统计 1.11`, and `統計 1.13` select `STAT-M01-T11-*.yaml` and `STAT-M01-T13-*.yaml`. The catalog topic code and the catalog id are not that number. A title without exactly one lesson number, or a number that is not exactly one factory file, gets no quiz.
 
-Questions and options are visible. The answer and the explanation stay inside a closed disclosure until the learner opens it.
+The narration track selects the quiz language. `en+zh` uses the English quiz. `zh+en` and `zh` use the 简体 quiz. `hk+en` uses the 粵語 quiz. Questions and options are visible. The answer and the explanation stay inside a closed disclosure until the learner opens it.
 
-Regenerate the derived file with network access to video-factory and YouTube oEmbed, plus PyYAML:
+Regenerate the quiz file with network access to video-factory and YouTube oEmbed, plus PyYAML. Retrieve descriptions from the public YouTube pages:
 
 ```bash
 python3 scripts/build-stat-lessons.py
+python3 scripts/fetch-youtube-descriptions.py
 ```
 
 ## Run and build
