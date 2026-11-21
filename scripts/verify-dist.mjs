@@ -4,10 +4,12 @@ import { fileURLToPath } from 'node:url';
 import { loadCatalog, topicSlug, trackSlug } from './catalog-lib.mjs';
 import { lessonCountText, summarizeLessons } from './lessons.mjs';
 import './check-lessons.mjs';
+import './check-stat-lessons.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const dist = path.join(root, 'dist');
 const catalog = loadCatalog(path.join(root, 'catalog', 'allowlist.json'));
+const statLessons = JSON.parse(fs.readFileSync(path.join(root, 'catalog', 'stat-lessons.json'), 'utf8'));
 const errors = [];
 
 function fail(message) {
@@ -166,6 +168,32 @@ for (const video of catalog.videos) {
   }
   if (!video.module_title && html.includes('<dt>Module title</dt>')) {
     fail(`${rel} invents a module title`);
+  }
+  const lesson = statLessons.videos?.[video.youtube_id];
+  const quiz = video.collection_slug === 'stat-lessons' && Array.isArray(lesson?.quiz) ? lesson.quiz : [];
+  const showsQuiz = html.includes('id="quiz-heading"');
+  if ((quiz.length > 0) !== showsQuiz) {
+    fail(`${rel} quiz heading presence is ${showsQuiz}, derived quiz items: ${quiz.length}`);
+  }
+  if (quiz.length > 0) {
+    const decoded = decode(html);
+    for (const item of quiz) {
+      if (!decoded.includes(item.question)) fail(`${rel} is missing a quiz question`);
+      if (!decoded.includes(`lang="${item.lang}"`)) fail(`${rel} is missing lang="${item.lang}"`);
+      for (const option of item.options) {
+        if (!decoded.includes(option)) fail(`${rel} is missing a quiz option`);
+      }
+      const questionAt = decoded.indexOf(item.question);
+      const detailsAt = decoded.indexOf('<details>', questionAt);
+      const detailsEnd = decoded.indexOf('</details>', detailsAt);
+      const block = detailsAt >= 0 && detailsEnd > detailsAt ? decoded.slice(detailsAt, detailsEnd) : '';
+      if (!block.includes(item.answer) || !block.includes(item.explanation)) {
+        fail(`${rel} does not keep the answer and explanation inside the disclosure`);
+      }
+      if (!block.includes('Show the answer') && !decoded.includes('Show the answer')) {
+        fail(`${rel} is missing the answer disclosure`);
+      }
+    }
   }
 }
 

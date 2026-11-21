@@ -54,6 +54,24 @@ Those limits describe the file as of that date. A later public video, including 
 
 Catalog `id` values repeat across language tracks for M03–M05. Pages are addressed by `youtube_id`, which is unique. The `source` field is editor provenance and is not shown on the site.
 
+## Descriptions and questions
+
+A video page shows Description when that recording has a catalog description, and Questions when `catalog/stat-lessons.json` has an official quiz. Empty sections are omitted. LAE 101, Economics Shorts, and LAE What-is have no official quiz here, and their descriptions stay null.
+
+STAT questions, and any description filled for a recording that had none, come from the public repository [kochiuyu/video-factory](https://github.com/kochiuyu/video-factory), default branch, `lessons/STAT/*.yaml`. This repository does not vendor that source. The file records the commit that was read.
+
+The lesson is the number in the official YouTube title. `STAT 1.11`, `统计 1.11`, and `統計 1.13` select `STAT-M01-T11-*.yaml` and `STAT-M01-T13-*.yaml`. The catalog topic code and the catalog id are not that number. A title without exactly one lesson number, or a number that is not exactly one factory file, gets no new description and no quiz.
+
+The narration track selects the text. `en+zh` uses the English objective and quiz. `zh+en` and `zh` use the 简体 fields. `hk+en` uses the 粵語 fields. A mixed track may also include the official second-language objective after a `———` break. Descriptions already in the catalog, including Modules 3–5, stay as written. The generator does not add subscribe lines and does not copy YouTube upload blurbs. If `objective_*` is absent, the description stays empty.
+
+Questions and options are visible. The answer and the explanation stay inside a closed disclosure until the learner opens it.
+
+Regenerate the derived file with network access to video-factory and YouTube oEmbed, plus PyYAML:
+
+```bash
+python3 scripts/build-stat-lessons.py
+```
+
 ## Run and build
 
 Requires Node.js 22 or newer.
@@ -72,7 +90,7 @@ npm run check:dist
 npm run preview
 ```
 
-`npm run build` checks the allowlist before generating the site. `npm run check:dist` checks that the built pages match the allowlist: one page and one standard embed per video, descriptions and durations only where the file has them, and links under `/educational-videos/`.
+`npm run build` checks the allowlist before generating the site. `npm run check:dist` checks that the built pages match the allowlist: one page and one standard embed per video, descriptions and durations only where the file has them, STAT questions only where the derived lesson file has them, and links under `/educational-videos/`.
 
 ## Browse, search, and filter
 

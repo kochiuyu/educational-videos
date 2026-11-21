@@ -3,6 +3,8 @@ import Base from '../../layouts/Base.astro';
 import Breadcrumb from '../../components/Breadcrumb.astro';
 import Player from '../../components/Player.astro';
 import VideoRows from '../../components/VideoRows.astro';
+import LessonQuiz from '../../components/LessonQuiz.astro';
+import type { QuizItem } from '../../components/LessonQuiz.astro';
 import {
   isStatLanguage,
   othersInCollection,
@@ -14,15 +16,24 @@ import { href, topicSlug, trackSlug } from '../../lib/urls';
 import VisibleTitle from '../../components/VisibleTitle.astro';
 import { descriptionBlocks, moduleTitleLang } from '../../lib/text';
 import type { Crumb } from '../../components/Breadcrumb.astro';
+import statLessons from '../../../catalog/stat-lessons.json';
+
+interface LessonRecord {
+  quiz?: QuizItem[] | null;
+}
 
 export function getStaticPaths() {
+  const byId = statLessons.videos as Record<string, LessonRecord>;
   return videos.map((video) => ({
     params: { youtubeId: video.youtube_id },
-    props: { video },
+    props: {
+      video,
+      quiz: byId[video.youtube_id]?.quiz ?? null,
+    },
   }));
 }
 
-const { video } = Astro.props as { video: Video };
+const { video, quiz } = Astro.props as { video: Video; quiz: QuizItem[] | null };
 const blocks = descriptionBlocks(video);
 const related =
   video.collection_slug === 'lae-101' ? othersInCollection(video) : sameTopic(video);
@@ -102,6 +113,7 @@ const current =
           </section>
         )
       }
+      {quiz && quiz.length > 0 && <LessonQuiz items={quiz} />}
       {
         related.length > 0 && (
           <section class="section" aria-labelledby="related-heading">

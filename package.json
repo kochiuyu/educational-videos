@@ -11,6 +11,7 @@
     "preview": "astro preview",
     "check:catalog": "node scripts/validate-catalog.mjs",
     "check:lessons": "node scripts/check-lessons.mjs",
+    "check:stat": "node scripts/check-stat-lessons.mjs",
     "check:dist": "node scripts/verify-dist.mjs"
   },
   "engines": {

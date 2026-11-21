@@ -1,0 +1,65 @@
+---
+export interface QuizItem {
+  question: string;
+  options: string[];
+  answer: string;
+  explanation: string;
+  lang: string;
+}
+
+interface Props {
+  items: QuizItem[];
+}
+
+const { items } = Astro.props;
+
+function lines(text: string): string[] {
+  return text.split('\n');
+}
+---
+
+<section class="quiz" aria-labelledby="quiz-heading">
+  <h2 id="quiz-heading">Questions</h2>
+  <ol class="quiz-list">
+    {
+      items.map((item) => (
+        <li>
+          <h3 lang={item.lang}>
+            {lines(item.question).map((line, index) => (
+              <>
+                {index > 0 && <br />}
+                {line}
+              </>
+            ))}
+          </h3>
+          <ul class="quiz-options">
+            {item.options.map((option) => (
+              <li lang={item.lang}>
+                {lines(option).map((line, index) => (
+                  <>
+                    {index > 0 && <br />}
+                    {line}
+                  </>
+                ))}
+              </li>
+            ))}
+          </ul>
+          <details>
+            <summary>Show the answer</summary>
+            <p class="quiz-answer" lang={item.lang}>
+              {item.answer}
+            </p>
+            <p lang={item.lang}>
+              {lines(item.explanation).map((line, index) => (
+                <>
+                  {index > 0 && <br />}
+                  {line}
+                </>
+              ))}
+            </p>
+          </details>
+        </li>
+      ))
+    }
+  </ol>
+</section>
