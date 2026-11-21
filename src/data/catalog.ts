@@ -1,4 +1,5 @@
 import raw from '../../catalog/allowlist.json';
+import { summarizeLessons, tally, lessonCountText } from '../../scripts/lessons.mjs';
 import { trackSlug } from '../lib/urls';
 
 export interface Language {
@@ -72,6 +73,25 @@ export function isStatLanguage(languageId: string | null): boolean {
 }
 export const videos = catalog.videos;
 export const videoCount = catalog.videos.length;
+
+export interface LessonTally {
+  lessons: number;
+  versions: number;
+}
+
+export const lessonSummary = summarizeLessons(videos) as {
+  lessons: number;
+  versions: number;
+  byCollection: Record<string, LessonTally>;
+};
+
+export function lessonTally(list: Video[]): LessonTally {
+  return tally(list) as LessonTally;
+}
+
+export function formatLessonCount(lessons: number, versions: number): string {
+  return lessonCountText(lessons, versions) as string;
+}
 
 export function collectionBySlug(slug: string): Collection | undefined {
   return collections.find((collection) => collection.slug === slug);

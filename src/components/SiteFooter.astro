@@ -1,5 +1,5 @@
 ---
-import { asOf, channelUrl, owner, timezone, videoCount } from '../data/catalog';
+import { asOf, channelUrl, lessonSummary, owner, timezone, videoCount } from '../data/catalog';
 import { catalogDateLine } from '../lib/text';
 
 const updated = catalogDateLine(asOf, timezone);
@@ -8,7 +8,7 @@ const updated = catalogDateLine(asOf, timezone);
 <footer class="site-footer">
   <div class="site-footer-inner">
     <p>
-      Updated {updated}. {videoCount} public videos. {owner}.
+      Updated {updated}. {lessonSummary.lessons} lessons · {videoCount} recordings, including language versions. {owner}.
     </p>
     <p>
       Channel for attribution only:

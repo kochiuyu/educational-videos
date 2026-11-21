@@ -3,6 +3,9 @@ import Base from '../layouts/Base.astro';
 import {
   asOf,
   collections,
+  formatLessonCount,
+  lessonSummary,
+  lessonTally,
   statLanguages,
   owner,
   siteTitle,
@@ -14,27 +17,33 @@ import {
   videosInTrack,
   moduleTitles,
   topicsInCollection,
+  type Video,
 } from '../data/catalog';
-import { href, topicSlug, trackSlug } from '../lib/urls';
+import { href, thumbnailFallbackUrl, thumbnailUrl, topicSlug, trackSlug } from '../lib/urls';
 import { catalogDateLine, moduleTitleLang } from '../lib/text';
 
 const updated = catalogDateLine(asOf, timezone);
-const description = `${videoCount} public teaching videos by ${owner}. Updated ${updated}.`;
+const description = `${lessonSummary.lessons} lessons by ${owner}. ${videoCount} recordings, including language versions. Updated ${updated}.`;
 const economicsTopics = topicsInCollection('economics-shorts');
 const laeWhatTopics = topicsInCollection('lae-what-is');
+
+function lead(videos: Video[]): Video | undefined {
+  return videos[0];
+}
 ---
 
 <Base title={`${siteTitle} · ${owner}`} description={description} current="home">
-  <header class="page-intro">
-    <h1>{videoCount} public teaching videos</h1>
+  <header class="page-intro home-hero">
+    <p class="kicker">Lesson catalog</p>
+    <h1>{lessonSummary.lessons} lessons</h1>
     <p class="lede">
-      Selected for teaching by {owner}. Open a video to play it in a YouTube embed.
-      Titles and descriptions are the ones published for each recording.
+      Each lesson is counted once. {videoCount} recordings include language versions of the same lesson.
+      Titles are the published titles.
     </p>
-    <p class="note">Updated {updated}.</p>
+    <p class="note">Updated {updated}. {owner}.</p>
     <form class="home-search" role="search" action={href('search')} method="get">
       <div class="field">
-        <label for="home-q">Search titles and descriptions</label>
+        <label for="home-q">Search the catalog</label>
         <input id="home-q" name="q" type="search" autocomplete="off" />
       </div>
       <button type="submit">Search</button>
@@ -46,14 +55,32 @@ const laeWhatTopics = topicsInCollection('lae-what-is');
     <ul class="collection-grid">
       {
         collections.map((collection) => {
-          const count = videosInCollection(collection.slug).length;
+          const list = videosInCollection(collection.slug);
+          const counts = lessonSummary.byCollection[collection.slug];
+          const sample = lead(list);
           return (
             <li>
               <a class="sheet-link" href={href(`collections/${collection.slug}`)}>
+                {
+                  sample && (
+                    <span class="card-thumb">
+                      <img
+                        src={thumbnailUrl(sample.youtube_id, collection.slug)}
+                        data-fallback={thumbnailFallbackUrl(sample.youtube_id)}
+                        alt=""
+                        width="1280"
+                        height="720"
+                        loading="lazy"
+                        decoding="async"
+                        onerror="this.onerror=null;var next=this.dataset.fallback;if(next){this.removeAttribute('data-fallback');this.src=next;}"
+                      />
+                    </span>
+                  )
+                }
                 <p class="kicker">Collection</p>
                 <h3>{collection.name}</h3>
                 <p>{collection.description}</p>
-                <p class="count">{count} videos</p>
+                <p class="count">{formatLessonCount(counts.lessons, counts.versions)}</p>
               </a>
             </li>
           );
@@ -69,8 +96,28 @@ const laeWhatTopics = topicsInCollection('lae-what-is');
         laeWhatTopics.map((group) => (
           <li>
             <a class="sheet-link" href={href(`lae-what-is/${topicSlug(group.topic)}`)}>
+              {
+                lead(group.videos) && (
+                  <span class="card-thumb">
+                    <img
+                      src={thumbnailUrl(lead(group.videos)!.youtube_id, 'lae-what-is')}
+                      data-fallback={thumbnailFallbackUrl(lead(group.videos)!.youtube_id)}
+                      alt=""
+                      width="1280"
+                      height="720"
+                      loading="lazy"
+                      decoding="async"
+                      onerror="this.onerror=null;var next=this.dataset.fallback;if(next){this.removeAttribute('data-fallback');this.src=next;}"
+                    />
+                  </span>
+                )
+              }
               <h3>{group.topic}</h3>
-              <p class="count">{group.videos.length} videos</p>
+              <p class="count">
+                {group.videos.length === 1
+                  ? '1 language version'
+                  : `${group.videos.length} language versions`}
+              </p>
             </a>
           </li>
         ))
@@ -85,8 +132,28 @@ const laeWhatTopics = topicsInCollection('lae-what-is');
         economicsTopics.map((group) => (
           <li>
             <a class="sheet-link" href={href(`economics-shorts/${topicSlug(group.topic)}`)}>
+              {
+                lead(group.videos) && (
+                  <span class="card-thumb">
+                    <img
+                      src={thumbnailUrl(lead(group.videos)!.youtube_id, 'economics-shorts')}
+                      data-fallback={thumbnailFallbackUrl(lead(group.videos)!.youtube_id)}
+                      alt=""
+                      width="1080"
+                      height="1920"
+                      loading="lazy"
+                      decoding="async"
+                      onerror="this.onerror=null;var next=this.dataset.fallback;if(next){this.removeAttribute('data-fallback');this.src=next;}"
+                    />
+                  </span>
+                )
+              }
               <h3>{group.topic}</h3>
-              <p class="count">{group.videos.length} videos</p>
+              <p class="count">
+                {lessonTally(group.videos).lessons === 1
+                  ? '1 short'
+                  : `${lessonTally(group.videos).lessons} shorts`}
+              </p>
             </a>
           </li>
         ))
@@ -100,18 +167,33 @@ const laeWhatTopics = topicsInCollection('lae-what-is');
       {
         statModuleIds().map((moduleId) => {
           const titles = moduleTitles(moduleId);
-          const count = videosInModule(moduleId).length;
-          const topics = new Set(videosInModule(moduleId).map((video) => video.topic)).size;
+          const list = videosInModule(moduleId);
+          const counts = lessonTally(list);
+          const sample = lead(list);
           return (
             <li>
               <a class="sheet-link" href={href(`stat-lessons/${moduleId.toLowerCase()}`)}>
+                {
+                  sample && (
+                    <span class="card-thumb">
+                      <img
+                        src={thumbnailUrl(sample.youtube_id, 'stat-lessons')}
+                        data-fallback={thumbnailFallbackUrl(sample.youtube_id)}
+                        alt=""
+                        width="1280"
+                        height="720"
+                        loading="lazy"
+                        decoding="async"
+                        onerror="this.onerror=null;var next=this.dataset.fallback;if(next){this.removeAttribute('data-fallback');this.src=next;}"
+                      />
+                    </span>
+                  )
+                }
                 <span class="code">{moduleId}</span>
                 {titles.map((title) => (
                   <span lang={moduleTitleLang(title)}>{title}</span>
                 ))}
-                <p class="count">
-                  {topics} topics · {count} videos
-                </p>
+                <p class="count">{formatLessonCount(counts.lessons, counts.versions)}</p>
               </a>
             </li>
           );
@@ -122,14 +204,17 @@ const laeWhatTopics = topicsInCollection('lae-what-is');
 
   <section class="section" aria-labelledby="tracks-heading">
     <h2 id="tracks-heading">STAT language tracks</h2>
-    <p class="note">These tracks are for STAT lessons only. LAE 101, LAE What-is, and Economics Shorts are not listed here.</p>
-    <ul class="track-grid">
+    <p class="note">
+      These list language versions of STAT lessons only. They are not extra lessons.
+      LAE 101, LAE What-is, and Economics Shorts are not listed here.
+    </p>
+    <ul class="inline-links">
       {
         statLanguages().map((language) => (
           <li>
-            <a class="sheet-link" href={href(`tracks/${trackSlug(language.id)}`)}>
-              <h3>{language.label}</h3>
-              <p class="count">{videosInTrack(language.id).length} videos</p>
+            <a href={href(`tracks/${trackSlug(language.id)}`)}>
+              {language.label}
+              <span class="count"> ({videosInTrack(language.id).length} recordings)</span>
             </a>
           </li>
         ))
