@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { loadCatalog, topicSlug, trackSlug } from './catalog-lib.mjs';
-import { lessonCountText, summarizeLessons } from './lessons.mjs';
+import { canonicalStatLabel, lessonCountText, summarizeLessons } from './lessons.mjs';
 import { parseLessonNumber } from './stat-map.mjs';
 import './check-lessons.mjs';
 import './check-stat-lessons.mjs';
@@ -47,6 +47,12 @@ function decode(value) {
     .replace(/&quot;/g, '"');
 }
 
+function shownTitle(video) {
+  if (video.collection_slug !== 'stat-lessons') return video.title;
+  const official = statLessons.videos?.[video.youtube_id]?.youtube_title;
+  return typeof official === 'string' && official.trim() ? official : video.title;
+}
+
 function appears(html, text) {
   if (!text) return true;
   return html.includes(text) || decode(html).includes(text);
@@ -82,7 +88,8 @@ for (const video of catalog.videos) {
   expected.add(`videos/${video.youtube_id}/index.html`);
   if (video.collection_slug === 'stat-lessons' && video.module) {
     moduleIds.add(video.module.toLowerCase());
-    topicKeys.add(`${video.module.toLowerCase()}/${video.topic.toLowerCase()}`);
+    const label = canonicalStatLabel(video);
+    if (label) topicKeys.add(`${video.module.toLowerCase()}/t${label.split('.')[1]}`);
   }
 }
 for (const moduleId of moduleIds) expected.add(`stat-lessons/${moduleId}/index.html`);
@@ -147,8 +154,8 @@ for (const [rel, html] of byRel) {
     }
     const video = allowlisted.get(id);
     if (!video) fail(`${rel} embeds unknown id ${id}`);
-    else if (frame.title !== video.title) {
-      fail(`${rel} iframe title does not match the verified title`);
+    else if (frame.title !== shownTitle(video)) {
+      fail(`${rel} iframe title does not match the official title`);
     }
   }
 }
@@ -157,7 +164,7 @@ for (const video of catalog.videos) {
   const rel = `videos/${video.youtube_id}/index.html`;
   const html = byRel.get(rel) ?? '';
   if (!html) continue;
-  if (!appears(html, video.title)) fail(`${rel} is missing the verified title`);
+  if (!appears(html, shownTitle(video))) fail(`${rel} is missing the official title`);
   const expectedSrc = `https://www.youtube.com/embed/${video.youtube_id}`;
   if (!html.includes(`src="${expectedSrc}"`)) fail(`${rel} is missing ${expectedSrc}`);
   if (!html.includes(`href="${video.youtube_url}"`)) fail(`${rel} is missing the watch URL`);
@@ -280,6 +287,83 @@ for (const id of ['IfZSkxjGnIo', 'ktDsOsvrqgA', 'd6uiWh4pnyc']) {
 }
 for (const id of ['t42YutwalcM', 'f8_qd5CERLA']) {
   if (skewRelated.includes(id)) fail(`skewness page still lists ${id}, which is not STAT 1.11`);
+}
+
+function lessonSections(html) {
+  return html.split('data-lesson="').slice(1).map((part) => {
+    const label = part.slice(0, part.indexOf('"'));
+    const end = part.search(/data-lesson="|<\/main>/);
+    const slice = end === -1 ? part : part.slice(0, end);
+    const ids = [...slice.matchAll(/\/videos\/([\w-]{11})\//g)].map((match) => match[1]);
+    return { label, ids };
+  });
+}
+
+const byLesson = new Map();
+for (const video of catalog.videos) {
+  if (video.collection_slug !== 'stat-lessons') continue;
+  const label = canonicalStatLabel(video);
+  if (!label) {
+    fail(`${video.youtube_id} has no canonical lesson for the module pages`);
+    continue;
+  }
+  const group = byLesson.get(label) ?? [];
+  group.push(video.youtube_id);
+  byLesson.set(label, group);
+}
+
+for (const moduleId of ['m01', 'm02', 'm03', 'm04', 'm05']) {
+  const html = byRel.get(`stat-lessons/${moduleId}/index.html`) ?? '';
+  const sections = lessonSections(html);
+  const labels = sections.map((section) => section.label);
+  const expectedLabels = [...byLesson.keys()]
+    .filter((label) => label.startsWith(String(Number(moduleId.slice(1))) + '.'))
+    .sort((a, b) => a.localeCompare(b, undefined, { numeric: true }));
+  if (labels.join(',') !== expectedLabels.join(',')) {
+    fail(`${moduleId} lesson order is ${labels.join(', ')}`);
+  }
+  for (const section of sections) {
+    const expected = new Set(byLesson.get(section.label) ?? []);
+    if (!sameIds(section.ids, [...expected])) {
+      fail(`${moduleId} section ${section.label} does not list only that lesson`);
+    }
+  }
+  if (html.includes('>Topic T')) fail(`${moduleId} still heads a group with a catalog topic code`);
+}
+
+for (const [label, ids] of byLesson) {
+  const [moduleNumber, topic] = label.split('.');
+  const rel = `stat-lessons/m${moduleNumber.padStart(2, '0')}/t${topic}/index.html`;
+  const html = byRel.get(rel) ?? '';
+  const sections = lessonSections(html);
+  if (sections.length !== 1 || sections[0].label !== label || !sameIds(sections[0].ids, ids)) {
+    fail(`${rel} does not contain only lesson ${label}`);
+  }
+  if (!html.includes(`<h1>STAT ${label}</h1>`)) fail(`${rel} does not title the official lesson`);
+}
+
+const lessonPages = {
+  'stat-lessons/m01/t01/index.html': {
+    present: ['VS7Qbq07ATM', 'f8_qd5CERLA'],
+    absent: ['dgh99RbB43s', 'IfZSkxjGnIo', 't42YutwalcM', 'Yb4eqJPlp5g'],
+  },
+  'stat-lessons/m01/t02/index.html': {
+    present: ['Yb4eqJPlp5g'],
+    absent: ['VS7Qbq07ATM', 'dgh99RbB43s', 't42YutwalcM'],
+  },
+  'stat-lessons/m01/t11/index.html': {
+    present: ['dgh99RbB43s', 'IfZSkxjGnIo'],
+    absent: ['VS7Qbq07ATM', 'f8_qd5CERLA', 't42YutwalcM', 'Yb4eqJPlp5g'],
+  },
+  'stat-lessons/m01/t13/index.html': {
+    present: ['t42YutwalcM'],
+    absent: ['dgh99RbB43s', 'VS7Qbq07ATM', 'f8_qd5CERLA', 'Yb4eqJPlp5g'],
+  },
+};
+for (const [rel, rule] of Object.entries(lessonPages)) {
+  const ids = lessonSections(byRel.get(rel) ?? '').flatMap((section) => section.ids);
+  for (const id of rule.present) if (!ids.includes(id)) fail(`${rel} is missing ${id}`);
+  for (const id of rule.absent) if (ids.includes(id)) fail(`${rel} still includes ${id}`);
 }
 
 const search = byRel.get('search/index.html') ?? '';

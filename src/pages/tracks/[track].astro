@@ -9,6 +9,7 @@ import {
   videosInTrack,
 } from '../../data/catalog';
 import VideoRows from '../../components/VideoRows.astro';
+import { canonicalLesson } from '../../lib/stat-lesson';
 import { href, trackSlug } from '../../lib/urls';
 
 export function getStaticPaths() {
@@ -27,7 +28,13 @@ const rows = videosInTrack(language.id);
 const modules = statModuleIds()
   .map((moduleId) => ({
     moduleId,
-    videos: videosInModule(moduleId).filter((video) => video.language === language.id),
+    videos: videosInModule(moduleId)
+      .filter((video) => video.language === language.id)
+      .sort((a, b) => {
+        const left = canonicalLesson(a)?.label ?? 'unmapped';
+        const right = canonicalLesson(b)?.label ?? 'unmapped';
+        return left.localeCompare(right, undefined, { numeric: true });
+      }),
   }))
   .filter((group) => group.videos.length > 0);
 ---
@@ -55,7 +62,7 @@ const modules = statModuleIds()
         <h2 id={`${group.moduleId}-heading`}>
           <a href={href(`stat-lessons/${group.moduleId.toLowerCase()}`)}>{group.moduleId}</a>
         </h2>
-        <VideoRows videos={group.videos} showTopic />
+        <VideoRows videos={group.videos} showLesson />
       </section>
     ))
   }

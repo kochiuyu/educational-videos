@@ -15,6 +15,7 @@ import VisibleTitle from '../../components/VisibleTitle.astro';
 import Description from '../../components/Description.astro';
 import { moduleTitleLang, presentDescription } from '../../lib/text';
 import { relatedVideos, statLessonLabel } from '../../lib/related';
+import { lessonSlug, officialYoutubeTitle } from '../../lib/stat-lesson';
 import type { Crumb } from '../../components/Breadcrumb.astro';
 import statLessons from '../../../catalog/stat-lessons.json';
 
@@ -38,6 +39,7 @@ const catalogIds = new Set(videos.map((item) => item.youtube_id));
 const description = presentDescription(video, catalogIds);
 const related = relatedVideos(video);
 const lessonLabel = video.collection_slug === 'stat-lessons' ? statLessonLabel(video.youtube_id) : null;
+const pageTitle = video.collection_slug === 'stat-lessons' ? officialYoutubeTitle(video) : video.title;
 
 const crumbs: Crumb[] = [
   { href: href(), label: 'Home' },
@@ -48,10 +50,12 @@ if (video.module) {
     href: href(`stat-lessons/${video.module.toLowerCase()}`),
     label: video.module,
   });
-  crumbs.push({
-    href: href(`stat-lessons/${video.module.toLowerCase()}/${video.topic.toLowerCase()}`),
-    label: `Catalog topic ${video.topic}`,
-  });
+  if (lessonLabel) {
+    crumbs.push({
+      href: href(`stat-lessons/${video.module.toLowerCase()}/${lessonSlug(lessonLabel)}`),
+      label: `STAT ${lessonLabel}`,
+    });
+  }
 } else if (video.collection_slug === 'economics-shorts' || video.collection_slug === 'lae-what-is') {
   crumbs.push({
     href: href(`${video.collection_slug}/${topicSlug(video.topic)}`),
@@ -60,7 +64,7 @@ if (video.module) {
 }
 
 const meta = [
-  video.title,
+  pageTitle,
   video.collection,
   video.language_label,
   video.module && video.topic ? `${video.module} ${video.topic}` : video.topic,
@@ -78,7 +82,7 @@ const current =
         : 'stat';
 ---
 
-<Base title={`${video.title} · Educational Videos`} description={meta} current={current}>
+<Base title={`${pageTitle} · Educational Videos`} description={meta} current={current}>
   <Breadcrumb items={crumbs} />
   <article class="detail watch">
     <div>
@@ -118,10 +122,14 @@ const current =
           <dd><a href={href(`collections/${video.collection_slug}`)}>{video.collection}</a></dd>
         </div>
         {
-          lessonLabel && (
+          lessonLabel && video.module && (
             <div class="lesson-fact">
               <dt>Lesson</dt>
-              <dd>STAT {lessonLabel}</dd>
+              <dd>
+                <a href={href(`stat-lessons/${video.module.toLowerCase()}/${lessonSlug(lessonLabel)}`)}>
+                  STAT {lessonLabel}
+                </a>
+              </dd>
             </div>
           )
         }
@@ -146,16 +154,10 @@ const current =
         {
           video.topic && (
             <div class:list={[{ 'quiet-fact': Boolean(video.module) }]}>
-              <dt>{video.module ? 'Catalog topic' : 'Topic'}</dt>
+              <dt>{video.module ? 'Catalog code' : 'Topic'}</dt>
               <dd>
                 {video.module ? (
-                  <a
-                    href={href(
-                      `stat-lessons/${video.module.toLowerCase()}/${video.topic.toLowerCase()}`,
-                    )}
-                  >
-                    {video.topic}
-                  </a>
+                  video.topic
                 ) : video.collection_slug === 'economics-shorts' ||
                   video.collection_slug === 'lae-what-is' ? (
                   <a href={href(`${video.collection_slug}/${topicSlug(video.topic)}`)}>{video.topic}</a>

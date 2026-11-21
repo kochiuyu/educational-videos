@@ -12,6 +12,7 @@ import {
   videosInModule,
 } from '../../data/catalog';
 import { href, topicSlug } from '../../lib/urls';
+import { lessonsInModule } from '../../lib/stat-lesson';
 import { moduleTitleLang } from '../../lib/text';
 
 export function getStaticPaths() {
@@ -58,8 +59,7 @@ const current =
     {
       isStat && (
         <p class="note">
-          Each topic code is the catalog’s grouping, not a translated title. Language tracks can use different wording.
-          Open a video for the title and description verified for that recording.
+          A lesson is the number in the official title, such as STAT 1.01. The catalog topic code is not that number.
         </p>
       )
     }
@@ -73,7 +73,7 @@ const current =
           {statModuleIds().map((moduleId) => {
             const titles = moduleTitles(moduleId);
             const rows = videosInModule(moduleId);
-            const topics = new Set(rows.map((video) => video.topic)).size;
+            const lessons = lessonsInModule(moduleId).length;
             return (
               <li>
                 <a class="sheet-link" href={href(`stat-lessons/${moduleId.toLowerCase()}`)}>
@@ -82,7 +82,7 @@ const current =
                     <span lang={moduleTitleLang(title)}>{title}</span>
                   ))}
                   <p class="count">
-                    {topics} topics · {rows.length} videos
+                    {lessons} lessons · {rows.length} recordings
                   </p>
                 </a>
               </li>

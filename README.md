@@ -103,7 +103,7 @@ npm run preview
 - STAT language tracks: `/tracks/en-zh/`, `/tracks/zh-en/`, `/tracks/hk-en/`, `/tracks/zh/`
 - Search: `/search/`
 
-Search filters titles, descriptions, catalog IDs, modules, topics, and language labels in the browser. Collection, module, topic, and language pages are ordinary links and work without scripts. Topic codes are catalog groupings. Titles are shown as published and are not rewritten to look like translations of each other.
+Search filters titles, descriptions, catalog IDs, modules, lessons, and language labels in the browser. Collection, module, lesson, and language pages are ordinary links and work without scripts. A STAT lesson is the number in the official YouTube title, such as STAT 1.11. The address `/stat-lessons/m01/t11/` is that lesson. The catalog topic code is not the lesson number, and it is not used to group recordings. A STAT card shows the official YouTube title. Descriptions and questions stay as stored.
 
 ## Add a video
 
