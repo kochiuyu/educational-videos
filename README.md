@@ -58,7 +58,7 @@ Catalog `id` values repeat across language tracks for M03–M05. Pages are addre
 
 A video page shows Description when that recording has a catalog description, and Questions when `catalog/stat-lessons.json` has an official quiz. Empty sections are omitted. LAE 101, Economics Shorts, and LAE What-is have no official quiz here.
 
-A description is the description on that YouTube video, copied verbatim and matched by `youtube_id`. Descriptions already in the catalog, including STAT Modules 3–5, stay as written. A lesson objective is not a substitute. `catalog/youtube-descriptions.json` records the retrieval date and the result for each previously empty description. Pages do not read that file.
+A description is the description on that YouTube video, copied verbatim and matched by `youtube_id`. The 25 Economics Shorts were read from the public Shorts page. The other previously empty descriptions were copied from the official Google Takeout videos CSV, archive `takeout-20261121T101859Z-1-001.zip`. Descriptions already in the catalog, including STAT Modules 3–5, stay as written. A lesson objective is not a substitute. `catalog/youtube-descriptions.json` records the retrieval and is not rendered.
 
 STAT questions come from the public repository [kochiuyu/video-factory](https://github.com/kochiuyu/video-factory), default branch, `lessons/STAT/*.yaml`. This repository does not vendor that source. The quiz file records the commit that was read.
 

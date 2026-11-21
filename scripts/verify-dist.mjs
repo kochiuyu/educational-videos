@@ -115,7 +115,11 @@ for (const [rel, html] of byRel) {
   if (/public_progress|videos\.qmd|series-retitle|HeyGen|DSME2021/i.test(html)) {
     fail(`${rel} leaks excluded or internal source text`);
   }
-  if (/playlist\?|[?&]list=/.test(html)) fail(`${rel} contains a playlist URL`);
+  // Description text may quote a playlist line from YouTube. A link or embed may not.
+  const links = html.match(/(?:href|src)="[^"]*"/g) ?? [];
+  if (links.some((link) => /playlist\?|[?&]list=/.test(link))) {
+    fail(`${rel} links to a playlist URL`);
+  }
   if (/href="\/(?!educational-videos\/)/.test(html)) {
     fail(`${rel} has a root link that skips the /educational-videos/ base path`);
   }

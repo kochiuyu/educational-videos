@@ -45,6 +45,9 @@ for (const video of catalog.videos) {
   const kept = Object.hasOwn(preserved, video.youtube_id);
   if (!record && !kept) fail(`${video.youtube_id} has no description provenance.`);
   if (record && kept) fail(`${video.youtube_id} was retrieved even though it already had a description.`);
+  if (typeof video.description !== 'string' || video.description.trim() === '') {
+    fail(`${video.youtube_id} has an empty description.`);
+  }
 }
 
 const tallies = {};
