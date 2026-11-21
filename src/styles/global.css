@@ -547,8 +547,24 @@ button:hover,
 }
 
 .watch-heading {
-  max-width: var(--measure);
-  margin-top: 1.15rem;
+  margin: 0 0 0.85rem;
+}
+
+.language-kicker {
+  margin: 0;
+  color: var(--brick);
+  font-size: 0.95rem;
+  font-weight: 650;
+  line-height: 1.35;
+}
+
+.collection-line {
+  margin: 0.15rem 0 0.45rem;
+  color: var(--faint);
+  font-size: 0.78rem;
+  font-weight: 650;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 .watch-title {
@@ -613,8 +629,58 @@ button:hover,
 }
 
 .description p,
+.description-list,
 .quiz {
   max-width: var(--measure);
+}
+
+.description a,
+.description-series a {
+  overflow-wrap: anywhere;
+}
+
+.description-series {
+  margin-top: 1.15rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--line);
+  color: var(--faint);
+  font-size: 0.92rem;
+}
+
+.description-series p {
+  margin: 0.15rem 0;
+}
+
+.description-list {
+  margin: 0.35rem 0 0.9rem;
+  padding-left: 1.2rem;
+}
+
+.description-list.timestamps {
+  list-style: none;
+  padding-left: 0;
+  font-variant-numeric: tabular-nums;
+}
+
+.description-list li + li {
+  margin-top: 0.28rem;
+}
+
+.lang-divider {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 1.25rem 0;
+  color: var(--faint);
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+}
+
+.lang-divider::before,
+.lang-divider::after {
+  content: '';
+  flex: 1;
+  border-top: 1px solid var(--line-strong);
 }
 
 .quiz-list {
@@ -636,30 +702,60 @@ button:hover,
 }
 
 .quiz-options {
-  margin: 0.35rem 0 0.6rem;
-  padding-left: 1.15rem;
+  margin: 0.4rem 0 0.55rem;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0.3rem;
 }
 
-.quiz-options li + li {
-  margin-top: 0.25rem;
+.quiz-options li {
+  margin: 0;
+  padding: 0.38rem 0.6rem;
+  background: var(--paper);
+  border: 1px solid var(--line);
 }
 
 .quiz details {
-  margin-top: 0.35rem;
+  margin-top: 0.45rem;
+  padding-top: 0.35rem;
+  border-top: 1px solid var(--line);
 }
 
 .quiz summary {
   cursor: pointer;
   font-weight: 650;
+  font-size: 0.95rem;
+}
+
+.quiz details p {
+  margin: 0.45rem 0 0;
 }
 
 .quiz-answer {
-  margin-bottom: 0.35rem;
+  margin-bottom: 0;
   font-weight: 650;
 }
 
-.watch-link {
-  margin-top: 0.75rem;
+.facts .watch-link {
+  margin: 0.9rem 0 0;
+  font-size: 0.9rem;
+}
+
+.facts .lesson-fact dd {
+  font-weight: 650;
+}
+
+.facts .quiet-fact dt {
+  font-size: 0.72rem;
+  font-weight: 550;
+  letter-spacing: 0.02em;
+  text-transform: none;
+}
+
+.facts .quiet-fact dd {
+  color: var(--muted);
+  font-size: 0.9rem;
 }
 
 hr.lang-break {

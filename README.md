@@ -56,7 +56,7 @@ Catalog `id` values repeat across language tracks for M03–M05. Pages are addre
 
 ## Descriptions and questions
 
-A video page shows Description when that recording has a catalog description, and Questions when `catalog/stat-lessons.json` has an official quiz. Empty sections are omitted. LAE 101, Economics Shorts, and LAE What-is have no official quiz here.
+A video page shows the title and language above the player. Description appears when that recording has a catalog description, and Questions when `catalog/stat-lessons.json` has an official quiz. Empty sections are omitted. LAE 101, Economics Shorts, and LAE What-is have no official quiz here. The description wording is unchanged. Official URLs in that text are linked, series lines sit in a quieter block, and list or timestamp lines use list markup. STAT related videos are the other language versions of the same lesson number in the YouTube title. A title that does not contain exactly one lesson number is not grouped. LAE What-is stays grouped by topic.
 
 A description is the description on that YouTube video, copied verbatim and matched by `youtube_id`. The 25 Economics Shorts were read from the public Shorts page. The other previously empty descriptions were copied from the official Google Takeout videos CSV, archive `takeout-20261121T101859Z-1-001.zip`. Descriptions already in the catalog, including STAT Modules 3–5, stay as written. A lesson objective is not a substitute. `catalog/youtube-descriptions.json` records the retrieval and is not rendered.
 
