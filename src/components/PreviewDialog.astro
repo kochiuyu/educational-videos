@@ -1,0 +1,26 @@
+---
+import { href } from '../lib/urls';
+
+const home = href();
+---
+
+<dialog id="quick-preview" class="preview-dialog" aria-labelledby="quick-preview-title">
+  <div class="preview-panel">
+    <div class="preview-toolbar">
+      <button type="button" class="button secondary" data-preview-close>Close</button>
+    </div>
+    <p id="quick-preview-title" class="preview-title"></p>
+    <div class="preview-frame" data-preview-frame></div>
+    <p class="note" data-preview-fallback hidden>This preview could not be loaded.</p>
+    <div class="preview-actions">
+      <a class="button" data-preview-lesson href={home}>View full lesson</a>
+      <a class="button secondary" data-preview-watch href={home} rel="noopener noreferrer">Watch on YouTube</a>
+    </div>
+  </div>
+</dialog>
+
+<script>
+  import { bindPreview } from '../../scripts/preview-dialog.mjs';
+
+  bindPreview(document, window);
+</script>

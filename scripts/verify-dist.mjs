@@ -6,6 +6,7 @@ import { canonicalStatLabel, lessonCountText, statModuleCoverId, summarizeLesson
 import { collectionCardCopy, readerIntro } from './reader-copy.mjs';
 import { parseLessonNumber } from './stat-map.mjs';
 import './check-lessons.mjs';
+import { assertPreviewMarkup } from './check-preview.mjs';
 import './check-stat-lessons.mjs';
 import './check-youtube-descriptions.mjs';
 
@@ -230,7 +231,7 @@ function relatedIds(html) {
   if (at < 0) return [];
   const end = html.indexOf('</section>', at);
   const slice = html.slice(at, end === -1 ? html.length : end);
-  return [...slice.matchAll(/\/videos\/([\w-]{11})\//g)].map((match) => match[1]);
+  return [...new Set([...slice.matchAll(/\/videos\/([\w-]{11})\//g)].map((match) => match[1]))];
 }
 
 function sameIds(actual, expected) {
@@ -295,7 +296,7 @@ function lessonSections(html) {
     const label = part.slice(0, part.indexOf('"'));
     const end = part.search(/data-lesson="|<\/main>/);
     const slice = end === -1 ? part : part.slice(0, end);
-    const ids = [...slice.matchAll(/\/videos\/([\w-]{11})\//g)].map((match) => match[1]);
+    const ids = [...new Set([...slice.matchAll(/\/videos\/([\w-]{11})\//g)].map((match) => match[1]))];
     return { label, ids };
   });
 }
@@ -460,6 +461,8 @@ for (const collection of catalog.collections) {
 }
 const laePage = byRel.get('collections/lae-what-is/index.html') ?? '';
 if (!laePage.includes('>Companion site<')) fail('LAE collection page dropped the companion link');
+
+for (const problem of assertPreviewMarkup(byRel, catalog)) fail(problem);
 
 const uniqueEmbeds = new Set(embedSrcs);
 if (uniqueEmbeds.size !== catalog.videos.length) {
