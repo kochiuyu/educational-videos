@@ -1,4 +1,4 @@
-import { canonicalStatLabel, lessonKey, summarizeLessons, tally } from './lessons.mjs';
+import { canonicalStatLabel, lessonKey, statModuleCoverId, summarizeLessons, tally } from './lessons.mjs';
 import { loadCatalog } from './catalog-lib.mjs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -196,6 +196,26 @@ for (const [id, collections] of globalIds) {
 
 const keys = catalog.videos.map((video) => lessonKey(video));
 if (new Set(keys).size !== summary.lessons) fail('Lesson keys and the summary disagree.');
+
+const expectedCovers = {
+  M01: 'VS7Qbq07ATM',
+  M02: 'iFxLhMzkpko',
+  M03: 'mW92Uy97xn0',
+  M04: 'D7cTzUxnWuE',
+  M05: 'kxuYPToB6iw',
+};
+for (const [moduleId, youtubeId] of Object.entries(expectedCovers)) {
+  const coverId = statModuleCoverId(catalog.videos, moduleId);
+  const cover = stat.find((video) => video.youtube_id === coverId);
+  if (coverId !== youtubeId) fail(`${moduleId} cover is ${coverId}, expected ${youtubeId}.`);
+  if (!cover || canonicalStatLabel(cover) !== `${Number(moduleId.slice(1))}.01`) {
+    fail(`${moduleId} cover is not the first official lesson.`);
+  }
+  if (cover?.language !== 'en+zh') fail(`${moduleId} cover is not the English narration.`);
+}
+if (statModuleCoverId(catalog.videos, 'M01') === 'dgh99RbB43s') {
+  fail('M01 cover must not be the skewness recording.');
+}
 
 if (errors.length) {
   console.error(`Lesson count check failed (${errors.length}):`);

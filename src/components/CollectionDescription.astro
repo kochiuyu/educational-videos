@@ -1,26 +1,21 @@
 ---
+import { COMPANION_URL, readerIntro } from '../../scripts/reader-copy.mjs';
+
 interface Props {
   description: string;
   class?: string;
 }
 
 const { description, class: className } = Astro.props;
-const companion = 'https://kochiuyu.github.io/lae-companion/';
-const at = description.indexOf(companion);
-const tail = at === -1 ? '' : description.slice(at + companion.length);
-const period = tail.startsWith('.') ? '.' : '';
+const intro = readerIntro(description);
+const companion = description.includes(COMPANION_URL);
 ---
 
-<p class={className}>
-  {
-    at === -1 ? (
-      description
-    ) : (
-      <>
-        {description.slice(0, at)}
-        <a href={companion}>{companion}{period}</a>
-        {period ? tail.slice(1) : tail}
-      </>
-    )
-  }
-</p>
+<p class={className}>{intro}</p>
+{
+  companion && (
+    <p class="note">
+      <a href={COMPANION_URL}>Companion site</a>
+    </p>
+  )
+}

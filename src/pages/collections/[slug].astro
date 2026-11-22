@@ -2,6 +2,7 @@
 import Base from '../../layouts/Base.astro';
 import VideoRows from '../../components/VideoRows.astro';
 import Breadcrumb from '../../components/Breadcrumb.astro';
+import CardThumb from '../../components/CardThumb.astro';
 import CollectionDescription from '../../components/CollectionDescription.astro';
 import {
   collections,
@@ -12,8 +13,9 @@ import {
   videosInModule,
 } from '../../data/catalog';
 import { href, topicSlug } from '../../lib/urls';
-import { lessonsInModule } from '../../lib/stat-lesson';
+import { lessonsInModule, moduleCover } from '../../lib/stat-lesson';
 import { moduleTitleLang } from '../../lib/text';
+import { readerIntro } from '../../../scripts/reader-copy.mjs';
 
 export function getStaticPaths() {
   return collections.map((collection) => ({
@@ -42,7 +44,7 @@ const current =
 
 <Base
   title={`${collection.name} · Educational Videos`}
-  description={`${collection.description} ${list.length} videos.`}
+  description={`${readerIntro(collection.description)} ${list.length} videos.`}
   current={current}
 >
   <Breadcrumb
@@ -69,17 +71,21 @@ const current =
     isStat ? (
       <section class="section" aria-labelledby="module-list-heading">
         <h2 id="module-list-heading">Modules</h2>
-        <ul class="module-grid">
+        <ul class="module-grid modules">
           {statModuleIds().map((moduleId) => {
             const titles = moduleTitles(moduleId);
             const rows = videosInModule(moduleId);
             const lessons = lessonsInModule(moduleId).length;
+            const cover = moduleCover(moduleId);
             return (
               <li>
                 <a class="sheet-link" href={href(`stat-lessons/${moduleId.toLowerCase()}`)}>
+                  {cover && <CardThumb youtubeId={cover.youtube_id} collection="stat-lessons" />}
                   <span class="code">{moduleId}</span>
                   {titles.map((title) => (
-                    <span lang={moduleTitleLang(title)}>{title}</span>
+                    <span class="module-title" lang={moduleTitleLang(title)}>
+                      {title}
+                    </span>
                   ))}
                   <p class="count">
                     {lessons} lessons · {rows.length} recordings
