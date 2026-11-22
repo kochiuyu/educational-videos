@@ -412,6 +412,23 @@ export function assertPreviewMarkup(pages, catalog) {
   }
   if (!shorts.includes('data-portrait="true"')) bad('Shorts previews are not marked portrait');
 
+  const accounting = pages.get('micro-cases/accounting/index.html') ?? '';
+  const caseIds = ['F1WY_3jXYQw', 'uetO9tibCEA', 'EFakphvV2qE'];
+  const casePreviews = accounting.match(/data-preview="/g) ?? [];
+  if (casePreviews.length !== caseIds.length) {
+    bad(`Accounting has ${casePreviews.length} previews for ${caseIds.length} recordings`);
+  }
+  if (accounting.includes('data-portrait="true"') || accounting.includes('video-card portrait')) {
+    bad('Accounting recordings are marked as portrait Shorts');
+  }
+  if (accounting.includes('View lesson')) bad('Accounting cards duplicate the title with View lesson');
+  for (const id of caseIds) {
+    if (!accounting.includes(`data-preview="${id}"`)) bad(`Accounting cannot preview ${id}`);
+    if (!accounting.includes(`href="/educational-videos/videos/${id}/"`)) {
+      bad(`Accounting title link for ${id} is missing`);
+    }
+  }
+
   return problems;
 }
 

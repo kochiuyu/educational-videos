@@ -1,5 +1,5 @@
 ---
-import { COMPANION_URL, readerIntro } from '../../scripts/reader-copy.mjs';
+import { COMPANION_URL, MICRO_CASES_URL, readerIntro } from '../../scripts/reader-copy.mjs';
 
 interface Props {
   description: string;
@@ -9,6 +9,7 @@ interface Props {
 const { description, class: className } = Astro.props;
 const intro = readerIntro(description);
 const companion = description.includes(COMPANION_URL);
+const microCases = description.includes(MICRO_CASES_URL);
 ---
 
 <p class={className}>{intro}</p>
@@ -16,6 +17,13 @@ const companion = description.includes(COMPANION_URL);
   companion && (
     <p class="note">
       <a href={COMPANION_URL}>Companion site</a>
+    </p>
+  )
+}
+{
+  microCases && (
+    <p class="note">
+      <a href={MICRO_CASES_URL}>Micro Cases collection</a>
     </p>
   )
 }

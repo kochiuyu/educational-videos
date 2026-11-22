@@ -3,13 +3,14 @@
   "owner": "Prof. Chiu Yu KO",
   "channel_url": "https://www.youtube.com/@ChiuYuKo",
   "repo": "https://github.com/kochiuyu/educational-videos",
-  "as_of": "2026-11-21",
+  "as_of": "2026-11-22",
   "timezone": "Asia/Hong_Kong",
   "inclusions": {
     "stat_lessons": "Public VF-Revise STAT lessons only: M01–M03 all topics; M04 T01–T10; M05 T01–T08. Four language tracks per topic.",
     "lae_101": "Ten public LAE 101 short intros. Individual video URLs only.",
     "economics_shorts": "Public cartoon-style economics YouTube Shorts from the @ChiuYuKo channel, grouped by the channel's public playlists Experimental Economics and Game Theory in daily life.",
-    "lae_what_is": "What is LAE?, What is the 1,000-metre band?, What is a drone?, What is an SUA?, and What is an eVTOL? for CUHK DOTE5891, Business Analysis of Low-Altitude Economy. Companion site: https://kochiuyu.github.io/lae-companion/."
+    "lae_what_is": "What is LAE?, What is the 1,000-metre band?, What is a drone?, What is an SUA?, and What is an eVTOL? for CUHK DOTE5891, Business Analysis of Low-Altitude Economy. Companion site: https://kochiuyu.github.io/lae-companion/.",
+    "micro_cases": "ACC-01, The last tray of egg tarts, as three landscape language recordings: English, 普通话, and 廣東話. Visibility Public was last observed at upload completion on 2026-11-22 (Asia/Hong_Kong), not rechecked afterward. Duration is null because a YouTube duration was not verified."
   },
   "exclusions": [
     "Older DSME2021 lecture recordings in kochiuyu/video-links",
@@ -42,6 +43,11 @@
       "slug": "lae-what-is",
       "name": "LAE What-is",
       "description": "What is LAE?, What is the 1,000-metre band?, What is a drone?, What is an SUA?, and What is an eVTOL? for CUHK DOTE5891, Business Analysis of Low-Altitude Economy. Companion site: https://kochiuyu.github.io/lae-companion/."
+    },
+    {
+      "slug": "micro-cases",
+      "name": "Micro Cases",
+      "description": "Accounting classroom cases. ACC-01, The last tray of egg tarts, in English, 普通话, and 廣東話. Case collection: https://kochiuyu.github.io/micro-cases/."
     }
   ],
   "languages": [
@@ -80,9 +86,21 @@
     {
       "id": "en-bi-hant",
       "label": "English narration · bilingual slides 中英 · 繁體"
+    },
+    {
+      "id": "mc-en",
+      "label": "English"
+    },
+    {
+      "id": "mc-cmn",
+      "label": "普通话"
+    },
+    {
+      "id": "mc-yue",
+      "label": "廣東話"
     }
   ],
-  "video_count": 312,
+  "video_count": 315,
   "videos": [
     {
       "id": "LAE101-01",
@@ -5074,6 +5092,54 @@
       "youtube_id": "ITrs7sD_a_g",
       "youtube_url": "https://www.youtube.com/watch?v=ITrs7sD_a_g",
       "source": "Approved for the public catalog on 20 Nov 2026 through the LAE-Concept-Video confirmation, while remaining Unlisted on YouTube.",
+      "module_title": null
+    },
+    {
+      "id": "ACC-01",
+      "collection": "Micro Cases",
+      "collection_slug": "micro-cases",
+      "module": null,
+      "topic": "Accounting",
+      "language": "mc-en",
+      "language_label": "English",
+      "title": "ACC-01 · The last tray of egg tarts (English)",
+      "description": "The last tray of egg tarts (ACC-01) is a Micro Cases classroom video on sunk cost and opportunity cost.\n\nYou run a Hong Kong bakery. At closing, twelve egg tarts remain on the counter, and the café next door makes an offer for the whole tray. Tonight you have no other buyer and no other use for it. The video then introduces a new fact and asks you to decide again, including what offer would leave you indifferent.\n\nThe teaching format is pause, vote, and reveal. Pause at each decision, vote, compare your reasons, then continue for the debrief. A later fact changes the alternatives, and you vote again.\n\nThe setting, figures, and later change of fact are fictional classroom assumptions, not a news report.\n\nRead the case page:\nhttps://kochiuyu.github.io/micro-cases/tarts.html\n\nBrowse the Micro Cases collection:\nhttps://kochiuyu.github.io/micro-cases/\n\nA Micro Cases classroom video by Prof. Chiu Yu KO.\n",
+      "duration": null,
+      "youtube_id": "F1WY_3jXYQw",
+      "youtube_url": "https://www.youtube.com/watch?v=F1WY_3jXYQw",
+      "source": "Approved ACC-01 English description. Visibility Public was last observed at upload completion on 2026-11-22 (Asia/Hong_Kong), not rechecked afterward. YouTube duration was not verified.",
+      "module_title": null
+    },
+    {
+      "id": "ACC-01",
+      "collection": "Micro Cases",
+      "collection_slug": "micro-cases",
+      "module": null,
+      "topic": "Accounting",
+      "language": "mc-cmn",
+      "language_label": "普通话",
+      "title": "ACC-01 · 最后一盘蛋挞（普通话）",
+      "description": "最后一盘蛋挞（ACC-01）是 Micro Cases 的课堂短片，用来讨论沉没成本和机会成本。\n\n你在香港经营一家面包店。打烊时，柜台上还剩十二个蛋挞，隔壁的咖啡店对整盘出了价。今晚没有其他买家，这盘蛋挞也没有其他用途。短片随后会给出新的事实，请你再做一次决定，并思考怎样的出价会让你无差异。\n\n短片采用先暂停、再投票、再讲评的课堂形式。请在每个决策点暂停、投票、比较理由，然后再继续观看讲评。后面会有一个事实发生变化，请再投一次票。\n\n场景、数字和后来改动的事实都是虚构的课堂假设，并不是新闻报道。\n\n阅读个案页面：\nhttps://kochiuyu.github.io/micro-cases/zh-cn/tarts.html\n\n浏览 Micro Cases 个案集：\nhttps://kochiuyu.github.io/micro-cases/\n\nMicro Cases 课堂短片，由 Prof. Chiu Yu KO 设计。\n",
+      "duration": null,
+      "youtube_id": "uetO9tibCEA",
+      "youtube_url": "https://www.youtube.com/watch?v=uetO9tibCEA",
+      "source": "Approved ACC-01 普通话 description. Visibility Public was last observed at upload completion on 2026-11-22 (Asia/Hong_Kong), not rechecked afterward. YouTube duration was not verified.",
+      "module_title": null
+    },
+    {
+      "id": "ACC-01",
+      "collection": "Micro Cases",
+      "collection_slug": "micro-cases",
+      "module": null,
+      "topic": "Accounting",
+      "language": "mc-yue",
+      "language_label": "廣東話",
+      "title": "ACC-01 · 最後一盤蛋撻（廣東話）",
+      "description": "最後一盤蛋撻（ACC-01）是 Micro Cases 的課堂短片，用來討論沉沒成本和機會成本。\n\n你在香港經營一家麵包店。打烊時，櫃檯上還剩十二個蛋撻，隔壁的咖啡店對整盤出了價。今晚沒有其他買家，這盤蛋撻也沒有其他用途。短片隨後會給出新的事實，請你再做一次決定，並思考怎樣的出價會讓你無差異。\n\n短片採用先暫停、再投票、再講評的課堂形式。請在每個決策點暫停、投票、比較理由，然後再繼續觀看講評。後面會有一個事實發生變化，請再投一次票。\n\n場景、數字和後來改動的事實都是虛構的課堂假設，並不是新聞報道。\n\n閱讀個案頁面：\nhttps://kochiuyu.github.io/micro-cases/zh-hk/tarts.html\n\n瀏覽 Micro Cases 個案集：\nhttps://kochiuyu.github.io/micro-cases/\n\nMicro Cases 課堂短片，由 Prof. Chiu Yu KO 設計。\n",
+      "duration": null,
+      "youtube_id": "EFakphvV2qE",
+      "youtube_url": "https://www.youtube.com/watch?v=EFakphvV2qE",
+      "source": "Approved ACC-01 廣東話 description. Visibility Public was last observed at upload completion on 2026-11-22 (Asia/Hong_Kong), not rechecked afterward. YouTube duration was not verified.",
       "module_title": null
     }
   ]

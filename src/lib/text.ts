@@ -55,6 +55,9 @@ export function splitPublishedTitle(title: string): PublishedTitleParts {
 
 /** Language of a title, based on its first character and the catalog language id. */
 export function titleLang(video: Pick<Video, 'title' | 'language'>): string {
+  if (video.language === 'mc-en') return 'en';
+  if (video.language === 'mc-cmn') return 'zh-Hans';
+  if (video.language === 'mc-yue') return 'zh-Hant';
   const startsHan = /^\s*\p{Script=Han}/u.test(video.title);
   if (!startsHan) return 'en';
   if (video.language === 'hk+en') return 'zh-Hant';
@@ -84,9 +87,17 @@ export interface DescriptionView {
 }
 
 function openingLang(language: string | null): string {
-  if (language === 'hk+en') return 'zh-Hant';
-  if (language === 'zh' || language === 'zh+en') return 'zh-Hans';
+  if (language === 'hk+en' || language === 'mc-yue') return 'zh-Hant';
+  if (language === 'zh' || language === 'zh+en' || language === 'mc-cmn') return 'zh-Hans';
   return 'en';
+}
+
+const CASE_PAGE = /https:\/\/kochiuyu\.github\.io\/micro-cases\/(?:zh-cn\/|zh-hk\/)?tarts\.html/;
+
+/** Localized Micro Cases page quoted by an approved description, when one is present. */
+export function casePageUrl(description: string | null): string | null {
+  if (!description) return null;
+  return description.match(CASE_PAGE)?.[0] ?? null;
 }
 
 function closingLang(language: string | null): string {

@@ -50,6 +50,11 @@ for (const video of catalog.videos) {
   }
 }
 
+const serialized = JSON.stringify(provenance);
+if (serialized.includes('/workspace/') || serialized.includes('acc-01-youtube') || serialized.includes('_studio.png')) {
+  fail('Description provenance includes a private local path.');
+}
+
 const tallies = {};
 for (const [id, record] of Object.entries(records)) {
   const video = byId.get(id);
@@ -63,7 +68,7 @@ for (const [id, record] of Object.entries(records)) {
   if (typeof record.page === 'string' && !record.page.includes(id)) {
     fail(`${id} was retrieved from a page for a different video.`);
   }
-  const tally = tallies[video.collection] ?? { filled: 0, empty: 0, blocked: 0 };
+  const tally = tallies[video.collection] ?? { filled: 0, empty: 0, blocked: 0, source: 0 };
   tallies[video.collection] = tally;
   if (record.status === 'filled') {
     tally.filled += 1;
@@ -73,6 +78,16 @@ for (const [id, record] of Object.entries(records)) {
   } else if (record.status === 'empty' || record.status === 'blocked') {
     tally[record.status] += 1;
     if (video.description) fail(`${id} has a description even though retrieval was ${record.status}.`);
+  } else if (record.status === 'source') {
+    tally.source += 1;
+    if (video.description !== record.description) {
+      fail(`${id} catalog description is not the approved source description.`);
+    }
+    if (record.page) fail(`${id} source description records a fetch page.`);
+    const blob = JSON.stringify(record);
+    if (blob.includes('/workspace/') || blob.includes('acc-01-youtube') || blob.includes('_studio.png')) {
+      fail(`${id} source record includes a private path.`);
+    }
   } else {
     fail(`${id} has an unknown retrieval status ${record.status}.`);
   }
@@ -80,7 +95,13 @@ for (const [id, record] of Object.entries(records)) {
 
 for (const [collection, tally] of Object.entries(tallies)) {
   const recorded = provenance.counts?.[collection];
-  if (!recorded || recorded.filled !== tally.filled || recorded.empty !== tally.empty || recorded.blocked !== tally.blocked) {
+  if (
+    !recorded ||
+    recorded.filled !== tally.filled ||
+    recorded.empty !== tally.empty ||
+    recorded.blocked !== tally.blocked ||
+    (recorded.source ?? 0) !== tally.source
+  ) {
     fail(`${collection} retrieval counts do not match the records.`);
   }
 }
@@ -92,6 +113,10 @@ if (errors.length) {
 }
 
 const summary = Object.entries(tallies)
-  .map(([collection, tally]) => `${collection}: ${tally.filled} filled, ${tally.empty} empty, ${tally.blocked} blocked`)
+  .map(([collection, tally]) => {
+    const parts = [`${tally.filled} filled`, `${tally.empty} empty`, `${tally.blocked} blocked`];
+    if (tally.source) parts.push(`${tally.source} source`);
+    return `${collection}: ${parts.join(', ')}`;
+  })
   .join('; ');
 console.log(`YouTube descriptions OK (${provenance.retrieved_on}): ${summary}`);

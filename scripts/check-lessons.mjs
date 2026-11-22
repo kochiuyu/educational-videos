@@ -1,5 +1,6 @@
 import { canonicalStatLabel, lessonKey, statModuleCoverId, summarizeLessons, tally } from './lessons.mjs';
 import { loadCatalog } from './catalog-lib.mjs';
+import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -215,6 +216,105 @@ for (const [moduleId, youtubeId] of Object.entries(expectedCovers)) {
 }
 if (statModuleCoverId(catalog.videos, 'M01') === 'dgh99RbB43s') {
   fail('M01 cover must not be the skewness recording.');
+}
+
+const sameCase = [
+  video({
+    collection_slug: 'micro-cases',
+    module: null,
+    topic: 'Accounting',
+    id: 'ACC-01',
+    language: 'mc-en',
+    youtube_id: 'aaaaaaaaaaa',
+  }),
+  video({
+    collection_slug: 'micro-cases',
+    module: null,
+    topic: 'Accounting',
+    id: 'ACC-01',
+    language: 'mc-cmn',
+    youtube_id: 'bbbbbbbbbbb',
+    title: 'A translated title stays in the same case',
+  }),
+];
+if (tally(sameCase).lessons !== 1 || tally(sameCase).versions !== 2) {
+  fail('Micro Case language recordings that share a catalog id must be one lesson.');
+}
+const separateCases = [
+  ...sameCase,
+  video({
+    collection_slug: 'micro-cases',
+    module: null,
+    topic: 'Accounting',
+    id: 'ACC-02',
+    language: 'mc-en',
+    youtube_id: 'ccccccccccc',
+  }),
+];
+if (tally(separateCases).lessons !== 2) {
+  fail('A shared Accounting topic must not merge different Micro Case ids.');
+}
+
+const accExpected = [
+  {
+    language: 'mc-en',
+    label: 'English',
+    youtube_id: 'F1WY_3jXYQw',
+    title: 'ACC-01 · The last tray of egg tarts (English)',
+    casePage: 'https://kochiuyu.github.io/micro-cases/tarts.html',
+  },
+  {
+    language: 'mc-cmn',
+    label: '普通话',
+    youtube_id: 'uetO9tibCEA',
+    title: 'ACC-01 · 最后一盘蛋挞（普通话）',
+    casePage: 'https://kochiuyu.github.io/micro-cases/zh-cn/tarts.html',
+  },
+  {
+    language: 'mc-yue',
+    label: '廣東話',
+    youtube_id: 'EFakphvV2qE',
+    title: 'ACC-01 · 最後一盤蛋撻（廣東話）',
+    casePage: 'https://kochiuyu.github.io/micro-cases/zh-hk/tarts.html',
+  },
+];
+const acc = catalog.videos.filter((item) => item.id === 'ACC-01');
+if (acc.length !== 3 || summary.byCollection['micro-cases']?.lessons !== 1 || summary.byCollection['micro-cases']?.versions !== 3) {
+  fail('ACC-01 must be one Micro Cases lesson with three recordings.');
+}
+if (summary.lessons !== 104 || summary.versions !== 315) {
+  fail(`Catalog is ${summary.lessons} lessons and ${summary.versions} recordings; expected 104 and 315.`);
+}
+if (summary.byCollection['stat-lessons'].lessons !== 63 || summary.byCollection['stat-lessons'].versions !== 252) {
+  fail('STAT lesson totals changed while adding ACC-01.');
+}
+const statLanguageIds = new Set(['en+zh', 'zh+en', 'hk+en', 'zh']);
+for (const expected of accExpected) {
+  const item = acc.find((video) => video.youtube_id === expected.youtube_id);
+  if (!item) {
+    fail(`ACC-01 is missing ${expected.youtube_id}.`);
+    continue;
+  }
+  if (item.collection_slug !== 'micro-cases' || item.topic !== 'Accounting' || item.module != null) {
+    fail(`${expected.youtube_id} is not grouped as an Accounting micro-case.`);
+  }
+  if (item.language !== expected.language || item.language_label !== expected.label) {
+    fail(`${expected.youtube_id} language label does not match its recording.`);
+  }
+  if (statLanguageIds.has(item.language)) fail(`${expected.youtube_id} uses a STAT language track.`);
+  if (item.title !== expected.title) fail(`${expected.youtube_id} title is not the approved title.`);
+  if (item.duration != null) fail(`${expected.youtube_id} duration must stay null until a YouTube duration is verified.`);
+  if (item.youtube_url !== `https://www.youtube.com/watch?v=${expected.youtube_id}`) {
+    fail(`${expected.youtube_id} watch URL is not the canonical watch URL.`);
+  }
+  if (!item.description?.includes(expected.casePage) || !item.description.includes('https://kochiuyu.github.io/micro-cases/')) {
+    fail(`${expected.youtube_id} description is missing its localized case page.`);
+  }
+  if (lessonKey(item) !== 'micro-cases\nACC-01') fail(`${expected.youtube_id} is not grouped as case ACC-01.`);
+}
+const catalogText = fs.readFileSync(path.join(root, 'catalog', 'allowlist.json'), 'utf8');
+if (catalogText.includes('/workspace/') || catalogText.includes('acc-01-youtube') || catalogText.includes('_studio.png')) {
+  fail('The allowlist includes a private local path.');
 }
 
 if (errors.length) {

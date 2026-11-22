@@ -13,7 +13,7 @@ import {
 import { href, topicSlug, trackSlug } from '../../lib/urls';
 import VisibleTitle from '../../components/VisibleTitle.astro';
 import Description from '../../components/Description.astro';
-import { moduleTitleLang, presentDescription } from '../../lib/text';
+import { casePageUrl, moduleTitleLang, presentDescription } from '../../lib/text';
 import { relatedVideos, statLessonLabel } from '../../lib/related';
 import { lessonSlug, officialYoutubeTitle } from '../../lib/stat-lesson';
 import type { Crumb } from '../../components/Breadcrumb.astro';
@@ -56,12 +56,18 @@ if (video.module) {
       label: `STAT ${lessonLabel}`,
     });
   }
-} else if (video.collection_slug === 'economics-shorts' || video.collection_slug === 'lae-what-is') {
+} else if (
+  video.collection_slug === 'economics-shorts' ||
+  video.collection_slug === 'lae-what-is' ||
+  video.collection_slug === 'micro-cases'
+) {
   crumbs.push({
     href: href(`${video.collection_slug}/${topicSlug(video.topic)}`),
     label: video.topic,
   });
 }
+
+const casePage = casePageUrl(video.description);
 
 const meta = [
   pageTitle,
@@ -79,7 +85,9 @@ const current =
       ? 'what'
       : video.collection_slug === 'economics-shorts'
         ? 'econ'
-        : 'stat';
+        : video.collection_slug === 'micro-cases'
+          ? 'cases'
+          : 'stat';
 ---
 
 <Base title={`${pageTitle} · Educational Videos`} description={meta} current={current}>
@@ -108,7 +116,9 @@ const current =
               videos={related.videos}
               showTopic={video.collection_slug === 'lae-101'}
               showLanguage={
-                video.collection_slug === 'stat-lessons' || video.collection_slug === 'lae-what-is'
+                video.collection_slug === 'stat-lessons' ||
+                video.collection_slug === 'lae-what-is' ||
+                video.collection_slug === 'micro-cases'
               }
             />
           </section>
@@ -159,7 +169,8 @@ const current =
                 {video.module ? (
                   video.topic
                 ) : video.collection_slug === 'economics-shorts' ||
-                  video.collection_slug === 'lae-what-is' ? (
+                  video.collection_slug === 'lae-what-is' ||
+                  video.collection_slug === 'micro-cases' ? (
                   <a href={href(`${video.collection_slug}/${topicSlug(video.topic)}`)}>{video.topic}</a>
                 ) : (
                   video.topic
@@ -181,6 +192,14 @@ const current =
                   )
                 }
               </dd>
+            </div>
+          )
+        }
+        {
+          casePage && (
+            <div>
+              <dt>Case page</dt>
+              <dd><a href={casePage}>{casePage}</a></dd>
             </div>
           )
         }
