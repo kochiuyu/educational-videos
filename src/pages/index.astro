@@ -29,6 +29,7 @@ const updated = catalogDateLine(asOf, timezone);
 const description = `Lesson catalog by ${owner}. ${lessonSummary.lessons} distinct lessons. ${videoCount} recordings, including language versions.`;
 const economicsTopics = topicsInCollection('economics-shorts');
 const laeWhatTopics = topicsInCollection('lae-what-is');
+const microTopics = topicsInCollection('micro-cases');
 
 function collectionCover(slug: string): Video | undefined {
   if (slug === 'stat-lessons') {
@@ -178,11 +179,36 @@ function collectionCover(slug: string): Video | undefined {
     </ul>
   </section>
 
+  <section class="section" aria-labelledby="micro-heading">
+    <h2 id="micro-heading">Micro Cases</h2>
+    <ul class="topic-grid">
+      {
+        microTopics.map((group) => {
+          const counts = lessonTally(group.videos);
+          const sample = group.videos.find((video) => video.language === 'mc-en') ?? group.videos[0];
+          return (
+            <li>
+              <a class="sheet-link" href={href(`micro-cases/${topicSlug(group.topic)}`)}>
+                {
+                  sample && (
+                    <CardThumb youtubeId={sample.youtube_id} collection="micro-cases" frame="wide" />
+                  )
+                }
+                <h3>{group.topic}</h3>
+                <p class="count">{formatLessonCount(counts.lessons, counts.versions)}</p>
+              </a>
+            </li>
+          );
+        })
+      }
+    </ul>
+  </section>
+
   <section class="section" aria-labelledby="tracks-heading">
     <h2 id="tracks-heading">STAT language tracks</h2>
     <p class="note">
       These list language versions of STAT lessons only. They are not extra lessons.
-      LAE 101, LAE What-is, and Economics Shorts are not listed here.
+      LAE 101, LAE What-is, Economics Shorts, and Micro Cases are not listed here.
     </p>
     <ul class="inline-links track-picks">
       {

@@ -6,6 +6,8 @@ import CardThumb from '../../components/CardThumb.astro';
 import CollectionDescription from '../../components/CollectionDescription.astro';
 import {
   collections,
+  formatLessonCount,
+  lessonTally,
   moduleTitles,
   statModuleIds,
   topicsInCollection,
@@ -28,7 +30,9 @@ const { collection } = Astro.props;
 const list = videosInCollection(collection.slug);
 const isStat = collection.slug === 'stat-lessons';
 const topicBase =
-  collection.slug === 'economics-shorts' || collection.slug === 'lae-what-is'
+  collection.slug === 'economics-shorts' ||
+  collection.slug === 'lae-what-is' ||
+  collection.slug === 'micro-cases'
     ? collection.slug
     : null;
 const topicGroups = topicBase ? topicsInCollection(collection.slug) : [];
@@ -39,7 +43,9 @@ const current =
       ? 'what'
       : collection.slug === 'economics-shorts'
         ? 'econ'
-        : 'stat';
+        : collection.slug === 'micro-cases'
+          ? 'cases'
+          : 'stat';
 ---
 
 <Base
@@ -57,7 +63,13 @@ const current =
     <p class="eyebrow">Collection</p>
     <h1>{collection.name}</h1>
     <CollectionDescription class="lede" description={collection.description} />
-    <p class="note">{list.length} videos.</p>
+    <p class="note">
+      {
+        collection.slug === 'micro-cases'
+          ? `${formatLessonCount(lessonTally(list).lessons, lessonTally(list).versions)}.`
+          : `${list.length} videos.`
+      }
+    </p>
     {
       isStat && (
         <p class="note">
@@ -102,8 +114,17 @@ const current =
           <h2 id={`${topicSlug(group.topic)}-heading`}>
             <a href={href(`${topicBase}/${topicSlug(group.topic)}`)}>{group.topic}</a>
           </h2>
-          <p class="note">{group.videos.length} videos.</p>
-          <VideoRows videos={group.videos} showLanguage={collection.slug === 'lae-what-is'} />
+          <p class="note">
+            {
+              collection.slug === 'micro-cases'
+                ? formatLessonCount(lessonTally(group.videos).lessons, lessonTally(group.videos).versions)
+                : `${group.videos.length} videos.`
+            }
+          </p>
+          <VideoRows
+            videos={group.videos}
+            showLanguage={collection.slug === 'lae-what-is' || collection.slug === 'micro-cases'}
+          />
         </section>
       ))
     ) : (

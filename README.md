@@ -6,14 +6,15 @@ The public channel [https://www.youtube.com/@ChiuYuKo](https://www.youtube.com/@
 
 ## What is listed
 
-`catalog/allowlist.json` is the source of truth. The copy in this repository is the verified catalog as of **2026-11-21** (Asia/Hong_Kong): **312** videos.
+`catalog/allowlist.json` is the source of truth. The copy in this repository is the verified catalog as of **2026-11-22** (Asia/Hong_Kong): **315** videos, **104** distinct lessons.
 
-| Collection | Videos |
-| --- | ---: |
-| STAT lessons | 252 |
-| LAE 101 | 10 |
-| Economics Shorts | 25 |
-| LAE What-is | 25 |
+| Collection | Lessons | Videos |
+| --- | ---: | ---: |
+| STAT lessons | 63 | 252 |
+| LAE 101 | 10 | 10 |
+| Economics Shorts | 25 | 25 |
+| LAE What-is | 5 | 25 |
+| Micro Cases | 1 | 3 |
 
 STAT lessons by module:
 
@@ -33,6 +34,8 @@ Economics Shorts are public cartoon-style YouTube Shorts from the @ChiuYuKo chan
 | --- | ---: |
 | Experimental Economics | 18 |
 | Game Theory in daily life | 7 |
+
+Micro Cases is one accounting case, ACC-01, The last tray of egg tarts, with three landscape 16:9 recordings: English (`F1WY_3jXYQw`), 普通话 (`uetO9tibCEA`), and 廣東話 (`EFakphvV2qE`). They share catalog id `ACC-01`, so they count as one lesson. They are not Economics Shorts and they are not STAT language tracks. Each description is the approved source description, including the link to that language’s case page (`tarts.html`, `zh-cn/tarts.html`, or `zh-hk/tarts.html`) and to https://kochiuyu.github.io/micro-cases/. `duration` is null because a YouTube duration was not verified. Visibility Public was last observed at upload completion on 22 Nov 2026 (Hong Kong time). That observation was not repeated afterward.
 
 `oVODqhnkkPg` is in the Game Theory in daily life group. It is a public Short on the channel and was not in that playlist when the list was checked. `econ-shorts-11` (`3C_-2iME2vk`) has no verified duration, so `duration` is null. Descriptions are null. Watch URLs are `https://www.youtube.com/watch?v=` plus the id, not Shorts URLs and not playlist URLs.
 
@@ -95,7 +98,8 @@ npm run preview
 
 ## Browse, search, and filter
 
-- Collections: `/collections/stat-lessons/`, `/collections/lae-101/`, `/collections/economics-shorts/`, and `/collections/lae-what-is/`
+- Collections: `/collections/stat-lessons/`, `/collections/lae-101/`, `/collections/economics-shorts/`, `/collections/lae-what-is/`, and `/collections/micro-cases/`
+- Micro Cases subject: `/micro-cases/accounting/`
 - STAT modules: `/stat-lessons/m01/` through `/stat-lessons/m05/`
 - STAT topics: `/stat-lessons/m03/t01/`
 - Economics Shorts topics: `/economics-shorts/experimental-economics/` and `/economics-shorts/game-theory-in-daily-life/`
@@ -122,10 +126,11 @@ There is no backend. Edit the catalog, open a pull request, and let the Pages wo
 5. STAT lessons also need `module` (`M01`), `topic` (`T01`), `language` (an id in `languages`), and `language_label` (that language’s label, copied exactly).
 6. Economics Shorts use `collection_slug` `economics-shorts` and a `topic` of `Experimental Economics` or `Game Theory in daily life`. Leave `module`, `language`, and `language_label` null unless a verified value exists. Use the watch URL, not a Shorts URL and not a playlist URL. Copy `duration` when it was verified, and leave it null when it was not. Do not label these Shorts as HeyGen.
 7. LAE What-is uses `collection_slug` `lae-what-is`, a topic of `What is LAE?`, `What is the 1,000-metre band?`, `What is a drone?`, `What is an SUA?`, or `What is an eVTOL?`, and one of its five language ids (`en`, `cmn`, `yue`, `en-bi-hans`, `en-bi-hant`) with that language’s label copied exactly. Do not file these under LAE 101 or under the four STAT language tracks. Leave `duration` null unless a duration was verified. Use the watch URL, not a playlist URL. If the collection description names the topics, keep those names in topic order so the topic pages stay in that order.
-8. Optional: `description`, `duration` (`2:14`), `module_title`, `source`. Use `null` or omit anything you do not have.
-9. A new collection or language has to be added to `collections` or `languages` in the same edit. Every collection and language in those arrays must have at least one video.
-10. Run `npm run check:catalog` and `npm run build`.
-11. Open a pull request to `main`. The workflow builds the site on the pull request. After merge, GitHub Actions deploys it.
+8. Optional: `description`, `duration` (`2:14`), `module_title`, `source`. Use `null` or omit anything you do not have. Leave `duration` null when a YouTube duration was not verified.
+9. Micro Cases use `collection_slug` `micro-cases`, topic `Accounting`, and one shared catalog id per case. ACC-01 uses language ids `mc-en`, `mc-cmn`, and `mc-yue` with labels `English`, `普通话`, and `廣東話`. Do not file these under the four STAT language tracks. Copy the approved description, which already links the localized case page. Do not add a quiz or a duration that was not verified on YouTube.
+10. A new collection or language has to be added to `collections` or `languages` in the same edit. Every collection and language in those arrays must have at least one video.
+11. Run `npm run check:catalog` and `npm run build`.
+12. Open a pull request to `main`. The workflow builds the site on the pull request. After merge, GitHub Actions deploys it.
 
 The checker rejects duplicate YouTube IDs, playlist URLs, a `youtube_url` that does not match the id, HeyGen-labeled entries, and DSME2021 entries.
 
@@ -156,4 +161,4 @@ Built with [Astro](https://astro.build/) 5.18.2, used under the [MIT License](ht
 
 ## Embed restrictions
 
-The catalog does not say whether YouTube permits embedding. If a player shows that a video cannot be embedded, the page still links to the watch URL. Embed restrictions were not verified for all 312 videos.
+The catalog does not say whether YouTube permits embedding. If a player shows that a video cannot be embedded, the page still links to the watch URL. Embed restrictions were not verified for all 315 videos.

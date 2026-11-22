@@ -104,6 +104,10 @@ const laeWhatTopics = new Set(
   catalog.videos.filter((video) => video.collection_slug === 'lae-what-is').map((video) => video.topic),
 );
 for (const topic of laeWhatTopics) expected.add(`lae-what-is/${topicSlug(topic)}/index.html`);
+const microTopics = new Set(
+  catalog.videos.filter((video) => video.collection_slug === 'micro-cases').map((video) => video.topic),
+);
+for (const topic of microTopics) expected.add(`micro-cases/${topicSlug(topic)}/index.html`);
 const statLanguageIds = new Set(['en+zh', 'zh+en', 'hk+en', 'zh']);
 for (const language of catalog.languages) {
   if (statLanguageIds.has(language.id)) expected.add(`tracks/${trackSlug(language.id)}/index.html`);
@@ -124,6 +128,9 @@ for (const [rel, html] of byRel) {
   if (/>null</.test(html) || />undefined</.test(html)) fail(`${rel} renders null or undefined`);
   if (/public_progress|videos\.qmd|series-retitle|HeyGen|DSME2021/i.test(html)) {
     fail(`${rel} leaks excluded or internal source text`);
+  }
+  if (html.includes('/workspace/') || html.includes('acc-01-youtube') || html.includes('_studio.png')) {
+    fail(`${rel} includes a private local path`);
   }
   // A description may link the playlist URL it already quotes. Playback links may not.
   const playlistAttrs = html.match(/(?:href|src)="[^"]*(?:playlist\?|[?&]list=)[^"]*"/g) ?? [];
@@ -266,6 +273,42 @@ for (const video of catalog.videos) {
     if (!sameIds(ids, expected)) {
       fail(`${rel} related videos are not the other ${parsed.label} language versions`);
     }
+  } else if (video.collection_slug === 'micro-cases') {
+    const expected = catalog.videos
+      .filter(
+        (other) =>
+          other.youtube_id !== video.youtube_id &&
+          other.collection_slug === 'micro-cases' &&
+          other.id === video.id,
+      )
+      .map((other) => other.youtube_id);
+    if (html.includes('Same lesson in other languages.')) {
+      fail(`${rel} uses a STAT lesson group`);
+    }
+    if (!html.includes('Same case in other languages.')) {
+      fail(`${rel} is missing the same-case heading`);
+    }
+    if (!sameIds(ids, expected)) fail(`${rel} related videos are not the other languages of this case`);
+    if (html.includes('<dt>Duration</dt>')) fail(`${rel} shows a duration that was not verified on YouTube`);
+    if (html.includes('video-card portrait') || html.includes('data-portrait="true"')) {
+      fail(`${rel} presents a landscape case as a Short`);
+    }
+    const casePages = {
+      F1WY_3jXYQw: 'https://kochiuyu.github.io/micro-cases/tarts.html',
+      uetO9tibCEA: 'https://kochiuyu.github.io/micro-cases/zh-cn/tarts.html',
+      EFakphvV2qE: 'https://kochiuyu.github.io/micro-cases/zh-hk/tarts.html',
+    };
+    const ownCase = casePages[video.youtube_id];
+    if (!ownCase || !html.includes(`href="${ownCase}"`)) {
+      fail(`${rel} is missing its localized case page`);
+    }
+    for (const [id, url] of Object.entries(casePages)) {
+      if (id !== video.youtube_id && html.includes(url)) {
+        fail(`${rel} links another language's case page`);
+      }
+    }
+    const watchLinks = html.match(new RegExp(`href="${video.youtube_url.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}"`, 'g')) ?? [];
+    if (watchLinks.length !== 1) fail(`${rel} should have one canonical watch link, found ${watchLinks.length}`);
   } else if (video.collection_slug === 'lae-what-is' || video.collection_slug === 'economics-shorts') {
     const expected = catalog.videos
       .filter(
@@ -461,6 +504,18 @@ for (const collection of catalog.collections) {
 }
 const laePage = byRel.get('collections/lae-what-is/index.html') ?? '';
 if (!laePage.includes('>Companion site<')) fail('LAE collection page dropped the companion link');
+const microPage = byRel.get('collections/micro-cases/index.html') ?? '';
+if (!microPage.includes('>Micro Cases collection<')) fail('Micro Cases page dropped the collection link');
+if (!home.includes('micro-cases/accounting/')) fail('home page is missing the Accounting case group');
+if (!home.includes('/vi/F1WY_3jXYQw/hq720.jpg')) fail('home page is missing the landscape ACC-01 cover');
+if (home.includes('/vi/F1WY_3jXYQw/oardefault.jpg')) fail('ACC-01 cover uses a Shorts thumbnail');
+const languageSelectStart = searchPage.indexOf('id="language"');
+const languageSelectEnd = searchPage.indexOf('</select>', languageSelectStart);
+const languageSelect = languageSelectStart >= 0 ? searchPage.slice(languageSelectStart, languageSelectEnd) : '';
+for (const id of ['mc-en', 'mc-cmn', 'mc-yue']) {
+  if (languageSelect.includes(id)) fail(`STAT language filter includes Micro Cases language ${id}`);
+}
+if (!searchPage.includes('>Accounting</option>')) fail('search topic filter is missing Accounting');
 
 for (const problem of assertPreviewMarkup(byRel, catalog)) fail(problem);
 

@@ -1,7 +1,7 @@
 {
   "retrieved_at": "2026-11-21T09:59:12Z",
   "retrieved_on": "2026-11-21",
-  "method": "Matched by youtube_id. The 25 Economics Shorts were first retrieved on 2026-11-21 from public YouTube Shorts HTML (videoDetails.shortDescription) and were left unchanged. The 155 descriptions that the public watch page blocked were copied verbatim from the official Google Takeout videos CSV, field Video Description (Original). Archive takeout-20261121T101859Z-1-001.zip, SHA-256 ecc0feabc6c769feb027c020f221feb16d01eb692e1948d9e9d44b8b2c1620a4, channel UC0Amh8UkHvIVxPbxsrEBRMg, exported 2026-11-21. Existing descriptions, including STAT Modules 3–5, were not replaced. Objectives are not used. This file is not rendered.",
+  "method": "Matched by youtube_id. The 25 Economics Shorts were first retrieved on 2026-11-21 from public YouTube Shorts HTML (videoDetails.shortDescription) and were left unchanged. The 155 descriptions that the public watch page blocked were copied verbatim from the official Google Takeout videos CSV, field Video Description (Original). Archive takeout-20261121T101859Z-1-001.zip, SHA-256 ecc0feabc6c769feb027c020f221feb16d01eb692e1948d9e9d44b8b2c1620a4, channel UC0Amh8UkHvIVxPbxsrEBRMg, exported 2026-11-21. Existing descriptions, including STAT Modules 3–5, were not replaced. Objectives are not used. This file is not rendered. ACC-01 descriptions are the approved source texts, confirmed as the saved YouTube descriptions at upload completion on 2026-11-22 (Asia/Hong_Kong), matched by youtube_id. They were not fetched from a public watch page, and YouTube duration was not verified.",
   "counts": {
     "Economics Shorts": {
       "filled": 25,
@@ -22,6 +22,12 @@
       "filled": 120,
       "empty": 0,
       "blocked": 0
+    },
+    "Micro Cases": {
+      "filled": 0,
+      "empty": 0,
+      "blocked": 0,
+      "source": 3
     }
   },
   "preserved_description_sha256": {
@@ -3868,6 +3874,30 @@
         "reason": "Sign in to confirm you’re not a bot",
         "page": "https://www.youtube.com/watch?v=ITrs7sD_a_g"
       }
+    },
+    "F1WY_3jXYQw": {
+      "collection": "Micro Cases",
+      "collection_slug": "micro-cases",
+      "status": "source",
+      "description": "The last tray of egg tarts (ACC-01) is a Micro Cases classroom video on sunk cost and opportunity cost.\n\nYou run a Hong Kong bakery. At closing, twelve egg tarts remain on the counter, and the café next door makes an offer for the whole tray. Tonight you have no other buyer and no other use for it. The video then introduces a new fact and asks you to decide again, including what offer would leave you indifferent.\n\nThe teaching format is pause, vote, and reveal. Pause at each decision, vote, compare your reasons, then continue for the debrief. A later fact changes the alternatives, and you vote again.\n\nThe setting, figures, and later change of fact are fictional classroom assumptions, not a news report.\n\nRead the case page:\nhttps://kochiuyu.github.io/micro-cases/tarts.html\n\nBrowse the Micro Cases collection:\nhttps://kochiuyu.github.io/micro-cases/\n\nA Micro Cases classroom video by Prof. Chiu Yu KO.\n",
+      "retrieval": "Approved source description, matched by youtube_id. Confirmed as the saved YouTube description at upload completion on 2026-11-22 (Asia/Hong_Kong). Not fetched from a public watch page. YouTube duration was not verified.",
+      "description_sha256": "669058403d308a9cf795264e6ec1495c350d9613313effcc1fd051dedf73213f"
+    },
+    "uetO9tibCEA": {
+      "collection": "Micro Cases",
+      "collection_slug": "micro-cases",
+      "status": "source",
+      "description": "最后一盘蛋挞（ACC-01）是 Micro Cases 的课堂短片，用来讨论沉没成本和机会成本。\n\n你在香港经营一家面包店。打烊时，柜台上还剩十二个蛋挞，隔壁的咖啡店对整盘出了价。今晚没有其他买家，这盘蛋挞也没有其他用途。短片随后会给出新的事实，请你再做一次决定，并思考怎样的出价会让你无差异。\n\n短片采用先暂停、再投票、再讲评的课堂形式。请在每个决策点暂停、投票、比较理由，然后再继续观看讲评。后面会有一个事实发生变化，请再投一次票。\n\n场景、数字和后来改动的事实都是虚构的课堂假设，并不是新闻报道。\n\n阅读个案页面：\nhttps://kochiuyu.github.io/micro-cases/zh-cn/tarts.html\n\n浏览 Micro Cases 个案集：\nhttps://kochiuyu.github.io/micro-cases/\n\nMicro Cases 课堂短片，由 Prof. Chiu Yu KO 设计。\n",
+      "retrieval": "Approved source description, matched by youtube_id. Confirmed as the saved YouTube description at upload completion on 2026-11-22 (Asia/Hong_Kong). Not fetched from a public watch page. YouTube duration was not verified.",
+      "description_sha256": "728a1880d3822a9e9b663672983b17d2b203560c88351592eea000d6e91e45b7"
+    },
+    "EFakphvV2qE": {
+      "collection": "Micro Cases",
+      "collection_slug": "micro-cases",
+      "status": "source",
+      "description": "最後一盤蛋撻（ACC-01）是 Micro Cases 的課堂短片，用來討論沉沒成本和機會成本。\n\n你在香港經營一家麵包店。打烊時，櫃檯上還剩十二個蛋撻，隔壁的咖啡店對整盤出了價。今晚沒有其他買家，這盤蛋撻也沒有其他用途。短片隨後會給出新的事實，請你再做一次決定，並思考怎樣的出價會讓你無差異。\n\n短片採用先暫停、再投票、再講評的課堂形式。請在每個決策點暫停、投票、比較理由，然後再繼續觀看講評。後面會有一個事實發生變化，請再投一次票。\n\n場景、數字和後來改動的事實都是虛構的課堂假設，並不是新聞報道。\n\n閱讀個案頁面：\nhttps://kochiuyu.github.io/micro-cases/zh-hk/tarts.html\n\n瀏覽 Micro Cases 個案集：\nhttps://kochiuyu.github.io/micro-cases/\n\nMicro Cases 課堂短片，由 Prof. Chiu Yu KO 設計。\n",
+      "retrieval": "Approved source description, matched by youtube_id. Confirmed as the saved YouTube description at upload completion on 2026-11-22 (Asia/Hong_Kong). Not fetched from a public watch page. YouTube duration was not verified.",
+      "description_sha256": "004dd426a9adb89c73c0e77a633eeef8f9ed96bceb1f058ab52b61f7e2e3e9d8"
     }
   },
   "takeout": {

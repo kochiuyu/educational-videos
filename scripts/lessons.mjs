@@ -18,6 +18,9 @@
  * groups of different Shorts, so they are not collapsed. A shared title would
  * not merge them either.
  *
+ * micro-cases: one lesson is one catalog id. That id is one case, shared by
+ * its language recordings, and it does not span cases.
+ *
  * Any other collection is one lesson per recording.
  */
 
@@ -67,7 +70,7 @@ export function lessonKey(video) {
     if (!label) return `stat-lessons\nunmapped\n${video.youtube_id}`;
     return `stat-lessons\n${label}`;
   }
-  if (slug === 'lae-what-is' || slug === 'lae-101') {
+  if (slug === 'lae-what-is' || slug === 'lae-101' || slug === 'micro-cases') {
     return `${slug}\n${video.id}`;
   }
   return `${slug}\n${video.youtube_id}`;

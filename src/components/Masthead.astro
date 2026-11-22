@@ -3,7 +3,7 @@ import { href } from '../lib/urls';
 import { owner, siteTitle } from '../data/catalog';
 
 interface Props {
-  current?: 'home' | 'stat' | 'lae' | 'what' | 'econ' | 'tracks' | 'search';
+  current?: 'home' | 'stat' | 'lae' | 'what' | 'econ' | 'cases' | 'tracks' | 'search';
 }
 
 const { current } = Astro.props;
@@ -14,6 +14,7 @@ const items = [
   { id: 'lae', href: href('collections/lae-101'), label: 'LAE 101' },
   { id: 'what', href: href('collections/lae-what-is'), label: 'LAE What-is' },
   { id: 'econ', href: href('collections/economics-shorts'), label: 'Economics Shorts' },
+  { id: 'cases', href: href('collections/micro-cases'), label: 'Micro Cases' },
   { id: 'tracks', href: href('tracks'), label: 'Language tracks' },
   { id: 'search', href: href('search'), label: 'Search' },
 ];
