@@ -354,7 +354,16 @@ export function assertPreviewMarkup(pages, catalog) {
       if (!card.includes('type="button"') || !card.includes('>Quick preview<') && !card.includes('Quick preview')) {
         bad(`${rel} preview control is missing its visible label`);
       }
-      if (!card.includes('View lesson')) bad(`${rel} recording card is missing View lesson`);
+      if (card.includes('View lesson')) bad(`${rel} recording card still duplicates the title with View lesson`);
+      const anchors = card.match(/<a\b/g) ?? [];
+      if (anchors.length !== 1 || !card.includes('class="video-card-link"')) {
+        bad(`${rel} recording card should have one title link`);
+      }
+      const previewId = card.match(/data-preview="([A-Za-z0-9_-]{11})"/)?.[1];
+      const titleHref = card.match(/class="video-card-link"[^>]*href="([^"]+)"/)?.[1];
+      if (!previewId || titleHref !== `/educational-videos/videos/${previewId}/`) {
+        bad(`${rel} title link does not open the same recording as Quick preview`);
+      }
       if (!card.includes('aria-label="Quick preview:')) bad(`${rel} preview label is not video-specific`);
     }
   }
@@ -371,9 +380,13 @@ export function assertPreviewMarkup(pages, catalog) {
   if (searchIds.length !== catalog.videos.length) {
     bad(`search page has ${searchIds.length} preview controls for ${catalog.videos.length} recordings`);
   }
-  const viewLessons = search.match(/View lesson/g) ?? [];
-  if (viewLessons.length !== catalog.videos.length) {
-    bad(`search page has ${viewLessons.length} View lesson links`);
+  const titleLinks = search.match(/class="video-card-link"/g) ?? [];
+  if (titleLinks.length !== catalog.videos.length) {
+    bad(`search page has ${titleLinks.length} title links for ${catalog.videos.length} recordings`);
+  }
+  if (search.includes('View lesson')) bad('search cards still include a duplicate View lesson link');
+  if (!search.includes('>View full lesson<') || !search.includes('>Watch on YouTube<')) {
+    bad('preview dialog is missing View full lesson or Watch on YouTube');
   }
   for (const id of ['VS7Qbq07ATM', 'dgh99RbB43s']) {
     if (!search.includes(`data-preview="${id}"`)) bad(`search page cannot preview ${id}`);
