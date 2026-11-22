@@ -15,22 +15,37 @@ const portrait = video.collection_slug === 'economics-shorts';
 const primary = thumbnailUrl(video.youtube_id, video.collection_slug);
 const fallback = thumbnailFallbackUrl(video.youtube_id);
 const shownTitle = video.collection_slug === 'stat-lessons' ? officialYoutubeTitle(video) : video.title;
-const altSource =
-  portrait ? splitPublishedTitle(shownTitle).headline || shownTitle : shownTitle;
+const headline = portrait ? splitPublishedTitle(shownTitle).headline || shownTitle : shownTitle;
+const lessonHref = href(`videos/${video.youtube_id}`);
 ---
 
-<a class:list={['video-card', { portrait }]} href={href(`videos/${video.youtube_id}`)}>
-  <span class="thumb">
+<article class:list={['video-card', { portrait }]}>
+  <div class="thumb">
     <img
       src={primary}
       data-fallback={fallback}
-      alt={altSource}
+      alt=""
       width={portrait ? 1080 : 1280}
       height={portrait ? 1920 : 720}
       loading="lazy"
       decoding="async"
       onerror="this.onerror=null;var next=this.dataset.fallback;if(next){this.removeAttribute('data-fallback');this.src=next;}"
     />
+    <button
+      type="button"
+      class="preview-button"
+      data-preview={video.youtube_id}
+      data-title={headline}
+      data-catalog-path={lessonHref}
+      data-watch={video.youtube_url}
+      data-portrait={portrait ? 'true' : 'false'}
+      aria-haspopup="dialog"
+      aria-controls="quick-preview"
+      aria-label={`Quick preview: ${headline}`}
+    >
+      <span class="preview-icon" aria-hidden="true"></span>
+      Quick preview
+    </button>
     {
       video.duration && (
         <span class="duration-badge">
@@ -39,9 +54,14 @@ const altSource =
         </span>
       )
     }
-  </span>
-  <div class="video-card-body">
-    {meta && <span class="meta">{meta}</span>}
-    <VisibleTitle video={video} />
   </div>
-</a>
+  <div class="video-card-body">
+    {meta && <p class="meta">{meta}</p>}
+    <a class="video-card-link" href={lessonHref}>
+      <VisibleTitle video={video} />
+    </a>
+    <a class="view-lesson" href={lessonHref}>
+      View lesson<span class="sr-only">: {headline}</span>
+    </a>
+  </div>
+</article>
