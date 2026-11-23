@@ -161,7 +161,12 @@ for (const video of statVideos) {
   if (!record.lesson.startsWith(factoryPrefix(parsed.module, parsed.topic))) {
     fail(`${video.youtube_id} lesson file does not start with the parsed lesson number.`);
   }
-  if (!Array.isArray(record.quiz) || record.quiz.length !== 2) {
+  const m06WithoutQuiz = record.lesson.startsWith('STAT-M06-') && record.quiz == null;
+  if (m06WithoutQuiz) {
+    if (record.description_status !== 'kept') {
+      fail(`${video.youtube_id} is an M06 recording without a stored description.`);
+    }
+  } else if (!Array.isArray(record.quiz) || record.quiz.length !== 2) {
     fail(`${video.youtube_id} quiz does not have the two official items.`);
   } else {
     const lang = narrationLang(video.language);
@@ -181,6 +186,18 @@ for (const video of statVideos) {
     fail(`${video.youtube_id} has an unknown description status ${record.description_status}.`);
   }
 }
+
+const m06 = statVideos.filter((video) => video.module === 'M06');
+if (m06.length !== 60) fail(`M06 has ${m06.length} recordings; expected 60.`);
+const m06Lessons = new Set(m06.map((video) => lessons.videos?.[video.youtube_id]?.lesson_number));
+if (m06Lessons.size !== 15) fail('M06 must be 15 official lessons.');
+for (const video of m06) {
+  const record = lessons.videos?.[video.youtube_id];
+  if (!record || record.quiz != null) fail(`${video.youtube_id} must not invent an M06 quiz.`);
+  if (video.duration != null) fail(`${video.youtube_id} duration must stay null.`);
+}
+const quizzes = statVideos.filter((video) => Array.isArray(lessons.videos?.[video.youtube_id]?.quiz)).length;
+if (quizzes !== 252) fail(`STAT quizzes changed to ${quizzes}; M06 must stay without a quiz.`);
 
 if (errors.length) {
   console.error(`STAT lesson check failed (${errors.length}):`);

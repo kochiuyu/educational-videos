@@ -160,8 +160,8 @@
     ]
   },
   "counts": {
-    "stat": 252,
-    "mapped": 252,
+    "stat": 312,
+    "mapped": 312,
     "quizzes": 252,
     "descriptions_filled": 0,
     "missing_objective": 120,
@@ -8231,6 +8231,426 @@
           "lang": "en"
         }
       ]
+    },
+    "y0UPJ8XVphM": {
+      "lesson": "STAT-M06-T01-SCATT",
+      "lesson_number": "6.01",
+      "youtube_title": "统计 6.01 · 散点图：建模前先看数据 (普通话)",
+      "description_status": "kept",
+      "quiz": null
+    },
+    "6yBIgiBmNtE": {
+      "lesson": "STAT-M06-T01-SCATT",
+      "lesson_number": "6.01",
+      "youtube_title": "統計 6.01 · 散點圖：建模之前先睇數據（粵語講解 · 中英雙語畫面）",
+      "description_status": "kept",
+      "quiz": null
+    },
+    "Uaq56wHSCJU": {
+      "lesson": "STAT-M06-T01-SCATT",
+      "lesson_number": "6.01",
+      "youtube_title": "统计 6.01 · 散点图：建模前先看数据（普通话讲解 · 中英双语画面）",
+      "description_status": "kept",
+      "quiz": null
+    },
+    "ud3n4q9ul4Y": {
+      "lesson": "STAT-M06-T01-SCATT",
+      "lesson_number": "6.01",
+      "youtube_title": "STAT 6.01 · See the scatter before modeling (English narration · bilingual slides 中英)",
+      "description_status": "kept",
+      "quiz": null
+    },
+    "3K5C6Ew_8zE": {
+      "lesson": "STAT-M06-T02-COVAR",
+      "lesson_number": "6.02",
+      "youtube_title": "统计 6.02 · 样本协方差：看共动方向 (普通话)",
+      "description_status": "kept",
+      "quiz": null
+    },
+    "dwT-qVkWytE": {
+      "lesson": "STAT-M06-T02-COVAR",
+      "lesson_number": "6.02",
+      "youtube_title": "統計 6.02 · 樣本協方差：睇共動方向（粵語講解 · 中英雙語畫面）",
+      "description_status": "kept",
+      "quiz": null
+    },
+    "NBjutGOutJM": {
+      "lesson": "STAT-M06-T02-COVAR",
+      "lesson_number": "6.02",
+      "youtube_title": "统计 6.02 · 样本协方差：看共动方向（普通话讲解 · 中英双语画面）",
+      "description_status": "kept",
+      "quiz": null
+    },
+    "GmyalBcPpD8": {
+      "lesson": "STAT-M06-T02-COVAR",
+      "lesson_number": "6.02",
+      "youtube_title": "STAT 6.02 · Covariance shows direction (English narration · bilingual slides 中英)",
+      "description_status": "kept",
+      "quiz": null
+    },
+    "SpJSiOQGBMo": {
+      "lesson": "STAT-M06-T03-CORRE",
+      "lesson_number": "6.03",
+      "youtube_title": "统计 6.03 · 相关系数：放到同一尺度 (普通话)",
+      "description_status": "kept",
+      "quiz": null
+    },
+    "eJqDo7_Ju1s": {
+      "lesson": "STAT-M06-T03-CORRE",
+      "lesson_number": "6.03",
+      "youtube_title": "統計 6.03 · 相關系數：放到同一尺度（粵語講解 · 中英雙語畫面）",
+      "description_status": "kept",
+      "quiz": null
+    },
+    "_YISk01wbHM": {
+      "lesson": "STAT-M06-T03-CORRE",
+      "lesson_number": "6.03",
+      "youtube_title": "统计 6.03 · 相关系数：放到同一尺度（普通话讲解 · 中英双语画面）",
+      "description_status": "kept",
+      "quiz": null
+    },
+    "scPHYidSJX8": {
+      "lesson": "STAT-M06-T03-CORRE",
+      "lesson_number": "6.03",
+      "youtube_title": "STAT 6.03 · Correlation on a common scale (English narration · bilingual slides 中英)",
+      "description_status": "kept",
+      "quiz": null
+    },
+    "wfassxEYXZY": {
+      "lesson": "STAT-M06-T04-OLSCR",
+      "lesson_number": "6.04",
+      "youtube_title": "统计 6.04 · 最小二乘：选最贴的直线 (普通话)",
+      "description_status": "kept",
+      "quiz": null
+    },
+    "4UdpFBAWbDQ": {
+      "lesson": "STAT-M06-T04-OLSCR",
+      "lesson_number": "6.04",
+      "youtube_title": "統計 6.04 · 最小二乘：選最貼嘅直線（粵語講解 · 中英雙語畫面）",
+      "description_status": "kept",
+      "quiz": null
+    },
+    "R_p3QsmlqgY": {
+      "lesson": "STAT-M06-T04-OLSCR",
+      "lesson_number": "6.04",
+      "youtube_title": "统计 6.04 · 最小二乘：选最贴的直线（普通话讲解 · 中英双语画面）",
+      "description_status": "kept",
+      "quiz": null
+    },
+    "aoHYZXt4rkk": {
+      "lesson": "STAT-M06-T04-OLSCR",
+      "lesson_number": "6.04",
+      "youtube_title": "STAT 6.04 · Least squares picks the line (English narration · bilingual slides 中英)",
+      "description_status": "kept",
+      "quiz": null
+    },
+    "EMeQ4DWT32s": {
+      "lesson": "STAT-M06-T05-SLOPE",
+      "lesson_number": "6.05",
+      "youtube_title": "统计 6.05 · 斜率与截距：怎么读这条线 (普通话)",
+      "description_status": "kept",
+      "quiz": null
+    },
+    "9fMfps47vTU": {
+      "lesson": "STAT-M06-T05-SLOPE",
+      "lesson_number": "6.05",
+      "youtube_title": "統計 6.05 · 斜率同截距：點樣讀呢條線（粵語講解 · 中英雙語畫面）",
+      "description_status": "kept",
+      "quiz": null
+    },
+    "F3eW8DfxQAo": {
+      "lesson": "STAT-M06-T05-SLOPE",
+      "lesson_number": "6.05",
+      "youtube_title": "统计 6.05 · 斜率与截距：怎么读这条线（普通话讲解 · 中英双语画面）",
+      "description_status": "kept",
+      "quiz": null
+    },
+    "ICVEqpO9MLg": {
+      "lesson": "STAT-M06-T05-SLOPE",
+      "lesson_number": "6.05",
+      "youtube_title": "STAT 6.05 · Slope and intercept of the line (English narration · bilingual slides 中英)",
+      "description_status": "kept",
+      "quiz": null
+    },
+    "eZUxKrskyws": {
+      "lesson": "STAT-M06-T06-SSDEC",
+      "lesson_number": "6.06",
+      "youtube_title": "统计 6.06 · 平方和：总、解释和残差 (普通话)",
+      "description_status": "kept",
+      "quiz": null
+    },
+    "61G3MwLepWs": {
+      "lesson": "STAT-M06-T06-SSDEC",
+      "lesson_number": "6.06",
+      "youtube_title": "統計 6.06 · 平方和：總、解釋同殘差（粵語講解 · 中英雙語畫面）",
+      "description_status": "kept",
+      "quiz": null
+    },
+    "liSacJtBakI": {
+      "lesson": "STAT-M06-T06-SSDEC",
+      "lesson_number": "6.06",
+      "youtube_title": "统计 6.06 · 平方和：总、解释和残差（普通话讲解 · 中英双语画面）",
+      "description_status": "kept",
+      "quiz": null
+    },
+    "-kf0Y3N8Wjo": {
+      "lesson": "STAT-M06-T06-SSDEC",
+      "lesson_number": "6.06",
+      "youtube_title": "STAT 6.06 · Split variation into three parts (English narration · bilingual slides 中英)",
+      "description_status": "kept",
+      "quiz": null
+    },
+    "F6cXNtNlY3w": {
+      "lesson": "STAT-M06-T07-RSQRD",
+      "lesson_number": "6.07",
+      "youtube_title": "统计 6.07 · 判定系数：不要过度结论 (普通话)",
+      "description_status": "kept",
+      "quiz": null
+    },
+    "X9ATrc6ttTs": {
+      "lesson": "STAT-M06-T07-RSQRD",
+      "lesson_number": "6.07",
+      "youtube_title": "統計 6.07 · 判定系數：唔好過度結論（粵語講解 · 中英雙語畫面）",
+      "description_status": "kept",
+      "quiz": null
+    },
+    "27ZFVmCJ6M4": {
+      "lesson": "STAT-M06-T07-RSQRD",
+      "lesson_number": "6.07",
+      "youtube_title": "统计 6.07 · 判定系数：不要过度结论（普通话讲解 · 中英双语画面）",
+      "description_status": "kept",
+      "quiz": null
+    },
+    "bwET9w72udE": {
+      "lesson": "STAT-M06-T07-RSQRD",
+      "lesson_number": "6.07",
+      "youtube_title": "STAT 6.07 · R-squared, without overclaiming (English narration · bilingual slides 中英)",
+      "description_status": "kept",
+      "quiz": null
+    },
+    "mrqr6QBZszk": {
+      "lesson": "STAT-M06-T08-STDER",
+      "lesson_number": "6.08",
+      "youtube_title": "统计 6.08 · 残差标准误：看典型误差 (普通话)",
+      "description_status": "kept",
+      "quiz": null
+    },
+    "vS89TFC-QJ8": {
+      "lesson": "STAT-M06-T08-STDER",
+      "lesson_number": "6.08",
+      "youtube_title": "統計 6.08 · 殘差標準誤：睇典型誤差（粵語講解 · 中英雙語畫面）",
+      "description_status": "kept",
+      "quiz": null
+    },
+    "NFbt31vrdB0": {
+      "lesson": "STAT-M06-T08-STDER",
+      "lesson_number": "6.08",
+      "youtube_title": "统计 6.08 · 残差标准误：看典型误差（普通话讲解 · 中英双语画面）",
+      "description_status": "kept",
+      "quiz": null
+    },
+    "OvmeFWgQsFc": {
+      "lesson": "STAT-M06-T08-STDER",
+      "lesson_number": "6.08",
+      "youtube_title": "STAT 6.08 · Typical error in outcome units (English narration · bilingual slides 中英)",
+      "description_status": "kept",
+      "quiz": null
+    },
+    "BLUtLiyr2qU": {
+      "lesson": "STAT-M06-T09-SLPSE",
+      "lesson_number": "6.09",
+      "youtube_title": "统计 6.09 · 斜率标准误：估计有多准 (普通话)",
+      "description_status": "kept",
+      "quiz": null
+    },
+    "wKfMuQoMQ0o": {
+      "lesson": "STAT-M06-T09-SLPSE",
+      "lesson_number": "6.09",
+      "youtube_title": "統計 6.09 · 斜率標準誤：估計有幾準（粵語講解 · 中英雙語畫面）",
+      "description_status": "kept",
+      "quiz": null
+    },
+    "jacSU3TfZRM": {
+      "lesson": "STAT-M06-T09-SLPSE",
+      "lesson_number": "6.09",
+      "youtube_title": "统计 6.09 · 斜率标准误：估计有多准（普通话讲解 · 中英双语画面）",
+      "description_status": "kept",
+      "quiz": null
+    },
+    "0KI6u_KmV3A": {
+      "lesson": "STAT-M06-T09-SLPSE",
+      "lesson_number": "6.09",
+      "youtube_title": "STAT 6.09 · The slope's standard error (English narration · bilingual slides 中英)",
+      "description_status": "kept",
+      "quiz": null
+    },
+    "OoBQFuD712A": {
+      "lesson": "STAT-M06-T10-TSLOP",
+      "lesson_number": "6.10",
+      "youtube_title": "统计 6.10 · 斜率 t 检验：证据不是决策 (普通话)",
+      "description_status": "kept",
+      "quiz": null
+    },
+    "QOERvrio0CE": {
+      "lesson": "STAT-M06-T10-TSLOP",
+      "lesson_number": "6.10",
+      "youtube_title": "統計 6.10 · 斜率 t 檢驗：證據唔係決策（粵語講解 · 中英雙語畫面）",
+      "description_status": "kept",
+      "quiz": null
+    },
+    "1dKPDLWuiCc": {
+      "lesson": "STAT-M06-T10-TSLOP",
+      "lesson_number": "6.10",
+      "youtube_title": "统计 6.10 · 斜率 t 检验：证据不是决策（普通话讲解 · 中英双语画面）",
+      "description_status": "kept",
+      "quiz": null
+    },
+    "FxLuL63oUwo": {
+      "lesson": "STAT-M06-T10-TSLOP",
+      "lesson_number": "6.10",
+      "youtube_title": "STAT 6.10 · A t-test for the slope (English narration · bilingual slides 中英)",
+      "description_status": "kept",
+      "quiz": null
+    },
+    "aHzIgE-JleE": {
+      "lesson": "STAT-M06-T11-CVIPI",
+      "lesson_number": "6.11",
+      "youtube_title": "统计 6.11 · 置信与预测：别用错区间 (普通话)",
+      "description_status": "kept",
+      "quiz": null
+    },
+    "6PvM-OXvPIc": {
+      "lesson": "STAT-M06-T11-CVIPI",
+      "lesson_number": "6.11",
+      "youtube_title": "統計 6.11 · 置信同預測：唔好用錯區間（粵語講解 · 中英雙語畫面）",
+      "description_status": "kept",
+      "quiz": null
+    },
+    "jBL9rpanqA8": {
+      "lesson": "STAT-M06-T11-CVIPI",
+      "lesson_number": "6.11",
+      "youtube_title": "统计 6.11 · 置信与预测：别用错区间（普通话讲解 · 中英双语画面）",
+      "description_status": "kept",
+      "quiz": null
+    },
+    "v3DxBzp5gsc": {
+      "lesson": "STAT-M06-T11-CVIPI",
+      "lesson_number": "6.11",
+      "youtube_title": "STAT 6.11 · Two intervals, two questions (English narration · bilingual slides 中英)",
+      "description_status": "kept",
+      "quiz": null
+    },
+    "Wb4b_x2252M": {
+      "lesson": "STAT-M06-T12-RESDI",
+      "lesson_number": "6.12",
+      "youtube_title": "统计 6.12 · 残差图：先检查再部署 (普通话)",
+      "description_status": "kept",
+      "quiz": null
+    },
+    "l70cU4cU_Lk": {
+      "lesson": "STAT-M06-T12-RESDI",
+      "lesson_number": "6.12",
+      "youtube_title": "統計 6.12 · 殘差圖：先檢查再部署（粵語講解 · 中英雙語畫面）",
+      "description_status": "kept",
+      "quiz": null
+    },
+    "_VkN7UPXEas": {
+      "lesson": "STAT-M06-T12-RESDI",
+      "lesson_number": "6.12",
+      "youtube_title": "统计 6.12 · 残差图：先检查再部署（普通话讲解 · 中英双语画面）",
+      "description_status": "kept",
+      "quiz": null
+    },
+    "4rCx_dAZkuQ": {
+      "lesson": "STAT-M06-T12-RESDI",
+      "lesson_number": "6.12",
+      "youtube_title": "STAT 6.12 · Check residuals before you deploy (English narration · bilingual slides 中英)",
+      "description_status": "kept",
+      "quiz": null
+    },
+    "SB-zx_7WwS0": {
+      "lesson": "STAT-M06-T13-LOGLG",
+      "lesson_number": "6.13",
+      "youtube_title": "统计 6.13 · 双对数：斜率就是弹性 (普通话)",
+      "description_status": "kept",
+      "quiz": null
+    },
+    "k1ffGf_8FTk": {
+      "lesson": "STAT-M06-T13-LOGLG",
+      "lesson_number": "6.13",
+      "youtube_title": "統計 6.13 · 雙對數：斜率就係彈性（粵語講解 · 中英雙語畫面）",
+      "description_status": "kept",
+      "quiz": null
+    },
+    "Ab1mDsnMWOE": {
+      "lesson": "STAT-M06-T13-LOGLG",
+      "lesson_number": "6.13",
+      "youtube_title": "统计 6.13 · 双对数：斜率就是弹性（普通话讲解 · 中英双语画面）",
+      "description_status": "kept",
+      "quiz": null
+    },
+    "JpE325Ikll0": {
+      "lesson": "STAT-M06-T13-LOGLG",
+      "lesson_number": "6.13",
+      "youtube_title": "STAT 6.13 · Log-log: slope is elasticity (English narration · bilingual slides 中英)",
+      "description_status": "kept",
+      "quiz": null
+    },
+    "0xZkfWeAV2c": {
+      "lesson": "STAT-M06-T14-OVBIA",
+      "lesson_number": "6.14",
+      "youtube_title": "统计 6.14 · 遗漏变量：别把斜率当真因 (普通话)",
+      "description_status": "kept",
+      "quiz": null
+    },
+    "dNTu5wWixHw": {
+      "lesson": "STAT-M06-T14-OVBIA",
+      "lesson_number": "6.14",
+      "youtube_title": "統計 6.14 · 遺漏變量：唔好將斜率當真因（粵語講解 · 中英雙語畫面）",
+      "description_status": "kept",
+      "quiz": null
+    },
+    "Ew1Qh5UzybI": {
+      "lesson": "STAT-M06-T14-OVBIA",
+      "lesson_number": "6.14",
+      "youtube_title": "统计 6.14 · 遗漏变量：别把斜率当真因（普通话讲解 · 中英双语画面）",
+      "description_status": "kept",
+      "quiz": null
+    },
+    "vOdPbNdMalQ": {
+      "lesson": "STAT-M06-T14-OVBIA",
+      "lesson_number": "6.14",
+      "youtube_title": "STAT 6.14 · A missing factor can bias slope (English narration · bilingual slides 中英)",
+      "description_status": "kept",
+      "quiz": null
+    },
+    "xKpsg5XD4vo": {
+      "lesson": "STAT-M06-T15-RECAP",
+      "lesson_number": "6.15",
+      "youtube_title": "统计 6.15 · 回归复核：先验证再决策 (普通话)",
+      "description_status": "kept",
+      "quiz": null
+    },
+    "soBWz1Xz9oU": {
+      "lesson": "STAT-M06-T15-RECAP",
+      "lesson_number": "6.15",
+      "youtube_title": "統計 6.15 · 回歸覆核：先驗證再決策（粵語講解 · 中英雙語畫面）",
+      "description_status": "kept",
+      "quiz": null
+    },
+    "zN8ze4VSqvw": {
+      "lesson": "STAT-M06-T15-RECAP",
+      "lesson_number": "6.15",
+      "youtube_title": "统计 6.15 · 回归复核：先验证再决策（普通话讲解 · 中英双语画面）",
+      "description_status": "kept",
+      "quiz": null
+    },
+    "TesktXlxkf8": {
+      "lesson": "STAT-M06-T15-RECAP",
+      "lesson_number": "6.15",
+      "youtube_title": "STAT 6.15 · Review the fit before you expand (English narration · bilingual slides 中英)",
+      "description_status": "kept",
+      "quiz": null
     }
   }
 }

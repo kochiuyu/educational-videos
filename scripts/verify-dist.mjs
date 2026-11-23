@@ -360,7 +360,7 @@ for (const video of catalog.videos) {
   byLesson.set(label, group);
 }
 
-for (const moduleId of ['m01', 'm02', 'm03', 'm04', 'm05']) {
+for (const moduleId of ['m01', 'm02', 'm03', 'm04', 'm05', 'm06']) {
   const html = byRel.get(`stat-lessons/${moduleId}/index.html`) ?? '';
   const sections = lessonSections(html);
   const labels = sections.map((section) => section.label);
@@ -458,7 +458,7 @@ for (const moduleId of coverModules) {
   if (!label || !label.endsWith('.01')) fail(`${moduleId} cover ${coverId} is not lesson .01`);
   if (cover?.language !== 'en+zh') fail(`${moduleId} cover is not the English narration`);
 }
-for (const title of ['STAT M04 · 咖啡连锁的抽样与区间估计', 'STAT M05 · 咖啡连锁的假设检验']) {
+for (const title of ['STAT M04 · 咖啡连锁的抽样与区间估计', 'STAT M05 · 咖啡连锁的假设检验', 'STAT M06 · 咖啡连锁的回归诊断与建模']) {
   if (!appears(home, title)) fail(`home page is missing the verified module title ${title}`);
 }
 for (const collection of catalog.collections) {

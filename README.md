@@ -6,11 +6,11 @@ The public channel [https://www.youtube.com/@ChiuYuKo](https://www.youtube.com/@
 
 ## What is listed
 
-`catalog/allowlist.json` is the source of truth. The copy in this repository is the verified catalog as of **2026-11-23** (Asia/Hong_Kong): **318** videos, **105** distinct lessons.
+`catalog/allowlist.json` is the source of truth. The copy in this repository is the verified catalog as of **2026-11-23** (Asia/Hong_Kong): **378** videos, **120** distinct lessons.
 
 | Collection | Lessons | Videos |
 | --- | ---: | ---: |
-| STAT lessons | 63 | 252 |
+| STAT lessons | 78 | 312 |
 | LAE 101 | 10 | 10 |
 | Economics Shorts | 25 | 25 |
 | LAE What-is | 5 | 25 |
@@ -25,8 +25,11 @@ STAT lessons by module:
 | M03 | T01–T15 | 60 |
 | M04 | T01–T10 | 40 |
 | M05 | T01–T08 | 32 |
+| M06 | T01–T15 | 60 |
 
 Each STAT topic has four language tracks: English · 简体 slides, 普通话 · English slides, 粵語 · English slides, and 普通话.
+
+M06, STAT M06 · 咖啡连锁的回归诊断与建模, is 15 lessons (STAT/统计/統計 6.01–6.15) and 60 recordings. The module cover is the first official lesson on the English narration track, `ud3n4q9ul4Y`. `duration` is null. No M06 quiz is attached: this repository names the `STAT-M06-*.yaml` files, and it does not contain verified M06 question text. Visibility was Unlisted at cataloguing on 23 Nov 2026 (Taipei time), not Public. On that date, after being told the 60 recordings were Unlisted and that daily Public starts 24 Nov 2026 around 12:00 PM Hong Kong time, Prof. Ko asked to update this site. The four M06 playlists stay Unlisted and are not catalog entries. This exception does not add M04 T11–T15, M05 T09–T15, or any other unlisted video.
 
 Economics Shorts are public cartoon-style YouTube Shorts from the @ChiuYuKo channel. The catalog groups them by the channel’s public playlist names:
 
@@ -41,7 +44,7 @@ ACC-02, Close the loss-making branch?, is the second Accounting case. Its three 
 
 `oVODqhnkkPg` is in the Game Theory in daily life group. It is a public Short on the channel and was not in that playlist when the list was checked. `econ-shorts-11` (`3C_-2iME2vk`) has no verified duration, so `duration` is null. Descriptions are null. Watch URLs are `https://www.youtube.com/watch?v=` plus the id, not Shorts URLs and not playlist URLs.
 
-LAE What-is is a separate collection from LAE 101. It has five topics: What is LAE?, What is the 1,000-metre band?, What is a drone?, What is an SUA?, and What is an eVTOL?. Each topic has five language mixes that are not the four STAT tracks: English, 普通话, 粵語, English narration with bilingual 简体 slides, and English narration with bilingual 繁體 slides. The five T01 watch links were faculty-approved for this public catalog on 20 Nov 2026 and remain Unlisted on YouTube. The five T02 watch links were replaced on 21 Nov 2026 at faculty request and remain Unlisted on YouTube. The 15 T03–T05 watch links were approved for this public catalog on 20 Nov 2026 through the LAE-Concept-Video confirmation and also remain Unlisted on YouTube. These lists are the only unlisted exceptions. Descriptions and durations are null. The collection description names CUHK DOTE5891, Business Analysis of Low-Altitude Economy, and links to https://kochiuyu.github.io/lae-companion/ for context.
+LAE What-is is a separate collection from LAE 101. It has five topics: What is LAE?, What is the 1,000-metre band?, What is a drone?, What is an SUA?, and What is an eVTOL?. Each topic has five language mixes that are not the four STAT tracks: English, 普通话, 粵語, English narration with bilingual 简体 slides, and English narration with bilingual 繁體 slides. The five T01 watch links were faculty-approved for this public catalog on 20 Nov 2026 and remain Unlisted on YouTube. The five T02 watch links were replaced on 21 Nov 2026 at faculty request and remain Unlisted on YouTube. The 15 T03–T05 watch links were approved for this public catalog on 20 Nov 2026 through the LAE-Concept-Video confirmation and also remain Unlisted on YouTube. These LAE What-is lists, and the 60 STAT M06 recordings catalogued on 23 Nov 2026 while Unlisted, are the unlisted exceptions. That is not permission to add other unlisted or private videos. Descriptions and durations are null. The collection description names CUHK DOTE5891, Business Analysis of Low-Altitude Economy, and links to https://kochiuyu.github.io/lae-companion/ for context.
 
 On that date the catalog left out:
 
@@ -50,7 +53,7 @@ On that date the catalog left out:
 - M05 T09–T15 (not yet confirmed public as of 18 Nov 2026, 9:03pm HKT)
 - All YouTube playlist URLs
 - HeyGen-labeled videos
-- Any unlisted or private video, except these LAE What-is watch links that remain Unlisted on YouTube: the 10 faculty-approved T01–T02 links, with the five T02 links replaced on 21 Nov 2026 and still Unlisted (`8Rzd0SHzQuw`, `dImZvXJ9ltE`, `G3mHD9mqMxk`, `k6fljhys-rc`, `fTK-AoG7EWk`, `Ij7FeqTjN1E`, `vtBGxjIddpM`, `bvpwxNdzbgE`, `kpVK0zK8I8M`, `rJThHVak5Zc`) and the 15 T03–T05 links approved for this public catalog on 20 Nov 2026 (`NrxDw-5BJQM`, `CyCK71Weipg`, `w3TSjyx4m44`, `yzU1T_FtXGc`, `ziaNFUJEgXw`, `27Rg3B3_2QE`, `t_-vEnjJgCc`, `CzUMY-dtRO8`, `MBXJwBl3FTs`, `WYmiEXeOvpg`, `25yQjVJoTjc`, `jQZ7PqnW-rU`, `-COmumpSlz4`, `hlfZpcq1oEE`, `ITrs7sD_a_g`). This is not permission to add other unlisted or private videos. Do not restore the retired T02 uploads.
+- Any unlisted or private video, except these LAE What-is watch links that remain Unlisted on YouTube: the 10 faculty-approved T01–T02 links, with the five T02 links replaced on 21 Nov 2026 and still Unlisted (`8Rzd0SHzQuw`, `dImZvXJ9ltE`, `G3mHD9mqMxk`, `k6fljhys-rc`, `fTK-AoG7EWk`, `Ij7FeqTjN1E`, `vtBGxjIddpM`, `bvpwxNdzbgE`, `kpVK0zK8I8M`, `rJThHVak5Zc`) and the 15 T03–T05 links approved for this public catalog on 20 Nov 2026 (`NrxDw-5BJQM`, `CyCK71Weipg`, `w3TSjyx4m44`, `yzU1T_FtXGc`, `ziaNFUJEgXw`, `27Rg3B3_2QE`, `t_-vEnjJgCc`, `CzUMY-dtRO8`, `MBXJwBl3FTs`, `WYmiEXeOvpg`, `25yQjVJoTjc`, `jQZ7PqnW-rU`, `-COmumpSlz4`, `hlfZpcq1oEE`, `ITrs7sD_a_g`), and the 60 STAT M06 recordings catalogued on 23 Nov 2026 while Unlisted, at faculty request. This is not permission to add other unlisted or private videos. Do not restore the retired T02 uploads. M04 T11–T15, M05 T09–T15, and the M06 playlists stay out.
 - Seven public campus-walking Shorts that are not economics lessons: `JqQtx1NpGFc`, `ONuqnSEsL64`, `MWxWfH8OO9w`, `Jt63krqjqpA`, `m7s78I9eha8`, `MnkiC51dFNk`, `OZWPxCoQFwo`
 - The non-Short Micro Business Case video `Rv665coalu8`
 - Five language-mix playlist IDs that appear truncated and were not added: `PLdov2JtNENto`, `PLRfIHgyMKz8c`, `PLLdrdvbXQCiI`, `PLdhLcA4fn-Mc`, `PLTdQoQ9sXSew`
@@ -102,7 +105,7 @@ npm run preview
 
 - Collections: `/collections/stat-lessons/`, `/collections/lae-101/`, `/collections/economics-shorts/`, `/collections/lae-what-is/`, and `/collections/micro-cases/`
 - Micro Cases subject: `/micro-cases/accounting/`
-- STAT modules: `/stat-lessons/m01/` through `/stat-lessons/m05/`
+- STAT modules: `/stat-lessons/m01/` through `/stat-lessons/m06/`
 - STAT topics: `/stat-lessons/m03/t01/`
 - Economics Shorts topics: `/economics-shorts/experimental-economics/` and `/economics-shorts/game-theory-in-daily-life/`
 - LAE What-is topics: `/lae-what-is/what-is-lae/`, `/lae-what-is/what-is-the-1-000-metre-band/`, `/lae-what-is/what-is-a-drone/`, `/lae-what-is/what-is-an-sua/`, and `/lae-what-is/what-is-an-evtol/`
@@ -115,7 +118,7 @@ Search filters titles, descriptions, catalog IDs, modules, lessons, and language
 
 There is no backend. Edit the catalog, open a pull request, and let the Pages workflow rebuild.
 
-1. Confirm the video is public (not unlisted or private) and copy its watch URL. Do not add playlist URLs. The only unlisted exceptions are the 25 LAE What-is watch links already listed. Do not add other unlisted or private videos.
+1. Confirm the video is public (not unlisted or private) and copy its watch URL. Do not add playlist URLs. The unlisted exceptions already listed are the 25 LAE What-is watch links and the 60 STAT M06 recordings. Do not add other unlisted or private videos.
 2. Edit `catalog/allowlist.json`.
 3. Append one object to `videos` and set `video_count` to the new length of `videos`.
 4. Required fields:
@@ -163,4 +166,4 @@ Built with [Astro](https://astro.build/) 5.18.2, used under the [MIT License](ht
 
 ## Embed restrictions
 
-The catalog does not say whether YouTube permits embedding. If a player shows that a video cannot be embedded, the page still links to the watch URL. Embed restrictions were not verified for all 318 videos.
+The catalog does not say whether YouTube permits embedding. If a player shows that a video cannot be embedded, the page still links to the watch URL. Embed restrictions were not verified for all 378 videos.
