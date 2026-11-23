@@ -279,11 +279,12 @@ const accExpected = [
   },
 ];
 const acc = catalog.videos.filter((item) => item.id === 'ACC-01');
-if (acc.length !== 3 || summary.byCollection['micro-cases']?.lessons !== 1 || summary.byCollection['micro-cases']?.versions !== 3) {
-  fail('ACC-01 must be one Micro Cases lesson with three recordings.');
+if (acc.length !== 3) fail('ACC-01 must stay one lesson with three recordings.');
+if (summary.byCollection['micro-cases']?.lessons !== 2 || summary.byCollection['micro-cases']?.versions !== 6) {
+  fail('Micro Cases must be two lessons and six recordings.');
 }
-if (summary.lessons !== 104 || summary.versions !== 315) {
-  fail(`Catalog is ${summary.lessons} lessons and ${summary.versions} recordings; expected 104 and 315.`);
+if (summary.lessons !== 105 || summary.versions !== 318) {
+  fail(`Catalog is ${summary.lessons} lessons and ${summary.versions} recordings; expected 105 and 318.`);
 }
 if (summary.byCollection['stat-lessons'].lessons !== 63 || summary.byCollection['stat-lessons'].versions !== 252) {
   fail('STAT lesson totals changed while adding ACC-01.');
@@ -312,9 +313,64 @@ for (const expected of accExpected) {
   }
   if (lessonKey(item) !== 'micro-cases\nACC-01') fail(`${expected.youtube_id} is not grouped as case ACC-01.`);
 }
+const acc02Expected = [
+  {
+    language: 'mc-en',
+    label: 'English',
+    youtube_id: '1Qik16ZYE14',
+    title: 'ACC-02 · Close the loss-making branch? (English)',
+    casePage: 'https://kochiuyu.github.io/micro-cases/branch-loss.html',
+  },
+  {
+    language: 'mc-cmn',
+    label: '普通话',
+    youtube_id: 'WjCDkMI3uZc',
+    title: 'ACC-02 · 亏损的门店，要不要关？（普通话）',
+    casePage: 'https://kochiuyu.github.io/micro-cases/zh-cn/branch-loss.html',
+  },
+  {
+    language: 'mc-yue',
+    label: '廣東話',
+    youtube_id: 'LADYnu4OCug',
+    title: 'ACC-02 · 虧損的分店，應該結業嗎？（廣東話）',
+    casePage: 'https://kochiuyu.github.io/micro-cases/zh-hk/branch-loss.html',
+  },
+];
+const acc02 = catalog.videos.filter((item) => item.id === 'ACC-02');
+if (acc02.length !== 3) fail('ACC-02 must be one lesson with three recordings.');
+const microIds = catalog.videos.filter((item) => item.collection_slug === 'micro-cases').map((item) => item.youtube_id);
+if (microIds.join(',') !== [...accExpected, ...acc02Expected].map((item) => item.youtube_id).join(',')) {
+  fail('Micro Cases recordings changed order or identity.');
+}
+for (const expected of acc02Expected) {
+  const item = acc02.find((video) => video.youtube_id === expected.youtube_id);
+  if (!item) {
+    fail(`ACC-02 is missing ${expected.youtube_id}.`);
+    continue;
+  }
+  if (item.collection_slug !== 'micro-cases' || item.topic !== 'Accounting' || item.module != null) {
+    fail(`${expected.youtube_id} is not grouped as an Accounting micro-case.`);
+  }
+  if (item.language !== expected.language || item.language_label !== expected.label) {
+    fail(`${expected.youtube_id} language label does not match its recording.`);
+  }
+  if (statLanguageIds.has(item.language)) fail(`${expected.youtube_id} uses a STAT language track.`);
+  if (item.title !== expected.title) fail(`${expected.youtube_id} title is not the approved title.`);
+  if (item.duration != null) fail(`${expected.youtube_id} duration must stay null until a YouTube duration is verified.`);
+  if (item.youtube_url !== `https://www.youtube.com/watch?v=${expected.youtube_id}`) {
+    fail(`${expected.youtube_id} watch URL is not the canonical watch URL.`);
+  }
+  if (!item.description?.includes(expected.casePage) || !item.description.includes('pause, vote, and reveal') && !item.description.includes('先暂停、再投票、再讲评') && !item.description.includes('先暫停、再投票、再講評')) {
+    fail(`${expected.youtube_id} description dropped the approved case page or classroom wording.`);
+  }
+  if (lessonKey(item) !== 'micro-cases\nACC-02') fail(`${expected.youtube_id} is not grouped as case ACC-02.`);
+}
+if (catalog.videos.some((item) => item.youtube_id === 'w-ZNJWfxFts')) {
+  fail('The unpublished draft recording was cataloged.');
+}
 const catalogText = fs.readFileSync(path.join(root, 'catalog', 'allowlist.json'), 'utf8');
-if (catalogText.includes('/workspace/') || catalogText.includes('acc-01-youtube') || catalogText.includes('_studio.png')) {
-  fail('The allowlist includes a private local path.');
+if (catalogText.includes('/workspace/') || catalogText.includes('acc-01-youtube') || catalogText.includes('acc-02-youtube') || catalogText.includes('_studio.png') || catalogText.includes('w-ZNJWfxFts')) {
+  fail('The allowlist includes a private path or the unpublished draft.');
 }
 
 if (errors.length) {
