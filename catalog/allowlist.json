@@ -3,14 +3,14 @@
   "owner": "Prof. Chiu Yu KO",
   "channel_url": "https://www.youtube.com/@ChiuYuKo",
   "repo": "https://github.com/kochiuyu/educational-videos",
-  "as_of": "2026-11-22",
+  "as_of": "2026-11-23",
   "timezone": "Asia/Hong_Kong",
   "inclusions": {
     "stat_lessons": "Public VF-Revise STAT lessons only: M01–M03 all topics; M04 T01–T10; M05 T01–T08. Four language tracks per topic.",
     "lae_101": "Ten public LAE 101 short intros. Individual video URLs only.",
     "economics_shorts": "Public cartoon-style economics YouTube Shorts from the @ChiuYuKo channel, grouped by the channel's public playlists Experimental Economics and Game Theory in daily life.",
     "lae_what_is": "What is LAE?, What is the 1,000-metre band?, What is a drone?, What is an SUA?, and What is an eVTOL? for CUHK DOTE5891, Business Analysis of Low-Altitude Economy. Companion site: https://kochiuyu.github.io/lae-companion/.",
-    "micro_cases": "ACC-01, The last tray of egg tarts, as three landscape language recordings: English, 普通话, and 廣東話. Visibility Public was last observed at upload completion on 2026-11-22 (Asia/Hong_Kong), not rechecked afterward. Duration is null because a YouTube duration was not verified."
+    "micro_cases": "ACC-01, The last tray of egg tarts, as three landscape language recordings: English, 普通话, and 廣東話. Visibility Public was last observed at upload completion on 2026-11-22 (Asia/Hong_Kong), not rechecked afterward. Duration is null because a YouTube duration was not verified. ACC-02, Close the loss-making branch?, as three landscape language recordings: English, 普通话, and 廣東話. Visibility Public was last observed at upload completion on 2026-11-23 (Asia/Taipei), not rechecked afterward. Duration is null because a YouTube duration was not verified."
   },
   "exclusions": [
     "Older DSME2021 lecture recordings in kochiuyu/video-links",
@@ -47,7 +47,7 @@
     {
       "slug": "micro-cases",
       "name": "Micro Cases",
-      "description": "Accounting classroom cases. ACC-01, The last tray of egg tarts, in English, 普通话, and 廣東話. Case collection: https://kochiuyu.github.io/micro-cases/."
+      "description": "Accounting classroom cases. ACC-01, The last tray of egg tarts, and ACC-02, Close the loss-making branch?, in English, 普通话, and 廣東話. Case collection: https://kochiuyu.github.io/micro-cases/."
     }
   ],
   "languages": [
@@ -100,7 +100,7 @@
       "label": "廣東話"
     }
   ],
-  "video_count": 315,
+  "video_count": 318,
   "videos": [
     {
       "id": "LAE101-01",
@@ -5140,6 +5140,54 @@
       "youtube_id": "EFakphvV2qE",
       "youtube_url": "https://www.youtube.com/watch?v=EFakphvV2qE",
       "source": "Approved ACC-01 廣東話 description. Visibility Public was last observed at upload completion on 2026-11-22 (Asia/Hong_Kong), not rechecked afterward. YouTube duration was not verified.",
+      "module_title": null
+    },
+    {
+      "id": "ACC-02",
+      "collection": "Micro Cases",
+      "collection_slug": "micro-cases",
+      "module": null,
+      "topic": "Accounting",
+      "language": "mc-en",
+      "language_label": "English",
+      "title": "ACC-02 · Close the loss-making branch? (English)",
+      "description": "Close the loss-making branch? (ACC-02) is a Micro Cases classroom video on cost allocation and avoidable costs.\n\nYou manage a fictional Hong Kong stationery-and-printing chain. The lease decision for East Branch is due tomorrow. After a change in how head-office costs are shared, its next-quarter forecast shows a loss, even though its sales and branch-level costs have not changed. The chief executive asks whether East should close at the end of this quarter rather than operate next quarter.\n\nThe teaching format is pause, vote, and reveal. Pause at each decision, vote, compare your reasons, then continue for the debrief. A later fact changes what you know about the costs, and you vote again.\n\nThe chain, the branch figures, and the later checks are fictional classroom assumptions, not a news report about any real company.\n\nRead the case page:\nhttps://kochiuyu.github.io/micro-cases/branch-loss.html\n\nBrowse the Micro Cases collection:\nhttps://kochiuyu.github.io/micro-cases/\n\nA Micro Cases classroom video by Prof. Chiu Yu KO.\n",
+      "duration": null,
+      "youtube_id": "1Qik16ZYE14",
+      "youtube_url": "https://www.youtube.com/watch?v=1Qik16ZYE14",
+      "source": "Approved ACC-02 English description. Visibility Public was last observed at upload completion on 2026-11-23 (Asia/Taipei), not rechecked afterward. YouTube duration was not verified.",
+      "module_title": null
+    },
+    {
+      "id": "ACC-02",
+      "collection": "Micro Cases",
+      "collection_slug": "micro-cases",
+      "module": null,
+      "topic": "Accounting",
+      "language": "mc-cmn",
+      "language_label": "普通话",
+      "title": "ACC-02 · 亏损的门店，要不要关？（普通话）",
+      "description": "亏损的门店，要不要关？（ACC-02）是 Micro Cases 的课堂短片，用来讨论成本分摊和可避免成本。\n\n你管理一家虚构的香港连锁文印店，明天就要决定东区门店的租约如何处理。总部改了成本分摊方法，东区门店现预计下季度亏损，但销售额和门店自身成本的预测都没变。总经理问：是本季度末关掉东区门店，还是下季度继续营业？\n\n短片采用先暂停、再投票、再讲评的课堂形式。请在每个决策点暂停、投票、比较理由，然后再继续观看讲评。后面会补充新的成本事实，请再投一次票。\n\n连锁店、门店数字和后来核实的资料都是虚构的课堂假设，并不是对任何真实公司的新闻报道。\n\n阅读个案页面：\nhttps://kochiuyu.github.io/micro-cases/zh-cn/branch-loss.html\n\n浏览 Micro Cases 个案集：\nhttps://kochiuyu.github.io/micro-cases/\n\nMicro Cases 课堂短片，由 Prof. Chiu Yu KO 设计。\n",
+      "duration": null,
+      "youtube_id": "WjCDkMI3uZc",
+      "youtube_url": "https://www.youtube.com/watch?v=WjCDkMI3uZc",
+      "source": "Approved ACC-02 普通话 description. Visibility Public was last observed at upload completion on 2026-11-23 (Asia/Taipei), not rechecked afterward. YouTube duration was not verified.",
+      "module_title": null
+    },
+    {
+      "id": "ACC-02",
+      "collection": "Micro Cases",
+      "collection_slug": "micro-cases",
+      "module": null,
+      "topic": "Accounting",
+      "language": "mc-yue",
+      "language_label": "廣東話",
+      "title": "ACC-02 · 虧損的分店，應該結業嗎？（廣東話）",
+      "description": "虧損的分店，應該結業嗎？（ACC-02）是 Micro Cases 的課堂短片，用來討論成本分攤和可避免成本。\n\n你負責管理一家虛構的香港連鎖文具印務店，明天便要就東區分店的租約作決定。總部更改成本分攤方法後，東區分店現時預計下季虧損；分店銷售及自身成本的預測卻沒有改變。行政總裁問：東區分店應否本季末結業，而不再經營下季？\n\n短片採用先暫停、再投票、再講評的課堂形式。請在每個決策點暫停、投票、比較理由，然後再繼續觀看講評。後面會補充新的成本資料，請再投一次票。\n\n連鎖店、分店數字和後來核實的資料都是虛構的課堂假設，並不是對任何真實公司的新聞報道。\n\n閱讀個案頁面：\nhttps://kochiuyu.github.io/micro-cases/zh-hk/branch-loss.html\n\n瀏覽 Micro Cases 個案集：\nhttps://kochiuyu.github.io/micro-cases/\n\nMicro Cases 課堂短片，由 Prof. Chiu Yu KO 設計。\n",
+      "duration": null,
+      "youtube_id": "LADYnu4OCug",
+      "youtube_url": "https://www.youtube.com/watch?v=LADYnu4OCug",
+      "source": "Approved ACC-02 廣東話 description. Visibility Public was last observed at upload completion on 2026-11-23 (Asia/Taipei), not rechecked afterward. YouTube duration was not verified.",
       "module_title": null
     }
   ]

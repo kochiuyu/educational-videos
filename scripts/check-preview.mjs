@@ -413,7 +413,7 @@ export function assertPreviewMarkup(pages, catalog) {
   if (!shorts.includes('data-portrait="true"')) bad('Shorts previews are not marked portrait');
 
   const accounting = pages.get('micro-cases/accounting/index.html') ?? '';
-  const caseIds = ['F1WY_3jXYQw', 'uetO9tibCEA', 'EFakphvV2qE'];
+  const caseIds = ['F1WY_3jXYQw', 'uetO9tibCEA', 'EFakphvV2qE', '1Qik16ZYE14', 'WjCDkMI3uZc', 'LADYnu4OCug'];
   const casePreviews = accounting.match(/data-preview="/g) ?? [];
   if (casePreviews.length !== caseIds.length) {
     bad(`Accounting has ${casePreviews.length} previews for ${caseIds.length} recordings`);

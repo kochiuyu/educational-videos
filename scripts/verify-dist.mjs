@@ -297,6 +297,9 @@ for (const video of catalog.videos) {
       F1WY_3jXYQw: 'https://kochiuyu.github.io/micro-cases/tarts.html',
       uetO9tibCEA: 'https://kochiuyu.github.io/micro-cases/zh-cn/tarts.html',
       EFakphvV2qE: 'https://kochiuyu.github.io/micro-cases/zh-hk/tarts.html',
+      '1Qik16ZYE14': 'https://kochiuyu.github.io/micro-cases/branch-loss.html',
+      WjCDkMI3uZc: 'https://kochiuyu.github.io/micro-cases/zh-cn/branch-loss.html',
+      LADYnu4OCug: 'https://kochiuyu.github.io/micro-cases/zh-hk/branch-loss.html',
     };
     const ownCase = casePages[video.youtube_id];
     if (!ownCase || !html.includes(`href="${ownCase}"`)) {
