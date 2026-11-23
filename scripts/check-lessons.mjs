@@ -204,6 +204,7 @@ const expectedCovers = {
   M03: 'mW92Uy97xn0',
   M04: 'D7cTzUxnWuE',
   M05: 'kxuYPToB6iw',
+  M06: 'ud3n4q9ul4Y',
 };
 for (const [moduleId, youtubeId] of Object.entries(expectedCovers)) {
   const coverId = statModuleCoverId(catalog.videos, moduleId);
@@ -283,11 +284,11 @@ if (acc.length !== 3) fail('ACC-01 must stay one lesson with three recordings.')
 if (summary.byCollection['micro-cases']?.lessons !== 2 || summary.byCollection['micro-cases']?.versions !== 6) {
   fail('Micro Cases must be two lessons and six recordings.');
 }
-if (summary.lessons !== 105 || summary.versions !== 318) {
-  fail(`Catalog is ${summary.lessons} lessons and ${summary.versions} recordings; expected 105 and 318.`);
+if (summary.lessons !== 120 || summary.versions !== 378) {
+  fail(`Catalog is ${summary.lessons} lessons and ${summary.versions} recordings; expected 120 and 378.`);
 }
-if (summary.byCollection['stat-lessons'].lessons !== 63 || summary.byCollection['stat-lessons'].versions !== 252) {
-  fail('STAT lesson totals changed while adding ACC-01.');
+if (summary.byCollection['stat-lessons'].lessons !== 78 || summary.byCollection['stat-lessons'].versions !== 312) {
+  fail('STAT must be 78 lessons and 312 recordings.');
 }
 const statLanguageIds = new Set(['en+zh', 'zh+en', 'hk+en', 'zh']);
 for (const expected of accExpected) {
