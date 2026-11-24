@@ -6,7 +6,7 @@ The public channel [https://www.youtube.com/@ChiuYuKo](https://www.youtube.com/@
 
 ## What is listed
 
-`catalog/allowlist.json` is the source of truth. The copy in this repository is the verified catalog as of **2026-11-23** (Asia/Hong_Kong): **378** videos, **120** distinct lessons.
+`catalog/allowlist.json` is the source of truth. The copy in this repository is the verified catalog as of **2026-11-24** (Asia/Hong_Kong): **381** videos, **121** distinct lessons.
 
 | Collection | Lessons | Videos |
 | --- | ---: | ---: |
@@ -14,7 +14,7 @@ The public channel [https://www.youtube.com/@ChiuYuKo](https://www.youtube.com/@
 | LAE 101 | 10 | 10 |
 | Economics Shorts | 25 | 25 |
 | LAE What-is | 5 | 25 |
-| Micro Cases | 2 | 6 |
+| Micro Cases | 3 | 9 |
 
 STAT lessons by module:
 
@@ -41,6 +41,8 @@ Economics Shorts are public cartoon-style YouTube Shorts from the @ChiuYuKo chan
 Micro Cases starts with ACC-01, The last tray of egg tarts, with three landscape 16:9 recordings: English (`F1WY_3jXYQw`), 普通话 (`uetO9tibCEA`), and 廣東話 (`EFakphvV2qE`). They share catalog id `ACC-01`, so they count as one lesson. They are not Economics Shorts and they are not STAT language tracks. Each description is the approved source description, including the link to that language’s case page (`tarts.html`, `zh-cn/tarts.html`, or `zh-hk/tarts.html`) and to https://kochiuyu.github.io/micro-cases/. `duration` is null because a YouTube duration was not verified. Visibility Public was last observed at upload completion on 22 Nov 2026 (Hong Kong time). That observation was not repeated afterward.
 
 ACC-02, Close the loss-making branch?, is the second Accounting case. Its three landscape recordings are English (`1Qik16ZYE14`), 普通话 (`WjCDkMI3uZc`), and 廣東話 (`LADYnu4OCug`). They share catalog id `ACC-02`. Each description is the approved source description and links that language’s `branch-loss.html` page. `duration` is null because a YouTube duration was not verified. Visibility Public was last observed at upload completion on 23 Nov 2026 (Taipei time): English 10:35, 普通话 10:42:25, and 廣東話 10:52. That observation was not repeated afterward.
+
+ACC-03, Target reached. Returns still coming?, is the third Accounting case. Its three landscape recordings are English (`kc97t9pCO-I`), 普通话 (`heYTMobTncY`), and 廣東話 (`l5ug7pz-ZrM`). They share catalog id `ACC-03`. Each description is the official staged upload text and links that language’s `returns-target.html` page. `duration` is null because a hosted YouTube duration was not verified. Visibility Public was last observed in YouTube Studio on 24 Nov 2026 (Hong Kong time): English 11:42, 普通话 11:52, and 廣東話 published 12:19. That observation was not repeated afterward. The catalog does not record a Studio language setting.
 
 `oVODqhnkkPg` is in the Game Theory in daily life group. It is a public Short on the channel and was not in that playlist when the list was checked. `econ-shorts-11` (`3C_-2iME2vk`) has no verified duration, so `duration` is null. Descriptions are null. Watch URLs are `https://www.youtube.com/watch?v=` plus the id, not Shorts URLs and not playlist URLs.
 
@@ -166,4 +168,4 @@ Built with [Astro](https://astro.build/) 5.18.2, used under the [MIT License](ht
 
 ## Embed restrictions
 
-The catalog does not say whether YouTube permits embedding. If a player shows that a video cannot be embedded, the page still links to the watch URL. Embed restrictions were not verified for all 378 videos.
+The catalog does not say whether YouTube permits embedding. If a player shows that a video cannot be embedded, the page still links to the watch URL. Embed restrictions were not verified for all 381 videos.

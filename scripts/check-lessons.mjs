@@ -281,11 +281,11 @@ const accExpected = [
 ];
 const acc = catalog.videos.filter((item) => item.id === 'ACC-01');
 if (acc.length !== 3) fail('ACC-01 must stay one lesson with three recordings.');
-if (summary.byCollection['micro-cases']?.lessons !== 2 || summary.byCollection['micro-cases']?.versions !== 6) {
-  fail('Micro Cases must be two lessons and six recordings.');
+if (summary.byCollection['micro-cases']?.lessons !== 3 || summary.byCollection['micro-cases']?.versions !== 9) {
+  fail('Micro Cases must be three lessons and nine recordings.');
 }
-if (summary.lessons !== 120 || summary.versions !== 378) {
-  fail(`Catalog is ${summary.lessons} lessons and ${summary.versions} recordings; expected 120 and 378.`);
+if (summary.lessons !== 121 || summary.versions !== 381) {
+  fail(`Catalog is ${summary.lessons} lessons and ${summary.versions} recordings; expected 121 and 381.`);
 }
 if (summary.byCollection['stat-lessons'].lessons !== 78 || summary.byCollection['stat-lessons'].versions !== 312) {
   fail('STAT must be 78 lessons and 312 recordings.');
@@ -339,10 +339,6 @@ const acc02Expected = [
 ];
 const acc02 = catalog.videos.filter((item) => item.id === 'ACC-02');
 if (acc02.length !== 3) fail('ACC-02 must be one lesson with three recordings.');
-const microIds = catalog.videos.filter((item) => item.collection_slug === 'micro-cases').map((item) => item.youtube_id);
-if (microIds.join(',') !== [...accExpected, ...acc02Expected].map((item) => item.youtube_id).join(',')) {
-  fail('Micro Cases recordings changed order or identity.');
-}
 for (const expected of acc02Expected) {
   const item = acc02.find((video) => video.youtube_id === expected.youtube_id);
   if (!item) {
@@ -366,12 +362,72 @@ for (const expected of acc02Expected) {
   }
   if (lessonKey(item) !== 'micro-cases\nACC-02') fail(`${expected.youtube_id} is not grouped as case ACC-02.`);
 }
-if (catalog.videos.some((item) => item.youtube_id === 'w-ZNJWfxFts')) {
-  fail('The unpublished draft recording was cataloged.');
+const acc03Expected = [
+  {
+    language: 'mc-en',
+    label: 'English',
+    youtube_id: 'kc97t9pCO-I',
+    title: 'ACC-03 · Target reached. Returns still coming? (English)',
+    casePage: 'https://kochiuyu.github.io/micro-cases/returns-target.html',
+  },
+  {
+    language: 'mc-cmn',
+    label: '普通话',
+    youtube_id: 'heYTMobTncY',
+    title: 'ACC-03 · 销售达标了？退货期还没结束（普通话）',
+    casePage: 'https://kochiuyu.github.io/micro-cases/zh-cn/returns-target.html',
+  },
+  {
+    language: 'mc-yue',
+    label: '廣東話',
+    youtube_id: 'l5ug7pz-ZrM',
+    title: 'ACC-03 · 銷售達標了？退貨期還未完（廣東話）',
+    casePage: 'https://kochiuyu.github.io/micro-cases/zh-hk/returns-target.html',
+  },
+];
+const microIds = catalog.videos.filter((item) => item.collection_slug === 'micro-cases').map((item) => item.youtube_id);
+if (microIds.join(',') !== [...accExpected, ...acc02Expected, ...acc03Expected].map((item) => item.youtube_id).join(',')) {
+  fail('Micro Cases recordings changed order or identity.');
+}
+const acc03 = catalog.videos.filter((item) => item.id === 'ACC-03');
+if (acc03.length !== 3) fail('ACC-03 must be one lesson with three recordings.');
+for (const expected of acc03Expected) {
+  const item = acc03.find((video) => video.youtube_id === expected.youtube_id);
+  if (!item) {
+    fail(`ACC-03 is missing ${expected.youtube_id}.`);
+    continue;
+  }
+  if (item.collection_slug !== 'micro-cases' || item.topic !== 'Accounting' || item.module != null) {
+    fail(`${expected.youtube_id} is not grouped as an Accounting micro-case.`);
+  }
+  if (item.language !== expected.language || item.language_label !== expected.label) {
+    fail(`${expected.youtube_id} language label does not match its recording.`);
+  }
+  if (statLanguageIds.has(item.language)) fail(`${expected.youtube_id} uses a STAT language track.`);
+  if (item.title !== expected.title) fail(`${expected.youtube_id} title is not the approved title.`);
+  if (item.duration != null) fail(`${expected.youtube_id} duration must stay null until a hosted YouTube duration is verified.`);
+  if (item.youtube_url !== `https://www.youtube.com/watch?v=${expected.youtube_id}`) {
+    fail(`${expected.youtube_id} watch URL is not the canonical watch URL.`);
+  }
+  if (!item.description?.includes(expected.casePage) || !item.description.includes('Prof. Chiu Yu KO')) {
+    fail(`${expected.youtube_id} description dropped the case page or attribution.`);
+  }
+  if (lessonKey(item) !== 'micro-cases\nACC-03') fail(`${expected.youtube_id} is not grouped as case ACC-03.`);
+}
+const excludedDrafts = ['w-ZNJWfxFts', 'BkosxidgHCk', 'z11xephERog'];
+if (catalog.videos.some((item) => excludedDrafts.includes(item.youtube_id))) {
+  fail('An excluded draft recording was cataloged.');
 }
 const catalogText = fs.readFileSync(path.join(root, 'catalog', 'allowlist.json'), 'utf8');
-if (catalogText.includes('/workspace/') || catalogText.includes('acc-01-youtube') || catalogText.includes('acc-02-youtube') || catalogText.includes('_studio.png') || catalogText.includes('w-ZNJWfxFts')) {
-  fail('The allowlist includes a private path or the unpublished draft.');
+if (
+  catalogText.includes('/workspace/') ||
+  catalogText.includes('acc-01-youtube') ||
+  catalogText.includes('acc-02-youtube') ||
+  catalogText.includes('acc-03-youtube') ||
+  catalogText.includes('_studio.png') ||
+  excludedDrafts.some((id) => catalogText.includes(id))
+) {
+  fail('The allowlist includes a private path or an excluded draft.');
 }
 
 if (errors.length) {
