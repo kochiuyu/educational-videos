@@ -19,8 +19,13 @@ export function topicSlug(topic: string): string {
  * present for every economics short. Other videos use hq720 (1280×720),
  * present for every STAT and LAE video. hqdefault is the fallback.
  */
+/** Portrait 9:16 Shorts. A new Tea Shorts topic stays in this set without a layout change. */
+export function isPortraitCollection(collectionSlug: string): boolean {
+  return collectionSlug === 'economics-shorts' || collectionSlug === 'tea-shorts';
+}
+
 export function thumbnailUrl(youtubeId: string, collectionSlug: string): string {
-  const file = collectionSlug === 'economics-shorts' ? 'oardefault.jpg' : 'hq720.jpg';
+  const file = isPortraitCollection(collectionSlug) ? 'oardefault.jpg' : 'hq720.jpg';
   return `https://i.ytimg.com/vi/${youtubeId}/${file}`;
 }
 

@@ -1,0 +1,39 @@
+---
+import Base from '../../layouts/Base.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import VideoRows from '../../components/VideoRows.astro';
+import { formatLessonCount, lessonTally, topicsInCollection } from '../../data/catalog';
+import { href, topicSlug } from '../../lib/urls';
+
+export function getStaticPaths() {
+  return topicsInCollection('tea-shorts').map((group) => ({
+    params: { topic: topicSlug(group.topic) },
+    props: { group },
+  }));
+}
+
+const { group } = Astro.props;
+const counts = lessonTally(group.videos);
+---
+
+<Base
+  title={`${group.topic} · Tea Shorts · Educational Videos`}
+  description={`${group.topic}: ${formatLessonCount(counts.lessons, counts.versions)} from Tea Companion.`}
+  current="tea"
+>
+  <Breadcrumb
+    items={[
+      { href: href(), label: 'Home' },
+      { href: href('collections/tea-shorts'), label: 'Tea Shorts' },
+      { label: group.topic },
+    ]}
+  />
+  <header class="page-intro">
+    <p class="eyebrow">Tea Shorts</p>
+    <h1>{group.topic}</h1>
+    <p class="note">
+      {formatLessonCount(counts.lessons, counts.versions)}. Titles are the published titles.
+    </p>
+  </header>
+  <VideoRows videos={group.videos} showLanguage />
+</Base>

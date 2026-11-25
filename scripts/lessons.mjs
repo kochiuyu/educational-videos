@@ -21,6 +21,9 @@
  * micro-cases: one lesson is one catalog id. That id is one case, shared by
  * its language recordings, and it does not span cases.
  *
+ * tea-shorts: one lesson is one catalog id. That id is one topic, shared by
+ * its language recordings. A later topic is a new id and a new topic name.
+ *
  * Any other collection is one lesson per recording.
  */
 
@@ -70,7 +73,7 @@ export function lessonKey(video) {
     if (!label) return `stat-lessons\nunmapped\n${video.youtube_id}`;
     return `stat-lessons\n${label}`;
   }
-  if (slug === 'lae-what-is' || slug === 'lae-101' || slug === 'micro-cases') {
+  if (slug === 'lae-what-is' || slug === 'lae-101' || slug === 'micro-cases' || slug === 'tea-shorts') {
     return `${slug}\n${video.id}`;
   }
   return `${slug}\n${video.youtube_id}`;

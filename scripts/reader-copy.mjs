@@ -5,6 +5,7 @@
 
 export const COMPANION_URL = 'https://kochiuyu.github.io/lae-companion/';
 export const MICRO_CASES_URL = 'https://kochiuyu.github.io/micro-cases/';
+export const TEA_COMPANION_URL = 'https://kochiuyu.github.io/tea-companion/';
 
 export function readerIntro(description) {
   if (typeof description !== 'string') return '';
@@ -15,7 +16,7 @@ export function readerIntro(description) {
       ', grouped as ',
     )
     .replace(/^Public\s+/, '')
-    .replace(/\s*Companion site:\s*https:\/\/kochiuyu\.github\.io\/lae-companion\/\.?\s*/g, '')
+    .replace(/\s*Companion site:\s*https:\/\/kochiuyu\.github\.io\/(?:lae-companion|tea-companion)\/\.?\s*/g, '')
     .replace(/\s*Case collection:\s*https:\/\/kochiuyu\.github\.io\/micro-cases\/\.?\s*/g, '')
     .replace(/\s{2,}/g, ' ')
     .trim();

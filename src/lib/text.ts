@@ -55,9 +55,9 @@ export function splitPublishedTitle(title: string): PublishedTitleParts {
 
 /** Language of a title, based on its first character and the catalog language id. */
 export function titleLang(video: Pick<Video, 'title' | 'language'>): string {
-  if (video.language === 'mc-en') return 'en';
-  if (video.language === 'mc-cmn') return 'zh-Hans';
-  if (video.language === 'mc-yue') return 'zh-Hant';
+  if (video.language === 'mc-en' || video.language === 'tea-en') return 'en';
+  if (video.language === 'mc-cmn' || video.language === 'tea-cmn') return 'zh-Hans';
+  if (video.language === 'mc-yue' || video.language === 'tea-yue') return 'zh-Hant';
   const startsHan = /^\s*\p{Script=Han}/u.test(video.title);
   if (!startsHan) return 'en';
   if (video.language === 'hk+en') return 'zh-Hant';
@@ -87,8 +87,8 @@ export interface DescriptionView {
 }
 
 function openingLang(language: string | null): string {
-  if (language === 'hk+en' || language === 'mc-yue') return 'zh-Hant';
-  if (language === 'zh' || language === 'zh+en' || language === 'mc-cmn') return 'zh-Hans';
+  if (language === 'hk+en' || language === 'mc-yue' || language === 'tea-yue') return 'zh-Hant';
+  if (language === 'zh' || language === 'zh+en' || language === 'mc-cmn' || language === 'tea-cmn') return 'zh-Hans';
   return 'en';
 }
 
@@ -98,6 +98,15 @@ const CASE_PAGE = /https:\/\/kochiuyu\.github\.io\/micro-cases\/(?:zh-cn\/|zh-hk
 export function casePageUrl(description: string | null): string | null {
   if (!description) return null;
   return description.match(CASE_PAGE)?.[0] ?? null;
+}
+
+const TEA_SOURCE =
+  /https:\/\/kochiuyu\.github\.io\/tea-companion\/(?:zh-hans\/|zh-hant-hk\/)?tea-labels\.html#type-map/;
+
+/** Tea Companion source page quoted by a Tea Shorts description, when one is present. */
+export function teaSourceUrl(description: string | null): string | null {
+  if (!description) return null;
+  return description.match(TEA_SOURCE)?.[0] ?? null;
 }
 
 function closingLang(language: string | null): string {

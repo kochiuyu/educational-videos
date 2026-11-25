@@ -6,7 +6,7 @@ The public channel [https://www.youtube.com/@ChiuYuKo](https://www.youtube.com/@
 
 ## What is listed
 
-`catalog/allowlist.json` is the source of truth. The copy in this repository is the verified catalog as of **2026-11-24** (Asia/Hong_Kong): **381** videos, **121** distinct lessons.
+`catalog/allowlist.json` is the source of truth. The copy in this repository is the verified catalog as of **2026-11-25** (Asia/Hong_Kong): **384** videos, **122** distinct lessons.
 
 | Collection | Lessons | Videos |
 | --- | ---: | ---: |
@@ -15,6 +15,7 @@ The public channel [https://www.youtube.com/@ChiuYuKo](https://www.youtube.com/@
 | Economics Shorts | 25 | 25 |
 | LAE What-is | 5 | 25 |
 | Micro Cases | 3 | 9 |
+| Tea Shorts | 1 | 3 |
 
 STAT lessons by module:
 
@@ -39,6 +40,8 @@ Economics Shorts are public cartoon-style YouTube Shorts from the @ChiuYuKo chan
 | Game Theory in daily life | 7 |
 
 Micro Cases starts with ACC-01, The last tray of egg tarts, with three landscape 16:9 recordings: English (`F1WY_3jXYQw`), 普通话 (`uetO9tibCEA`), and 廣東話 (`EFakphvV2qE`). They share catalog id `ACC-01`, so they count as one lesson. They are not Economics Shorts and they are not STAT language tracks. Each description is the approved source description, including the link to that language’s case page (`tarts.html`, `zh-cn/tarts.html`, or `zh-hk/tarts.html`) and to https://kochiuyu.github.io/micro-cases/. `duration` is null because a YouTube duration was not verified. Visibility Public was last observed at upload completion on 22 Nov 2026 (Hong Kong time). That observation was not repeated afterward.
+
+Tea Shorts are portrait 9:16 YouTube Shorts from [Tea Companion](https://kochiuyu.github.io/tea-companion/). T01, One plant, six families of tea, is one lesson with three language recordings, not three lessons. They share catalog id `TEA-T01` and topic `T01`. English (`PXyUCfLHOf8`, `tea-en`) uses English on-screen text and https://kochiuyu.github.io/tea-companion/tea-labels.html#type-map. 普通话 (`EZk3qvma1aU`, `tea-cmn`) uses Simplified on-screen text and https://kochiuyu.github.io/tea-companion/zh-hans/tea-labels.html#type-map. 粵語 (`DaQ19k9U6To`, `tea-yue`) uses Hong Kong Traditional on-screen text and https://kochiuyu.github.io/tea-companion/zh-hant-hk/tea-labels.html#type-map. These language ids are not STAT tracks. Each description is the public YouTube `shortDescription` retrieved on 25 Nov 2026, with no trailing newline. `duration` is null. There is no quiz and no playlist. T02–T07 are not in this catalog.
 
 ACC-02, Close the loss-making branch?, is the second Accounting case. Its three landscape recordings are English (`1Qik16ZYE14`), 普通话 (`WjCDkMI3uZc`), and 廣東話 (`LADYnu4OCug`). They share catalog id `ACC-02`. Each description is the approved source description and links that language’s `branch-loss.html` page. `duration` is null because a YouTube duration was not verified. Visibility Public was last observed at upload completion on 23 Nov 2026 (Taipei time): English 10:35, 普通话 10:42:25, and 廣東話 10:52. That observation was not repeated afterward.
 
@@ -66,9 +69,9 @@ Catalog `id` values repeat across language tracks for M03–M05. Pages are addre
 
 ## Descriptions and questions
 
-A video page shows the title and language above the player. Description appears when that recording has a catalog description, and Questions when `catalog/stat-lessons.json` has an official quiz. Empty sections are omitted. LAE 101, Economics Shorts, and LAE What-is have no official quiz here. The description wording is unchanged. Official URLs in that text are linked, series lines sit in a quieter block, and list or timestamp lines use list markup. STAT related videos are the other language versions of the same lesson number in the YouTube title. A title that does not contain exactly one lesson number is not grouped. LAE What-is stays grouped by topic.
+A video page shows the title and language above the player. Description appears when that recording has a catalog description, and Questions when `catalog/stat-lessons.json` has an official quiz. Empty sections are omitted. LAE 101, Economics Shorts, LAE What-is, and Tea Shorts have no official quiz here. The description wording is unchanged. Official URLs in that text are linked, series lines sit in a quieter block, and list or timestamp lines use list markup. STAT related videos are the other language versions of the same lesson number in the YouTube title. A title that does not contain exactly one lesson number is not grouped. LAE What-is stays grouped by topic.
 
-A description is the description on that YouTube video, copied verbatim and matched by `youtube_id`. The 25 Economics Shorts were read from the public Shorts page. The other previously empty descriptions were copied from the official Google Takeout videos CSV, archive `takeout-20261121T101859Z-1-001.zip`. Descriptions already in the catalog, including STAT Modules 3–5, stay as written. A lesson objective is not a substitute. `catalog/youtube-descriptions.json` records the retrieval and is not rendered.
+A description is the description on that YouTube video, copied verbatim and matched by `youtube_id`. The 25 Economics Shorts were read from the public Shorts page. Tea Shorts T01 was read the same way on 25 Nov 2026. The other previously empty descriptions were copied from the official Google Takeout videos CSV, archive `takeout-20261121T101859Z-1-001.zip`. Descriptions already in the catalog, including STAT Modules 3–5, stay as written. A lesson objective is not a substitute. `catalog/youtube-descriptions.json` records the retrieval and is not rendered.
 
 STAT questions come from the public repository [kochiuyu/video-factory](https://github.com/kochiuyu/video-factory), default branch, `lessons/STAT/*.yaml`. This repository does not vendor that source. The quiz file records the commit that was read.
 
@@ -105,7 +108,8 @@ npm run preview
 
 ## Browse, search, and filter
 
-- Collections: `/collections/stat-lessons/`, `/collections/lae-101/`, `/collections/economics-shorts/`, `/collections/lae-what-is/`, and `/collections/micro-cases/`
+- Collections: `/collections/stat-lessons/`, `/collections/lae-101/`, `/collections/economics-shorts/`, `/collections/lae-what-is/`, `/collections/micro-cases/`, and `/collections/tea-shorts/`
+- Tea Shorts topics: `/tea-shorts/t01/`
 - Micro Cases subject: `/micro-cases/accounting/`
 - STAT modules: `/stat-lessons/m01/` through `/stat-lessons/m06/`
 - STAT topics: `/stat-lessons/m03/t01/`
@@ -135,9 +139,10 @@ There is no backend. Edit the catalog, open a pull request, and let the Pages wo
 7. LAE What-is uses `collection_slug` `lae-what-is`, a topic of `What is LAE?`, `What is the 1,000-metre band?`, `What is a drone?`, `What is an SUA?`, or `What is an eVTOL?`, and one of its five language ids (`en`, `cmn`, `yue`, `en-bi-hans`, `en-bi-hant`) with that language’s label copied exactly. Do not file these under LAE 101 or under the four STAT language tracks. Leave `duration` null unless a duration was verified. Use the watch URL, not a playlist URL. If the collection description names the topics, keep those names in topic order so the topic pages stay in that order.
 8. Optional: `description`, `duration` (`2:14`), `module_title`, `source`. Use `null` or omit anything you do not have. Leave `duration` null when a YouTube duration was not verified.
 9. Micro Cases use `collection_slug` `micro-cases`, topic `Accounting`, and one shared catalog id per case. ACC-01 uses language ids `mc-en`, `mc-cmn`, and `mc-yue` with labels `English`, `普通话`, and `廣東話`. Do not file these under the four STAT language tracks. Copy the approved description, which already links the localized case page. Do not add a quiz or a duration that was not verified on YouTube.
-10. A new collection or language has to be added to `collections` or `languages` in the same edit. Every collection and language in those arrays must have at least one video.
-11. Run `npm run check:catalog` and `npm run build`.
-12. Open a pull request to `main`. The workflow builds the site on the pull request. After merge, GitHub Actions deploys it.
+10. Tea Shorts use `collection_slug` `tea-shorts`. One topic is one lesson: give every language recording of that topic the same catalog `id` and the same `topic` (`T01`, then `T02` through `T07`). Use language ids `tea-en`, `tea-cmn`, and `tea-yue` with labels `English`, `普通话`, and `粵語`. Do not file these under the four STAT language tracks. Copy the public YouTube description exactly, including whether it has a trailing newline. Leave `duration` null unless a hosted YouTube duration was verified. Do not add a quiz or a playlist URL. Use the watch URL. A later topic does not need a new page template: `/collections/tea-shorts/`, `/tea-shorts/{topic}/`, the homepage tile, and the portrait Shorts layout are generated from the catalog. Update `video_count`, the README counts, and the lesson-count checks in the same edit.
+11. A new collection or language has to be added to `collections` or `languages` in the same edit. Every collection and language in those arrays must have at least one video.
+12. Run `npm run check:catalog` and `npm run build`.
+13. Open a pull request to `main`. The workflow builds the site on the pull request. After merge, GitHub Actions deploys it.
 
 The checker rejects duplicate YouTube IDs, playlist URLs, a `youtube_url` that does not match the id, HeyGen-labeled entries, and DSME2021 entries.
 
@@ -168,4 +173,4 @@ Built with [Astro](https://astro.build/) 5.18.2, used under the [MIT License](ht
 
 ## Embed restrictions
 
-The catalog does not say whether YouTube permits embedding. If a player shows that a video cannot be embedded, the page still links to the watch URL. Embed restrictions were not verified for all 381 videos.
+The catalog does not say whether YouTube permits embedding. If a player shows that a video cannot be embedded, the page still links to the watch URL. Embed restrictions were not verified for all 384 videos.

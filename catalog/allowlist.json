@@ -3,14 +3,15 @@
   "owner": "Prof. Chiu Yu KO",
   "channel_url": "https://www.youtube.com/@ChiuYuKo",
   "repo": "https://github.com/kochiuyu/educational-videos",
-  "as_of": "2026-11-24",
+  "as_of": "2026-11-25",
   "timezone": "Asia/Hong_Kong",
   "inclusions": {
     "stat_lessons": "Public VF-Revise STAT lessons: M01–M03 all topics; M04 T01–T10; M05 T01–T08. Four language tracks per topic. M06 T01–T15 is a separate exception: 60 recordings were Unlisted on YouTube at cataloguing on 23 November 2026 (Asia/Taipei). On that date, after being told the 60 were Unlisted and that daily Public starts 24 November 2026 around 12:00 PM Hong Kong time, Prof. Ko asked to update this site. M06 playlists are not entries. This does not permit other unlisted videos.",
     "lae_101": "Ten public LAE 101 short intros. Individual video URLs only.",
     "economics_shorts": "Public cartoon-style economics YouTube Shorts from the @ChiuYuKo channel, grouped by the channel's public playlists Experimental Economics and Game Theory in daily life.",
     "lae_what_is": "What is LAE?, What is the 1,000-metre band?, What is a drone?, What is an SUA?, and What is an eVTOL? for CUHK DOTE5891, Business Analysis of Low-Altitude Economy. Companion site: https://kochiuyu.github.io/lae-companion/.",
-    "micro_cases": "ACC-01, The last tray of egg tarts, as three landscape language recordings: English, 普通话, and 廣東話. Visibility Public was last observed at upload completion on 2026-11-22 (Asia/Hong_Kong), not rechecked afterward. Duration is null because a YouTube duration was not verified. ACC-02, Close the loss-making branch?, as three landscape language recordings: English, 普通话, and 廣東話. Visibility Public was last observed at upload completion on 2026-11-23 (Asia/Taipei), not rechecked afterward. Duration is null because a YouTube duration was not verified. ACC-03, Target reached. Returns still coming?, as three landscape language recordings: English, 普通话, and 廣東話. Visibility Public was last observed in YouTube Studio on 2026-11-24 (Asia/Hong_Kong): English 11:42, 普通话 11:52, and 廣東話 published 12:19. Not rechecked afterward. Duration is null because a hosted YouTube duration was not verified."
+    "micro_cases": "ACC-01, The last tray of egg tarts, as three landscape language recordings: English, 普通话, and 廣東話. Visibility Public was last observed at upload completion on 2026-11-22 (Asia/Hong_Kong), not rechecked afterward. Duration is null because a YouTube duration was not verified. ACC-02, Close the loss-making branch?, as three landscape language recordings: English, 普通话, and 廣東話. Visibility Public was last observed at upload completion on 2026-11-23 (Asia/Taipei), not rechecked afterward. Duration is null because a YouTube duration was not verified. ACC-03, Target reached. Returns still coming?, as three landscape language recordings: English, 普通话, and 廣東話. Visibility Public was last observed in YouTube Studio on 2026-11-24 (Asia/Hong_Kong): English 11:42, 普通话 11:52, and 廣東話 published 12:19. Not rechecked afterward. Duration is null because a hosted YouTube duration was not verified.",
+    "tea_shorts": "Tea Companion portrait Shorts. T01, One plant, six families of tea, as one lesson with three language recordings: English, 普通话, and 粵語. Descriptions are the public YouTube shortDescription texts retrieved on 2026-11-25. Duration is null. T02–T07 are not in this catalog."
   },
   "exclusions": [
     "Older DSME2021 lecture recordings in kochiuyu/video-links",
@@ -48,6 +49,11 @@
       "slug": "micro-cases",
       "name": "Micro Cases",
       "description": "Accounting classroom cases. ACC-01, The last tray of egg tarts, ACC-02, Close the loss-making branch?, and ACC-03, Target reached. Returns still coming?, in English, 普通话, and 廣東話. Case collection: https://kochiuyu.github.io/micro-cases/."
+    },
+    {
+      "slug": "tea-shorts",
+      "name": "Tea Shorts",
+      "description": "Portrait YouTube Shorts from Tea Companion. T01, One plant, six families of tea, in English, 普通话, and 粵語. Later topics are added in this catalog. Companion site: https://kochiuyu.github.io/tea-companion/."
     }
   ],
   "languages": [
@@ -98,9 +104,21 @@
     {
       "id": "mc-yue",
       "label": "廣東話"
+    },
+    {
+      "id": "tea-en",
+      "label": "English"
+    },
+    {
+      "id": "tea-cmn",
+      "label": "普通话"
+    },
+    {
+      "id": "tea-yue",
+      "label": "粵語"
     }
   ],
-  "video_count": 381,
+  "video_count": 384,
   "videos": [
     {
       "id": "LAE101-01",
@@ -6196,6 +6214,54 @@
       "youtube_id": "l5ug7pz-ZrM",
       "youtube_url": "https://www.youtube.com/watch?v=l5ug7pz-ZrM",
       "source": "Approved ACC-03 廣東話 description, the official staged upload text. Visibility Public was last observed in YouTube Studio at 12:19 on 2026-11-24 (Asia/Hong_Kong), not rechecked afterward. A public watch page did not return the description. YouTube duration was not verified. No Studio language setting is recorded.",
+      "module_title": null
+    },
+    {
+      "id": "TEA-T01",
+      "collection": "Tea Shorts",
+      "collection_slug": "tea-shorts",
+      "module": null,
+      "topic": "T01",
+      "language": "tea-en",
+      "language_label": "English",
+      "title": "One plant, six families of tea",
+      "description": "One plant, six families of tea is a short educational video from Tea Companion.\n\nGreen tea and black tea usually come from the same plant. The difference is how the leaves are processed. These are six families, not six steps from green to black.\n\nThis is the English narration, with English on-screen text.\n\nRead the source:\nhttps://kochiuyu.github.io/tea-companion/tea-labels.html#type-map\n\nTea Companion:\nhttps://kochiuyu.github.io/tea-companion/",
+      "duration": null,
+      "youtube_id": "PXyUCfLHOf8",
+      "youtube_url": "https://www.youtube.com/watch?v=PXyUCfLHOf8",
+      "source": "Public YouTube Shorts description (videoDetails.shortDescription), retrieved 2026-11-25. Channel Chiu Yu Ko, UC0Amh8UkHvIVxPbxsrEBRMg. Source page https://kochiuyu.github.io/tea-companion/tea-labels.html#type-map. Duration was not verified. oEmbed confirms the title and author only.",
+      "module_title": null
+    },
+    {
+      "id": "TEA-T01",
+      "collection": "Tea Shorts",
+      "collection_slug": "tea-shorts",
+      "module": null,
+      "topic": "T01",
+      "language": "tea-cmn",
+      "language_label": "普通话",
+      "title": "同一种茶树，六类茶",
+      "description": "同一种茶树，六类茶 is a short educational video from Tea Companion.\n\n绿茶和红茶，多半来自同一种茶树。差别在采收之后怎么做。这是六类茶，不是从绿茶到红茶的六个步骤。\n\n本片为普通话解说，屏幕文字为简体中文。\n\nRead the source:\nhttps://kochiuyu.github.io/tea-companion/zh-hans/tea-labels.html#type-map\n\nTea Companion:\nhttps://kochiuyu.github.io/tea-companion/",
+      "duration": null,
+      "youtube_id": "EZk3qvma1aU",
+      "youtube_url": "https://www.youtube.com/watch?v=EZk3qvma1aU",
+      "source": "Public YouTube Shorts description (videoDetails.shortDescription), retrieved 2026-11-25. Channel Chiu Yu Ko, UC0Amh8UkHvIVxPbxsrEBRMg. Source page https://kochiuyu.github.io/tea-companion/zh-hans/tea-labels.html#type-map. Duration was not verified. oEmbed confirms the title and author only.",
+      "module_title": null
+    },
+    {
+      "id": "TEA-T01",
+      "collection": "Tea Shorts",
+      "collection_slug": "tea-shorts",
+      "module": null,
+      "topic": "T01",
+      "language": "tea-yue",
+      "language_label": "粵語",
+      "title": "同一種茶樹，六類茶",
+      "description": "同一種茶樹，六類茶 is a short educational video from Tea Companion.\n\n綠茶和紅茶，多半來自同一種茶樹。分別在採收之後怎樣加工。這是六類茶，不是從綠茶到紅茶的六個步驟。\n\n本片為粵語旁白，屏幕文字為香港繁體中文。\n\nRead the source:\nhttps://kochiuyu.github.io/tea-companion/zh-hant-hk/tea-labels.html#type-map\n\nTea Companion:\nhttps://kochiuyu.github.io/tea-companion/",
+      "duration": null,
+      "youtube_id": "DaQ19k9U6To",
+      "youtube_url": "https://www.youtube.com/watch?v=DaQ19k9U6To",
+      "source": "Public YouTube Shorts description (videoDetails.shortDescription), retrieved 2026-11-25. Channel Chiu Yu Ko, UC0Amh8UkHvIVxPbxsrEBRMg. Source page https://kochiuyu.github.io/tea-companion/zh-hant-hk/tea-labels.html#type-map. Duration was not verified. oEmbed confirms the title and author only.",
       "module_title": null
     }
   ]
