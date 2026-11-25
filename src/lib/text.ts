@@ -92,7 +92,7 @@ function openingLang(language: string | null): string {
   return 'en';
 }
 
-const CASE_PAGE = /https:\/\/kochiuyu\.github\.io\/micro-cases\/(?:zh-cn\/|zh-hk\/)?(?:tarts|branch-loss)\.html/;
+const CASE_PAGE = /https:\/\/kochiuyu\.github\.io\/micro-cases\/(?:zh-cn\/|zh-hk\/)?(?:tarts|branch-loss|returns-target|count-and-value)\.html/;
 
 /** Localized Micro Cases page quoted by an approved description, when one is present. */
 export function casePageUrl(description: string | null): string | null {

@@ -282,11 +282,11 @@ const accExpected = [
 ];
 const acc = catalog.videos.filter((item) => item.id === 'ACC-01');
 if (acc.length !== 3) fail('ACC-01 must stay one lesson with three recordings.');
-if (summary.byCollection['micro-cases']?.lessons !== 2 || summary.byCollection['micro-cases']?.versions !== 6) {
-  fail('Micro Cases must be two lessons and six recordings.');
+if (summary.byCollection['micro-cases']?.lessons !== 4 || summary.byCollection['micro-cases']?.versions !== 12) {
+  fail('Micro Cases must be four lessons and twelve recordings.');
 }
-if (summary.lessons !== 121 || summary.versions !== 381) {
-  fail(`Catalog is ${summary.lessons} lessons and ${summary.versions} recordings; expected 121 and 381.`);
+if (summary.lessons !== 123 || summary.versions !== 387) {
+  fail(`Catalog is ${summary.lessons} lessons and ${summary.versions} recordings; expected 123 and 387.`);
 }
 if (summary.byCollection['stat-lessons'].lessons !== 78 || summary.byCollection['stat-lessons'].versions !== 312) {
   fail('STAT must be 78 lessons and 312 recordings.');
@@ -295,7 +295,7 @@ for (const [slug, lessons, versions] of [
   ['lae-101', 10, 10],
   ['economics-shorts', 25, 25],
   ['lae-what-is', 5, 25],
-  ['micro-cases', 2, 6],
+  ['micro-cases', 4, 12],
 ]) {
   const row = summary.byCollection[slug];
   if (row?.lessons !== lessons || row?.versions !== versions) {
@@ -411,10 +411,6 @@ const acc02Expected = [
 ];
 const acc02 = catalog.videos.filter((item) => item.id === 'ACC-02');
 if (acc02.length !== 3) fail('ACC-02 must be one lesson with three recordings.');
-const microIds = catalog.videos.filter((item) => item.collection_slug === 'micro-cases').map((item) => item.youtube_id);
-if (microIds.join(',') !== [...accExpected, ...acc02Expected].map((item) => item.youtube_id).join(',')) {
-  fail('Micro Cases recordings changed order or identity.');
-}
 for (const expected of acc02Expected) {
   const item = acc02.find((video) => video.youtube_id === expected.youtube_id);
   if (!item) {
@@ -438,12 +434,129 @@ for (const expected of acc02Expected) {
   }
   if (lessonKey(item) !== 'micro-cases\nACC-02') fail(`${expected.youtube_id} is not grouped as case ACC-02.`);
 }
-if (catalog.videos.some((item) => item.youtube_id === 'w-ZNJWfxFts')) {
-  fail('The unpublished draft recording was cataloged.');
+const acc03Expected = [
+  {
+    language: 'mc-en',
+    label: 'English',
+    youtube_id: 'kc97t9pCO-I',
+    title: 'ACC-03 · Target reached. Returns still coming? (English)',
+    casePage: 'https://kochiuyu.github.io/micro-cases/returns-target.html',
+  },
+  {
+    language: 'mc-cmn',
+    label: '普通话',
+    youtube_id: 'heYTMobTncY',
+    title: 'ACC-03 · 销售达标了？退货期还没结束（普通话）',
+    casePage: 'https://kochiuyu.github.io/micro-cases/zh-cn/returns-target.html',
+  },
+  {
+    language: 'mc-yue',
+    label: '廣東話',
+    youtube_id: 'l5ug7pz-ZrM',
+    title: 'ACC-03 · 銷售達標了？退貨期還未完（廣東話）',
+    casePage: 'https://kochiuyu.github.io/micro-cases/zh-hk/returns-target.html',
+  },
+];
+const microIds = catalog.videos.filter((item) => item.collection_slug === 'micro-cases').map((item) => item.youtube_id);
+const acc03 = catalog.videos.filter((item) => item.id === 'ACC-03');
+if (acc03.length !== 3) fail('ACC-03 must be one lesson with three recordings.');
+for (const expected of acc03Expected) {
+  const item = acc03.find((video) => video.youtube_id === expected.youtube_id);
+  if (!item) {
+    fail(`ACC-03 is missing ${expected.youtube_id}.`);
+    continue;
+  }
+  if (item.collection_slug !== 'micro-cases' || item.topic !== 'Accounting' || item.module != null) {
+    fail(`${expected.youtube_id} is not grouped as an Accounting micro-case.`);
+  }
+  if (item.language !== expected.language || item.language_label !== expected.label) {
+    fail(`${expected.youtube_id} language label does not match its recording.`);
+  }
+  if (statLanguageIds.has(item.language)) fail(`${expected.youtube_id} uses a STAT language track.`);
+  if (item.title !== expected.title) fail(`${expected.youtube_id} title is not the approved title.`);
+  if (item.duration != null) fail(`${expected.youtube_id} duration must stay null until a hosted YouTube duration is verified.`);
+  if (item.youtube_url !== `https://www.youtube.com/watch?v=${expected.youtube_id}`) {
+    fail(`${expected.youtube_id} watch URL is not the canonical watch URL.`);
+  }
+  if (!item.description?.includes(expected.casePage) || !item.description.includes('Prof. Chiu Yu KO')) {
+    fail(`${expected.youtube_id} description dropped the case page or attribution.`);
+  }
+  if (lessonKey(item) !== 'micro-cases\nACC-03') fail(`${expected.youtube_id} is not grouped as case ACC-03.`);
+}
+const acc04Expected = [
+  {
+    language: 'mc-en',
+    label: 'English',
+    youtube_id: 'j1Mqyo9azI0',
+    title: 'ACC-04 · The stock is all there. Is it worth the same? (English)',
+    casePage: 'https://kochiuyu.github.io/micro-cases/count-and-value.html',
+    sha256: '60cfad1869550a75c02c212ac7eae555f9865d03a95586de6825eb82c277fd72',
+  },
+  {
+    language: 'mc-cmn',
+    label: '普通话',
+    youtube_id: 'clafASuRNBg',
+    title: 'ACC-04 · 货一件不少，价值就没变吗？（普通话）',
+    casePage: 'https://kochiuyu.github.io/micro-cases/zh-cn/count-and-value.html',
+    sha256: 'eb4e43b4840d9fdfb91668a340fd952034a85c559ae9b5ec4b9bf0b6ba68591c',
+  },
+  {
+    language: 'mc-yue',
+    label: '廣東話',
+    youtube_id: 'p98piMHwA8Y',
+    title: 'ACC-04 · 貨全在，還值原本的金額嗎？（廣東話）',
+    casePage: 'https://kochiuyu.github.io/micro-cases/zh-hk/count-and-value.html',
+    sha256: '9c57b1c41fc03f811b202c44eebbc9b311abc2df18303f42f21f9e07d07d0b20',
+  },
+];
+const acc04 = catalog.videos.filter((item) => item.id === 'ACC-04');
+if (acc04.length !== 3) fail('ACC-04 must be one lesson with three recordings.');
+if (microIds.join(',') !== [...accExpected, ...acc02Expected, ...acc03Expected, ...acc04Expected].map((item) => item.youtube_id).join(',')) {
+  fail('Micro Cases recordings changed order or identity.');
+}
+for (const expected of acc04Expected) {
+  const item = acc04.find((video) => video.youtube_id === expected.youtube_id);
+  if (!item) {
+    fail(`ACC-04 is missing ${expected.youtube_id}.`);
+    continue;
+  }
+  if (item.collection_slug !== 'micro-cases' || item.topic !== 'Accounting' || item.module != null) {
+    fail(`${expected.youtube_id} is not grouped as an Accounting micro-case.`);
+  }
+  if (item.language !== expected.language || item.language_label !== expected.label) {
+    fail(`${expected.youtube_id} language label does not match its recording.`);
+  }
+  if (statLanguageIds.has(item.language)) fail(`${expected.youtube_id} uses a STAT language track.`);
+  if (item.title !== expected.title) fail(`${expected.youtube_id} title is not the approved title.`);
+  if (item.duration != null) fail(`${expected.youtube_id} duration must stay null until a hosted YouTube duration is verified.`);
+  if (item.youtube_url !== `https://www.youtube.com/watch?v=${expected.youtube_id}`) {
+    fail(`${expected.youtube_id} watch URL is not the canonical watch URL.`);
+  }
+  if (!item.description?.includes(expected.casePage) || !item.description.endsWith('\n')) {
+    fail(`${expected.youtube_id} description dropped the case page or its trailing newline.`);
+  }
+  if (crypto.createHash('sha256').update(item.description ?? '').digest('hex') !== expected.sha256) {
+    fail(`${expected.youtube_id} description is not the official source text.`);
+  }
+  if (lessonKey(item) !== 'micro-cases\nACC-04') fail(`${expected.youtube_id} is not grouped as case ACC-04.`);
+}
+for (const id of ['ACC-05', 'ACC-06', 'ACC-07', 'ACC-08', 'ACC-09', 'ACC-10']) {
+  if (catalog.videos.some((item) => item.id === id)) fail(`${id} is not part of this catalog.`);
+}
+const excludedDrafts = ['w-ZNJWfxFts', 'BkosxidgHCk', 'z11xephERog'];
+if (catalog.videos.some((item) => excludedDrafts.includes(item.youtube_id))) {
+  fail('An excluded draft recording was cataloged.');
 }
 const catalogText = fs.readFileSync(path.join(root, 'catalog', 'allowlist.json'), 'utf8');
-if (catalogText.includes('/workspace/') || catalogText.includes('acc-01-youtube') || catalogText.includes('acc-02-youtube') || catalogText.includes('_studio.png') || catalogText.includes('w-ZNJWfxFts')) {
-  fail('The allowlist includes a private path or the unpublished draft.');
+if (
+  catalogText.includes('/workspace/') ||
+  catalogText.includes('acc-01-youtube') ||
+  catalogText.includes('acc-02-youtube') ||
+  catalogText.includes('acc-03-youtube') ||
+  catalogText.includes('_studio.png') ||
+  excludedDrafts.some((id) => catalogText.includes(id))
+) {
+  fail('The allowlist includes a private path or an excluded draft.');
 }
 
 if (errors.length) {

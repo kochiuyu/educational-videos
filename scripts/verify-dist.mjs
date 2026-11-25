@@ -304,6 +304,12 @@ for (const video of catalog.videos) {
       '1Qik16ZYE14': 'https://kochiuyu.github.io/micro-cases/branch-loss.html',
       WjCDkMI3uZc: 'https://kochiuyu.github.io/micro-cases/zh-cn/branch-loss.html',
       LADYnu4OCug: 'https://kochiuyu.github.io/micro-cases/zh-hk/branch-loss.html',
+      'kc97t9pCO-I': 'https://kochiuyu.github.io/micro-cases/returns-target.html',
+      heYTMobTncY: 'https://kochiuyu.github.io/micro-cases/zh-cn/returns-target.html',
+      'l5ug7pz-ZrM': 'https://kochiuyu.github.io/micro-cases/zh-hk/returns-target.html',
+      j1Mqyo9azI0: 'https://kochiuyu.github.io/micro-cases/count-and-value.html',
+      clafASuRNBg: 'https://kochiuyu.github.io/micro-cases/zh-cn/count-and-value.html',
+      p98piMHwA8Y: 'https://kochiuyu.github.io/micro-cases/zh-hk/count-and-value.html',
     };
     const ownCase = casePages[video.youtube_id];
     if (!ownCase || !html.includes(`href="${ownCase}"`)) {

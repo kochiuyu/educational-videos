@@ -6,7 +6,7 @@ The public channel [https://www.youtube.com/@ChiuYuKo](https://www.youtube.com/@
 
 ## What is listed
 
-`catalog/allowlist.json` is the source of truth. The copy in this repository is the verified catalog as of **2026-11-25** (Asia/Hong_Kong): **381** videos, **121** distinct lessons.
+`catalog/allowlist.json` is the source of truth. The copy in this repository is the verified catalog as of **2026-11-25** (Asia/Hong_Kong): **387** videos, **123** distinct lessons.
 
 | Collection | Lessons | Videos |
 | --- | ---: | ---: |
@@ -14,7 +14,7 @@ The public channel [https://www.youtube.com/@ChiuYuKo](https://www.youtube.com/@
 | LAE 101 | 10 | 10 |
 | Economics Shorts | 25 | 25 |
 | LAE What-is | 5 | 25 |
-| Micro Cases | 2 | 6 |
+| Micro Cases | 4 | 12 |
 | Tea Shorts | 1 | 3 |
 
 STAT lessons by module:
@@ -44,6 +44,10 @@ Micro Cases starts with ACC-01, The last tray of egg tarts, with three landscape
 Tea Shorts are portrait 9:16 YouTube Shorts from [Tea Companion](https://kochiuyu.github.io/tea-companion/). T01, One plant, six families of tea, is one lesson with three language recordings, not three lessons. They share catalog id `TEA-T01` and topic `T01`. English (`PXyUCfLHOf8`, `tea-en`) uses English on-screen text and https://kochiuyu.github.io/tea-companion/tea-labels.html#type-map. 普通话 (`EZk3qvma1aU`, `tea-cmn`) uses Simplified on-screen text and https://kochiuyu.github.io/tea-companion/zh-hans/tea-labels.html#type-map. 粵語 (`DaQ19k9U6To`, `tea-yue`) uses Hong Kong Traditional on-screen text and https://kochiuyu.github.io/tea-companion/zh-hant-hk/tea-labels.html#type-map. These language ids are not STAT tracks. Each description is the public YouTube `shortDescription` retrieved on 25 Nov 2026, with no trailing newline. `duration` is null. There is no quiz and no playlist. T02–T07 are not in this catalog.
 
 ACC-02, Close the loss-making branch?, is the second Accounting case. Its three landscape recordings are English (`1Qik16ZYE14`), 普通话 (`WjCDkMI3uZc`), and 廣東話 (`LADYnu4OCug`). They share catalog id `ACC-02`. Each description is the approved source description and links that language’s `branch-loss.html` page. `duration` is null because a YouTube duration was not verified. Visibility Public was last observed at upload completion on 23 Nov 2026 (Taipei time): English 10:35, 普通话 10:42:25, and 廣東話 10:52. That observation was not repeated afterward.
+
+ACC-03, Target reached. Returns still coming?, is the third Accounting case. Its three landscape recordings are English (`kc97t9pCO-I`), 普通话 (`heYTMobTncY`), and 廣東話 (`l5ug7pz-ZrM`). They share catalog id `ACC-03`. Each description is the official staged upload text and links that language’s `returns-target.html` page. `duration` is null because a hosted YouTube duration was not verified. Visibility Public was last observed in YouTube Studio on 24 Nov 2026 (Hong Kong time): English 11:42, 普通话 11:52, and 廣東話 published 12:19. That observation was not repeated afterward. The catalog does not record a Studio language setting.
+
+ACC-04, The stock is all there. Is it worth the same?, is the fourth Accounting case. Its three landscape recordings are English (`j1Mqyo9azI0`), 普通话 (`clafASuRNBg`), and 廣東話 (`p98piMHwA8Y`). They share catalog id `ACC-04`. Each description is the official source text, including one trailing newline, and links that language’s `count-and-value.html` page. `duration` is null because a hosted YouTube duration was not verified. ACC-05 through ACC-10 are not in this catalog.
 
 `oVODqhnkkPg` is in the Game Theory in daily life group. It is a public Short on the channel and was not in that playlist when the list was checked. `econ-shorts-11` (`3C_-2iME2vk`) has no verified duration, so `duration` is null. Descriptions are null. Watch URLs are `https://www.youtube.com/watch?v=` plus the id, not Shorts URLs and not playlist URLs.
 
@@ -171,4 +175,4 @@ Built with [Astro](https://astro.build/) 5.18.2, used under the [MIT License](ht
 
 ## Embed restrictions
 
-The catalog does not say whether YouTube permits embedding. If a player shows that a video cannot be embedded, the page still links to the watch URL. Embed restrictions were not verified for all 381 videos.
+The catalog does not say whether YouTube permits embedding. If a player shows that a video cannot be embedded, the page still links to the watch URL. Embed restrictions were not verified for all 387 videos.
