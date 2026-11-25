@@ -10,7 +10,7 @@
     "lae_101": "Ten public LAE 101 short intros. Individual video URLs only.",
     "economics_shorts": "Public cartoon-style economics YouTube Shorts from the @ChiuYuKo channel, grouped by the channel's public playlists Experimental Economics and Game Theory in daily life.",
     "lae_what_is": "What is LAE?, What is the 1,000-metre band?, What is a drone?, What is an SUA?, and What is an eVTOL? for CUHK DOTE5891, Business Analysis of Low-Altitude Economy. Companion site: https://kochiuyu.github.io/lae-companion/.",
-    "micro_cases": "ACC-01, The last tray of egg tarts, as three landscape language recordings: English, 普通话, and 廣東話. Visibility Public was last observed at upload completion on 2026-11-22 (Asia/Hong_Kong), not rechecked afterward. Duration is null because a YouTube duration was not verified. ACC-02, Close the loss-making branch?, as three landscape language recordings: English, 普通话, and 廣東話. Visibility Public was last observed at upload completion on 2026-11-23 (Asia/Taipei), not rechecked afterward. Duration is null because a YouTube duration was not verified. ACC-03, Target reached. Returns still coming?, as three landscape language recordings: English, 普通话, and 廣東話. Visibility Public was last observed in YouTube Studio on 2026-11-24 (Asia/Hong_Kong): English 11:42, 普通话 11:52, and 廣東話 published 12:19. Not rechecked afterward. Duration is null because a hosted YouTube duration was not verified.",
+    "micro_cases": "ACC-01, The last tray of egg tarts, as three landscape language recordings: English, 普通话, and 廣東話. Visibility Public was last observed at upload completion on 2026-11-22 (Asia/Hong_Kong), not rechecked afterward. Duration is null because a YouTube duration was not verified. ACC-02, Close the loss-making branch?, as three landscape language recordings: English, 普通话, and 廣東話. Visibility Public was last observed at upload completion on 2026-11-23 (Asia/Taipei), not rechecked afterward. Duration is null because a YouTube duration was not verified. ACC-03, Target reached. Returns still coming?, as three landscape language recordings: English, 普通话, and 廣東話. Visibility Public was last observed in YouTube Studio on 2026-11-24 (Asia/Hong_Kong): English 11:42, 普通话 11:52, and 廣東話 published 12:19. Not rechecked afterward. Duration is null because a hosted YouTube duration was not verified. ACC-04, The stock is all there. Is it worth the same?, as three landscape language recordings: English, 普通话, and 廣東話. Duration is null because a hosted YouTube duration was not verified. Descriptions are the official source texts, including one trailing newline.",
     "tea_shorts": "Tea Companion portrait Shorts. T01, One plant, six families of tea, as one lesson with three language recordings: English, 普通话, and 粵語. Descriptions are the public YouTube shortDescription texts retrieved on 2026-11-25. Duration is null. T02–T07 are not in this catalog."
   },
   "exclusions": [
@@ -48,7 +48,7 @@
     {
       "slug": "micro-cases",
       "name": "Micro Cases",
-      "description": "Accounting classroom cases. ACC-01, The last tray of egg tarts, ACC-02, Close the loss-making branch?, and ACC-03, Target reached. Returns still coming?, in English, 普通话, and 廣東話. Case collection: https://kochiuyu.github.io/micro-cases/."
+      "description": "Accounting classroom cases. ACC-01, The last tray of egg tarts, ACC-02, Close the loss-making branch?, ACC-03, Target reached. Returns still coming?, and ACC-04, The stock is all there. Is it worth the same?, in English, 普通话, and 廣東話. Case collection: https://kochiuyu.github.io/micro-cases/."
     },
     {
       "slug": "tea-shorts",
@@ -118,7 +118,7 @@
       "label": "粵語"
     }
   ],
-  "video_count": 384,
+  "video_count": 387,
   "videos": [
     {
       "id": "LAE101-01",
@@ -6214,6 +6214,54 @@
       "youtube_id": "l5ug7pz-ZrM",
       "youtube_url": "https://www.youtube.com/watch?v=l5ug7pz-ZrM",
       "source": "Approved ACC-03 廣東話 description, the official staged upload text. Visibility Public was last observed in YouTube Studio at 12:19 on 2026-11-24 (Asia/Hong_Kong), not rechecked afterward. A public watch page did not return the description. YouTube duration was not verified. No Studio language setting is recorded.",
+      "module_title": null
+    },
+    {
+      "id": "ACC-04",
+      "collection": "Micro Cases",
+      "collection_slug": "micro-cases",
+      "module": null,
+      "topic": "Accounting",
+      "language": "mc-en",
+      "language_label": "English",
+      "title": "ACC-04 · The stock is all there. Is it worth the same? (English)",
+      "description": "The stock is all there. Is it worth the same? (ACC-04) is a Micro Cases classroom video on inventory existence and valuation.\n\nYou are the accountant at a fictional Hong Kong accessories wholesaler. Its company-wide ledger records 1,000 fabric pouches at HK$80 each, for an inventory balance of HK$80,000. No valuation reduction has been recorded. A count sheet from the ordinary storage shelves lists only 900 pouches. The monthly internal report is due later today, and you have a short window to inspect movement records and other storage areas before finalising it. The owner asks whether the apparent 100-unit difference means an immediate HK$8,000 loss. You have not yet reconciled locations, checked ownership or reviewed condition. For this classroom report, the company measures inventory at the lower of cost and net realisable value. Net realisable value means the estimated selling price minus necessary completion and selling costs.\n\nThe teaching format is pause, vote, and reveal. Pause at each decision, vote, compare your reasons, then continue for the debrief. A later fact changes what you know about the count, and you vote again.\n\nThe wholesaler, the stock quantities, the cost, and the later review are fictional classroom assumptions, not a news report about any real company.\n\nRead the case page:\nhttps://kochiuyu.github.io/micro-cases/count-and-value.html\n\nBrowse the Micro Cases collection:\nhttps://kochiuyu.github.io/micro-cases/\n\nA Micro Cases classroom video by Prof. Chiu Yu KO.\n",
+      "duration": null,
+      "youtube_id": "j1Mqyo9azI0",
+      "youtube_url": "https://www.youtube.com/watch?v=j1Mqyo9azI0",
+      "source": "Approved ACC-04 English description, the official source text including its trailing newline. YouTube duration was not verified.",
+      "module_title": null
+    },
+    {
+      "id": "ACC-04",
+      "collection": "Micro Cases",
+      "collection_slug": "micro-cases",
+      "module": null,
+      "topic": "Accounting",
+      "language": "mc-cmn",
+      "language_label": "普通话",
+      "title": "ACC-04 · 货一件不少，价值就没变吗？（普通话）",
+      "description": "货一件不少，价值就没变吗？（ACC-04）是 Micro Cases 的课堂短片，用来讨论存货的存在和计价。\n\n你是香港一家虚构配饰批发商的会计。全公司账簿记录了 1,000 个布袋，每个成本 HK$80，存货结余为 HK$80,000，至今未有记录价值减记。一般存货货架的盘点表只列出 900 个布袋。内部月报须在今天稍后完成，你还有一点时间查阅调拨记录及其他存放地点，才定稿。老板问：表面少了 100 个，是否应即时确认 HK$8,000 损失？你尚未核对存放地点、货品所有权及状况。本课堂报告采用成本与可变现净值孰低计量存货。可变现净值是预计售价扣除必要的完工成本和销售费用。\n\n短片采用先暂停、再投票、再讲评的课堂形式。请在每个决策点暂停、投票、比较理由，然后再继续观看讲评。后面会补充新的盘点资料，请再投一次票。\n\n批发商、存货数量、成本和后来复核的资料都是虚构的课堂假设，并不是对任何真实公司的新闻报道。\n\n阅读个案页面：\nhttps://kochiuyu.github.io/micro-cases/zh-cn/count-and-value.html\n\n浏览 Micro Cases 个案集：\nhttps://kochiuyu.github.io/micro-cases/\n\nMicro Cases 课堂短片，由 Prof. Chiu Yu KO 设计。\n",
+      "duration": null,
+      "youtube_id": "clafASuRNBg",
+      "youtube_url": "https://www.youtube.com/watch?v=clafASuRNBg",
+      "source": "Approved ACC-04 普通话 description, the official source text including its trailing newline. YouTube duration was not verified.",
+      "module_title": null
+    },
+    {
+      "id": "ACC-04",
+      "collection": "Micro Cases",
+      "collection_slug": "micro-cases",
+      "module": null,
+      "topic": "Accounting",
+      "language": "mc-yue",
+      "language_label": "廣東話",
+      "title": "ACC-04 · 貨全在，還值原本的金額嗎？（廣東話）",
+      "description": "貨全在，還值原本的金額嗎？（ACC-04）是 Micro Cases 的課堂短片，用來討論存貨的存在和計價。\n\n你是香港一家虛構配飾批發商的會計。全公司帳簿記錄了 1,000 個布袋，每個成本 HK$80，存貨結餘為 HK$80,000，至今未有記錄價值撇減。一般存貨貨架的盤點表只列出 900 個布袋。內部月報須在今天稍後完成，你還有一點時間查閱調撥紀錄及其他存放地點，才敲定月報。老闆問：表面少了 100 個，是否應即時確認 HK$8,000 損失？你尚未核對存放地點、貨品所有權及狀況。在本課堂報告中，企業按成本與可變現淨值兩者中的較低者計量存貨。可變現淨值是估計售價減去必要的完工及銷售成本。\n\n短片採用先暫停、再投票、再講評的課堂形式。請在每個決策點暫停、投票、比較理由，然後再繼續觀看講評。後面會補充新的盤點資料，請再投一次票。\n\n批發商、存貨數量、成本和後來覆核的資料都是虛構的課堂假設，並不是對任何真實公司的新聞報道。\n\n閱讀個案頁面：\nhttps://kochiuyu.github.io/micro-cases/zh-hk/count-and-value.html\n\n瀏覽 Micro Cases 個案集：\nhttps://kochiuyu.github.io/micro-cases/\n\nMicro Cases 課堂短片，由 Prof. Chiu Yu KO 設計。\n",
+      "duration": null,
+      "youtube_id": "p98piMHwA8Y",
+      "youtube_url": "https://www.youtube.com/watch?v=p98piMHwA8Y",
+      "source": "Approved ACC-04 廣東話 description, the official source text including its trailing newline. YouTube duration was not verified.",
       "module_title": null
     },
     {
