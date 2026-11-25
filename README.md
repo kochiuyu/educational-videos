@@ -6,7 +6,7 @@ The public channel [https://www.youtube.com/@ChiuYuKo](https://www.youtube.com/@
 
 ## What is listed
 
-`catalog/allowlist.json` is the source of truth. The copy in this repository is the verified catalog as of **2026-11-25** (Asia/Hong_Kong): **402** videos, **128** distinct lessons.
+`catalog/allowlist.json` is the source of truth. The copy in this repository is the verified catalog as of **2026-11-25** (Asia/Hong_Kong): **417** videos, **133** distinct lessons.
 
 | Collection | Lessons | Videos |
 | --- | ---: | ---: |
@@ -14,7 +14,7 @@ The public channel [https://www.youtube.com/@ChiuYuKo](https://www.youtube.com/@
 | LAE 101 | 10 | 10 |
 | Economics Shorts | 25 | 25 |
 | LAE What-is | 5 | 25 |
-| Micro Cases | 9 | 27 |
+| Micro Cases | 14 | 42 |
 | Tea Shorts | 1 | 3 |
 
 STAT lessons by module:
@@ -57,7 +57,17 @@ FIN-03, The biggest order, the smallest cash balance, is the third Finance case.
 
 FIN-04, The invoice is not the exposure, is the fourth Finance case. Its three landscape recordings are English (`EAcNlzMLh7I`), 普通话 (`v4YfvgdcDAE`), and 廣東話 (`nUgtZfLaoGU`). They share catalog id `FIN-04`. Each description is the official source text, including one trailing newline, and links that language’s `invoice-exposure.html` page. `duration` is null. Public status was verified from the owner’s box at 14:18 Taipei on 25 Nov 2026.
 
-FIN-05, A larger limit. The same gap?, is the fifth Finance case. Its three landscape recordings are English (`Qau-HM-85-E`), 普通话 (`tbI7P8_zoAM`), and 廣東話 (`440x4VRAgz0`). They share catalog id `FIN-05`. Each description is the official source text, including one trailing newline, and links that language’s `same-gap.html` page. `duration` is null. Public status was verified from the owner’s box at 14:18 Taipei on 25 Nov 2026. FIN-06 through FIN-10 are not in this catalog.
+FIN-05, A larger limit. The same gap?, is the fifth Finance case. Its three landscape recordings are English (`Qau-HM-85-E`), 普通话 (`tbI7P8_zoAM`), and 廣東話 (`440x4VRAgz0`). They share catalog id `FIN-05`. Each description is the official source text, including one trailing newline, and links that language’s `same-gap.html` page. `duration` is null. Public status was verified from the owner’s box at 14:18 Taipei on 25 Nov 2026.
+
+FIN-06, Smaller payments. Cheaper loan?, is the sixth Finance case. Its three landscape recordings are English (`kzGc6WQohFg`), 普通话 (`3EOWmBLrDVQ`), and 廣東話 (`2OG1VTp9KSI`). They share catalog id `FIN-06`. Each description is the official source text, including one trailing newline, and links that language’s `smaller-payments.html` page. `duration` is null. Public status was verified from the owner’s box at 15:00 Taipei on 25 Nov 2026.
+
+FIN-07, A discount for paying sooner. Sooner than what?, is the seventh Finance case. Its three landscape recordings are English (`V4QeDVOF-2M`), 普通话 (`8OyobFAT6v0`), and 廣東話 (`aflFEPkATd0`). They share catalog id `FIN-07`. Each description is the official source text, including one trailing newline, and links that language’s `sooner-than-what.html` page. `duration` is null. Public status was verified from the owner’s box at 15:00 Taipei on 25 Nov 2026.
+
+FIN-08, Back sooner. Worth more?, is the eighth Finance case. Its three landscape recordings are English (`QNdl2tdO-lw`), 普通话 (`7eWqEtRlSSs`), and 廣東話 (`C_zTgU6kyys`). They share catalog id `FIN-08`. Each description is the official source text, including one trailing newline, and links that language’s `back-sooner.html` page. `duration` is null. Public status was verified from the owner’s box at 15:00 Taipei on 25 Nov 2026.
+
+FIN-09, One bank. Two kinds of safety., is the ninth Finance case. Its three landscape recordings are English (`oE09NSa8aoA`), 普通话 (`cVfpsOE_0I8`), and 廣東話 (`CYp8xEb9GSE`). They share catalog id `FIN-09`. Each description is the official source text, including one trailing newline, and links that language’s `protected-and-available.html` page. `duration` is null. Public status was verified from the owner’s box at 15:00 Taipei on 25 Nov 2026.
+
+FIN-10, Twenty per cent. Only once?, is the tenth Finance case. Its three landscape recordings are English (`_lcD6lRqFn8`), 普通话 (`Z37KkN1cFEE`), and 廣東話 (`-GfgYAgPkn4`). They share catalog id `FIN-10`. Each description is the official source text, including one trailing newline, and links that language’s `only-once.html` page. `duration` is null. Public status was verified from the owner’s box at 15:00 Taipei on 25 Nov 2026.
 
 `oVODqhnkkPg` is in the Game Theory in daily life group. It is a public Short on the channel and was not in that playlist when the list was checked. `econ-shorts-11` (`3C_-2iME2vk`) has no verified duration, so `duration` is null. Descriptions are null. Watch URLs are `https://www.youtube.com/watch?v=` plus the id, not Shorts URLs and not playlist URLs.
 
@@ -185,4 +195,4 @@ Built with [Astro](https://astro.build/) 5.18.2, used under the [MIT License](ht
 
 ## Embed restrictions
 
-The catalog does not say whether YouTube permits embedding. If a player shows that a video cannot be embedded, the page still links to the watch URL. Embed restrictions were not verified for all 402 videos.
+The catalog does not say whether YouTube permits embedding. If a player shows that a video cannot be embedded, the page still links to the watch URL. Embed restrictions were not verified for all 417 videos.

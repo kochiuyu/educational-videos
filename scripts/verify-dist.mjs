@@ -325,6 +325,21 @@ for (const video of catalog.videos) {
       'Qau-HM-85-E': 'https://kochiuyu.github.io/micro-cases/same-gap.html',
       tbI7P8_zoAM: 'https://kochiuyu.github.io/micro-cases/zh-cn/same-gap.html',
       '440x4VRAgz0': 'https://kochiuyu.github.io/micro-cases/zh-hk/same-gap.html',
+      kzGc6WQohFg: 'https://kochiuyu.github.io/micro-cases/smaller-payments.html',
+      '3EOWmBLrDVQ': 'https://kochiuyu.github.io/micro-cases/zh-cn/smaller-payments.html',
+      '2OG1VTp9KSI': 'https://kochiuyu.github.io/micro-cases/zh-hk/smaller-payments.html',
+      'V4QeDVOF-2M': 'https://kochiuyu.github.io/micro-cases/sooner-than-what.html',
+      '8OyobFAT6v0': 'https://kochiuyu.github.io/micro-cases/zh-cn/sooner-than-what.html',
+      aflFEPkATd0: 'https://kochiuyu.github.io/micro-cases/zh-hk/sooner-than-what.html',
+      'QNdl2tdO-lw': 'https://kochiuyu.github.io/micro-cases/back-sooner.html',
+      '7eWqEtRlSSs': 'https://kochiuyu.github.io/micro-cases/zh-cn/back-sooner.html',
+      C_zTgU6kyys: 'https://kochiuyu.github.io/micro-cases/zh-hk/back-sooner.html',
+      oE09NSa8aoA: 'https://kochiuyu.github.io/micro-cases/protected-and-available.html',
+      cVfpsOE_0I8: 'https://kochiuyu.github.io/micro-cases/zh-cn/protected-and-available.html',
+      CYp8xEb9GSE: 'https://kochiuyu.github.io/micro-cases/zh-hk/protected-and-available.html',
+      _lcD6lRqFn8: 'https://kochiuyu.github.io/micro-cases/only-once.html',
+      Z37KkN1cFEE: 'https://kochiuyu.github.io/micro-cases/zh-cn/only-once.html',
+      '-GfgYAgPkn4': 'https://kochiuyu.github.io/micro-cases/zh-hk/only-once.html',
     };
     const ownCase = casePages[video.youtube_id];
     if (!ownCase || !html.includes(`href="${ownCase}"`)) {

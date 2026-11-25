@@ -92,7 +92,7 @@ function openingLang(language: string | null): string {
   return 'en';
 }
 
-const CASE_PAGE = /https:\/\/kochiuyu\.github\.io\/micro-cases\/(?:zh-cn\/|zh-hk\/)?(?:tarts|branch-loss|returns-target|count-and-value|match|minibus|cash-flow|invoice-exposure|same-gap)\.html/;
+const CASE_PAGE = /https:\/\/kochiuyu\.github\.io\/micro-cases\/(?:zh-cn\/|zh-hk\/)?(?:tarts|branch-loss|returns-target|count-and-value|match|minibus|cash-flow|invoice-exposure|same-gap|smaller-payments|sooner-than-what|back-sooner|protected-and-available|only-once)\.html/;
 
 /** Localized Micro Cases page quoted by an approved description, when one is present. */
 export function casePageUrl(description: string | null): string | null {
