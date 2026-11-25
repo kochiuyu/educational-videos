@@ -310,6 +310,36 @@ for (const video of catalog.videos) {
       j1Mqyo9azI0: 'https://kochiuyu.github.io/micro-cases/count-and-value.html',
       clafASuRNBg: 'https://kochiuyu.github.io/micro-cases/zh-cn/count-and-value.html',
       p98piMHwA8Y: 'https://kochiuyu.github.io/micro-cases/zh-hk/count-and-value.html',
+      'GA8-62W4ptQ': 'https://kochiuyu.github.io/micro-cases/match.html',
+      'r8poa-aQMtc': 'https://kochiuyu.github.io/micro-cases/zh-cn/match.html',
+      xqgkTiDSTv4: 'https://kochiuyu.github.io/micro-cases/zh-hk/match.html',
+      VGywQb1zanU: 'https://kochiuyu.github.io/micro-cases/minibus.html',
+      EtDwBboVmtI: 'https://kochiuyu.github.io/micro-cases/zh-cn/minibus.html',
+      PHgat2vIRbc: 'https://kochiuyu.github.io/micro-cases/zh-hk/minibus.html',
+      'OeiP-qAIIDc': 'https://kochiuyu.github.io/micro-cases/cash-flow.html',
+      qOKn14OPQgI: 'https://kochiuyu.github.io/micro-cases/zh-cn/cash-flow.html',
+      CNkL1dHjnZo: 'https://kochiuyu.github.io/micro-cases/zh-hk/cash-flow.html',
+      EAcNlzMLh7I: 'https://kochiuyu.github.io/micro-cases/invoice-exposure.html',
+      v4YfvgdcDAE: 'https://kochiuyu.github.io/micro-cases/zh-cn/invoice-exposure.html',
+      nUgtZfLaoGU: 'https://kochiuyu.github.io/micro-cases/zh-hk/invoice-exposure.html',
+      'Qau-HM-85-E': 'https://kochiuyu.github.io/micro-cases/same-gap.html',
+      tbI7P8_zoAM: 'https://kochiuyu.github.io/micro-cases/zh-cn/same-gap.html',
+      '440x4VRAgz0': 'https://kochiuyu.github.io/micro-cases/zh-hk/same-gap.html',
+      kzGc6WQohFg: 'https://kochiuyu.github.io/micro-cases/smaller-payments.html',
+      '3EOWmBLrDVQ': 'https://kochiuyu.github.io/micro-cases/zh-cn/smaller-payments.html',
+      '2OG1VTp9KSI': 'https://kochiuyu.github.io/micro-cases/zh-hk/smaller-payments.html',
+      'V4QeDVOF-2M': 'https://kochiuyu.github.io/micro-cases/sooner-than-what.html',
+      '8OyobFAT6v0': 'https://kochiuyu.github.io/micro-cases/zh-cn/sooner-than-what.html',
+      aflFEPkATd0: 'https://kochiuyu.github.io/micro-cases/zh-hk/sooner-than-what.html',
+      'QNdl2tdO-lw': 'https://kochiuyu.github.io/micro-cases/back-sooner.html',
+      '7eWqEtRlSSs': 'https://kochiuyu.github.io/micro-cases/zh-cn/back-sooner.html',
+      C_zTgU6kyys: 'https://kochiuyu.github.io/micro-cases/zh-hk/back-sooner.html',
+      oE09NSa8aoA: 'https://kochiuyu.github.io/micro-cases/protected-and-available.html',
+      cVfpsOE_0I8: 'https://kochiuyu.github.io/micro-cases/zh-cn/protected-and-available.html',
+      CYp8xEb9GSE: 'https://kochiuyu.github.io/micro-cases/zh-hk/protected-and-available.html',
+      _lcD6lRqFn8: 'https://kochiuyu.github.io/micro-cases/only-once.html',
+      Z37KkN1cFEE: 'https://kochiuyu.github.io/micro-cases/zh-cn/only-once.html',
+      '-GfgYAgPkn4': 'https://kochiuyu.github.io/micro-cases/zh-hk/only-once.html',
     };
     const ownCase = casePages[video.youtube_id];
     if (!ownCase || !html.includes(`href="${ownCase}"`)) {
@@ -552,6 +582,7 @@ if (!laePage.includes('>Companion site<')) fail('LAE collection page dropped the
 const microPage = byRel.get('collections/micro-cases/index.html') ?? '';
 if (!microPage.includes('>Micro Cases collection<')) fail('Micro Cases page dropped the collection link');
 if (!home.includes('micro-cases/accounting/')) fail('home page is missing the Accounting case group');
+if (!home.includes('micro-cases/finance/')) fail('home page is missing the Finance case group');
 if (!home.includes('/vi/F1WY_3jXYQw/hq720.jpg')) fail('home page is missing the landscape ACC-01 cover');
 if (home.includes('/vi/F1WY_3jXYQw/oardefault.jpg')) fail('ACC-01 cover uses a Shorts thumbnail');
 const languageSelectStart = searchPage.indexOf('id="language"');
@@ -569,6 +600,7 @@ if (!teaCollection.includes('class="video-grid shorts"') || !teaCollection.inclu
 if (!home.includes('tea-shorts/t01/')) fail('home page is missing the Tea Shorts T01 topic');
 if (!home.includes('/vi/PXyUCfLHOf8/oardefault.jpg')) fail('home page is missing the Tea Shorts cover');
 if (!searchPage.includes('>Accounting</option>')) fail('search topic filter is missing Accounting');
+if (!searchPage.includes('>Finance</option>')) fail('search topic filter is missing Finance');
 
 for (const problem of assertPreviewMarkup(byRel, catalog)) fail(problem);
 
