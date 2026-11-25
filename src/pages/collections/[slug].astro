@@ -32,7 +32,8 @@ const isStat = collection.slug === 'stat-lessons';
 const topicBase =
   collection.slug === 'economics-shorts' ||
   collection.slug === 'lae-what-is' ||
-  collection.slug === 'micro-cases'
+  collection.slug === 'micro-cases' ||
+  collection.slug === 'tea-shorts'
     ? collection.slug
     : null;
 const topicGroups = topicBase ? topicsInCollection(collection.slug) : [];
@@ -45,7 +46,9 @@ const current =
         ? 'econ'
         : collection.slug === 'micro-cases'
           ? 'cases'
-          : 'stat';
+          : collection.slug === 'tea-shorts'
+            ? 'tea'
+            : 'stat';
 ---
 
 <Base
@@ -65,7 +68,7 @@ const current =
     <CollectionDescription class="lede" description={collection.description} />
     <p class="note">
       {
-        collection.slug === 'micro-cases'
+        collection.slug === 'micro-cases' || collection.slug === 'tea-shorts'
           ? `${formatLessonCount(lessonTally(list).lessons, lessonTally(list).versions)}.`
           : `${list.length} videos.`
       }
@@ -116,14 +119,18 @@ const current =
           </h2>
           <p class="note">
             {
-              collection.slug === 'micro-cases'
+              collection.slug === 'micro-cases' || collection.slug === 'tea-shorts'
                 ? formatLessonCount(lessonTally(group.videos).lessons, lessonTally(group.videos).versions)
                 : `${group.videos.length} videos.`
             }
           </p>
           <VideoRows
             videos={group.videos}
-            showLanguage={collection.slug === 'lae-what-is' || collection.slug === 'micro-cases'}
+            showLanguage={
+              collection.slug === 'lae-what-is' ||
+              collection.slug === 'micro-cases' ||
+              collection.slug === 'tea-shorts'
+            }
           />
         </section>
       ))

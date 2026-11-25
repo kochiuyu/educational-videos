@@ -20,7 +20,7 @@ import {
   topicsInCollection,
   type Video,
 } from '../data/catalog';
-import { href, topicSlug, trackSlug } from '../lib/urls';
+import { href, isPortraitCollection, topicSlug, trackSlug } from '../lib/urls';
 import { moduleCover } from '../lib/stat-lesson';
 import { catalogDateLine, moduleTitleLang } from '../lib/text';
 import { collectionCardCopy } from '../../scripts/reader-copy.mjs';
@@ -30,6 +30,7 @@ const description = `Lesson catalog by ${owner}. ${lessonSummary.lessons} distin
 const economicsTopics = topicsInCollection('economics-shorts');
 const laeWhatTopics = topicsInCollection('lae-what-is');
 const microTopics = topicsInCollection('micro-cases');
+const teaTopics = topicsInCollection('tea-shorts');
 
 function collectionCover(slug: string): Video | undefined {
   if (slug === 'stat-lessons') {
@@ -63,7 +64,7 @@ function collectionCover(slug: string): Video | undefined {
         collections.map((collection) => {
           const counts = lessonSummary.byCollection[collection.slug];
           const sample = collectionCover(collection.slug);
-          const portrait = collection.slug === 'economics-shorts';
+          const portrait = isPortraitCollection(collection.slug);
           return (
             <li>
               <a class="sheet-link" href={href(`collections/${collection.slug}`)}>
@@ -204,11 +205,36 @@ function collectionCover(slug: string): Video | undefined {
     </ul>
   </section>
 
+  <section class="section" aria-labelledby="tea-heading">
+    <h2 id="tea-heading">Tea Shorts</h2>
+    <ul class="short-grid">
+      {
+        teaTopics.map((group) => {
+          const counts = lessonTally(group.videos);
+          const sample = group.videos.find((video) => video.language === 'tea-en') ?? group.videos[0];
+          return (
+            <li>
+              <a class="sheet-link" href={href(`tea-shorts/${topicSlug(group.topic)}`)}>
+                {
+                  sample && (
+                    <CardThumb youtubeId={sample.youtube_id} collection="tea-shorts" frame="poster" />
+                  )
+                }
+                <h3>{group.topic}</h3>
+                <p class="count">{formatLessonCount(counts.lessons, counts.versions)}</p>
+              </a>
+            </li>
+          );
+        })
+      }
+    </ul>
+  </section>
+
   <section class="section" aria-labelledby="tracks-heading">
     <h2 id="tracks-heading">STAT language tracks</h2>
     <p class="note">
       These list language versions of STAT lessons only. They are not extra lessons.
-      LAE 101, LAE What-is, Economics Shorts, and Micro Cases are not listed here.
+      LAE 101, LAE What-is, Economics Shorts, Micro Cases, and Tea Shorts are not listed here.
     </p>
     <ul class="inline-links track-picks">
       {

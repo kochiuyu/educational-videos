@@ -44,6 +44,18 @@ export function relatedVideos(video: Video): { heading: string; videos: Video[] 
     if (same.length === 0) return null;
     return { heading: 'Same case in other languages.', videos: same };
   }
+  if (video.collection_slug === 'tea-shorts') {
+    const same = sortByLanguage(
+      videos.filter(
+        (other) =>
+          other.youtube_id !== video.youtube_id &&
+          other.collection_slug === 'tea-shorts' &&
+          other.id === video.id,
+      ),
+    );
+    if (same.length === 0) return null;
+    return { heading: 'Same topic in other languages.', videos: same };
+  }
   if (video.collection_slug === 'lae-101') {
     const others = videos.filter(
       (other) => other.collection_slug === video.collection_slug && other.youtube_id !== video.youtube_id,

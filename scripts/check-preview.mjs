@@ -412,6 +412,25 @@ export function assertPreviewMarkup(pages, catalog) {
   }
   if (!shorts.includes('data-portrait="true"')) bad('Shorts previews are not marked portrait');
 
+  const teaPage = pages.get('tea-shorts/t01/index.html') ?? '';
+  const teaIds = ['PXyUCfLHOf8', 'EZk3qvma1aU', 'DaQ19k9U6To'];
+  const teaPreviews = teaPage.match(/data-preview="/g) ?? [];
+  if (teaPreviews.length !== teaIds.length) {
+    bad(`Tea Shorts T01 has ${teaPreviews.length} previews for ${teaIds.length} recordings`);
+  }
+  if (!teaPage.includes('class="video-grid shorts"') || !teaPage.includes('video-card portrait')) {
+    bad('Tea Shorts T01 is not a portrait Shorts grid');
+  }
+  for (const id of teaIds) {
+    if (!teaPage.includes(`data-preview="${id}"`) || !teaPage.includes('data-portrait="true"')) {
+      bad(`Tea Shorts cannot preview ${id} as a portrait Short`);
+    }
+    if (!teaPage.includes(`href="/educational-videos/videos/${id}/"`)) {
+      bad(`Tea Shorts title link for ${id} is missing`);
+    }
+  }
+  if (teaPage.includes('data-portrait="false"')) bad('Tea Shorts T01 has a landscape preview');
+
   const accounting = pages.get('micro-cases/accounting/index.html') ?? '';
   const caseIds = ['F1WY_3jXYQw', 'uetO9tibCEA', 'EFakphvV2qE', '1Qik16ZYE14', 'WjCDkMI3uZc', 'LADYnu4OCug'];
   const casePreviews = accounting.match(/data-preview="/g) ?? [];

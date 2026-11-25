@@ -34,6 +34,7 @@ for (const list of statLessonOptions.values()) {
 const econTopics = topicsInCollection('economics-shorts').map((group) => group.topic);
 const laeWhatTopics = topicsInCollection('lae-what-is').map((group) => group.topic);
 const microTopics = topicsInCollection('micro-cases').map((group) => group.topic);
+const teaTopics = topicsInCollection('tea-shorts').map((group) => group.topic);
 const modules = statModuleIds();
 ---
 
@@ -105,6 +106,9 @@ const modules = statModuleIds();
         </optgroup>
         <optgroup label="Micro Cases">
           {microTopics.map((topic) => <option value={topic}>{topic}</option>)}
+        </optgroup>
+        <optgroup label="Tea Shorts">
+          {teaTopics.map((topic) => <option value={topic}>{topic}</option>)}
         </optgroup>
       </select>
     </div>
