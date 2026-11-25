@@ -10,7 +10,7 @@
     "lae_101": "Ten public LAE 101 short intros. Individual video URLs only.",
     "economics_shorts": "Public cartoon-style economics YouTube Shorts from the @ChiuYuKo channel, grouped by the channel's public playlists Experimental Economics and Game Theory in daily life.",
     "lae_what_is": "What is LAE?, What is the 1,000-metre band?, What is a drone?, What is an SUA?, and What is an eVTOL? for CUHK DOTE5891, Business Analysis of Low-Altitude Economy. Companion site: https://kochiuyu.github.io/lae-companion/.",
-    "micro_cases": "ACC-01, The last tray of egg tarts, as three landscape language recordings: English, 普通话, and 廣東話. Visibility Public was last observed at upload completion on 2026-11-22 (Asia/Hong_Kong), not rechecked afterward. Duration is null because a YouTube duration was not verified. ACC-02, Close the loss-making branch?, as three landscape language recordings: English, 普通话, and 廣東話. Visibility Public was last observed at upload completion on 2026-11-23 (Asia/Taipei), not rechecked afterward. Duration is null because a YouTube duration was not verified. ACC-03, Target reached. Returns still coming?, as three landscape language recordings: English, 普通话, and 廣東話. Visibility Public was last observed in YouTube Studio on 2026-11-24 (Asia/Hong_Kong): English 11:42, 普通话 11:52, and 廣東話 published 12:19. Not rechecked afterward. Duration is null because a hosted YouTube duration was not verified. ACC-04, The stock is all there. Is it worth the same?, as three landscape language recordings: English, 普通话, and 廣東話. Duration is null because a hosted YouTube duration was not verified. Descriptions are the official source texts, including one trailing newline.",
+    "micro_cases": "ACC-01, The last tray of egg tarts, as three landscape language recordings: English, 普通话, and 廣東話. Visibility Public was last observed at upload completion on 2026-11-22 (Asia/Hong_Kong), not rechecked afterward. Duration is null because a YouTube duration was not verified. ACC-02, Close the loss-making branch?, as three landscape language recordings: English, 普通话, and 廣東話. Visibility Public was last observed at upload completion on 2026-11-23 (Asia/Taipei), not rechecked afterward. Duration is null because a YouTube duration was not verified. ACC-03, Target reached. Returns still coming?, as three landscape language recordings: English, 普通话, and 廣東話. Visibility Public was last observed in YouTube Studio on 2026-11-24 (Asia/Hong_Kong): English 11:42, 普通话 11:52, and 廣東話 published 12:19. Not rechecked afterward. Duration is null because a hosted YouTube duration was not verified. ACC-04, The stock is all there. Is it worth the same?, as three landscape language recordings: English, 普通话, and 廣東話. Duration is null because a hosted YouTube duration was not verified. Descriptions are the official source texts, including one trailing newline. FIN-01, When the star sits out, and FIN-02, The red minibus bid, as three landscape language recordings each: English, 普通话, and 廣東話. Public status was verified from the owner's box at 14:08 Taipei on 2026-11-25. Duration is null because a hosted YouTube duration was not verified. Descriptions are the official source texts, including one trailing newline.",
     "tea_shorts": "Tea Companion portrait Shorts. T01, One plant, six families of tea, as one lesson with three language recordings: English, 普通话, and 粵語. Descriptions are the public YouTube shortDescription texts retrieved on 2026-11-25. Duration is null. T02–T07 are not in this catalog."
   },
   "exclusions": [
@@ -48,7 +48,7 @@
     {
       "slug": "micro-cases",
       "name": "Micro Cases",
-      "description": "Accounting classroom cases. ACC-01, The last tray of egg tarts, ACC-02, Close the loss-making branch?, ACC-03, Target reached. Returns still coming?, and ACC-04, The stock is all there. Is it worth the same?, in English, 普通话, and 廣東話. Case collection: https://kochiuyu.github.io/micro-cases/."
+      "description": "Accounting and Finance classroom cases. ACC-01, The last tray of egg tarts, ACC-02, Close the loss-making branch?, ACC-03, Target reached. Returns still coming?, and ACC-04, The stock is all there. Is it worth the same?. FIN-01, When the star sits out, and FIN-02, The red minibus bid. Each case is in English, 普通话, and 廣東話. Case collection: https://kochiuyu.github.io/micro-cases/."
     },
     {
       "slug": "tea-shorts",
@@ -118,7 +118,7 @@
       "label": "粵語"
     }
   ],
-  "video_count": 387,
+  "video_count": 393,
   "videos": [
     {
       "id": "LAE101-01",
@@ -6262,6 +6262,102 @@
       "youtube_id": "p98piMHwA8Y",
       "youtube_url": "https://www.youtube.com/watch?v=p98piMHwA8Y",
       "source": "Approved ACC-04 廣東話 description, the official source text including its trailing newline. YouTube duration was not verified.",
+      "module_title": null
+    },
+    {
+      "id": "FIN-01",
+      "collection": "Micro Cases",
+      "collection_slug": "micro-cases",
+      "module": null,
+      "topic": "Finance",
+      "language": "mc-en",
+      "language_label": "English",
+      "title": "FIN-01 · When the star sits out (English)",
+      "description": "When the star sits out (FIN-01) is a Micro Cases classroom video on pricing a ticket refund if the star sits out.\n\nHong Kong Stadium, 4 February 2024. Fans came to an exhibition match hoping to see Lionel Messi play for Inter Miami. The match went ahead. Messi stayed on the bench. Imagine you are selling tickets for the next exhibition. Your headline player may miss the match. Before sales open, you must decide what to promise buyers. Two offers are available for the same seat, in HK$ per ticket: a Standard ticket costs HK$800 today and refunds nothing if the star sits out; a Protected ticket costs HK$850 today and refunds HK$400 if the star sits out. Which ticket would you buy? What would you need to know before paying the extra HK$50?\n\nThe teaching format is pause, vote, and reveal. Pause at each decision, vote, compare your reasons, then continue for the debrief. A later fact changes what you know about the star sitting out, and you vote again.\n\nThe two offers and prices are fictional teaching assumptions, not the actual ticketing scheme of that match, and not a news report about any real company.\n\nRead the case page:\nhttps://kochiuyu.github.io/micro-cases/match.html\n\nBrowse the Micro Cases collection:\nhttps://kochiuyu.github.io/micro-cases/\n\nA Micro Cases classroom video by Prof. Chiu Yu KO.\n",
+      "duration": null,
+      "youtube_id": "GA8-62W4ptQ",
+      "youtube_url": "https://www.youtube.com/watch?v=GA8-62W4ptQ",
+      "source": "Official FIN-01 English source text, including one trailing newline. Public status was verified from the owner's box at 14:08 Taipei on 2026-11-25. YouTube duration was not verified.",
+      "module_title": null
+    },
+    {
+      "id": "FIN-01",
+      "collection": "Micro Cases",
+      "collection_slug": "micro-cases",
+      "module": null,
+      "topic": "Finance",
+      "language": "mc-cmn",
+      "language_label": "普通话",
+      "title": "FIN-01 · 球星没有上场，由谁承担？（普通话）",
+      "description": "球星没有上场，由谁承担？（FIN-01）是 Micro Cases 的课堂短片，用来讨论在头号球星可能不上场时，如何为退款承诺定价。\n\n2024年2月4日，香港大球场。观众来看一场表演赛，就是为了看利昂内尔·梅西代表国际迈阿密上场。比赛照常踢完，梅西始终坐在替补席。假设下一场表演赛由你卖票。头号球星可能整场不上。售票之前，你得先定好：向买票的人承诺什么。同一座位有两种票，每张以港元计价：普通票今天付款 800，球星未上场可退 0；保障票今天付款 850，球星未上场可退 400。你会买哪一种？多付这50港元之前，你还要弄清什么？\n\n短片采用先暂停、再投票、再讲评的课堂形式。请在每个决策点暂停、投票、比较理由，然后再继续观看讲评。后面会补充新的资料，请再投一次票。\n\n两种票和价格都是课堂假设，不是那场比赛的售票方案，也不是对任何真实公司的新闻报道。\n\n阅读个案页面：\nhttps://kochiuyu.github.io/micro-cases/zh-cn/match.html\n\n浏览 Micro Cases 个案集：\nhttps://kochiuyu.github.io/micro-cases/\n\nMicro Cases 课堂短片，由 Prof. Chiu Yu KO 设计。\n",
+      "duration": null,
+      "youtube_id": "r8poa-aQMtc",
+      "youtube_url": "https://www.youtube.com/watch?v=r8poa-aQMtc",
+      "source": "Official FIN-01 普通话 source text, including one trailing newline. Public status was verified from the owner's box at 14:08 Taipei on 2026-11-25. YouTube duration was not verified.",
+      "module_title": null
+    },
+    {
+      "id": "FIN-01",
+      "collection": "Micro Cases",
+      "collection_slug": "micro-cases",
+      "module": null,
+      "topic": "Finance",
+      "language": "mc-yue",
+      "language_label": "廣東話",
+      "title": "FIN-01 · 球星沒有上場，由誰承擔？（廣東話）",
+      "description": "球星沒有上場，由誰承擔？（FIN-01）是 Micro Cases 的課堂短片，用來討論在首席球星可能不上場時，如何為退款承諾定價。\n\n2024年2月4日，香港大球場。球迷入場看表演賽，是為了看利昂內爾·美斯代表國際邁阿密上陣。賽事照常踢完，美斯一直坐在後備席。假設下一場表演賽由你售票。首席球星可能整場不上。開售之前，你要先決定向購票人士承諾甚麼。同一座位有兩種門票，每張以港元計價：普通票今天付款 800，球星未上場可退 0；保障票今天付款 850，球星未上場可退 400。你會買哪一種？多付這50港元之前，還要弄清楚甚麼？\n\n短片採用先暫停、再投票、再講評的課堂形式。請在每個決策點暫停、投票、比較理由，然後再繼續觀看講評。後面會補充新的資料，請再投一次票。\n\n兩種門票和價格都是課堂假設，並非該場賽事的售票安排，也不是對任何真實公司的新聞報道。\n\n閱讀個案頁面：\nhttps://kochiuyu.github.io/micro-cases/zh-hk/match.html\n\n瀏覽 Micro Cases 個案集：\nhttps://kochiuyu.github.io/micro-cases/\n\nMicro Cases 課堂短片，由 Prof. Chiu Yu KO 設計。\n",
+      "duration": null,
+      "youtube_id": "xqgkTiDSTv4",
+      "youtube_url": "https://www.youtube.com/watch?v=xqgkTiDSTv4",
+      "source": "Official FIN-01 廣東話 source text, including one trailing newline. Public status was verified from the owner's box at 14:08 Taipei on 2026-11-25. YouTube duration was not verified.",
+      "module_title": null
+    },
+    {
+      "id": "FIN-02",
+      "collection": "Micro Cases",
+      "collection_slug": "micro-cases",
+      "module": null,
+      "topic": "Finance",
+      "language": "mc-en",
+      "language_label": "English",
+      "title": "FIN-02 · The red minibus bid (English)",
+      "description": "The red minibus bid (FIN-02) is a Micro Cases classroom video on what to bid for a one-year red minibus operating lease.\n\nA red minibus owner offers you the vehicle and the right to operate it for one year. The owner wants HK$110,000, payable at year end. You keep the fares, cover the running costs and return the bus at the end. You can walk away today. Your forecast for 250 operating days is HK$2,000 a day in fares and HK$1,500 a day in costs, including what your own working time is worth. Treat the forecast as certain for this round. Would you take the lease for HK$110,000? What is the most you could pay and still do as well as walking away?\n\nThe teaching format is pause, vote, and reveal. Pause at each decision, vote, compare your reasons, then continue for the debrief. A later fact changes what you know about future earnings, and you vote again.\n\nThe lease, the earnings forecast, and the later update are fictional classroom assumptions, not a news report about any real operator. All amounts are in Hong Kong dollars.\n\nRead the case page:\nhttps://kochiuyu.github.io/micro-cases/minibus.html\n\nBrowse the Micro Cases collection:\nhttps://kochiuyu.github.io/micro-cases/\n\nA Micro Cases classroom video by Prof. Chiu Yu KO.\n",
+      "duration": null,
+      "youtube_id": "VGywQb1zanU",
+      "youtube_url": "https://www.youtube.com/watch?v=VGywQb1zanU",
+      "source": "Official FIN-02 English source text, including one trailing newline. Public status was verified from the owner's box at 14:08 Taipei on 2026-11-25. YouTube duration was not verified.",
+      "module_title": null
+    },
+    {
+      "id": "FIN-02",
+      "collection": "Micro Cases",
+      "collection_slug": "micro-cases",
+      "module": null,
+      "topic": "Finance",
+      "language": "mc-cmn",
+      "language_label": "普通话",
+      "title": "FIN-02 · 这辆红色小巴，你出多少？（普通话）",
+      "description": "这辆红色小巴，你出多少？（FIN-02）是 Micro Cases 的课堂短片，用来讨论如何为一年期红色小巴营运权出价。\n\n车主把一辆红色小巴连同一年营运权出让给你。他要价110,000港元，年底才付。车费归你，营运开支由你承担，年终把车交还。今天不接手，也完全可以。你预计营运250天，每天车费2,000港元，每天成本1,500港元，其中已经计入你自己时间的价值。这一轮先把预测当成确定的。110,000港元的租约，你接不接？你最多可以付到多少，结果仍然不比今天放弃差？\n\n短片采用先暂停、再投票、再讲评的课堂形式。请在每个决策点暂停、投票、比较理由，然后再继续观看讲评。后面会补充新的资料，请再投一次票。\n\n租约、收入预测和后来补充的资料都是课堂假设，并不是对任何真实营运者的新闻报道。金额均为港元。\n\n阅读个案页面：\nhttps://kochiuyu.github.io/micro-cases/zh-cn/minibus.html\n\n浏览 Micro Cases 个案集：\nhttps://kochiuyu.github.io/micro-cases/\n\nMicro Cases 课堂短片，由 Prof. Chiu Yu KO 设计。\n",
+      "duration": null,
+      "youtube_id": "EtDwBboVmtI",
+      "youtube_url": "https://www.youtube.com/watch?v=EtDwBboVmtI",
+      "source": "Official FIN-02 普通话 source text, including one trailing newline. Public status was verified from the owner's box at 14:08 Taipei on 2026-11-25. YouTube duration was not verified.",
+      "module_title": null
+    },
+    {
+      "id": "FIN-02",
+      "collection": "Micro Cases",
+      "collection_slug": "micro-cases",
+      "module": null,
+      "topic": "Finance",
+      "language": "mc-yue",
+      "language_label": "廣東話",
+      "title": "FIN-02 · 這輛紅色小巴，你出多少？（廣東話）",
+      "description": "這輛紅色小巴，你出多少？（FIN-02）是 Micro Cases 的課堂短片，用來討論如何為一年期紅色小巴營運權出價。\n\n車主把一輛紅色小巴連同一年營運權出讓給你。他要價110,000港元，年底才付。車費歸你，營運開支由你承擔，年終把車交還。今天不接手，亦完全可以。你預計營運250天，每天車費2,000港元，每天成本1,500港元，當中已計入你自己時間的價值。這一輪先把預測當作確定。110,000港元的租約，你接不接？你最多可以付到多少，結果仍然不比今天放棄差？\n\n短片採用先暫停、再投票、再講評的課堂形式。請在每個決策點暫停、投票、比較理由，然後再繼續觀看講評。後面會補充新的資料，請再投一次票。\n\n租約、收入預測和後來補充的資料都是課堂假設，並不是對任何真實營運者的新聞報道。金額均為港元。\n\n閱讀個案頁面：\nhttps://kochiuyu.github.io/micro-cases/zh-hk/minibus.html\n\n瀏覽 Micro Cases 個案集：\nhttps://kochiuyu.github.io/micro-cases/\n\nMicro Cases 課堂短片，由 Prof. Chiu Yu KO 設計。\n",
+      "duration": null,
+      "youtube_id": "PHgat2vIRbc",
+      "youtube_url": "https://www.youtube.com/watch?v=PHgat2vIRbc",
+      "source": "Official FIN-02 廣東話 source text, including one trailing newline. Public status was verified from the owner's box at 14:08 Taipei on 2026-11-25. YouTube duration was not verified.",
       "module_title": null
     },
     {

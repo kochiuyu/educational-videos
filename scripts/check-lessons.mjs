@@ -282,11 +282,11 @@ const accExpected = [
 ];
 const acc = catalog.videos.filter((item) => item.id === 'ACC-01');
 if (acc.length !== 3) fail('ACC-01 must stay one lesson with three recordings.');
-if (summary.byCollection['micro-cases']?.lessons !== 4 || summary.byCollection['micro-cases']?.versions !== 12) {
-  fail('Micro Cases must be four lessons and twelve recordings.');
+if (summary.byCollection['micro-cases']?.lessons !== 6 || summary.byCollection['micro-cases']?.versions !== 18) {
+  fail('Micro Cases must be six lessons and eighteen recordings.');
 }
-if (summary.lessons !== 123 || summary.versions !== 387) {
-  fail(`Catalog is ${summary.lessons} lessons and ${summary.versions} recordings; expected 123 and 387.`);
+if (summary.lessons !== 125 || summary.versions !== 393) {
+  fail(`Catalog is ${summary.lessons} lessons and ${summary.versions} recordings; expected 125 and 393.`);
 }
 if (summary.byCollection['stat-lessons'].lessons !== 78 || summary.byCollection['stat-lessons'].versions !== 312) {
   fail('STAT must be 78 lessons and 312 recordings.');
@@ -295,7 +295,7 @@ for (const [slug, lessons, versions] of [
   ['lae-101', 10, 10],
   ['economics-shorts', 25, 25],
   ['lae-what-is', 5, 25],
-  ['micro-cases', 4, 12],
+  ['micro-cases', 6, 18],
 ]) {
   const row = summary.byCollection[slug];
   if (row?.lessons !== lessons || row?.versions !== versions) {
@@ -509,9 +509,66 @@ const acc04Expected = [
     sha256: '9c57b1c41fc03f811b202c44eebbc9b311abc2df18303f42f21f9e07d07d0b20',
   },
 ];
+const fin01Expected = [
+  {
+    language: 'mc-en',
+    label: 'English',
+    youtube_id: 'GA8-62W4ptQ',
+    title: 'FIN-01 · When the star sits out (English)',
+    casePage: 'https://kochiuyu.github.io/micro-cases/match.html',
+    sha256: '002d1517f94d463e32c9bece4713dada3d175e3bd71aac0e4d2406357682339a',
+  },
+  {
+    language: 'mc-cmn',
+    label: '普通话',
+    youtube_id: 'r8poa-aQMtc',
+    title: 'FIN-01 · 球星没有上场，由谁承担？（普通话）',
+    casePage: 'https://kochiuyu.github.io/micro-cases/zh-cn/match.html',
+    sha256: '776add6345bd385572143e8a43dbd745dffabec3d553fa61d23f21a6cad0fa93',
+  },
+  {
+    language: 'mc-yue',
+    label: '廣東話',
+    youtube_id: 'xqgkTiDSTv4',
+    title: 'FIN-01 · 球星沒有上場，由誰承擔？（廣東話）',
+    casePage: 'https://kochiuyu.github.io/micro-cases/zh-hk/match.html',
+    sha256: '1a11fe010dd7f4f9ea19bb5a135f6a458fea10a7f25fac54f6a4364d32cf02ed',
+  },
+];
+const fin02Expected = [
+  {
+    language: 'mc-en',
+    label: 'English',
+    youtube_id: 'VGywQb1zanU',
+    title: 'FIN-02 · The red minibus bid (English)',
+    casePage: 'https://kochiuyu.github.io/micro-cases/minibus.html',
+    sha256: 'ee5d378e8bc289532d8f56eab229796d967ee48fe387e07378bd51d19709f6f0',
+  },
+  {
+    language: 'mc-cmn',
+    label: '普通话',
+    youtube_id: 'EtDwBboVmtI',
+    title: 'FIN-02 · 这辆红色小巴，你出多少？（普通话）',
+    casePage: 'https://kochiuyu.github.io/micro-cases/zh-cn/minibus.html',
+    sha256: 'afe7c2ffc7004b354d86733b611319b04b5253e70db4b93c98d4dedd5bb9a996',
+  },
+  {
+    language: 'mc-yue',
+    label: '廣東話',
+    youtube_id: 'PHgat2vIRbc',
+    title: 'FIN-02 · 這輛紅色小巴，你出多少？（廣東話）',
+    casePage: 'https://kochiuyu.github.io/micro-cases/zh-hk/minibus.html',
+    sha256: '23676967185d4dfb31834ec010f09fb0fe2cadd05a4fdedc294ed0f9f16ac73f',
+  },
+];
 const acc04 = catalog.videos.filter((item) => item.id === 'ACC-04');
 if (acc04.length !== 3) fail('ACC-04 must be one lesson with three recordings.');
-if (microIds.join(',') !== [...accExpected, ...acc02Expected, ...acc03Expected, ...acc04Expected].map((item) => item.youtube_id).join(',')) {
+if (
+  microIds.join(',') !==
+  [...accExpected, ...acc02Expected, ...acc03Expected, ...acc04Expected, ...fin01Expected, ...fin02Expected]
+    .map((item) => item.youtube_id)
+    .join(',')
+) {
   fail('Micro Cases recordings changed order or identity.');
 }
 for (const expected of acc04Expected) {
@@ -539,6 +596,39 @@ for (const expected of acc04Expected) {
     fail(`${expected.youtube_id} description is not the official source text.`);
   }
   if (lessonKey(item) !== 'micro-cases\nACC-04') fail(`${expected.youtube_id} is not grouped as case ACC-04.`);
+}
+for (const [caseId, expectedRows] of [
+  ['FIN-01', fin01Expected],
+  ['FIN-02', fin02Expected],
+]) {
+  const rows = catalog.videos.filter((item) => item.id === caseId);
+  if (rows.length !== 3) fail(`${caseId} must be one lesson with three recordings.`);
+  for (const expected of expectedRows) {
+    const item = rows.find((video) => video.youtube_id === expected.youtube_id);
+    if (!item) {
+      fail(`${caseId} is missing ${expected.youtube_id}.`);
+      continue;
+    }
+    if (item.collection_slug !== 'micro-cases' || item.topic !== 'Finance' || item.module != null) {
+      fail(`${expected.youtube_id} is not grouped as a Finance micro-case.`);
+    }
+    if (item.language !== expected.language || item.language_label !== expected.label) {
+      fail(`${expected.youtube_id} language label does not match its recording.`);
+    }
+    if (statLanguageIds.has(item.language)) fail(`${expected.youtube_id} uses a STAT language track.`);
+    if (item.title !== expected.title) fail(`${expected.youtube_id} title is not the oEmbed title.`);
+    if (item.duration != null) fail(`${expected.youtube_id} duration must stay null.`);
+    if (item.youtube_url !== `https://www.youtube.com/watch?v=${expected.youtube_id}`) {
+      fail(`${expected.youtube_id} watch URL is not the canonical watch URL.`);
+    }
+    if (!item.description?.includes(expected.casePage) || !item.description.endsWith('\n')) {
+      fail(`${expected.youtube_id} description dropped the case page or its trailing newline.`);
+    }
+    if (crypto.createHash('sha256').update(item.description ?? '').digest('hex') !== expected.sha256) {
+      fail(`${expected.youtube_id} description is not the official source text.`);
+    }
+    if (lessonKey(item) !== `micro-cases\n${caseId}`) fail(`${expected.youtube_id} is not grouped as case ${caseId}.`);
+  }
 }
 for (const id of ['ACC-05', 'ACC-06', 'ACC-07', 'ACC-08', 'ACC-09', 'ACC-10']) {
   if (catalog.videos.some((item) => item.id === id)) fail(`${id} is not part of this catalog.`);

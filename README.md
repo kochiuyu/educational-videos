@@ -6,7 +6,7 @@ The public channel [https://www.youtube.com/@ChiuYuKo](https://www.youtube.com/@
 
 ## What is listed
 
-`catalog/allowlist.json` is the source of truth. The copy in this repository is the verified catalog as of **2026-11-25** (Asia/Hong_Kong): **387** videos, **123** distinct lessons.
+`catalog/allowlist.json` is the source of truth. The copy in this repository is the verified catalog as of **2026-11-25** (Asia/Hong_Kong): **393** videos, **125** distinct lessons.
 
 | Collection | Lessons | Videos |
 | --- | ---: | ---: |
@@ -14,7 +14,7 @@ The public channel [https://www.youtube.com/@ChiuYuKo](https://www.youtube.com/@
 | LAE 101 | 10 | 10 |
 | Economics Shorts | 25 | 25 |
 | LAE What-is | 5 | 25 |
-| Micro Cases | 4 | 12 |
+| Micro Cases | 6 | 18 |
 | Tea Shorts | 1 | 3 |
 
 STAT lessons by module:
@@ -48,6 +48,10 @@ ACC-02, Close the loss-making branch?, is the second Accounting case. Its three 
 ACC-03, Target reached. Returns still coming?, is the third Accounting case. Its three landscape recordings are English (`kc97t9pCO-I`), 普通话 (`heYTMobTncY`), and 廣東話 (`l5ug7pz-ZrM`). They share catalog id `ACC-03`. Each description is the official staged upload text and links that language’s `returns-target.html` page. `duration` is null because a hosted YouTube duration was not verified. Visibility Public was last observed in YouTube Studio on 24 Nov 2026 (Hong Kong time): English 11:42, 普通话 11:52, and 廣東話 published 12:19. That observation was not repeated afterward. The catalog does not record a Studio language setting.
 
 ACC-04, The stock is all there. Is it worth the same?, is the fourth Accounting case. Its three landscape recordings are English (`j1Mqyo9azI0`), 普通话 (`clafASuRNBg`), and 廣東話 (`p98piMHwA8Y`). They share catalog id `ACC-04`. Each description is the official source text, including one trailing newline, and links that language’s `count-and-value.html` page. `duration` is null because a hosted YouTube duration was not verified. ACC-05 through ACC-10 are not in this catalog.
+
+FIN-01, When the star sits out, is the first Finance case. Its three landscape recordings are English (`GA8-62W4ptQ`), 普通话 (`r8poa-aQMtc`), and 廣東話 (`xqgkTiDSTv4`). They share catalog id `FIN-01` and topic `Finance`. Each description is the official source text, including one trailing newline, and links that language’s `match.html` page. `duration` is null. Public status was verified from the owner’s box at 14:08 Taipei on 25 Nov 2026.
+
+FIN-02, The red minibus bid, is the second Finance case. Its three landscape recordings are English (`VGywQb1zanU`), 普通话 (`EtDwBboVmtI`), and 廣東話 (`PHgat2vIRbc`). They share catalog id `FIN-02` and topic `Finance`. Each description is the official source text, including one trailing newline, and links that language’s `minibus.html` page. `duration` is null. Public status was verified from the owner’s box at 14:08 Taipei on 25 Nov 2026.
 
 `oVODqhnkkPg` is in the Game Theory in daily life group. It is a public Short on the channel and was not in that playlist when the list was checked. `econ-shorts-11` (`3C_-2iME2vk`) has no verified duration, so `duration` is null. Descriptions are null. Watch URLs are `https://www.youtube.com/watch?v=` plus the id, not Shorts URLs and not playlist URLs.
 
@@ -112,7 +116,7 @@ npm run preview
 
 - Collections: `/collections/stat-lessons/`, `/collections/lae-101/`, `/collections/economics-shorts/`, `/collections/lae-what-is/`, `/collections/micro-cases/`, and `/collections/tea-shorts/`
 - Tea Shorts topics: `/tea-shorts/t01/`
-- Micro Cases subject: `/micro-cases/accounting/`
+- Micro Cases subjects: `/micro-cases/accounting/` and `/micro-cases/finance/`
 - STAT modules: `/stat-lessons/m01/` through `/stat-lessons/m06/`
 - STAT topics: `/stat-lessons/m03/t01/`
 - Economics Shorts topics: `/economics-shorts/experimental-economics/` and `/economics-shorts/game-theory-in-daily-life/`
@@ -140,7 +144,7 @@ There is no backend. Edit the catalog, open a pull request, and let the Pages wo
 6. Economics Shorts use `collection_slug` `economics-shorts` and a `topic` of `Experimental Economics` or `Game Theory in daily life`. Leave `module`, `language`, and `language_label` null unless a verified value exists. Use the watch URL, not a Shorts URL and not a playlist URL. Copy `duration` when it was verified, and leave it null when it was not. Do not label these Shorts as HeyGen.
 7. LAE What-is uses `collection_slug` `lae-what-is`, a topic of `What is LAE?`, `What is the 1,000-metre band?`, `What is a drone?`, `What is an SUA?`, or `What is an eVTOL?`, and one of its five language ids (`en`, `cmn`, `yue`, `en-bi-hans`, `en-bi-hant`) with that language’s label copied exactly. Do not file these under LAE 101 or under the four STAT language tracks. Leave `duration` null unless a duration was verified. Use the watch URL, not a playlist URL. If the collection description names the topics, keep those names in topic order so the topic pages stay in that order.
 8. Optional: `description`, `duration` (`2:14`), `module_title`, `source`. Use `null` or omit anything you do not have. Leave `duration` null when a YouTube duration was not verified.
-9. Micro Cases use `collection_slug` `micro-cases`, topic `Accounting`, and one shared catalog id per case. ACC-01 uses language ids `mc-en`, `mc-cmn`, and `mc-yue` with labels `English`, `普通话`, and `廣東話`. Do not file these under the four STAT language tracks. Copy the approved description, which already links the localized case page. Do not add a quiz or a duration that was not verified on YouTube.
+9. Micro Cases use `collection_slug` `micro-cases`, a subject topic such as `Accounting` or `Finance`, and one shared catalog id per case. Language ids are `mc-en`, `mc-cmn`, and `mc-yue` with labels `English`, `普通话`, and `廣東話`. Do not file these under the four STAT language tracks. Copy the approved description, including its trailing newline and the localized case page. Do not add a quiz or a duration that was not verified on YouTube. A new subject is a new topic page, such as `/micro-cases/finance/`, from the same template.
 10. Tea Shorts use `collection_slug` `tea-shorts`. One topic is one lesson: give every language recording of that topic the same catalog `id` and the same `topic` (`T01`, then `T02` through `T07`). Use language ids `tea-en`, `tea-cmn`, and `tea-yue` with labels `English`, `普通话`, and `粵語`. Do not file these under the four STAT language tracks. Copy the public YouTube description exactly, including whether it has a trailing newline. Leave `duration` null unless a hosted YouTube duration was verified. Do not add a quiz or a playlist URL. Use the watch URL. A later topic does not need a new page template: `/collections/tea-shorts/`, `/tea-shorts/{topic}/`, the homepage tile, and the portrait Shorts layout are generated from the catalog. Update `video_count`, the README counts, and the lesson-count checks in the same edit.
 11. A new collection or language has to be added to `collections` or `languages` in the same edit. Every collection and language in those arrays must have at least one video.
 12. Run `npm run check:catalog` and `npm run build`.
@@ -175,4 +179,4 @@ Built with [Astro](https://astro.build/) 5.18.2, used under the [MIT License](ht
 
 ## Embed restrictions
 
-The catalog does not say whether YouTube permits embedding. If a player shows that a video cannot be embedded, the page still links to the watch URL. Embed restrictions were not verified for all 387 videos.
+The catalog does not say whether YouTube permits embedding. If a player shows that a video cannot be embedded, the page still links to the watch URL. Embed restrictions were not verified for all 393 videos.
