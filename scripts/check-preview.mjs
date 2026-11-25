@@ -449,7 +449,7 @@ export function assertPreviewMarkup(pages, catalog) {
   }
 
   const finance = pages.get('micro-cases/finance/index.html') ?? '';
-  const financeIds = ['GA8-62W4ptQ', 'r8poa-aQMtc', 'xqgkTiDSTv4', 'VGywQb1zanU', 'EtDwBboVmtI', 'PHgat2vIRbc'];
+  const financeIds = ['GA8-62W4ptQ', 'r8poa-aQMtc', 'xqgkTiDSTv4', 'VGywQb1zanU', 'EtDwBboVmtI', 'PHgat2vIRbc', 'OeiP-qAIIDc', 'qOKn14OPQgI', 'CNkL1dHjnZo', 'EAcNlzMLh7I', 'v4YfvgdcDAE', 'nUgtZfLaoGU', 'Qau-HM-85-E', 'tbI7P8_zoAM', '440x4VRAgz0'];
   const financePreviews = finance.match(/data-preview="/g) ?? [];
   if (financePreviews.length !== financeIds.length) {
     bad(`Finance has ${financePreviews.length} previews for ${financeIds.length} recordings`);

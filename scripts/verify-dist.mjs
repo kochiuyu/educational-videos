@@ -316,6 +316,15 @@ for (const video of catalog.videos) {
       VGywQb1zanU: 'https://kochiuyu.github.io/micro-cases/minibus.html',
       EtDwBboVmtI: 'https://kochiuyu.github.io/micro-cases/zh-cn/minibus.html',
       PHgat2vIRbc: 'https://kochiuyu.github.io/micro-cases/zh-hk/minibus.html',
+      'OeiP-qAIIDc': 'https://kochiuyu.github.io/micro-cases/cash-flow.html',
+      qOKn14OPQgI: 'https://kochiuyu.github.io/micro-cases/zh-cn/cash-flow.html',
+      CNkL1dHjnZo: 'https://kochiuyu.github.io/micro-cases/zh-hk/cash-flow.html',
+      EAcNlzMLh7I: 'https://kochiuyu.github.io/micro-cases/invoice-exposure.html',
+      v4YfvgdcDAE: 'https://kochiuyu.github.io/micro-cases/zh-cn/invoice-exposure.html',
+      nUgtZfLaoGU: 'https://kochiuyu.github.io/micro-cases/zh-hk/invoice-exposure.html',
+      'Qau-HM-85-E': 'https://kochiuyu.github.io/micro-cases/same-gap.html',
+      tbI7P8_zoAM: 'https://kochiuyu.github.io/micro-cases/zh-cn/same-gap.html',
+      '440x4VRAgz0': 'https://kochiuyu.github.io/micro-cases/zh-hk/same-gap.html',
     };
     const ownCase = casePages[video.youtube_id];
     if (!ownCase || !html.includes(`href="${ownCase}"`)) {

@@ -282,11 +282,11 @@ const accExpected = [
 ];
 const acc = catalog.videos.filter((item) => item.id === 'ACC-01');
 if (acc.length !== 3) fail('ACC-01 must stay one lesson with three recordings.');
-if (summary.byCollection['micro-cases']?.lessons !== 6 || summary.byCollection['micro-cases']?.versions !== 18) {
-  fail('Micro Cases must be six lessons and eighteen recordings.');
+if (summary.byCollection['micro-cases']?.lessons !== 9 || summary.byCollection['micro-cases']?.versions !== 27) {
+  fail('Micro Cases must be nine lessons and twenty-seven recordings.');
 }
-if (summary.lessons !== 125 || summary.versions !== 393) {
-  fail(`Catalog is ${summary.lessons} lessons and ${summary.versions} recordings; expected 125 and 393.`);
+if (summary.lessons !== 128 || summary.versions !== 402) {
+  fail(`Catalog is ${summary.lessons} lessons and ${summary.versions} recordings; expected 128 and 402.`);
 }
 if (summary.byCollection['stat-lessons'].lessons !== 78 || summary.byCollection['stat-lessons'].versions !== 312) {
   fail('STAT must be 78 lessons and 312 recordings.');
@@ -295,7 +295,7 @@ for (const [slug, lessons, versions] of [
   ['lae-101', 10, 10],
   ['economics-shorts', 25, 25],
   ['lae-what-is', 5, 25],
-  ['micro-cases', 6, 18],
+  ['micro-cases', 9, 27],
 ]) {
   const row = summary.byCollection[slug];
   if (row?.lessons !== lessons || row?.versions !== versions) {
@@ -561,11 +561,89 @@ const fin02Expected = [
     sha256: '23676967185d4dfb31834ec010f09fb0fe2cadd05a4fdedc294ed0f9f16ac73f',
   },
 ];
+const fin03Expected = [
+  {
+    language: "mc-en",
+    label: "English",
+    youtube_id: "OeiP-qAIIDc",
+    title: "FIN-03 · The biggest order, the smallest cash balance (English)",
+    casePage: "https://kochiuyu.github.io/micro-cases/cash-flow.html",
+    sha256: "2048fe63114ce13cbac2bbb571b79e1656139cc19a6202efa14e517ee98ed73c",
+  },
+  {
+    language: "mc-cmn",
+    label: "普通话",
+    youtube_id: "qOKn14OPQgI",
+    title: "FIN-03 · 最大的订单，最紧的现金（普通话）",
+    casePage: "https://kochiuyu.github.io/micro-cases/zh-cn/cash-flow.html",
+    sha256: "d22d0d6e8e6ab8aabb3f4957a9bbc3bd34d077bfca91d383048127b5a4683ada",
+  },
+  {
+    language: "mc-yue",
+    label: "廣東話",
+    youtube_id: "CNkL1dHjnZo",
+    title: "FIN-03 · 最大的訂單，最緊的現金（廣東話）",
+    casePage: "https://kochiuyu.github.io/micro-cases/zh-hk/cash-flow.html",
+    sha256: "1d1196654b3829213c0cfb916c111943106e2c0657473c1535addacf76182ccb",
+  },
+];
+const fin04Expected = [
+  {
+    language: "mc-en",
+    label: "English",
+    youtube_id: "EAcNlzMLh7I",
+    title: "FIN-04 · The invoice is not the exposure (English)",
+    casePage: "https://kochiuyu.github.io/micro-cases/invoice-exposure.html",
+    sha256: "0041817b6d4166f843995f3a30f11c990555345bce38466bea28407468558765",
+  },
+  {
+    language: "mc-cmn",
+    label: "普通话",
+    youtube_id: "v4YfvgdcDAE",
+    title: "FIN-04 · 发票金额，不是风险敞口（普通话）",
+    casePage: "https://kochiuyu.github.io/micro-cases/zh-cn/invoice-exposure.html",
+    sha256: "d19659cf22bd6ae9fed2947e17795dde6a02adb03aa24509b9a35db60affbb77",
+  },
+  {
+    language: "mc-yue",
+    label: "廣東話",
+    youtube_id: "nUgtZfLaoGU",
+    title: "FIN-04 · 發票金額，並非外匯風險（廣東話）",
+    casePage: "https://kochiuyu.github.io/micro-cases/zh-hk/invoice-exposure.html",
+    sha256: "5d09e0da5dd167be9995d59c5b380096ce66bd38fe931275e09e87866bc14554",
+  },
+];
+const fin05Expected = [
+  {
+    language: "mc-en",
+    label: "English",
+    youtube_id: "Qau-HM-85-E",
+    title: "FIN-05 · A larger limit. The same gap? (English)",
+    casePage: "https://kochiuyu.github.io/micro-cases/same-gap.html",
+    sha256: "f9fb3f9ed2da69d0981945387b39694bccc67bccb6b09fa488f4c612c1758ad5",
+  },
+  {
+    language: "mc-cmn",
+    label: "普通话",
+    youtube_id: "tbI7P8_zoAM",
+    title: "FIN-05 · 上限提高了，缺口还在吗？（普通话）",
+    casePage: "https://kochiuyu.github.io/micro-cases/zh-cn/same-gap.html",
+    sha256: "4974510252fee32aca17373199f68f4fa2d03ef0984b2297d42007077471ec91",
+  },
+  {
+    language: "mc-yue",
+    label: "廣東話",
+    youtube_id: "440x4VRAgz0",
+    title: "FIN-05 · 上限提高了，缺口是否依舊？（廣東話）",
+    casePage: "https://kochiuyu.github.io/micro-cases/zh-hk/same-gap.html",
+    sha256: "662b531db5525ba821e1d3f5b5a9e776947924afd62ca1ed634dd7f6b3c0364d",
+  },
+];
 const acc04 = catalog.videos.filter((item) => item.id === 'ACC-04');
 if (acc04.length !== 3) fail('ACC-04 must be one lesson with three recordings.');
 if (
   microIds.join(',') !==
-  [...accExpected, ...acc02Expected, ...acc03Expected, ...acc04Expected, ...fin01Expected, ...fin02Expected]
+  [...accExpected, ...acc02Expected, ...acc03Expected, ...acc04Expected, ...fin01Expected, ...fin02Expected, ...fin03Expected, ...fin04Expected, ...fin05Expected]
     .map((item) => item.youtube_id)
     .join(',')
 ) {
@@ -600,6 +678,9 @@ for (const expected of acc04Expected) {
 for (const [caseId, expectedRows] of [
   ['FIN-01', fin01Expected],
   ['FIN-02', fin02Expected],
+  ['FIN-03', fin03Expected],
+  ['FIN-04', fin04Expected],
+  ['FIN-05', fin05Expected],
 ]) {
   const rows = catalog.videos.filter((item) => item.id === caseId);
   if (rows.length !== 3) fail(`${caseId} must be one lesson with three recordings.`);

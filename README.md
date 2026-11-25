@@ -6,7 +6,7 @@ The public channel [https://www.youtube.com/@ChiuYuKo](https://www.youtube.com/@
 
 ## What is listed
 
-`catalog/allowlist.json` is the source of truth. The copy in this repository is the verified catalog as of **2026-11-25** (Asia/Hong_Kong): **393** videos, **125** distinct lessons.
+`catalog/allowlist.json` is the source of truth. The copy in this repository is the verified catalog as of **2026-11-25** (Asia/Hong_Kong): **402** videos, **128** distinct lessons.
 
 | Collection | Lessons | Videos |
 | --- | ---: | ---: |
@@ -14,7 +14,7 @@ The public channel [https://www.youtube.com/@ChiuYuKo](https://www.youtube.com/@
 | LAE 101 | 10 | 10 |
 | Economics Shorts | 25 | 25 |
 | LAE What-is | 5 | 25 |
-| Micro Cases | 6 | 18 |
+| Micro Cases | 9 | 27 |
 | Tea Shorts | 1 | 3 |
 
 STAT lessons by module:
@@ -52,6 +52,12 @@ ACC-04, The stock is all there. Is it worth the same?, is the fourth Accounting 
 FIN-01, When the star sits out, is the first Finance case. Its three landscape recordings are English (`GA8-62W4ptQ`), 普通话 (`r8poa-aQMtc`), and 廣東話 (`xqgkTiDSTv4`). They share catalog id `FIN-01` and topic `Finance`. Each description is the official source text, including one trailing newline, and links that language’s `match.html` page. `duration` is null. Public status was verified from the owner’s box at 14:08 Taipei on 25 Nov 2026.
 
 FIN-02, The red minibus bid, is the second Finance case. Its three landscape recordings are English (`VGywQb1zanU`), 普通话 (`EtDwBboVmtI`), and 廣東話 (`PHgat2vIRbc`). They share catalog id `FIN-02` and topic `Finance`. Each description is the official source text, including one trailing newline, and links that language’s `minibus.html` page. `duration` is null. Public status was verified from the owner’s box at 14:08 Taipei on 25 Nov 2026.
+
+FIN-03, The biggest order, the smallest cash balance, is the third Finance case. Its three landscape recordings are English (`OeiP-qAIIDc`), 普通话 (`qOKn14OPQgI`), and 廣東話 (`CNkL1dHjnZo`). They share catalog id `FIN-03`. Each description is the official source text, including one trailing newline, and links that language’s `cash-flow.html` page. `duration` is null. Public status was verified from the owner’s box at 14:18 Taipei on 25 Nov 2026.
+
+FIN-04, The invoice is not the exposure, is the fourth Finance case. Its three landscape recordings are English (`EAcNlzMLh7I`), 普通话 (`v4YfvgdcDAE`), and 廣東話 (`nUgtZfLaoGU`). They share catalog id `FIN-04`. Each description is the official source text, including one trailing newline, and links that language’s `invoice-exposure.html` page. `duration` is null. Public status was verified from the owner’s box at 14:18 Taipei on 25 Nov 2026.
+
+FIN-05, A larger limit. The same gap?, is the fifth Finance case. Its three landscape recordings are English (`Qau-HM-85-E`), 普通话 (`tbI7P8_zoAM`), and 廣東話 (`440x4VRAgz0`). They share catalog id `FIN-05`. Each description is the official source text, including one trailing newline, and links that language’s `same-gap.html` page. `duration` is null. Public status was verified from the owner’s box at 14:18 Taipei on 25 Nov 2026. FIN-06 through FIN-10 are not in this catalog.
 
 `oVODqhnkkPg` is in the Game Theory in daily life group. It is a public Short on the channel and was not in that playlist when the list was checked. `econ-shorts-11` (`3C_-2iME2vk`) has no verified duration, so `duration` is null. Descriptions are null. Watch URLs are `https://www.youtube.com/watch?v=` plus the id, not Shorts URLs and not playlist URLs.
 
@@ -179,4 +185,4 @@ Built with [Astro](https://astro.build/) 5.18.2, used under the [MIT License](ht
 
 ## Embed restrictions
 
-The catalog does not say whether YouTube permits embedding. If a player shows that a video cannot be embedded, the page still links to the watch URL. Embed restrictions were not verified for all 393 videos.
+The catalog does not say whether YouTube permits embedding. If a player shows that a video cannot be embedded, the page still links to the watch URL. Embed restrictions were not verified for all 402 videos.
