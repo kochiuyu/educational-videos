@@ -1,6 +1,7 @@
 ---
 import type { Video } from '../data/catalog';
 import { canonicalLesson } from '../lib/stat-lesson';
+import { isPortraitCollection } from '../lib/urls';
 import VideoCard from './VideoCard.astro';
 
 interface Props {
@@ -11,7 +12,7 @@ interface Props {
 }
 
 const { videos, showTopic = false, showLanguage = false, showLesson = false } = Astro.props;
-const shorts = videos.length > 0 && videos.every((video) => video.collection_slug === 'economics-shorts');
+const shorts = videos.length > 0 && videos.every((video) => isPortraitCollection(video.collection_slug));
 
 function metaLabel(video: Video): string {
   const parts: string[] = [];

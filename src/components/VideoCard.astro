@@ -1,7 +1,7 @@
 ---
 import type { Video } from '../data/catalog';
 import VisibleTitle from './VisibleTitle.astro';
-import { href, thumbnailFallbackUrl, thumbnailUrl } from '../lib/urls';
+import { href, isPortraitCollection, thumbnailFallbackUrl, thumbnailUrl } from '../lib/urls';
 import { officialYoutubeTitle } from '../lib/stat-lesson';
 import { splitPublishedTitle } from '../lib/text';
 
@@ -11,7 +11,7 @@ interface Props {
 }
 
 const { video, meta = '' } = Astro.props;
-const portrait = video.collection_slug === 'economics-shorts';
+const portrait = isPortraitCollection(video.collection_slug);
 const primary = thumbnailUrl(video.youtube_id, video.collection_slug);
 const fallback = thumbnailFallbackUrl(video.youtube_id);
 const shownTitle = video.collection_slug === 'stat-lessons' ? officialYoutubeTitle(video) : video.title;

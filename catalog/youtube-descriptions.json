@@ -1,7 +1,7 @@
 {
   "retrieved_at": "2026-11-21T09:59:12Z",
   "retrieved_on": "2026-11-21",
-  "method": "Matched by youtube_id. The 25 Economics Shorts were first retrieved on 2026-11-21 from public YouTube Shorts HTML (videoDetails.shortDescription) and were left unchanged. The 155 descriptions that the public watch page blocked were copied verbatim from the official Google Takeout videos CSV, field Video Description (Original). Archive takeout-20261121T101859Z-1-001.zip, SHA-256 ecc0feabc6c769feb027c020f221feb16d01eb692e1948d9e9d44b8b2c1620a4, channel UC0Amh8UkHvIVxPbxsrEBRMg, exported 2026-11-21. Existing descriptions, including STAT Modules 3–5, were not replaced. Objectives are not used. This file is not rendered. ACC-01 descriptions are the approved source texts, confirmed as the saved YouTube descriptions at upload completion on 2026-11-22 (Asia/Hong_Kong), matched by youtube_id. They were not fetched from a public watch page, and YouTube duration was not verified. ACC-02 descriptions are the approved source texts, confirmed as the saved YouTube descriptions at upload completion on 2026-11-23 (Asia/Taipei), matched by youtube_id. They were not fetched from a public watch page, and YouTube duration was not verified. STAT M06 descriptions are the verified inventory texts for the 60 Unlisted recordings catalogued on 2026-11-23 (Asia/Taipei), matched by youtube_id. Fifty-six matched the YouTube shortDescription after a trailing newline was removed. Four player reads returned LOGIN_REQUIRED (dwT-qVkWytE, 1dKPDLWuiCc, jBL9rpanqA8, SB-zx_7WwS0) and use the same inventory text. Duration was not written.",
+  "method": "Matched by youtube_id. The 25 Economics Shorts were first retrieved on 2026-11-21 from public YouTube Shorts HTML (videoDetails.shortDescription) and were left unchanged. The 155 descriptions that the public watch page blocked were copied verbatim from the official Google Takeout videos CSV, field Video Description (Original). Archive takeout-20261121T101859Z-1-001.zip, SHA-256 ecc0feabc6c769feb027c020f221feb16d01eb692e1948d9e9d44b8b2c1620a4, channel UC0Amh8UkHvIVxPbxsrEBRMg, exported 2026-11-21. Existing descriptions, including STAT Modules 3–5, were not replaced. Objectives are not used. This file is not rendered. ACC-01 descriptions are the approved source texts, confirmed as the saved YouTube descriptions at upload completion on 2026-11-22 (Asia/Hong_Kong), matched by youtube_id. They were not fetched from a public watch page, and YouTube duration was not verified. ACC-02 descriptions are the approved source texts, confirmed as the saved YouTube descriptions at upload completion on 2026-11-23 (Asia/Taipei), matched by youtube_id. They were not fetched from a public watch page, and YouTube duration was not verified. STAT M06 descriptions are the verified inventory texts for the 60 Unlisted recordings catalogued on 2026-11-23 (Asia/Taipei), matched by youtube_id. Fifty-six matched the YouTube shortDescription after a trailing newline was removed. Four player reads returned LOGIN_REQUIRED (dwT-qVkWytE, 1dKPDLWuiCc, jBL9rpanqA8, SB-zx_7WwS0) and use the same inventory text. Duration was not written. Tea Shorts T01 descriptions were retrieved on 2026-11-25 from public YouTube Shorts HTML (videoDetails.shortDescription) and match that text with no trailing newline. YouTube duration was not verified.",
   "counts": {
     "Economics Shorts": {
       "filled": 25,
@@ -29,6 +29,11 @@
       "empty": 0,
       "blocked": 0,
       "source": 6
+    },
+    "Tea Shorts": {
+      "filled": 3,
+      "empty": 0,
+      "blocked": 0
     }
   },
   "preserved_description_sha256": {
@@ -4403,6 +4408,33 @@
       "description": "Series: STAT M06 · Regression diagnostics and modeling for a coffee chain · English narration · bilingual slides 中英 · Lesson 15/15\n\nReview the fit before you expand\n\nMetro Coffee is reviewing an assumed store-expansion forecast. A high R-squared, or a significant slope, can look persuasive. Neither one establishes stable prediction, correct specification, causality, or commercial value. If you authorize capital from those in-sample numbers alone, you can fund a model that fails on the next stores. A defensible review combines the decision target, coefficient magnitude, uncertainty, residual behavior, data design, and performance on genuinely unseen observations, before management considers capital allocation.\n\nR-squared summarizes in-sample variation accounted for, while the residual standard error s_e summarizes residual scale in outcome units. A slope estimate and its interval describe magnitude and uncertainty under the inferential method. Each answers a different question, and none alone certifies a model for deployment. Residual plots assess functional form, changing variance, clustering, and unusual observations. Out-of-sample validation assesses generalization to data not used for fitting or model selection. Causal use additionally requires a credible identification design; predictive accuracy by itself does not establish intervention effects.\n\nIn an assumed calculation, training residual scale is 12 cups, and five held-out errors are -10, 12, -14, 15, and 13 cups. Validation mean squared error is (100 + 144 + 196 + 225 + 169) / 5 = 166.8 cups squared, so validation RMSE, the root mean squared error, is sqrt(166.8) = 12.92 cups. That is close to the training residual scale here, but five observations provide limited evidence, and the denominators differ. Validation error does not by itself decide investment. Approve decisions through governance, not statistics alone.\n\n———\n\n回归复核：先验证再决策\n\n都市咖啡在看一项假设的门店扩张预测。较高的判定系数（R-squared），或者显著的斜率，看起来可能很有说服力。但两者都不能证明预测稳定、模型设定正确、具有因果性，或具有商业价值。如果你只凭这些样本内数字去授权资本，就可能资助一个在下一批门店上会失败的模型。可辩护的复核，应结合决策目标、系数大小、不确定性、残差表现、数据设计，以及在真正未见观测上的表现，再由管理层考虑资本配置。\n\n判定系数概括样本内所核算的变异份额，残差标准误 s_e 则以结果单位概括残差尺度。斜率估计及其区间，描述既定推断方法下的大小与不确定性。各指标回答不同问题，任何一个都不能单独认证模型可以部署。残差图检查函数形式、变化方差、聚类和异常观测。样本外验证（out-of-sample validation）评估模型对未用于拟合或模型选择的数据的泛化。若用于因果决策，还需要可信的识别设计；预测准确本身不能证明干预效应。\n",
       "retrieval": "Verified inventory description, matched by youtube_id. Visibility was Unlisted at cataloguing on 2026-11-23 (Asia/Taipei), not Public. Duration was not written. The YouTube shortDescription matched this text after a trailing newline was removed. The catalog keeps the inventory text, including its trailing newline.",
       "description_sha256": "d8c3669364f5c260922b53772fec7790a904122b5fa5ef40c1e6cbed1c95f174"
+    },
+    "PXyUCfLHOf8": {
+      "collection": "Tea Shorts",
+      "collection_slug": "tea-shorts",
+      "status": "filled",
+      "description": "One plant, six families of tea is a short educational video from Tea Companion.\n\nGreen tea and black tea usually come from the same plant. The difference is how the leaves are processed. These are six families, not six steps from green to black.\n\nThis is the English narration, with English on-screen text.\n\nRead the source:\nhttps://kochiuyu.github.io/tea-companion/tea-labels.html#type-map\n\nTea Companion:\nhttps://kochiuyu.github.io/tea-companion/",
+      "page": "https://www.youtube.com/shorts/PXyUCfLHOf8",
+      "retrieval": "Public YouTube Shorts HTML, videoDetails.shortDescription, retrieved 2026-11-25. The catalog text matches that description with no trailing newline. YouTube duration was not verified.",
+      "description_sha256": "b70ad0e6f1e67b6ef7352a26361b5ad030c2330fa7ece7e8a8cf925c975fba3e"
+    },
+    "EZk3qvma1aU": {
+      "collection": "Tea Shorts",
+      "collection_slug": "tea-shorts",
+      "status": "filled",
+      "description": "同一种茶树，六类茶 is a short educational video from Tea Companion.\n\n绿茶和红茶，多半来自同一种茶树。差别在采收之后怎么做。这是六类茶，不是从绿茶到红茶的六个步骤。\n\n本片为普通话解说，屏幕文字为简体中文。\n\nRead the source:\nhttps://kochiuyu.github.io/tea-companion/zh-hans/tea-labels.html#type-map\n\nTea Companion:\nhttps://kochiuyu.github.io/tea-companion/",
+      "page": "https://www.youtube.com/shorts/EZk3qvma1aU",
+      "retrieval": "Public YouTube Shorts HTML, videoDetails.shortDescription, retrieved 2026-11-25. The catalog text matches that description with no trailing newline. YouTube duration was not verified.",
+      "description_sha256": "a1171c434c06c07bbaef1f8fa9e7b180cf467372b664b3cff67d391efd2c608f"
+    },
+    "DaQ19k9U6To": {
+      "collection": "Tea Shorts",
+      "collection_slug": "tea-shorts",
+      "status": "filled",
+      "description": "同一種茶樹，六類茶 is a short educational video from Tea Companion.\n\n綠茶和紅茶，多半來自同一種茶樹。分別在採收之後怎樣加工。這是六類茶，不是從綠茶到紅茶的六個步驟。\n\n本片為粵語旁白，屏幕文字為香港繁體中文。\n\nRead the source:\nhttps://kochiuyu.github.io/tea-companion/zh-hant-hk/tea-labels.html#type-map\n\nTea Companion:\nhttps://kochiuyu.github.io/tea-companion/",
+      "page": "https://www.youtube.com/shorts/DaQ19k9U6To",
+      "retrieval": "Public YouTube Shorts HTML, videoDetails.shortDescription, retrieved 2026-11-25. The catalog text matches that description with no trailing newline. YouTube duration was not verified.",
+      "description_sha256": "8fb44d06cf30b49be6485cdcba907bd7258734acbfd30079131a1e81cfd2cded"
     }
   },
   "takeout": {

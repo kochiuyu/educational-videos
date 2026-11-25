@@ -1,5 +1,6 @@
 import { canonicalStatLabel, lessonKey, statModuleCoverId, summarizeLessons, tally } from './lessons.mjs';
 import { loadCatalog } from './catalog-lib.mjs';
+import crypto from 'node:crypto';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -284,13 +285,84 @@ if (acc.length !== 3) fail('ACC-01 must stay one lesson with three recordings.')
 if (summary.byCollection['micro-cases']?.lessons !== 2 || summary.byCollection['micro-cases']?.versions !== 6) {
   fail('Micro Cases must be two lessons and six recordings.');
 }
-if (summary.lessons !== 120 || summary.versions !== 378) {
-  fail(`Catalog is ${summary.lessons} lessons and ${summary.versions} recordings; expected 120 and 378.`);
+if (summary.lessons !== 121 || summary.versions !== 381) {
+  fail(`Catalog is ${summary.lessons} lessons and ${summary.versions} recordings; expected 121 and 381.`);
 }
 if (summary.byCollection['stat-lessons'].lessons !== 78 || summary.byCollection['stat-lessons'].versions !== 312) {
   fail('STAT must be 78 lessons and 312 recordings.');
 }
+for (const [slug, lessons, versions] of [
+  ['lae-101', 10, 10],
+  ['economics-shorts', 25, 25],
+  ['lae-what-is', 5, 25],
+  ['micro-cases', 2, 6],
+]) {
+  const row = summary.byCollection[slug];
+  if (row?.lessons !== lessons || row?.versions !== versions) {
+    fail(`${slug} must stay ${lessons} lessons and ${versions} recordings.`);
+  }
+}
+if (summary.byCollection['tea-shorts']?.lessons !== 1 || summary.byCollection['tea-shorts']?.versions !== 3) {
+  fail('Tea Shorts must be one lesson and three recordings.');
+}
 const statLanguageIds = new Set(['en+zh', 'zh+en', 'hk+en', 'zh']);
+const teaExpected = [
+  {
+    language: 'tea-en',
+    label: 'English',
+    youtube_id: 'PXyUCfLHOf8',
+    title: 'One plant, six families of tea',
+    source: 'https://kochiuyu.github.io/tea-companion/tea-labels.html#type-map',
+    sha256: 'b70ad0e6f1e67b6ef7352a26361b5ad030c2330fa7ece7e8a8cf925c975fba3e',
+  },
+  {
+    language: 'tea-cmn',
+    label: '普通话',
+    youtube_id: 'EZk3qvma1aU',
+    title: '同一种茶树，六类茶',
+    source: 'https://kochiuyu.github.io/tea-companion/zh-hans/tea-labels.html#type-map',
+    sha256: 'a1171c434c06c07bbaef1f8fa9e7b180cf467372b664b3cff67d391efd2c608f',
+  },
+  {
+    language: 'tea-yue',
+    label: '粵語',
+    youtube_id: 'DaQ19k9U6To',
+    title: '同一種茶樹，六類茶',
+    source: 'https://kochiuyu.github.io/tea-companion/zh-hant-hk/tea-labels.html#type-map',
+    sha256: '8fb44d06cf30b49be6485cdcba907bd7258734acbfd30079131a1e81cfd2cded',
+  },
+];
+const tea = catalog.videos.filter((item) => item.collection_slug === 'tea-shorts');
+if (tea.length !== 3 || new Set(tea.map((item) => item.id)).size !== 1) {
+  fail('Tea Shorts T01 must be one shared catalog id.');
+}
+for (const topic of ['T02', 'T03', 'T04', 'T05', 'T06', 'T07']) {
+  if (tea.some((item) => item.topic === topic)) fail(`${topic} is not part of this catalog.`);
+}
+for (const expected of teaExpected) {
+  const item = tea.find((video) => video.youtube_id === expected.youtube_id);
+  if (!item) {
+    fail(`Tea Shorts is missing ${expected.youtube_id}.`);
+    continue;
+  }
+  if (item.id !== 'TEA-T01' || item.topic !== 'T01' || item.module != null) {
+    fail(`${expected.youtube_id} is not T01.`);
+  }
+  if (item.language !== expected.language || item.language_label !== expected.label) {
+    fail(`${expected.youtube_id} language does not match its recording.`);
+  }
+  if (statLanguageIds.has(item.language)) fail(`${expected.youtube_id} uses a STAT language track.`);
+  if (item.title !== expected.title) fail(`${expected.youtube_id} title is not the public title.`);
+  if (item.duration != null) fail(`${expected.youtube_id} duration must stay null.`);
+  if (item.youtube_url !== `https://www.youtube.com/watch?v=${expected.youtube_id}`) {
+    fail(`${expected.youtube_id} watch URL is not the canonical watch URL.`);
+  }
+  if (!item.description?.includes(expected.source)) fail(`${expected.youtube_id} description dropped its source page.`);
+  if (crypto.createHash('sha256').update(item.description ?? '').digest('hex') !== expected.sha256) {
+    fail(`${expected.youtube_id} description is not the public shortDescription.`);
+  }
+  if (lessonKey(item) !== 'tea-shorts\nTEA-T01') fail(`${expected.youtube_id} is not grouped as one Tea Shorts lesson.`);
+}
 for (const expected of accExpected) {
   const item = acc.find((video) => video.youtube_id === expected.youtube_id);
   if (!item) {
