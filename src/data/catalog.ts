@@ -28,6 +28,8 @@ export interface Video {
   youtube_url: string;
   source: string | null;
   module_title: string | null;
+  /** i.ytimg filename when the collection default is missing. Absent otherwise. */
+  thumbnail?: string | null;
 }
 
 interface CatalogFile {

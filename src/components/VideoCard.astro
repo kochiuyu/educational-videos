@@ -12,7 +12,7 @@ interface Props {
 
 const { video, meta = '' } = Astro.props;
 const portrait = isPortraitCollection(video.collection_slug);
-const primary = thumbnailUrl(video.youtube_id, video.collection_slug);
+const primary = thumbnailUrl(video.youtube_id, video.collection_slug, video.thumbnail);
 const fallback = thumbnailFallbackUrl(video.youtube_id);
 const shownTitle = video.collection_slug === 'stat-lessons' ? officialYoutubeTitle(video) : video.title;
 const headline = portrait ? splitPublishedTitle(shownTitle).headline || shownTitle : shownTitle;

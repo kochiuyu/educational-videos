@@ -217,7 +217,12 @@ function collectionCover(slug: string): Video | undefined {
               <a class="sheet-link" href={href(`tea-shorts/${topicSlug(group.topic)}`)}>
                 {
                   sample && (
-                    <CardThumb youtubeId={sample.youtube_id} collection="tea-shorts" frame="poster" />
+                    <CardThumb
+                      youtubeId={sample.youtube_id}
+                      collection="tea-shorts"
+                      frame="poster"
+                      thumbnail={sample.thumbnail}
+                    />
                   )
                 }
                 <h3>{group.topic}</h3>
