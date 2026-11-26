@@ -8,6 +8,7 @@ import { collectionCardCopy, readerIntro } from './reader-copy.mjs';
 import { parseLessonNumber } from './stat-map.mjs';
 import './check-lessons.mjs';
 import { assertPreviewMarkup } from './check-preview.mjs';
+import { assertContrast } from './check-contrast.mjs';
 import './check-stat-lessons.mjs';
 import './check-youtube-descriptions.mjs';
 
@@ -684,6 +685,15 @@ for (const video of catalog.videos.filter((item) => item.collection_slug === 'ec
 if (!searchPage.includes('>Accounting</option>')) fail('search topic filter is missing Accounting');
 if (!searchPage.includes('>Finance</option>')) fail('search topic filter is missing Finance');
 
+for (const problem of assertContrast()) fail(problem);
+const builtCss = fs
+  .readdirSync(path.join(dist, '_astro'))
+  .filter((name) => name.endsWith('.css'))
+  .map((name) => fs.readFileSync(path.join(dist, '_astro', name), 'utf8'))
+  .join('\n');
+if (!builtCss.includes('prefers-color-scheme:dark') && !builtCss.includes('prefers-color-scheme: dark')) {
+  fail('built stylesheet dropped the dark color scheme');
+}
 for (const problem of assertPreviewMarkup(byRel, catalog)) fail(problem);
 for (const problem of await assertChosenThumbnails(catalog.videos)) fail(problem);
 
