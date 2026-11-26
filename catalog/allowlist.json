@@ -11,7 +11,7 @@
     "economics_shorts": "Public cartoon-style economics YouTube Shorts from the @ChiuYuKo channel, grouped by the channel's public playlists Experimental Economics and Game Theory in daily life.",
     "lae_what_is": "What is LAE?, What is the 1,000-metre band?, What is a drone?, What is an SUA?, and What is an eVTOL? for CUHK DOTE5891, Business Analysis of Low-Altitude Economy. Companion site: https://kochiuyu.github.io/lae-companion/.",
     "micro_cases": "ACC-01, The last tray of egg tarts, as three landscape language recordings: English, 普通话, and 廣東話. Visibility Public was last observed at upload completion on 2026-11-22 (Asia/Hong_Kong), not rechecked afterward. Duration is null because a YouTube duration was not verified. ACC-02, Close the loss-making branch?, as three landscape language recordings: English, 普通话, and 廣東話. Visibility Public was last observed at upload completion on 2026-11-23 (Asia/Taipei), not rechecked afterward. Duration is null because a YouTube duration was not verified. ACC-03, Target reached. Returns still coming?, as three landscape language recordings: English, 普通话, and 廣東話. Visibility Public was last observed in YouTube Studio on 2026-11-24 (Asia/Hong_Kong): English 11:42, 普通话 11:52, and 廣東話 published 12:19. Not rechecked afterward. Duration is null because a hosted YouTube duration was not verified. ACC-04, The stock is all there. Is it worth the same?, as three landscape language recordings: English, 普通话, and 廣東話. Duration is null because a hosted YouTube duration was not verified. Descriptions are the official source texts, including one trailing newline. FIN-01, When the star sits out, and FIN-02, The red minibus bid, as three landscape language recordings each: English, 普通话, and 廣東話. Public status was verified from the owner's box at 14:08 Taipei on 2026-11-25. Duration is null because a hosted YouTube duration was not verified. Descriptions are the official source texts, including one trailing newline. FIN-03, The biggest order, the smallest cash balance, FIN-04, The invoice is not the exposure, and FIN-05, A larger limit. The same gap?, as three landscape language recordings each: English, 普通话, and 廣東話. Public status was verified from the owner's box at 14:18 Taipei on 2026-11-25. Duration is null because a hosted YouTube duration was not verified. Descriptions are the official source texts, including one trailing newline. FIN-06, Smaller payments. Cheaper loan?, FIN-07, A discount for paying sooner. Sooner than what?, FIN-08, Back sooner. Worth more?, FIN-09, One bank. Two kinds of safety., and FIN-10, Twenty per cent. Only once?, as three landscape language recordings each: English, 普通话, and 廣東話. Public status was verified from the owner's box at 15:00 Taipei on 2026-11-25. Duration is null because a hosted YouTube duration was not verified. Descriptions are the official source texts, including one trailing newline. ACC-05, Over budget. Out of control?, as three landscape language recordings: English, 普通话, and 廣東話. Public status was verified from the owner's box on 26 Nov 2026. Duration is null because a hosted YouTube duration was not verified. Descriptions are the official source texts, including one trailing newline.",
-    "tea_shorts": "Tea Companion portrait Shorts. T01, One plant, six families of tea, as one lesson with three language recordings: English, 普通话, and 粵語. Descriptions are the public YouTube shortDescription texts retrieved on 2026-11-25. Duration is null. T02, Is chamomile tea?, as one lesson with three language recordings: English, 普通话, and 粵語. Descriptions are the owner-verified player texts from 26 Nov 2026, with no trailing newline. Duration is null. T03–T07 are not in this catalog."
+    "tea_shorts": "Tea Companion portrait Shorts. T01, One plant, six families of tea, as one lesson with three language recordings: English, 普通话, and 粵語. Descriptions are the public YouTube shortDescription texts retrieved on 2026-11-25. Duration is null. T02, Is chamomile tea?, as one lesson with three language recordings: English, 普通话, and 粵語. Descriptions are the owner-verified player texts from 26 Nov 2026, with no trailing newline. Duration is null. T03, Black tea is 紅茶, not 黑茶, as one lesson with three language recordings: English, 普通话, and 粵語. Descriptions are the public player texts from 26 Nov 2026, with no trailing newline. Duration is null. T04–T07 are not in this catalog."
   },
   "exclusions": [
     "Older DSME2021 lecture recordings in kochiuyu/video-links",
@@ -53,7 +53,7 @@
     {
       "slug": "tea-shorts",
       "name": "Tea Shorts",
-      "description": "Portrait YouTube Shorts from Tea Companion. T01, One plant, six families of tea, and T02, Is chamomile tea?, each in English, 普通话, and 粵語. Later topics are added in this catalog. Companion site: https://kochiuyu.github.io/tea-companion/."
+      "description": "Portrait YouTube Shorts from Tea Companion. T01, One plant, six families of tea, T02, Is chamomile tea?, and T03, Black tea is 紅茶, not 黑茶, each in English, 普通话, and 粵語. Later topics are added in this catalog. Companion site: https://kochiuyu.github.io/tea-companion/."
     }
   ],
   "languages": [
@@ -118,7 +118,7 @@
       "label": "粵語"
     }
   ],
-  "video_count": 423,
+  "video_count": 426,
   "videos": [
     {
       "id": "LAE101-01",
@@ -6889,6 +6889,57 @@
       "youtube_url": "https://www.youtube.com/watch?v=XqEDrAEpoKM",
       "thumbnail": "hq720.jpg",
       "source": "Public player description supplied for this catalog, with no trailing newline. Channel Chiu Yu Ko, UC0Amh8UkHvIVxPbxsrEBRMg. Source page https://kochiuyu.github.io/tea-companion/zh-hant-hk/tea-basics.html. Public status was verified from the owner's box on 26 Nov 2026. Duration was not verified.",
+      "module_title": null
+    },
+    {
+      "id": "TEA-T03",
+      "collection": "Tea Shorts",
+      "collection_slug": "tea-shorts",
+      "module": null,
+      "topic": "T03",
+      "language": "tea-en",
+      "language_label": "English",
+      "title": "Black tea is 紅茶, not 黑茶",
+      "description": "Black tea is 紅茶, not 黑茶 is a short educational video from Tea Companion.\n\nIn Chinese, the tea you know as black tea is not called 黑茶. Black tea is 紅茶. 黑茶 is dark tea, such as Pu-erh, a different family.\n\nThis is the English narration, with English on-screen text.\n\nRead the source:\nhttps://kochiuyu.github.io/tea-companion/tea-labels.html#type-map\n\nTea Companion:\nhttps://kochiuyu.github.io/tea-companion/",
+      "duration": null,
+      "youtube_id": "SlbhVTvJZiE",
+      "youtube_url": "https://www.youtube.com/watch?v=SlbhVTvJZiE",
+      "thumbnail": "hq720.jpg",
+      "source": "Public player description supplied for this catalog, with no trailing newline. Channel Chiu Yu Ko, UC0Amh8UkHvIVxPbxsrEBRMg. Source page https://kochiuyu.github.io/tea-companion/tea-labels.html#type-map. Public status was verified from the watch-page playerResponse on 26 Nov 2026: playability OK, isPrivate false, isUnlisted false. Duration was not verified.",
+      "module_title": null
+    },
+    {
+      "id": "TEA-T03",
+      "collection": "Tea Shorts",
+      "collection_slug": "tea-shorts",
+      "module": null,
+      "topic": "T03",
+      "language": "tea-cmn",
+      "language_label": "普通话",
+      "title": "红茶不是黑茶",
+      "description": "红茶不是黑茶 is a short educational video from Tea Companion.\n\n英文里的 black tea，中文并不叫黑茶。英文 black tea 是红茶。黑茶是 dark tea，不是把 black 直接译成黑。\n\n本片为普通话解说，屏幕文字为简体中文。\n\nRead the source:\nhttps://kochiuyu.github.io/tea-companion/zh-hans/tea-labels.html#type-map\n\nTea Companion:\nhttps://kochiuyu.github.io/tea-companion/",
+      "duration": null,
+      "youtube_id": "F4K7oFns_ac",
+      "youtube_url": "https://www.youtube.com/watch?v=F4K7oFns_ac",
+      "thumbnail": "hq720.jpg",
+      "source": "Public player description supplied for this catalog, with no trailing newline. Channel Chiu Yu Ko, UC0Amh8UkHvIVxPbxsrEBRMg. Source page https://kochiuyu.github.io/tea-companion/zh-hans/tea-labels.html#type-map. Public status was verified from the watch-page playerResponse on 26 Nov 2026: playability OK, isPrivate false, isUnlisted false. Duration was not verified.",
+      "module_title": null
+    },
+    {
+      "id": "TEA-T03",
+      "collection": "Tea Shorts",
+      "collection_slug": "tea-shorts",
+      "module": null,
+      "topic": "T03",
+      "language": "tea-yue",
+      "language_label": "粵語",
+      "title": "紅茶不是黑茶",
+      "description": "紅茶不是黑茶 is a short educational video from Tea Companion.\n\n英文的 black tea，中文不叫黑茶。英文 black tea 是紅茶。黑茶是 dark tea，不是把 black 直接譯成黑。\n\n本片為粵語旁白，屏幕文字為香港繁體中文。\n\nRead the source:\nhttps://kochiuyu.github.io/tea-companion/zh-hant-hk/tea-labels.html#type-map\n\nTea Companion:\nhttps://kochiuyu.github.io/tea-companion/",
+      "duration": null,
+      "youtube_id": "27uXuCviBz4",
+      "youtube_url": "https://www.youtube.com/watch?v=27uXuCviBz4",
+      "thumbnail": "hq720.jpg",
+      "source": "Public player description supplied for this catalog, with no trailing newline. Channel Chiu Yu Ko, UC0Amh8UkHvIVxPbxsrEBRMg. Source page https://kochiuyu.github.io/tea-companion/zh-hant-hk/tea-labels.html#type-map. Public status was verified from the watch-page playerResponse on 26 Nov 2026: playability OK, isPrivate false, isUnlisted false. Duration was not verified.",
       "module_title": null
     }
   ]
