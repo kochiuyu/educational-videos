@@ -355,6 +355,12 @@ h3 {
   object-position: center;
 }
 
+.card-thumb.mat img.fit-cover,
+.card-thumb.poster img.fit-cover {
+  object-fit: cover;
+  object-position: center;
+}
+
 .card-thumb.poster {
   aspect-ratio: 9 / 16;
 }

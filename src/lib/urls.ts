@@ -15,18 +15,22 @@ export function topicSlug(topic: string): string {
 }
 
 /**
- * Public YouTube thumbnail. Shorts use oardefault (1080×1920), which was
- * present for every economics short. Other videos use hq720 (1280×720),
- * present for every STAT and LAE video. hqdefault is the fallback.
+ * Public YouTube thumbnail. Shorts use oardefault (1080×1920) unless the
+ * catalog sets `thumbnail` because that file is not on i.ytimg. Other videos
+ * use hq720 (1280×720). Keep the default in step with scripts/thumbnails.mjs.
  */
 /** Portrait 9:16 Shorts. A new Tea Shorts topic stays in this set without a layout change. */
 export function isPortraitCollection(collectionSlug: string): boolean {
   return collectionSlug === 'economics-shorts' || collectionSlug === 'tea-shorts';
 }
 
-export function thumbnailUrl(youtubeId: string, collectionSlug: string): string {
-  const file = isPortraitCollection(collectionSlug) ? 'oardefault.jpg' : 'hq720.jpg';
-  return `https://i.ytimg.com/vi/${youtubeId}/${file}`;
+export function thumbnailUrl(
+  youtubeId: string,
+  collectionSlug: string,
+  file?: string | null,
+): string {
+  const name = file || (isPortraitCollection(collectionSlug) ? 'oardefault.jpg' : 'hq720.jpg');
+  return `https://i.ytimg.com/vi/${youtubeId}/${name}`;
 }
 
 export function thumbnailFallbackUrl(youtubeId: string): string {

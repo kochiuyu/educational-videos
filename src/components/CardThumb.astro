@@ -6,15 +6,18 @@ interface Props {
   collection: string;
   frame?: 'wide' | 'poster' | 'mat';
   eager?: boolean;
+  thumbnail?: string | null;
 }
 
-const { youtubeId, collection, frame = 'wide', eager = false } = Astro.props;
+const { youtubeId, collection, frame = 'wide', eager = false, thumbnail = null } = Astro.props;
 const portrait = frame !== 'wide';
+const cropped = portrait && Boolean(thumbnail) && thumbnail !== 'oardefault.jpg';
 ---
 
 <span class:list={['card-thumb', frame]}>
   <img
-    src={thumbnailUrl(youtubeId, collection)}
+    class:list={{ 'fit-cover': cropped }}
+    src={thumbnailUrl(youtubeId, collection, thumbnail)}
     data-fallback={thumbnailFallbackUrl(youtubeId)}
     alt=""
     width={portrait ? 1080 : 1280}

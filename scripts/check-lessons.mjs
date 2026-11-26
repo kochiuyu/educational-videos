@@ -402,6 +402,7 @@ for (const expected of teaExpected) {
   }
   if (item.description?.endsWith('\n')) fail(`${expected.youtube_id} description must not have a trailing newline.`);
   if (lessonKey(item) !== 'tea-shorts\nTEA-T01') fail(`${expected.youtube_id} is not grouped as one Tea Shorts lesson.`);
+  if (item.thumbnail != null) fail(`${expected.youtube_id} must keep the oardefault.jpg Shorts cover.`);
 }
 for (const expected of tea02Expected) {
   const item = tea.find((video) => video.youtube_id === expected.youtube_id);
@@ -427,6 +428,14 @@ for (const expected of tea02Expected) {
     fail(`${expected.youtube_id} description is not the public player text.`);
   }
   if (lessonKey(item) !== 'tea-shorts\nTEA-T02') fail(`${expected.youtube_id} is not grouped as Tea Shorts T02.`);
+  if (item.thumbnail !== 'hq720.jpg') {
+    fail(`${expected.youtube_id} must use hq720.jpg because oardefault.jpg is not on i.ytimg.`);
+  }
+}
+const thumbnailOverrides = catalog.videos.filter((item) => item.thumbnail != null);
+const t02Ids = new Set(tea02Expected.map((item) => item.youtube_id));
+if (thumbnailOverrides.length !== 3 || thumbnailOverrides.some((item) => !t02Ids.has(item.youtube_id))) {
+  fail('Only the three T02 recordings may set a thumbnail override.');
 }
 for (const expected of accExpected) {
   const item = acc.find((video) => video.youtube_id === expected.youtube_id);

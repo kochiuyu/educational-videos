@@ -1,4 +1,5 @@
 import fs from 'node:fs';
+import { YTIMG_FILES } from './thumbnails.mjs';
 
 const YOUTUBE_ID = /^[A-Za-z0-9_-]{11}$/;
 const SLUG = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
@@ -140,6 +141,12 @@ export function validateCatalog(data) {
       if (!optionalString(video[key])) {
         errors.push(`${where} (${label}) ${key} must be a string or null.`);
       }
+    }
+
+    if (video.thumbnail != null && !YTIMG_FILES.has(video.thumbnail)) {
+      errors.push(
+        `${where} (${label}) thumbnail must be an i.ytimg filename: ${[...YTIMG_FILES].join(', ')}.`,
+      );
     }
 
     if (isString(video.youtube_id) && !YOUTUBE_ID.test(video.youtube_id)) {
