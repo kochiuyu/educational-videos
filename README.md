@@ -6,7 +6,7 @@ The public channel [https://www.youtube.com/@ChiuYuKo](https://www.youtube.com/@
 
 ## What is listed
 
-`catalog/allowlist.json` is the source of truth. The copy in this repository is the verified catalog as of **2026-11-26** (Asia/Hong_Kong): **423** videos, **135** distinct lessons.
+`catalog/allowlist.json` is the source of truth. The copy in this repository is the verified catalog as of **2026-11-26** (Asia/Hong_Kong): **426** videos, **136** distinct lessons.
 
 | Collection | Lessons | Videos |
 | --- | ---: | ---: |
@@ -15,7 +15,7 @@ The public channel [https://www.youtube.com/@ChiuYuKo](https://www.youtube.com/@
 | Economics Shorts | 25 | 25 |
 | LAE What-is | 5 | 25 |
 | Micro Cases | 15 | 45 |
-| Tea Shorts | 2 | 6 |
+| Tea Shorts | 3 | 9 |
 
 STAT lessons by module:
 
@@ -43,7 +43,9 @@ Micro Cases starts with ACC-01, The last tray of egg tarts, with three landscape
 
 Tea Shorts are portrait 9:16 YouTube Shorts from [Tea Companion](https://kochiuyu.github.io/tea-companion/). T01, One plant, six families of tea, is one lesson with three language recordings, not three lessons. They share catalog id `TEA-T01` and topic `T01`. English (`PXyUCfLHOf8`, `tea-en`) uses English on-screen text and https://kochiuyu.github.io/tea-companion/tea-labels.html#type-map. 普通话 (`EZk3qvma1aU`, `tea-cmn`) uses Simplified on-screen text and https://kochiuyu.github.io/tea-companion/zh-hans/tea-labels.html#type-map. 粵語 (`DaQ19k9U6To`, `tea-yue`) uses Hong Kong Traditional on-screen text and https://kochiuyu.github.io/tea-companion/zh-hant-hk/tea-labels.html#type-map. These language ids are not STAT tracks. Each description is the public YouTube `shortDescription` retrieved on 25 Nov 2026, with no trailing newline. `duration` is null. There is no quiz and no playlist.
 
-T02, Is chamomile tea?, is the second Tea Shorts lesson. Its three portrait recordings are English (`0IUvlR4wEeY`, `tea-en`, https://kochiuyu.github.io/tea-companion/tea-basics.html), 普通话 (`7wqlXKwPN5c`, `tea-cmn`, https://kochiuyu.github.io/tea-companion/zh-hans/tea-basics.html), and 粵語 (`XqEDrAEpoKM`, `tea-yue`, https://kochiuyu.github.io/tea-companion/zh-hant-hk/tea-basics.html). They share catalog id `TEA-T02` and topic `T02`. Each description is the owner-verified player text from 26 Nov 2026, with no trailing newline. `oardefault.jpg` is not published for these three ids, so each sets `thumbnail` to `hq720.jpg`. The portrait card crops that 16:9 frame to the center poster. Reported lengths are 35s, 33s, and 35s, and `duration` stays null, as it does for T01. There is no quiz. `EvkN-c9pn2g` and `QztZN6gktzg` are not in this catalog. T03–T07 are not in this catalog.
+T02, Is chamomile tea?, is the second Tea Shorts lesson. Its three portrait recordings are English (`0IUvlR4wEeY`, `tea-en`, https://kochiuyu.github.io/tea-companion/tea-basics.html), 普通话 (`7wqlXKwPN5c`, `tea-cmn`, https://kochiuyu.github.io/tea-companion/zh-hans/tea-basics.html), and 粵語 (`XqEDrAEpoKM`, `tea-yue`, https://kochiuyu.github.io/tea-companion/zh-hant-hk/tea-basics.html). They share catalog id `TEA-T02` and topic `T02`. Each description is the owner-verified player text from 26 Nov 2026, with no trailing newline. `oardefault.jpg` is not published for these three ids, so each sets `thumbnail` to `hq720.jpg`. The portrait card crops that 16:9 frame to the center poster. Reported lengths are 35s, 33s, and 35s, and `duration` stays null, as it does for T01. There is no quiz. `EvkN-c9pn2g` and `QztZN6gktzg` are not in this catalog.
+
+T03, Black tea is 紅茶, not 黑茶, is the third Tea Shorts lesson. Its three portrait recordings are English (`SlbhVTvJZiE`, `tea-en`, title `Black tea is 紅茶, not 黑茶`, https://kochiuyu.github.io/tea-companion/tea-labels.html#type-map), 普通话 (`F4K7oFns_ac`, `tea-cmn`, title `红茶不是黑茶`, https://kochiuyu.github.io/tea-companion/zh-hans/tea-labels.html#type-map), and 粵語 (`27uXuCviBz4`, `tea-yue`, title `紅茶不是黑茶`, https://kochiuyu.github.io/tea-companion/zh-hant-hk/tea-labels.html#type-map). They share catalog id `TEA-T03` and topic `T03`. Each description is the public watch-page player text from 26 Nov 2026, with no trailing newline. `oardefault.jpg` is not published for these three ids, so each sets `thumbnail` to `hq720.jpg`. Reported lengths are 26s, 28s, and 29s, and `duration` stays null. There is no quiz. `fPrJK_iyzRw`, `Nfp_ROBqnbU`, and `TwdVAeKZWA4` are not in this catalog. T04–T07 are not in this catalog.
 
 ACC-02, Close the loss-making branch?, is the second Accounting case. Its three landscape recordings are English (`1Qik16ZYE14`), 普通话 (`WjCDkMI3uZc`), and 廣東話 (`LADYnu4OCug`). They share catalog id `ACC-02`. Each description is the approved source description and links that language’s `branch-loss.html` page. `duration` is null because a YouTube duration was not verified. Visibility Public was last observed at upload completion on 23 Nov 2026 (Taipei time): English 10:35, 普通话 10:42:25, and 廣東話 10:52. That observation was not repeated afterward.
 
@@ -135,7 +137,7 @@ npm run preview
 ## Browse, search, and filter
 
 - Collections: `/collections/stat-lessons/`, `/collections/lae-101/`, `/collections/economics-shorts/`, `/collections/lae-what-is/`, `/collections/micro-cases/`, and `/collections/tea-shorts/`
-- Tea Shorts topics: `/tea-shorts/t01/` and `/tea-shorts/t02/`
+- Tea Shorts topics: `/tea-shorts/t01/`, `/tea-shorts/t02/`, and `/tea-shorts/t03/`
 - Micro Cases subjects: `/micro-cases/accounting/` and `/micro-cases/finance/`
 - STAT modules: `/stat-lessons/m01/` through `/stat-lessons/m06/`
 - STAT topics: `/stat-lessons/m03/t01/`
@@ -199,4 +201,4 @@ Built with [Astro](https://astro.build/) 5.18.2, used under the [MIT License](ht
 
 ## Embed restrictions
 
-The catalog does not say whether YouTube permits embedding. If a player shows that a video cannot be embedded, the page still links to the watch URL. Embed restrictions were not verified for all 423 videos.
+The catalog does not say whether YouTube permits embedding. If a player shows that a video cannot be embedded, the page still links to the watch URL. Embed restrictions were not verified for all 426 videos.

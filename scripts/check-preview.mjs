@@ -453,6 +453,28 @@ export function assertPreviewMarkup(pages, catalog) {
     bad('Tea Shorts T02 includes an excluded draft');
   }
 
+  const tea03Page = pages.get('tea-shorts/t03/index.html') ?? '';
+  const tea03Ids = ['SlbhVTvJZiE', 'F4K7oFns_ac', '27uXuCviBz4'];
+  const tea03Previews = tea03Page.match(/data-preview="/g) ?? [];
+  if (tea03Previews.length !== tea03Ids.length) {
+    bad(`Tea Shorts T03 has ${tea03Previews.length} previews for ${tea03Ids.length} recordings`);
+  }
+  if (!tea03Page.includes('class="video-grid shorts"') || !tea03Page.includes('video-card portrait')) {
+    bad('Tea Shorts T03 is not a portrait Shorts grid');
+  }
+  for (const id of tea03Ids) {
+    if (!tea03Page.includes(`data-preview="${id}"`) || !tea03Page.includes('data-portrait="true"')) {
+      bad(`Tea Shorts cannot preview ${id} as a portrait Short`);
+    }
+    if (!tea03Page.includes(`href="/educational-videos/videos/${id}/"`)) {
+      bad(`Tea Shorts title link for ${id} is missing`);
+    }
+  }
+  if (tea03Page.includes('data-portrait="false"')) bad('Tea Shorts T03 has a landscape preview');
+  for (const id of ['EvkN-c9pn2g', 'QztZN6gktzg', 'fPrJK_iyzRw', 'Nfp_ROBqnbU', 'TwdVAeKZWA4']) {
+    if (tea03Page.includes(id)) bad(`Tea Shorts T03 includes excluded id ${id}`);
+  }
+
   const accounting = pages.get('micro-cases/accounting/index.html') ?? '';
   const caseIds = ['F1WY_3jXYQw', 'uetO9tibCEA', 'EFakphvV2qE', '1Qik16ZYE14', 'WjCDkMI3uZc', 'LADYnu4OCug', 'kc97t9pCO-I', 'heYTMobTncY', 'l5ug7pz-ZrM', 'j1Mqyo9azI0', 'clafASuRNBg', 'p98piMHwA8Y', 'KuanXS7qYhg', 'iz9uH4qyyWo', 'ZH-VWdEsvjY'];
   const casePreviews = accounting.match(/data-preview="/g) ?? [];
