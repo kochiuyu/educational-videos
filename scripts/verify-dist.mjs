@@ -378,6 +378,9 @@ for (const video of catalog.videos) {
       PXyUCfLHOf8: 'https://kochiuyu.github.io/tea-companion/tea-labels.html#type-map',
       EZk3qvma1aU: 'https://kochiuyu.github.io/tea-companion/zh-hans/tea-labels.html#type-map',
       DaQ19k9U6To: 'https://kochiuyu.github.io/tea-companion/zh-hant-hk/tea-labels.html#type-map',
+      '0IUvlR4wEeY': 'https://kochiuyu.github.io/tea-companion/tea-basics.html',
+      '7wqlXKwPN5c': 'https://kochiuyu.github.io/tea-companion/zh-hans/tea-basics.html',
+      XqEDrAEpoKM: 'https://kochiuyu.github.io/tea-companion/zh-hant-hk/tea-basics.html',
     };
     const ownSource = sources[video.youtube_id];
     if (!ownSource || !html.includes(`href="${ownSource}"`)) fail(`${rel} is missing its source page`);
@@ -592,12 +595,14 @@ for (const id of ['mc-en', 'mc-cmn', 'mc-yue', 'tea-en', 'tea-cmn', 'tea-yue']) 
   if (languageSelect.includes(id)) fail(`STAT language filter includes ${id}`);
 }
 if (!searchPage.includes('>T01</option>')) fail('search topic filter is missing Tea Shorts T01');
+if (!searchPage.includes('>T02</option>')) fail('search topic filter is missing Tea Shorts T02');
 const teaCollection = byRel.get('collections/tea-shorts/index.html') ?? '';
 if (!teaCollection.includes('>Tea Companion<')) fail('Tea Shorts page dropped the companion link');
 if (!teaCollection.includes('class="video-grid shorts"') || !teaCollection.includes('video-card portrait')) {
   fail('Tea Shorts collection is not a portrait Shorts grid');
 }
 if (!home.includes('tea-shorts/t01/')) fail('home page is missing the Tea Shorts T01 topic');
+if (!home.includes('tea-shorts/t02/')) fail('home page is missing the Tea Shorts T02 topic');
 if (!home.includes('/vi/PXyUCfLHOf8/oardefault.jpg')) fail('home page is missing the Tea Shorts cover');
 if (!searchPage.includes('>Accounting</option>')) fail('search topic filter is missing Accounting');
 if (!searchPage.includes('>Finance</option>')) fail('search topic filter is missing Finance');

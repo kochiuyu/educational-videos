@@ -3,7 +3,7 @@
   "owner": "Prof. Chiu Yu KO",
   "channel_url": "https://www.youtube.com/@ChiuYuKo",
   "repo": "https://github.com/kochiuyu/educational-videos",
-  "as_of": "2026-11-25",
+  "as_of": "2026-11-26",
   "timezone": "Asia/Hong_Kong",
   "inclusions": {
     "stat_lessons": "Public VF-Revise STAT lessons: M01–M03 all topics; M04 T01–T10; M05 T01–T08. Four language tracks per topic. M06 T01–T15 is a separate exception: 60 recordings were Unlisted on YouTube at cataloguing on 23 November 2026 (Asia/Taipei). On that date, after being told the 60 were Unlisted and that daily Public starts 24 November 2026 around 12:00 PM Hong Kong time, Prof. Ko asked to update this site. M06 playlists are not entries. This does not permit other unlisted videos.",
@@ -11,7 +11,7 @@
     "economics_shorts": "Public cartoon-style economics YouTube Shorts from the @ChiuYuKo channel, grouped by the channel's public playlists Experimental Economics and Game Theory in daily life.",
     "lae_what_is": "What is LAE?, What is the 1,000-metre band?, What is a drone?, What is an SUA?, and What is an eVTOL? for CUHK DOTE5891, Business Analysis of Low-Altitude Economy. Companion site: https://kochiuyu.github.io/lae-companion/.",
     "micro_cases": "ACC-01, The last tray of egg tarts, as three landscape language recordings: English, 普通话, and 廣東話. Visibility Public was last observed at upload completion on 2026-11-22 (Asia/Hong_Kong), not rechecked afterward. Duration is null because a YouTube duration was not verified. ACC-02, Close the loss-making branch?, as three landscape language recordings: English, 普通话, and 廣東話. Visibility Public was last observed at upload completion on 2026-11-23 (Asia/Taipei), not rechecked afterward. Duration is null because a YouTube duration was not verified. ACC-03, Target reached. Returns still coming?, as three landscape language recordings: English, 普通话, and 廣東話. Visibility Public was last observed in YouTube Studio on 2026-11-24 (Asia/Hong_Kong): English 11:42, 普通话 11:52, and 廣東話 published 12:19. Not rechecked afterward. Duration is null because a hosted YouTube duration was not verified. ACC-04, The stock is all there. Is it worth the same?, as three landscape language recordings: English, 普通话, and 廣東話. Duration is null because a hosted YouTube duration was not verified. Descriptions are the official source texts, including one trailing newline. FIN-01, When the star sits out, and FIN-02, The red minibus bid, as three landscape language recordings each: English, 普通话, and 廣東話. Public status was verified from the owner's box at 14:08 Taipei on 2026-11-25. Duration is null because a hosted YouTube duration was not verified. Descriptions are the official source texts, including one trailing newline. FIN-03, The biggest order, the smallest cash balance, FIN-04, The invoice is not the exposure, and FIN-05, A larger limit. The same gap?, as three landscape language recordings each: English, 普通话, and 廣東話. Public status was verified from the owner's box at 14:18 Taipei on 2026-11-25. Duration is null because a hosted YouTube duration was not verified. Descriptions are the official source texts, including one trailing newline. FIN-06, Smaller payments. Cheaper loan?, FIN-07, A discount for paying sooner. Sooner than what?, FIN-08, Back sooner. Worth more?, FIN-09, One bank. Two kinds of safety., and FIN-10, Twenty per cent. Only once?, as three landscape language recordings each: English, 普通话, and 廣東話. Public status was verified from the owner's box at 15:00 Taipei on 2026-11-25. Duration is null because a hosted YouTube duration was not verified. Descriptions are the official source texts, including one trailing newline.",
-    "tea_shorts": "Tea Companion portrait Shorts. T01, One plant, six families of tea, as one lesson with three language recordings: English, 普通话, and 粵語. Descriptions are the public YouTube shortDescription texts retrieved on 2026-11-25. Duration is null. T02–T07 are not in this catalog."
+    "tea_shorts": "Tea Companion portrait Shorts. T01, One plant, six families of tea, as one lesson with three language recordings: English, 普通话, and 粵語. Descriptions are the public YouTube shortDescription texts retrieved on 2026-11-25. Duration is null. T02, Is chamomile tea?, as one lesson with three language recordings: English, 普通话, and 粵語. Descriptions are the owner-verified player texts from 26 Nov 2026, with no trailing newline. Duration is null. T03–T07 are not in this catalog."
   },
   "exclusions": [
     "Older DSME2021 lecture recordings in kochiuyu/video-links",
@@ -53,7 +53,7 @@
     {
       "slug": "tea-shorts",
       "name": "Tea Shorts",
-      "description": "Portrait YouTube Shorts from Tea Companion. T01, One plant, six families of tea, in English, 普通话, and 粵語. Later topics are added in this catalog. Companion site: https://kochiuyu.github.io/tea-companion/."
+      "description": "Portrait YouTube Shorts from Tea Companion. T01, One plant, six families of tea, and T02, Is chamomile tea?, each in English, 普通话, and 粵語. Later topics are added in this catalog. Companion site: https://kochiuyu.github.io/tea-companion/."
     }
   ],
   "languages": [
@@ -118,7 +118,7 @@
       "label": "粵語"
     }
   ],
-  "video_count": 417,
+  "video_count": 420,
   "videos": [
     {
       "id": "LAE101-01",
@@ -6790,6 +6790,54 @@
       "youtube_id": "DaQ19k9U6To",
       "youtube_url": "https://www.youtube.com/watch?v=DaQ19k9U6To",
       "source": "Public YouTube Shorts description (videoDetails.shortDescription), retrieved 2026-11-25. Channel Chiu Yu Ko, UC0Amh8UkHvIVxPbxsrEBRMg. Source page https://kochiuyu.github.io/tea-companion/zh-hant-hk/tea-labels.html#type-map. Duration was not verified. oEmbed confirms the title and author only.",
+      "module_title": null
+    },
+    {
+      "id": "TEA-T02",
+      "collection": "Tea Shorts",
+      "collection_slug": "tea-shorts",
+      "module": null,
+      "topic": "T02",
+      "language": "tea-en",
+      "language_label": "English",
+      "title": "Is chamomile tea?",
+      "description": "Is chamomile tea? is a short educational video from Tea Companion.\n\nMany boxes on the shelf say tea, but not all of them come from the tea plant. True tea comes from the tea plant. The rest are herbals.\n\nThis is the English narration, with English on-screen text.\n\nRead the source:\nhttps://kochiuyu.github.io/tea-companion/tea-basics.html\n\nTea Companion:\nhttps://kochiuyu.github.io/tea-companion/",
+      "duration": null,
+      "youtube_id": "0IUvlR4wEeY",
+      "youtube_url": "https://www.youtube.com/watch?v=0IUvlR4wEeY",
+      "source": "Public player description supplied for this catalog, with no trailing newline. Channel Chiu Yu Ko, UC0Amh8UkHvIVxPbxsrEBRMg. Source page https://kochiuyu.github.io/tea-companion/tea-basics.html. Public status was verified from the owner's box on 26 Nov 2026. Duration was not verified.",
+      "module_title": null
+    },
+    {
+      "id": "TEA-T02",
+      "collection": "Tea Shorts",
+      "collection_slug": "tea-shorts",
+      "module": null,
+      "topic": "T02",
+      "language": "tea-cmn",
+      "language_label": "普通话",
+      "title": "洋甘菊是茶吗？",
+      "description": "洋甘菊是茶吗？ is a short educational video from Tea Companion.\n\n货架上很多盒子也写着“茶”，但不一定来自茶树。真茶来自茶树。其余的，叫花草茶。\n\n本片为普通话解说，屏幕文字为简体中文。\n\nRead the source:\nhttps://kochiuyu.github.io/tea-companion/zh-hans/tea-basics.html\n\nTea Companion:\nhttps://kochiuyu.github.io/tea-companion/",
+      "duration": null,
+      "youtube_id": "7wqlXKwPN5c",
+      "youtube_url": "https://www.youtube.com/watch?v=7wqlXKwPN5c",
+      "source": "Public player description supplied for this catalog, with no trailing newline. Channel Chiu Yu Ko, UC0Amh8UkHvIVxPbxsrEBRMg. Source page https://kochiuyu.github.io/tea-companion/zh-hans/tea-basics.html. Public status was verified from the owner's box on 26 Nov 2026. Duration was not verified.",
+      "module_title": null
+    },
+    {
+      "id": "TEA-T02",
+      "collection": "Tea Shorts",
+      "collection_slug": "tea-shorts",
+      "module": null,
+      "topic": "T02",
+      "language": "tea-yue",
+      "language_label": "粵語",
+      "title": "洋甘菊是茶嗎？",
+      "description": "洋甘菊是茶嗎？ is a short educational video from Tea Companion.\n\n貨架上很多盒子也寫着「茶」，但不一定來自茶樹。真茶來自茶樹。其餘的，叫花草茶。\n\n本片為粵語旁白，屏幕文字為香港繁體中文。\n\nRead the source:\nhttps://kochiuyu.github.io/tea-companion/zh-hant-hk/tea-basics.html\n\nTea Companion:\nhttps://kochiuyu.github.io/tea-companion/",
+      "duration": null,
+      "youtube_id": "XqEDrAEpoKM",
+      "youtube_url": "https://www.youtube.com/watch?v=XqEDrAEpoKM",
+      "source": "Public player description supplied for this catalog, with no trailing newline. Channel Chiu Yu Ko, UC0Amh8UkHvIVxPbxsrEBRMg. Source page https://kochiuyu.github.io/tea-companion/zh-hant-hk/tea-basics.html. Public status was verified from the owner's box on 26 Nov 2026. Duration was not verified.",
       "module_title": null
     }
   ]

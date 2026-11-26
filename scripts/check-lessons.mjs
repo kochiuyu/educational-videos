@@ -294,8 +294,8 @@ const financeLessonIds = new Set(
 if (accountingLessonIds.size !== 4 || financeLessonIds.size !== 10) {
   fail('Micro Cases must stay at four Accounting lessons and ten Finance lessons.');
 }
-if (summary.lessons !== 133 || summary.versions !== 417) {
-  fail(`Catalog is ${summary.lessons} lessons and ${summary.versions} recordings; expected 133 and 417.`);
+if (summary.lessons !== 134 || summary.versions !== 420) {
+  fail(`Catalog is ${summary.lessons} lessons and ${summary.versions} recordings; expected 134 and 420.`);
 }
 if (summary.byCollection['stat-lessons'].lessons !== 78 || summary.byCollection['stat-lessons'].versions !== 312) {
   fail('STAT must be 78 lessons and 312 recordings.');
@@ -311,8 +311,8 @@ for (const [slug, lessons, versions] of [
     fail(`${slug} must stay ${lessons} lessons and ${versions} recordings.`);
   }
 }
-if (summary.byCollection['tea-shorts']?.lessons !== 1 || summary.byCollection['tea-shorts']?.versions !== 3) {
-  fail('Tea Shorts must be one lesson and three recordings.');
+if (summary.byCollection['tea-shorts']?.lessons !== 2 || summary.byCollection['tea-shorts']?.versions !== 6) {
+  fail('Tea Shorts must be two lessons and six recordings.');
 }
 const statLanguageIds = new Set(['en+zh', 'zh+en', 'hk+en', 'zh']);
 const teaExpected = [
@@ -341,12 +341,42 @@ const teaExpected = [
     sha256: '8fb44d06cf30b49be6485cdcba907bd7258734acbfd30079131a1e81cfd2cded',
   },
 ];
+const tea02Expected = [
+  {
+    language: 'tea-en',
+    label: 'English',
+    youtube_id: '0IUvlR4wEeY',
+    title: 'Is chamomile tea?',
+    source: 'https://kochiuyu.github.io/tea-companion/tea-basics.html',
+    sha256: '48cc1f5034bdd5e94279fec4c6982c4f10b21b1eeb33972776c40711d8e2679b',
+  },
+  {
+    language: 'tea-cmn',
+    label: '普通话',
+    youtube_id: '7wqlXKwPN5c',
+    title: '洋甘菊是茶吗？',
+    source: 'https://kochiuyu.github.io/tea-companion/zh-hans/tea-basics.html',
+    sha256: '9b1c5ee80c8524df67ae14419643d47e507e0df2b827596ee105867a1013668e',
+  },
+  {
+    language: 'tea-yue',
+    label: '粵語',
+    youtube_id: 'XqEDrAEpoKM',
+    title: '洋甘菊是茶嗎？',
+    source: 'https://kochiuyu.github.io/tea-companion/zh-hant-hk/tea-basics.html',
+    sha256: '05db180217051a6b63e98afb9e81279aed0d42e2c08f396ede101a4f7eb9e1af',
+  },
+];
 const tea = catalog.videos.filter((item) => item.collection_slug === 'tea-shorts');
-if (tea.length !== 3 || new Set(tea.map((item) => item.id)).size !== 1) {
-  fail('Tea Shorts T01 must be one shared catalog id.');
+const teaIds = new Set(tea.map((item) => item.id));
+if (tea.length !== 6 || teaIds.size !== 2 || !teaIds.has('TEA-T01') || !teaIds.has('TEA-T02')) {
+  fail('Tea Shorts must be T01 and T02, each with three recordings.');
 }
-for (const topic of ['T02', 'T03', 'T04', 'T05', 'T06', 'T07']) {
+for (const topic of ['T03', 'T04', 'T05', 'T06', 'T07']) {
   if (tea.some((item) => item.topic === topic)) fail(`${topic} is not part of this catalog.`);
+}
+for (const id of ['EvkN-c9pn2g', 'QztZN6gktzg']) {
+  if (catalog.videos.some((item) => item.youtube_id === id)) fail(`${id} is not part of this catalog.`);
 }
 for (const expected of teaExpected) {
   const item = tea.find((video) => video.youtube_id === expected.youtube_id);
@@ -370,7 +400,33 @@ for (const expected of teaExpected) {
   if (crypto.createHash('sha256').update(item.description ?? '').digest('hex') !== expected.sha256) {
     fail(`${expected.youtube_id} description is not the public shortDescription.`);
   }
+  if (item.description?.endsWith('\n')) fail(`${expected.youtube_id} description must not have a trailing newline.`);
   if (lessonKey(item) !== 'tea-shorts\nTEA-T01') fail(`${expected.youtube_id} is not grouped as one Tea Shorts lesson.`);
+}
+for (const expected of tea02Expected) {
+  const item = tea.find((video) => video.youtube_id === expected.youtube_id);
+  if (!item) {
+    fail(`Tea Shorts is missing ${expected.youtube_id}.`);
+    continue;
+  }
+  if (item.id !== 'TEA-T02' || item.topic !== 'T02' || item.module != null) {
+    fail(`${expected.youtube_id} is not T02.`);
+  }
+  if (item.language !== expected.language || item.language_label !== expected.label) {
+    fail(`${expected.youtube_id} language does not match its recording.`);
+  }
+  if (statLanguageIds.has(item.language)) fail(`${expected.youtube_id} uses a STAT language track.`);
+  if (item.title !== expected.title) fail(`${expected.youtube_id} title is not the public title.`);
+  if (item.duration != null) fail(`${expected.youtube_id} duration must stay null.`);
+  if (item.youtube_url !== `https://www.youtube.com/watch?v=${expected.youtube_id}`) {
+    fail(`${expected.youtube_id} watch URL is not the canonical watch URL.`);
+  }
+  if (!item.description?.includes(expected.source)) fail(`${expected.youtube_id} description dropped its source page.`);
+  if (item.description?.endsWith('\n')) fail(`${expected.youtube_id} description must not have a trailing newline.`);
+  if (crypto.createHash('sha256').update(item.description ?? '').digest('hex') !== expected.sha256) {
+    fail(`${expected.youtube_id} description is not the public player text.`);
+  }
+  if (lessonKey(item) !== 'tea-shorts\nTEA-T02') fail(`${expected.youtube_id} is not grouped as Tea Shorts T02.`);
 }
 for (const expected of accExpected) {
   const item = acc.find((video) => video.youtube_id === expected.youtube_id);
