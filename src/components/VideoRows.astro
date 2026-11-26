@@ -1,5 +1,6 @@
 ---
 import type { Video } from '../data/catalog';
+import { lessonAttrs } from '../lib/lang-pref';
 import { canonicalLesson } from '../lib/stat-lesson';
 import { isPortraitCollection } from '../lib/urls';
 import VideoCard from './VideoCard.astro';
@@ -30,7 +31,7 @@ function metaLabel(video: Video): string {
 <ul class:list={['video-grid', { shorts }]}>
   {
     videos.map((video) => (
-      <li>
+      <li {...lessonAttrs(video)}>
         <VideoCard video={video} meta={metaLabel(video)} />
       </li>
     ))

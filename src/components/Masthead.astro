@@ -1,6 +1,7 @@
 ---
 import { href } from '../lib/urls';
 import { owner, siteTitle } from '../data/catalog';
+import { LANG_PREFS } from '../lib/lang-pref';
 
 interface Props {
   current?: 'home' | 'stat' | 'lae' | 'what' | 'econ' | 'cases' | 'tea' | 'tracks' | 'search';
@@ -28,6 +29,12 @@ const items = [
       <a class="wordmark" href={href()}>{siteTitle}</a>
       <p class="byline">{owner}</p>
     </div>
+    <form id="lang-filter" class="lang-filter" method="get">
+      <label for="site-lang">Language</label>
+      <select id="site-lang" name="lang">
+        {LANG_PREFS.map((pref) => <option value={pref.value}>{pref.label}</option>)}
+      </select>
+    </form>
   </div>
   <nav class="nav-inner" aria-label="Primary">
     <ul class="nav-list">

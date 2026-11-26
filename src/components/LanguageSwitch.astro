@@ -1,0 +1,36 @@
+---
+import type { Video } from '../data/catalog';
+import { href, isPortraitCollection, thumbnailUrl } from '../lib/urls';
+
+interface Props {
+  heading: string;
+  videos: Video[];
+}
+
+const { heading, videos } = Astro.props;
+---
+
+<section class="section lang-switch" aria-labelledby="related-heading">
+  <h2 id="related-heading">{heading}</h2>
+  <ul>
+    {
+      videos.map((video) => {
+        const portrait = isPortraitCollection(video.collection_slug);
+        return (
+          <li>
+            <a href={href(`videos/${video.youtube_id}`)}>
+              <img
+                src={thumbnailUrl(video.youtube_id, video.collection_slug, video.thumbnail)}
+                alt=""
+                width={portrait ? 54 : 96}
+                height={portrait ? 96 : 54}
+                decoding="async"
+              />
+              <span>{video.language_label ?? video.title}</span>
+            </a>
+          </li>
+        );
+      })
+    }
+  </ul>
+</section>

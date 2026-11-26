@@ -3,6 +3,7 @@ import Base from '../../layouts/Base.astro';
 import Breadcrumb from '../../components/Breadcrumb.astro';
 import Player from '../../components/Player.astro';
 import VideoRows from '../../components/VideoRows.astro';
+import LanguageSwitch from '../../components/LanguageSwitch.astro';
 import LessonQuiz from '../../components/LessonQuiz.astro';
 import type { QuizItem } from '../../components/LessonQuiz.astro';
 import {
@@ -113,21 +114,18 @@ const current =
       <Description view={description} />
       {quiz && quiz.length > 0 && <LessonQuiz items={quiz} />}
       {
-        related && (
-          <section class="section" aria-labelledby="related-heading">
-            <h2 id="related-heading">{related.heading}</h2>
-            <VideoRows
-              videos={related.videos}
-              showTopic={video.collection_slug === 'lae-101'}
-              showLanguage={
-                video.collection_slug === 'stat-lessons' ||
-                video.collection_slug === 'lae-what-is' ||
-                video.collection_slug === 'micro-cases' ||
-                video.collection_slug === 'tea-shorts'
-              }
-            />
-          </section>
-        )
+        related &&
+          (video.collection_slug === 'stat-lessons' ||
+          video.collection_slug === 'micro-cases' ||
+          video.collection_slug === 'tea-shorts' ||
+          video.collection_slug === 'lae-what-is' ? (
+            <LanguageSwitch heading={related.heading} videos={related.videos} />
+          ) : (
+            <section class="section" aria-labelledby="related-heading">
+              <h2 id="related-heading">{related.heading}</h2>
+              <VideoRows videos={related.videos} showTopic={video.collection_slug === 'lae-101'} />
+            </section>
+          ))
       }
     </div>
     <aside class="facts" aria-label="About this video">
