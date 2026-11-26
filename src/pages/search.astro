@@ -10,6 +10,7 @@ import {
   videos,
 } from '../data/catalog';
 import VideoCard from '../components/VideoCard.astro';
+import { lessonAttrs } from '../lib/lang-pref';
 import { href, trackSlug } from '../lib/urls';
 import { canonicalLesson } from '../lib/stat-lesson';
 import { haystack } from '../lib/text';
@@ -53,7 +54,8 @@ const modules = statModuleIds();
     <p class="eyebrow">Catalog</p>
     <h1>Search</h1>
     <p class="lede">
-      Search titles and descriptions. The language-track filter lists STAT lessons only.
+      Search titles and descriptions. The language control in the header shows one recording per lesson.
+      All languages lists every version. The language-track filter lists STAT lessons only.
     </p>
   </header>
 
@@ -150,6 +152,7 @@ const modules = statModuleIds();
             data-topic={lesson ? lesson.label : video.topic}
             data-language={video.language ? trackSlug(video.language) : ''}
             data-haystack={haystack(video)}
+            {...lessonAttrs(video)}
           >
             <VideoCard video={video} meta={context} />
           </li>
@@ -158,75 +161,3 @@ const modules = statModuleIds();
     }
   </ul>
 </Base>
-
-<script>
-  const form = document.querySelector('#filters');
-  const count = document.querySelector('#result-count');
-  const empty = document.querySelector('#empty');
-  const items = Array.from(document.querySelectorAll('#results > li'));
-  const total = items.length;
-
-  function field(id: string): HTMLInputElement | HTMLSelectElement {
-    const element = document.getElementById(id);
-    if (!(element instanceof HTMLInputElement) && !(element instanceof HTMLSelectElement)) {
-      throw new Error(`Missing filter ${id}`);
-    }
-    return element;
-  }
-
-  function apply(updateUrl: boolean) {
-    const rawQuery = field('q').value.trim();
-    const tokens = rawQuery.toLowerCase().split(/\s+/).filter(Boolean);
-    const collection = field('collection').value;
-    const moduleId = field('module').value;
-    const topic = field('topic').value;
-    const language = field('language').value;
-    let shown = 0;
-
-    for (const item of items) {
-      if (!(item instanceof HTMLElement)) continue;
-      const hay = item.dataset.haystack ?? '';
-      const matches =
-        (!collection || item.dataset.collection === collection) &&
-        (!moduleId || item.dataset.module === moduleId) &&
-        (!topic || item.dataset.topic === topic) &&
-        (!language || item.dataset.language === language) &&
-        tokens.every((token) => hay.includes(token));
-      item.hidden = !matches;
-      if (matches) shown += 1;
-    }
-
-    if (count) {
-      count.textContent =
-        shown === total ? `Showing all ${total} videos.` : `Showing ${shown} of ${total} videos.`;
-    }
-    if (empty instanceof HTMLElement) empty.hidden = shown !== 0;
-
-    if (updateUrl) {
-      const params = new URLSearchParams();
-      if (rawQuery) params.set('q', rawQuery);
-      if (collection) params.set('collection', collection);
-      if (moduleId) params.set('module', moduleId);
-      if (topic) params.set('topic', topic);
-      if (language) params.set('language', language);
-      const query = params.toString();
-      const next = `${location.pathname}${query ? `?${query}` : ''}`;
-      history.replaceState(null, '', next);
-    }
-  }
-
-  const params = new URLSearchParams(location.search);
-  for (const name of ['q', 'collection', 'module', 'topic', 'language']) {
-    const value = params.get(name);
-    if (value != null) field(name).value = value;
-  }
-
-  apply(false);
-
-  form?.addEventListener('submit', (event) => {
-    event.preventDefault();
-    apply(true);
-  });
-  form?.addEventListener('input', () => apply(true));
-  form?.addEventListener('change', () => apply(true));
-</script>

@@ -510,7 +510,54 @@ for (const id of ['q', 'collection', 'module', 'topic', 'language']) {
 }
 if (!search.includes('aria-live="polite"')) fail('search page is missing a live result count');
 
+function assertLanguageFilter(rel, html) {
+  if (!html.includes('id="site-lang"') || !html.includes('for="site-lang"')) {
+    fail(`${rel} is missing the labeled language control`);
+  }
+  for (const value of ['en', 'zh-hans', 'zh-hk', 'all']) {
+    if (!html.includes(`value="${value}"`)) fail(`${rel} is missing language option ${value}`);
+  }
+  if (!html.includes('id="lang-status"') || !html.includes('aria-live="polite"')) {
+    fail(`${rel} is missing the live language status`);
+  }
+  if (!html.includes('lang-filter.js')) fail(`${rel} is missing the language filter script`);
+  if (!html.includes(`data-lessons="${lessonSummary.lessons}"`) || !html.includes(`data-recordings="${catalog.videos.length}"`)) {
+    fail(`${rel} dropped the catalog totals from the language status`);
+  }
+}
+
+const accountingHtml = byRel.get('micro-cases/accounting/index.html') ?? '';
+const accountingRows = [...accountingHtml.matchAll(/<li\b[^>]*\bdata-lang-group="[^"]*"[^>]*>/g)];
+if (accountingRows.length !== 15) {
+  fail(`Accounting page lists ${accountingRows.length} recordings in static HTML; expected 15`);
+}
+for (const row of accountingRows) {
+  if (/\shidden(?:="[^"]*")?(?=[\s>])/.test(row[0])) {
+    fail('Accounting page hides a recording before JavaScript runs');
+  }
+}
+for (const id of ['F1WY_3jXYQw', 'uetO9tibCEA', 'EFakphvV2qE', 'KuanXS7qYhg', 'iz9uH4qyyWo', 'ZH-VWdEsvjY']) {
+  if (!accountingHtml.includes(`data-preview="${id}"`)) {
+    fail(`Accounting static HTML is missing ${id}`);
+  }
+}
+const acc05 = byRel.get('videos/KuanXS7qYhg/index.html') ?? '';
+if (!acc05.includes('class="section lang-switch"') || !acc05.includes('Same case in other languages.')) {
+  fail('ACC-05 lesson page is missing the language switcher');
+}
+if (!acc05.includes('/videos/iz9uH4qyyWo/') || !acc05.includes('/videos/ZH-VWdEsvjY/')) {
+  fail('ACC-05 language switcher dropped another recording');
+}
+
 const lessonSummary = summarizeLessons(catalog.videos);
+const languagePages = [
+  'index.html',
+  'collections/micro-cases/index.html',
+  'micro-cases/accounting/index.html',
+  'search/index.html',
+  'videos/KuanXS7qYhg/index.html',
+];
+for (const rel of languagePages) assertLanguageFilter(rel, byRel.get(rel) ?? '');
 const home = byRel.get('index.html') ?? '';
 const homeHeading = /<h1>([^<]*)<\/h1>/.exec(home)?.[1] ?? '';
 if (homeHeading !== 'Lesson catalog') fail(`home heading is "${homeHeading}"`);

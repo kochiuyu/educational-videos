@@ -3,6 +3,7 @@ import '../styles/global.css';
 import Masthead from '../components/Masthead.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 import PreviewDialog from '../components/PreviewDialog.astro';
+import { lessonSummary, videoCount } from '../data/catalog';
 
 interface Props {
   title: string;
@@ -29,9 +30,19 @@ const icon = `${import.meta.env.BASE_URL}favicon.svg`;
     <a class="skip" href="#content">Skip to content</a>
     <Masthead current={current} />
     <main id="content" tabindex="-1">
+      <p
+        id="lang-status"
+        class="lang-status"
+        aria-live="polite"
+        data-lessons={lessonSummary.lessons}
+        data-recordings={videoCount}
+      >
+        Every language version is listed. Choose a language to show one recording per lesson.
+      </p>
       <slot />
     </main>
     <SiteFooter />
     <PreviewDialog />
+    <script is:inline src={`${import.meta.env.BASE_URL}lang-filter.js`}></script>
   </body>
 </html>
