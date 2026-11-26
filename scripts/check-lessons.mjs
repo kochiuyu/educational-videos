@@ -282,8 +282,8 @@ const accExpected = [
 ];
 const acc = catalog.videos.filter((item) => item.id === 'ACC-01');
 if (acc.length !== 3) fail('ACC-01 must stay one lesson with three recordings.');
-if (summary.byCollection['micro-cases']?.lessons !== 14 || summary.byCollection['micro-cases']?.versions !== 42) {
-  fail('Micro Cases must be fourteen lessons and forty-two recordings.');
+if (summary.byCollection['micro-cases']?.lessons !== 15 || summary.byCollection['micro-cases']?.versions !== 45) {
+  fail('Micro Cases must be fifteen lessons and forty-five recordings.');
 }
 const accountingLessonIds = new Set(
   catalog.videos.filter((item) => item.collection_slug === 'micro-cases' && item.topic === 'Accounting').map((item) => item.id),
@@ -291,11 +291,11 @@ const accountingLessonIds = new Set(
 const financeLessonIds = new Set(
   catalog.videos.filter((item) => item.collection_slug === 'micro-cases' && item.topic === 'Finance').map((item) => item.id),
 );
-if (accountingLessonIds.size !== 4 || financeLessonIds.size !== 10) {
-  fail('Micro Cases must stay at four Accounting lessons and ten Finance lessons.');
+if (accountingLessonIds.size !== 5 || financeLessonIds.size !== 10) {
+  fail('Micro Cases must stay at five Accounting lessons and ten Finance lessons.');
 }
-if (summary.lessons !== 133 || summary.versions !== 417) {
-  fail(`Catalog is ${summary.lessons} lessons and ${summary.versions} recordings; expected 133 and 417.`);
+if (summary.lessons !== 134 || summary.versions !== 420) {
+  fail(`Catalog is ${summary.lessons} lessons and ${summary.versions} recordings; expected 134 and 420.`);
 }
 if (summary.byCollection['stat-lessons'].lessons !== 78 || summary.byCollection['stat-lessons'].versions !== 312) {
   fail('STAT must be 78 lessons and 312 recordings.');
@@ -304,7 +304,7 @@ for (const [slug, lessons, versions] of [
   ['lae-101', 10, 10],
   ['economics-shorts', 25, 25],
   ['lae-what-is', 5, 25],
-  ['micro-cases', 14, 42],
+  ['micro-cases', 15, 45],
 ]) {
   const row = summary.byCollection[slug];
   if (row?.lessons !== lessons || row?.versions !== versions) {
@@ -778,11 +778,37 @@ const fin10Expected = [
     sha256: "faa4a9fe262a57337f1dc0cf50d7089be4571242396838891675604a75cc537b",
   },
 ];
+const acc05Expected = [
+  {
+    language: 'mc-en',
+    label: 'English',
+    youtube_id: 'KuanXS7qYhg',
+    title: 'ACC-05 · Over budget. Out of control? (English)',
+    casePage: 'https://kochiuyu.github.io/micro-cases/over-budget.html',
+    sha256: '5e5794997ae6269896a6d077d749f79c61ba44467e669bc10b043f1843344a82',
+  },
+  {
+    language: 'mc-cmn',
+    label: '普通话',
+    youtube_id: 'iz9uH4qyyWo',
+    title: 'ACC-05 · 支出超预算，就说明成本失控吗？（普通话）',
+    casePage: 'https://kochiuyu.github.io/micro-cases/zh-cn/over-budget.html',
+    sha256: 'aca00e00381dad9d10d4dd8f93296d6c0ca93b430a19d4582e9288d74dff0ca9',
+  },
+  {
+    language: 'mc-yue',
+    label: '廣東話',
+    youtube_id: 'ZH-VWdEsvjY',
+    title: 'ACC-05 · 成本超支，是否已經失控？（廣東話）',
+    casePage: 'https://kochiuyu.github.io/micro-cases/zh-hk/over-budget.html',
+    sha256: '44cb190f614bc10c8e1e062dc36381d660adb900c8d4140eb99aa72b7ca7eae8',
+  },
+];
 const acc04 = catalog.videos.filter((item) => item.id === 'ACC-04');
 if (acc04.length !== 3) fail('ACC-04 must be one lesson with three recordings.');
 if (
   microIds.join(',') !==
-  [...accExpected, ...acc02Expected, ...acc03Expected, ...acc04Expected, ...fin01Expected, ...fin02Expected, ...fin03Expected, ...fin04Expected, ...fin05Expected, ...fin06Expected, ...fin07Expected, ...fin08Expected, ...fin09Expected, ...fin10Expected]
+  [...accExpected, ...acc02Expected, ...acc03Expected, ...acc04Expected, ...acc05Expected, ...fin01Expected, ...fin02Expected, ...fin03Expected, ...fin04Expected, ...fin05Expected, ...fin06Expected, ...fin07Expected, ...fin08Expected, ...fin09Expected, ...fin10Expected]
     .map((item) => item.youtube_id)
     .join(',')
 ) {
@@ -855,7 +881,37 @@ for (const [caseId, expectedRows] of [
     if (lessonKey(item) !== `micro-cases\n${caseId}`) fail(`${expected.youtube_id} is not grouped as case ${caseId}.`);
   }
 }
-for (const id of ['ACC-05', 'ACC-06', 'ACC-07', 'ACC-08', 'ACC-09', 'ACC-10']) {
+for (const [caseId, expectedRows] of [['ACC-05', acc05Expected]]) {
+  const rows = catalog.videos.filter((item) => item.id === caseId);
+  if (rows.length !== 3) fail(`${caseId} must be one lesson with three recordings.`);
+  for (const expected of expectedRows) {
+    const item = rows.find((video) => video.youtube_id === expected.youtube_id);
+    if (!item) {
+      fail(`${caseId} is missing ${expected.youtube_id}.`);
+      continue;
+    }
+    if (item.collection_slug !== 'micro-cases' || item.topic !== 'Accounting' || item.module != null) {
+      fail(`${expected.youtube_id} is not grouped as an Accounting micro-case.`);
+    }
+    if (item.language !== expected.language || item.language_label !== expected.label) {
+      fail(`${expected.youtube_id} language label does not match its recording.`);
+    }
+    if (statLanguageIds.has(item.language)) fail(`${expected.youtube_id} uses a STAT language track.`);
+    if (item.title !== expected.title) fail(`${expected.youtube_id} title is not the approved title.`);
+    if (item.duration != null) fail(`${expected.youtube_id} duration must stay null.`);
+    if (item.youtube_url !== `https://www.youtube.com/watch?v=${expected.youtube_id}`) {
+      fail(`${expected.youtube_id} watch URL is not the canonical watch URL.`);
+    }
+    if (!item.description?.includes(expected.casePage) || !item.description.endsWith('\n')) {
+      fail(`${expected.youtube_id} description dropped the case page or its trailing newline.`);
+    }
+    if (crypto.createHash('sha256').update(item.description ?? '').digest('hex') !== expected.sha256) {
+      fail(`${expected.youtube_id} description is not the official source text.`);
+    }
+    if (lessonKey(item) !== `micro-cases\n${caseId}`) fail(`${expected.youtube_id} is not grouped as case ${caseId}.`);
+  }
+}
+for (const id of ['ACC-06', 'ACC-07', 'ACC-08', 'ACC-09', 'ACC-10']) {
   if (catalog.videos.some((item) => item.id === id)) fail(`${id} is not part of this catalog.`);
 }
 const excludedDrafts = ['w-ZNJWfxFts', 'BkosxidgHCk', 'z11xephERog'];

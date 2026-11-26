@@ -432,7 +432,7 @@ export function assertPreviewMarkup(pages, catalog) {
   if (teaPage.includes('data-portrait="false"')) bad('Tea Shorts T01 has a landscape preview');
 
   const accounting = pages.get('micro-cases/accounting/index.html') ?? '';
-  const caseIds = ['F1WY_3jXYQw', 'uetO9tibCEA', 'EFakphvV2qE', '1Qik16ZYE14', 'WjCDkMI3uZc', 'LADYnu4OCug', 'kc97t9pCO-I', 'heYTMobTncY', 'l5ug7pz-ZrM', 'j1Mqyo9azI0', 'clafASuRNBg', 'p98piMHwA8Y'];
+  const caseIds = ['F1WY_3jXYQw', 'uetO9tibCEA', 'EFakphvV2qE', '1Qik16ZYE14', 'WjCDkMI3uZc', 'LADYnu4OCug', 'kc97t9pCO-I', 'heYTMobTncY', 'l5ug7pz-ZrM', 'j1Mqyo9azI0', 'clafASuRNBg', 'p98piMHwA8Y', 'KuanXS7qYhg', 'iz9uH4qyyWo', 'ZH-VWdEsvjY'];
   const casePreviews = accounting.match(/data-preview="/g) ?? [];
   if (casePreviews.length !== caseIds.length) {
     bad(`Accounting has ${casePreviews.length} previews for ${caseIds.length} recordings`);
