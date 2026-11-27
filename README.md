@@ -6,7 +6,7 @@ The public channel [https://www.youtube.com/@ChiuYuKo](https://www.youtube.com/@
 
 ## What is listed
 
-`catalog/allowlist.json` is the source of truth. The copy in this repository is the verified catalog as of **2026-11-26** (Asia/Hong_Kong): **426** videos, **136** distinct lessons.
+`catalog/allowlist.json` is the source of truth. The copy in this repository is the verified catalog as of **2026-11-27** (Asia/Hong_Kong): **429** videos, **137** distinct lessons.
 
 | Collection | Lessons | Videos |
 | --- | ---: | ---: |
@@ -14,7 +14,7 @@ The public channel [https://www.youtube.com/@ChiuYuKo](https://www.youtube.com/@
 | LAE 101 | 10 | 10 |
 | Economics Shorts | 25 | 25 |
 | LAE What-is | 5 | 25 |
-| Micro Cases | 15 | 45 |
+| Micro Cases | 16 | 48 |
 | Tea Shorts | 3 | 9 |
 
 STAT lessons by module:
@@ -53,7 +53,9 @@ ACC-03, Target reached. Returns still coming?, is the third Accounting case. Its
 
 ACC-04, The stock is all there. Is it worth the same?, is the fourth Accounting case. Its three landscape recordings are English (`j1Mqyo9azI0`), 普通话 (`clafASuRNBg`), and 廣東話 (`p98piMHwA8Y`). They share catalog id `ACC-04`. Each description is the official source text, including one trailing newline, and links that language’s `count-and-value.html` page. `duration` is null because a hosted YouTube duration was not verified.
 
-ACC-05, Over budget. Out of control?, is the fifth Accounting case. Its three landscape recordings are English (`KuanXS7qYhg`), 普通话 (`iz9uH4qyyWo`), and 廣東話 (`ZH-VWdEsvjY`). They share catalog id `ACC-05`. Each description is the official source text, including one trailing newline, and links that language’s `over-budget.html` page. `duration` is null. Public status was verified from the owner’s box on 26 Nov 2026. ACC-06 through ACC-10 are not in this catalog.
+ACC-05, Over budget. Out of control?, is the fifth Accounting case. Its three landscape recordings are English (`KuanXS7qYhg`), 普通话 (`iz9uH4qyyWo`), and 廣東話 (`ZH-VWdEsvjY`). They share catalog id `ACC-05`. Each description is the official source text, including one trailing newline, and links that language’s `over-budget.html` page. `duration` is null. Public status was verified from the owner’s box on 26 Nov 2026.
+
+ACC-06, Paid today. Earned today?, is the sixth Accounting case. Its three landscape recordings are English (`BygMGGkvR68`, https://kochiuyu.github.io/micro-cases/paid-earned.html), 普通话 (`unzfNs99GvQ`, https://kochiuyu.github.io/micro-cases/zh-cn/paid-earned.html), and 廣東話 (`WmUVloqhdR4`, https://kochiuyu.github.io/micro-cases/zh-hk/paid-earned.html). They share catalog id `ACC-06`. Each description is the watch-page description text, including one trailing newline, and links that language’s `paid-earned.html` page. The watch page truncated the case-page URL, so the stored text uses the full URL from that description’s link target. `duration` is null. Reported lengths are 202s, 179s, and 204s. `hq720.jpg` returns 200, so there is no thumbnail override. Public status was reported from the watch-page player response on 27 Nov 2026. ACC-07 through ACC-10 are not in this catalog.
 
 FIN-01, When the star sits out, is the first Finance case. Its three landscape recordings are English (`GA8-62W4ptQ`), 普通话 (`r8poa-aQMtc`), and 廣東話 (`xqgkTiDSTv4`). They share catalog id `FIN-01` and topic `Finance`. Each description is the official source text, including one trailing newline, and links that language’s `match.html` page. `duration` is null. Public status was verified from the owner’s box at 14:08 Taipei on 25 Nov 2026.
 
@@ -201,4 +203,4 @@ Built with [Astro](https://astro.build/) 5.18.2, used under the [MIT License](ht
 
 ## Embed restrictions
 
-The catalog does not say whether YouTube permits embedding. If a player shows that a video cannot be embedded, the page still links to the watch URL. Embed restrictions were not verified for all 426 videos.
+The catalog does not say whether YouTube permits embedding. If a player shows that a video cannot be embedded, the page still links to the watch URL. Embed restrictions were not verified for all 429 videos.

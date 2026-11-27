@@ -315,6 +315,9 @@ for (const video of catalog.videos) {
       KuanXS7qYhg: 'https://kochiuyu.github.io/micro-cases/over-budget.html',
       iz9uH4qyyWo: 'https://kochiuyu.github.io/micro-cases/zh-cn/over-budget.html',
       'ZH-VWdEsvjY': 'https://kochiuyu.github.io/micro-cases/zh-hk/over-budget.html',
+      BygMGGkvR68: 'https://kochiuyu.github.io/micro-cases/paid-earned.html',
+      unzfNs99GvQ: 'https://kochiuyu.github.io/micro-cases/zh-cn/paid-earned.html',
+      WmUVloqhdR4: 'https://kochiuyu.github.io/micro-cases/zh-hk/paid-earned.html',
       'GA8-62W4ptQ': 'https://kochiuyu.github.io/micro-cases/match.html',
       'r8poa-aQMtc': 'https://kochiuyu.github.io/micro-cases/zh-cn/match.html',
       xqgkTiDSTv4: 'https://kochiuyu.github.io/micro-cases/zh-hk/match.html',
@@ -534,15 +537,15 @@ function assertLanguageFilter(rel, html) {
 
 const accountingHtml = byRel.get('micro-cases/accounting/index.html') ?? '';
 const accountingRows = [...accountingHtml.matchAll(/<li\b[^>]*\bdata-lang-group="[^"]*"[^>]*>/g)];
-if (accountingRows.length !== 15) {
-  fail(`Accounting page lists ${accountingRows.length} recordings in static HTML; expected 15`);
+if (accountingRows.length !== 18) {
+  fail(`Accounting page lists ${accountingRows.length} recordings in static HTML; expected 18`);
 }
 for (const row of accountingRows) {
   if (/\shidden(?:="[^"]*")?(?=[\s>])/.test(row[0])) {
     fail('Accounting page hides a recording before JavaScript runs');
   }
 }
-for (const id of ['F1WY_3jXYQw', 'uetO9tibCEA', 'EFakphvV2qE', 'KuanXS7qYhg', 'iz9uH4qyyWo', 'ZH-VWdEsvjY']) {
+for (const id of ['F1WY_3jXYQw', 'uetO9tibCEA', 'EFakphvV2qE', 'KuanXS7qYhg', 'iz9uH4qyyWo', 'ZH-VWdEsvjY', 'BygMGGkvR68', 'unzfNs99GvQ', 'WmUVloqhdR4']) {
   if (!accountingHtml.includes(`data-preview="${id}"`)) {
     fail(`Accounting static HTML is missing ${id}`);
   }

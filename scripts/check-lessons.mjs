@@ -282,8 +282,8 @@ const accExpected = [
 ];
 const acc = catalog.videos.filter((item) => item.id === 'ACC-01');
 if (acc.length !== 3) fail('ACC-01 must stay one lesson with three recordings.');
-if (summary.byCollection['micro-cases']?.lessons !== 15 || summary.byCollection['micro-cases']?.versions !== 45) {
-  fail('Micro Cases must be fifteen lessons and forty-five recordings.');
+if (summary.byCollection['micro-cases']?.lessons !== 16 || summary.byCollection['micro-cases']?.versions !== 48) {
+  fail('Micro Cases must be sixteen lessons and forty-eight recordings.');
 }
 const accountingLessonIds = new Set(
   catalog.videos.filter((item) => item.collection_slug === 'micro-cases' && item.topic === 'Accounting').map((item) => item.id),
@@ -291,11 +291,11 @@ const accountingLessonIds = new Set(
 const financeLessonIds = new Set(
   catalog.videos.filter((item) => item.collection_slug === 'micro-cases' && item.topic === 'Finance').map((item) => item.id),
 );
-if (accountingLessonIds.size !== 5 || financeLessonIds.size !== 10) {
-  fail('Micro Cases must stay at five Accounting lessons and ten Finance lessons.');
+if (accountingLessonIds.size !== 6 || financeLessonIds.size !== 10) {
+  fail('Micro Cases must stay at six Accounting lessons and ten Finance lessons.');
 }
-if (summary.lessons !== 136 || summary.versions !== 426) {
-  fail(`Catalog is ${summary.lessons} lessons and ${summary.versions} recordings; expected 136 and 426.`);
+if (summary.lessons !== 137 || summary.versions !== 429) {
+  fail(`Catalog is ${summary.lessons} lessons and ${summary.versions} recordings; expected 137 and 429.`);
 }
 if (summary.byCollection['stat-lessons'].lessons !== 78 || summary.byCollection['stat-lessons'].versions !== 312) {
   fail('STAT must be 78 lessons and 312 recordings.');
@@ -304,7 +304,7 @@ for (const [slug, lessons, versions] of [
   ['lae-101', 10, 10],
   ['economics-shorts', 25, 25],
   ['lae-what-is', 5, 25],
-  ['micro-cases', 15, 45],
+  ['micro-cases', 16, 48],
 ]) {
   const row = summary.byCollection[slug];
   if (row?.lessons !== lessons || row?.versions !== versions) {
@@ -923,11 +923,37 @@ const acc05Expected = [
     sha256: '44cb190f614bc10c8e1e062dc36381d660adb900c8d4140eb99aa72b7ca7eae8',
   },
 ];
+const acc06Expected = [
+  {
+    language: 'mc-en',
+    label: 'English',
+    youtube_id: 'BygMGGkvR68',
+    title: 'ACC-06 · Paid today. Earned today? (English)',
+    casePage: 'https://kochiuyu.github.io/micro-cases/paid-earned.html',
+    sha256: '64f40302c3dad2fbbc7c4b43d8e62f63511d9d415dca48a31be206984c83090d',
+  },
+  {
+    language: 'mc-cmn',
+    label: '普通话',
+    youtube_id: 'unzfNs99GvQ',
+    title: 'ACC-06 · 今天收到钱，就能确认收入吗？（普通话）',
+    casePage: 'https://kochiuyu.github.io/micro-cases/zh-cn/paid-earned.html',
+    sha256: 'dbb78834f62004869a94bb4a6712f91decb51d2e0c19c19a8d6aca5f4ac8a666',
+  },
+  {
+    language: 'mc-yue',
+    label: '廣東話',
+    youtube_id: 'WmUVloqhdR4',
+    title: 'ACC-06 · 今日收款，就算今日賺取收入？（廣東話）',
+    casePage: 'https://kochiuyu.github.io/micro-cases/zh-hk/paid-earned.html',
+    sha256: '8a54cb2fb194f951e190c2318651c9a81aeef463379be26a9a6390c278f5c2c8',
+  },
+];
 const acc04 = catalog.videos.filter((item) => item.id === 'ACC-04');
 if (acc04.length !== 3) fail('ACC-04 must be one lesson with three recordings.');
 if (
   microIds.join(',') !==
-  [...accExpected, ...acc02Expected, ...acc03Expected, ...acc04Expected, ...acc05Expected, ...fin01Expected, ...fin02Expected, ...fin03Expected, ...fin04Expected, ...fin05Expected, ...fin06Expected, ...fin07Expected, ...fin08Expected, ...fin09Expected, ...fin10Expected]
+  [...accExpected, ...acc02Expected, ...acc03Expected, ...acc04Expected, ...acc05Expected, ...acc06Expected, ...fin01Expected, ...fin02Expected, ...fin03Expected, ...fin04Expected, ...fin05Expected, ...fin06Expected, ...fin07Expected, ...fin08Expected, ...fin09Expected, ...fin10Expected]
     .map((item) => item.youtube_id)
     .join(',')
 ) {
@@ -1000,7 +1026,7 @@ for (const [caseId, expectedRows] of [
     if (lessonKey(item) !== `micro-cases\n${caseId}`) fail(`${expected.youtube_id} is not grouped as case ${caseId}.`);
   }
 }
-for (const [caseId, expectedRows] of [['ACC-05', acc05Expected]]) {
+for (const [caseId, expectedRows] of [['ACC-05', acc05Expected], ['ACC-06', acc06Expected]]) {
   const rows = catalog.videos.filter((item) => item.id === caseId);
   if (rows.length !== 3) fail(`${caseId} must be one lesson with three recordings.`);
   for (const expected of expectedRows) {
@@ -1030,7 +1056,7 @@ for (const [caseId, expectedRows] of [['ACC-05', acc05Expected]]) {
     if (lessonKey(item) !== `micro-cases\n${caseId}`) fail(`${expected.youtube_id} is not grouped as case ${caseId}.`);
   }
 }
-for (const id of ['ACC-06', 'ACC-07', 'ACC-08', 'ACC-09', 'ACC-10']) {
+for (const id of ['ACC-07', 'ACC-08', 'ACC-09', 'ACC-10']) {
   if (catalog.videos.some((item) => item.id === id)) fail(`${id} is not part of this catalog.`);
 }
 const excludedDrafts = ['w-ZNJWfxFts', 'BkosxidgHCk', 'z11xephERog'];
