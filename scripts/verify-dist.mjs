@@ -401,6 +401,9 @@ for (const video of catalog.videos) {
       SlbhVTvJZiE: 'https://kochiuyu.github.io/tea-companion/tea-labels.html#type-map',
       F4K7oFns_ac: 'https://kochiuyu.github.io/tea-companion/zh-hans/tea-labels.html#type-map',
       '27uXuCviBz4': 'https://kochiuyu.github.io/tea-companion/zh-hant-hk/tea-labels.html#type-map',
+      fPrJK_iyzRw: 'https://kochiuyu.github.io/tea-companion/tea-labels.html#japanese-names-you-will-see',
+      Nfp_ROBqnbU: 'https://kochiuyu.github.io/tea-companion/zh-hans/tea-labels.html#常见日文名',
+      TwdVAeKZWA4: 'https://kochiuyu.github.io/tea-companion/zh-hant-hk/tea-labels.html#常見日文名',
     };
     const ownSource = sources[video.youtube_id];
     if (!ownSource || !html.includes(`href="${ownSource}"`)) fail(`${rel} is missing its source page`);
@@ -666,6 +669,7 @@ for (const id of ['mc-en', 'mc-cmn', 'mc-yue', 'tea-en', 'tea-cmn', 'tea-yue']) 
 if (!searchPage.includes('>T01</option>')) fail('search topic filter is missing Tea Shorts T01');
 if (!searchPage.includes('>T02</option>')) fail('search topic filter is missing Tea Shorts T02');
 if (!searchPage.includes('>T03</option>')) fail('search topic filter is missing Tea Shorts T03');
+if (!searchPage.includes('>T04</option>')) fail('search topic filter is missing Tea Shorts T04');
 const teaCollection = byRel.get('collections/tea-shorts/index.html') ?? '';
 if (!teaCollection.includes('>Tea Companion<')) fail('Tea Shorts page dropped the companion link');
 if (!teaCollection.includes('class="video-grid shorts"') || !teaCollection.includes('video-card portrait')) {
@@ -674,16 +678,19 @@ if (!teaCollection.includes('class="video-grid shorts"') || !teaCollection.inclu
 if (!home.includes('tea-shorts/t01/')) fail('home page is missing the Tea Shorts T01 topic');
 if (!home.includes('tea-shorts/t02/')) fail('home page is missing the Tea Shorts T02 topic');
 if (!home.includes('tea-shorts/t03/')) fail('home page is missing the Tea Shorts T03 topic');
+if (!home.includes('tea-shorts/t04/')) fail('home page is missing the Tea Shorts T04 topic');
 if (!home.includes('/vi/PXyUCfLHOf8/oardefault.jpg')) fail('home page is missing the Tea Shorts cover');
 if (home.includes('/vi/PXyUCfLHOf8/hq720.jpg')) fail('home page changed the T01 Shorts cover');
 if (!home.includes('/vi/0IUvlR4wEeY/hq720.jpg')) fail('home page T02 cover is not hq720.jpg');
 if (home.includes('/vi/0IUvlR4wEeY/oardefault.jpg')) fail('home page T02 cover still uses oardefault.jpg');
 if (!home.includes('/vi/SlbhVTvJZiE/hq720.jpg')) fail('home page T03 cover is not hq720.jpg');
 if (home.includes('/vi/SlbhVTvJZiE/oardefault.jpg')) fail('home page T03 cover still uses oardefault.jpg');
+if (!home.includes('/vi/fPrJK_iyzRw/hq720.jpg')) fail('home page T04 cover is not hq720.jpg');
+if (home.includes('/vi/fPrJK_iyzRw/oardefault.jpg')) fail('home page T04 cover still uses oardefault.jpg');
 for (const id of ['PXyUCfLHOf8', 'EZk3qvma1aU', 'DaQ19k9U6To']) {
   if (!teaCollection.includes(`/vi/${id}/oardefault.jpg`)) fail(`Tea Shorts page dropped the T01 cover ${id}`);
 }
-for (const id of ['0IUvlR4wEeY', '7wqlXKwPN5c', 'XqEDrAEpoKM', 'SlbhVTvJZiE', 'F4K7oFns_ac', '27uXuCviBz4']) {
+for (const id of ['0IUvlR4wEeY', '7wqlXKwPN5c', 'XqEDrAEpoKM', 'SlbhVTvJZiE', 'F4K7oFns_ac', '27uXuCviBz4', 'fPrJK_iyzRw', 'Nfp_ROBqnbU', 'TwdVAeKZWA4']) {
   if (!teaCollection.includes(`/vi/${id}/hq720.jpg`)) fail(`Tea Shorts page is missing hq720.jpg for ${id}`);
   if (teaCollection.includes(`/vi/${id}/oardefault.jpg`)) {
     fail(`Tea Shorts page still uses oardefault.jpg for ${id}`);
