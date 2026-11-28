@@ -6,7 +6,7 @@ The public channel [https://www.youtube.com/@ChiuYuKo](https://www.youtube.com/@
 
 ## What is listed
 
-`catalog/allowlist.json` is the source of truth. The copy in this repository is the verified catalog as of **2026-11-27** (Asia/Hong_Kong): **429** videos, **137** distinct lessons.
+`catalog/allowlist.json` is the source of truth. The copy in this repository is the verified catalog as of **2026-11-28** (Asia/Hong_Kong): **432** videos, **138** distinct lessons.
 
 | Collection | Lessons | Videos |
 | --- | ---: | ---: |
@@ -15,7 +15,7 @@ The public channel [https://www.youtube.com/@ChiuYuKo](https://www.youtube.com/@
 | Economics Shorts | 25 | 25 |
 | LAE What-is | 5 | 25 |
 | Micro Cases | 16 | 48 |
-| Tea Shorts | 3 | 9 |
+| Tea Shorts | 4 | 12 |
 
 STAT lessons by module:
 
@@ -45,7 +45,9 @@ Tea Shorts are portrait 9:16 YouTube Shorts from [Tea Companion](https://kochiuy
 
 T02, Is chamomile tea?, is the second Tea Shorts lesson. Its three portrait recordings are English (`0IUvlR4wEeY`, `tea-en`, https://kochiuyu.github.io/tea-companion/tea-basics.html), 普通话 (`7wqlXKwPN5c`, `tea-cmn`, https://kochiuyu.github.io/tea-companion/zh-hans/tea-basics.html), and 粵語 (`XqEDrAEpoKM`, `tea-yue`, https://kochiuyu.github.io/tea-companion/zh-hant-hk/tea-basics.html). They share catalog id `TEA-T02` and topic `T02`. Each description is the owner-verified player text from 26 Nov 2026, with no trailing newline. `oardefault.jpg` is not published for these three ids, so each sets `thumbnail` to `hq720.jpg`. The portrait card crops that 16:9 frame to the center poster. Reported lengths are 35s, 33s, and 35s, and `duration` stays null, as it does for T01. There is no quiz. `EvkN-c9pn2g` and `QztZN6gktzg` are not in this catalog.
 
-T03, Black tea is 紅茶, not 黑茶, is the third Tea Shorts lesson. Its three portrait recordings are English (`SlbhVTvJZiE`, `tea-en`, title `Black tea is 紅茶, not 黑茶`, https://kochiuyu.github.io/tea-companion/tea-labels.html#type-map), 普通话 (`F4K7oFns_ac`, `tea-cmn`, title `红茶不是黑茶`, https://kochiuyu.github.io/tea-companion/zh-hans/tea-labels.html#type-map), and 粵語 (`27uXuCviBz4`, `tea-yue`, title `紅茶不是黑茶`, https://kochiuyu.github.io/tea-companion/zh-hant-hk/tea-labels.html#type-map). They share catalog id `TEA-T03` and topic `T03`. Each description is the public watch-page player text from 26 Nov 2026, with no trailing newline. `oardefault.jpg` is not published for these three ids, so each sets `thumbnail` to `hq720.jpg`. Reported lengths are 26s, 28s, and 29s, and `duration` stays null. There is no quiz. `fPrJK_iyzRw`, `Nfp_ROBqnbU`, and `TwdVAeKZWA4` are not in this catalog. T04–T07 are not in this catalog.
+T03, Black tea is 紅茶, not 黑茶, is the third Tea Shorts lesson. Its three portrait recordings are English (`SlbhVTvJZiE`, `tea-en`, title `Black tea is 紅茶, not 黑茶`, https://kochiuyu.github.io/tea-companion/tea-labels.html#type-map), 普通话 (`F4K7oFns_ac`, `tea-cmn`, title `红茶不是黑茶`, https://kochiuyu.github.io/tea-companion/zh-hans/tea-labels.html#type-map), and 粵語 (`27uXuCviBz4`, `tea-yue`, title `紅茶不是黑茶`, https://kochiuyu.github.io/tea-companion/zh-hant-hk/tea-labels.html#type-map). They share catalog id `TEA-T03` and topic `T03`. Each description is the public watch-page player text from 26 Nov 2026, with no trailing newline. `oardefault.jpg` is not published for these three ids, so each sets `thumbnail` to `hq720.jpg`. Reported lengths are 26s, 28s, and 29s, and `duration` stays null. There is no quiz.
+
+T04, Is Houjicha black tea?, is the fourth Tea Shorts lesson. Its three portrait recordings are English (`fPrJK_iyzRw`, `tea-en`, title `Is Houjicha black tea?`, https://kochiuyu.github.io/tea-companion/tea-labels.html#japanese-names-you-will-see), 普通话 (`Nfp_ROBqnbU`, `tea-cmn`, title `焙茶是红茶吗？`, https://kochiuyu.github.io/tea-companion/zh-hans/tea-labels.html#常见日文名), and 粵語 (`TwdVAeKZWA4`, `tea-yue`, title `焙茶是紅茶嗎？`, https://kochiuyu.github.io/tea-companion/zh-hant-hk/tea-labels.html#常見日文名). They share catalog id `TEA-T04` and topic `T04`. Each description is the public watch-page text from 28 Nov 2026, with no trailing newline. The watch page truncated the source URLs, so the stored text uses the full URLs from those description link targets. The Cantonese source fragment on the page and in the player is `#常見日文名`. `oardefault.jpg` is not published for these three ids, so each sets `thumbnail` to `hq720.jpg`. Reported lengths are 18s, 16s, and 18s, and `duration` stays null. There is no quiz. `EvkN-c9pn2g`, `QztZN6gktzg`, `bbhWvGYwE8E`, `24BkM_rgxcU`, `CWaDeud1LPI`, `ikVUoSm1cxY`, `yuhJjscVLB0`, and `-5BxARc20rY` are not in this catalog. T05–T07 are not in this catalog.
 
 ACC-02, Close the loss-making branch?, is the second Accounting case. Its three landscape recordings are English (`1Qik16ZYE14`), 普通话 (`WjCDkMI3uZc`), and 廣東話 (`LADYnu4OCug`). They share catalog id `ACC-02`. Each description is the approved source description and links that language’s `branch-loss.html` page. `duration` is null because a YouTube duration was not verified. Visibility Public was last observed at upload completion on 23 Nov 2026 (Taipei time): English 10:35, 普通话 10:42:25, and 廣東話 10:52. That observation was not repeated afterward.
 
@@ -203,4 +205,4 @@ Built with [Astro](https://astro.build/) 5.18.2, used under the [MIT License](ht
 
 ## Embed restrictions
 
-The catalog does not say whether YouTube permits embedding. If a player shows that a video cannot be embedded, the page still links to the watch URL. Embed restrictions were not verified for all 429 videos.
+The catalog does not say whether YouTube permits embedding. If a player shows that a video cannot be embedded, the page still links to the watch URL. Embed restrictions were not verified for all 432 videos.

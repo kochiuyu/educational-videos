@@ -101,7 +101,7 @@ export function casePageUrl(description: string | null): string | null {
 }
 
 const TEA_SOURCE =
-  /https:\/\/kochiuyu\.github\.io\/tea-companion\/(?:zh-hans\/|zh-hant-hk\/)?tea-labels\.html#type-map/;
+  /https:\/\/kochiuyu\.github\.io\/tea-companion\/(?:zh-hans\/|zh-hant-hk\/)?tea-labels\.html#[^\s<>"']+/;
 
 /** Tea Companion source page quoted by a Tea Shorts description, when one is present. */
 export function teaSourceUrl(description: string | null): string | null {

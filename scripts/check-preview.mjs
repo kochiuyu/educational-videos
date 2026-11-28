@@ -475,6 +475,29 @@ export function assertPreviewMarkup(pages, catalog) {
     if (tea03Page.includes(id)) bad(`Tea Shorts T03 includes excluded id ${id}`);
   }
 
+  const tea04Page = pages.get('tea-shorts/t04/index.html') ?? '';
+  const tea04Ids = ['fPrJK_iyzRw', 'Nfp_ROBqnbU', 'TwdVAeKZWA4'];
+  const tea04Previews = tea04Page.match(/data-preview="/g) ?? [];
+  if (tea04Previews.length !== tea04Ids.length) {
+    bad(`Tea Shorts T04 has ${tea04Previews.length} previews for ${tea04Ids.length} recordings`);
+  }
+  if (!tea04Page.includes('class="video-grid shorts"') || !tea04Page.includes('video-card portrait')) {
+    bad('Tea Shorts T04 is not a portrait Shorts grid');
+  }
+  for (const id of tea04Ids) {
+    if (!tea04Page.includes(`data-preview="${id}"`) || !tea04Page.includes('data-portrait="true"')) {
+      bad(`Tea Shorts cannot preview ${id} as a portrait Short`);
+    }
+    if (!tea04Page.includes(`href="/educational-videos/videos/${id}/"`)) {
+      bad(`Tea Shorts title link for ${id} is missing`);
+    }
+    if (!tea04Page.includes(`/vi/${id}/hq720.jpg`)) bad(`Tea Shorts T04 cover for ${id} is not hq720.jpg`);
+  }
+  if (tea04Page.includes('data-portrait="false"')) bad('Tea Shorts T04 has a landscape preview');
+  for (const id of ['EvkN-c9pn2g', 'QztZN6gktzg', 'bbhWvGYwE8E', '24BkM_rgxcU', 'CWaDeud1LPI', 'ikVUoSm1cxY', 'yuhJjscVLB0', '-5BxARc20rY']) {
+    if (tea04Page.includes(id)) bad(`Tea Shorts T04 includes excluded id ${id}`);
+  }
+
   const accounting = pages.get('micro-cases/accounting/index.html') ?? '';
   const caseIds = ['F1WY_3jXYQw', 'uetO9tibCEA', 'EFakphvV2qE', '1Qik16ZYE14', 'WjCDkMI3uZc', 'LADYnu4OCug', 'kc97t9pCO-I', 'heYTMobTncY', 'l5ug7pz-ZrM', 'j1Mqyo9azI0', 'clafASuRNBg', 'p98piMHwA8Y', 'KuanXS7qYhg', 'iz9uH4qyyWo', 'ZH-VWdEsvjY', 'BygMGGkvR68', 'unzfNs99GvQ', 'WmUVloqhdR4'];
   const casePreviews = accounting.match(/data-preview="/g) ?? [];

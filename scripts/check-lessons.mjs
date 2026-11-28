@@ -294,8 +294,8 @@ const financeLessonIds = new Set(
 if (accountingLessonIds.size !== 6 || financeLessonIds.size !== 10) {
   fail('Micro Cases must stay at six Accounting lessons and ten Finance lessons.');
 }
-if (summary.lessons !== 137 || summary.versions !== 429) {
-  fail(`Catalog is ${summary.lessons} lessons and ${summary.versions} recordings; expected 137 and 429.`);
+if (summary.lessons !== 138 || summary.versions !== 432) {
+  fail(`Catalog is ${summary.lessons} lessons and ${summary.versions} recordings; expected 138 and 432.`);
 }
 if (summary.byCollection['stat-lessons'].lessons !== 78 || summary.byCollection['stat-lessons'].versions !== 312) {
   fail('STAT must be 78 lessons and 312 recordings.');
@@ -311,8 +311,8 @@ for (const [slug, lessons, versions] of [
     fail(`${slug} must stay ${lessons} lessons and ${versions} recordings.`);
   }
 }
-if (summary.byCollection['tea-shorts']?.lessons !== 3 || summary.byCollection['tea-shorts']?.versions !== 9) {
-  fail('Tea Shorts must be three lessons and nine recordings.');
+if (summary.byCollection['tea-shorts']?.lessons !== 4 || summary.byCollection['tea-shorts']?.versions !== 12) {
+  fail('Tea Shorts must be four lessons and twelve recordings.');
 }
 const statLanguageIds = new Set(['en+zh', 'zh+en', 'hk+en', 'zh']);
 const teaExpected = [
@@ -393,15 +393,48 @@ const tea03Expected = [
     sha256: '07ed56c86f29d8212c7b7e9c46795db5ee3534d229b729c2ea774178756bc462',
   },
 ];
+const tea04Expected = [
+  {
+    language: 'tea-en',
+    label: 'English',
+    youtube_id: 'fPrJK_iyzRw',
+    title: 'Is Houjicha black tea?',
+    source: 'https://kochiuyu.github.io/tea-companion/tea-labels.html#japanese-names-you-will-see',
+    sha256: 'e12f69cbf67c42f5d4d9a7a77c84b4d05035d38bc6701196cd1e5f24c9f5cfc1',
+  },
+  {
+    language: 'tea-cmn',
+    label: '普通话',
+    youtube_id: 'Nfp_ROBqnbU',
+    title: '焙茶是红茶吗？',
+    source: 'https://kochiuyu.github.io/tea-companion/zh-hans/tea-labels.html#常见日文名',
+    sha256: 'eb568d5f4191e086a8bde5faf97a17e390c1ccff0cfb94e52837e29da5b83a8e',
+  },
+  {
+    language: 'tea-yue',
+    label: '粵語',
+    youtube_id: 'TwdVAeKZWA4',
+    title: '焙茶是紅茶嗎？',
+    source: 'https://kochiuyu.github.io/tea-companion/zh-hant-hk/tea-labels.html#常見日文名',
+    sha256: '4f2877cda146c449812bbdee558197b4c1bd00fa59757a1edfb3bbbab9d23855',
+  },
+];
 const tea = catalog.videos.filter((item) => item.collection_slug === 'tea-shorts');
 const teaIds = new Set(tea.map((item) => item.id));
-if (tea.length !== 9 || teaIds.size !== 3 || !teaIds.has('TEA-T01') || !teaIds.has('TEA-T02') || !teaIds.has('TEA-T03')) {
-  fail('Tea Shorts must be T01, T02, and T03, each with three recordings.');
+if (
+  tea.length !== 12 ||
+  teaIds.size !== 4 ||
+  !teaIds.has('TEA-T01') ||
+  !teaIds.has('TEA-T02') ||
+  !teaIds.has('TEA-T03') ||
+  !teaIds.has('TEA-T04')
+) {
+  fail('Tea Shorts must be T01, T02, T03, and T04, each with three recordings.');
 }
-for (const topic of ['T04', 'T05', 'T06', 'T07']) {
+for (const topic of ['T05', 'T06', 'T07']) {
   if (tea.some((item) => item.topic === topic)) fail(`${topic} is not part of this catalog.`);
 }
-for (const id of ['EvkN-c9pn2g', 'QztZN6gktzg', 'fPrJK_iyzRw', 'Nfp_ROBqnbU', 'TwdVAeKZWA4']) {
+for (const id of ['EvkN-c9pn2g', 'QztZN6gktzg', 'bbhWvGYwE8E', '24BkM_rgxcU', 'CWaDeud1LPI', 'ikVUoSm1cxY', 'yuhJjscVLB0', '-5BxARc20rY']) {
   if (catalog.videos.some((item) => item.youtube_id === id)) fail(`${id} is not part of this catalog.`);
 }
 for (const expected of teaExpected) {
@@ -486,10 +519,38 @@ for (const expected of tea03Expected) {
     fail(`${expected.youtube_id} must use hq720.jpg because oardefault.jpg is not on i.ytimg.`);
   }
 }
+for (const expected of tea04Expected) {
+  const item = tea.find((video) => video.youtube_id === expected.youtube_id);
+  if (!item) {
+    fail(`Tea Shorts is missing ${expected.youtube_id}.`);
+    continue;
+  }
+  if (item.id !== 'TEA-T04' || item.topic !== 'T04' || item.module != null) {
+    fail(`${expected.youtube_id} is not T04.`);
+  }
+  if (item.language !== expected.language || item.language_label !== expected.label) {
+    fail(`${expected.youtube_id} language does not match its recording.`);
+  }
+  if (statLanguageIds.has(item.language)) fail(`${expected.youtube_id} uses a STAT language track.`);
+  if (item.title !== expected.title) fail(`${expected.youtube_id} title is not the public title.`);
+  if (item.duration != null) fail(`${expected.youtube_id} duration must stay null.`);
+  if (item.youtube_url !== `https://www.youtube.com/watch?v=${expected.youtube_id}`) {
+    fail(`${expected.youtube_id} watch URL is not the canonical watch URL.`);
+  }
+  if (!item.description?.includes(expected.source)) fail(`${expected.youtube_id} description dropped its source page.`);
+  if (item.description?.endsWith('\n')) fail(`${expected.youtube_id} description must not have a trailing newline.`);
+  if (crypto.createHash('sha256').update(item.description ?? '').digest('hex') !== expected.sha256) {
+    fail(`${expected.youtube_id} description is not the public player text.`);
+  }
+  if (lessonKey(item) !== 'tea-shorts\nTEA-T04') fail(`${expected.youtube_id} is not grouped as Tea Shorts T04.`);
+  if (item.thumbnail !== 'hq720.jpg') {
+    fail(`${expected.youtube_id} must use hq720.jpg because oardefault.jpg is not on i.ytimg.`);
+  }
+}
 const thumbnailOverrides = catalog.videos.filter((item) => item.thumbnail != null);
-const overrideIds = new Set([...tea02Expected, ...tea03Expected].map((item) => item.youtube_id));
-if (thumbnailOverrides.length !== 6 || thumbnailOverrides.some((item) => !overrideIds.has(item.youtube_id))) {
-  fail('Only the T02 and T03 recordings may set a thumbnail override.');
+const overrideIds = new Set([...tea02Expected, ...tea03Expected, ...tea04Expected].map((item) => item.youtube_id));
+if (thumbnailOverrides.length !== 9 || thumbnailOverrides.some((item) => !overrideIds.has(item.youtube_id))) {
+  fail('Only the T02, T03, and T04 recordings may set a thumbnail override.');
 }
 for (const expected of accExpected) {
   const item = acc.find((video) => video.youtube_id === expected.youtube_id);
